@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="206px" height="219px" viewBox="0 0 206 219" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>BDB4CD6E-ADD0-41C4-A3CF-18E38F99909C@1.5x</title>
+    <defs>
+        <filter x="-15.2%" y="-14.1%" width="130.4%" height="128.2%" filterUnits="objectBoundingBox" id="filter-1">
+            <feOffset dx="0" dy="3" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.078642305 0" type="matrix" in="shadowBlurOuter1" result="shadowMatrixOuter1"></feColorMatrix>
+            <feMerge>
+                <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                <feMergeNode in="SourceGraphic"></feMergeNode>
+            </feMerge>
+        </filter>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="2.1-A/-Dark-Mode-/-מסך-הסבר-v2" transform="translate(-84.000000, -519.000000)">
+            <g id="Group-18" filter="url(#filter-1)" transform="translate(103.000000, 538.000000)">
+                <g id="Group-2">
+                    <rect id="Rectangle-Copy-10" fill="#3B3B3B" x="0" y="11" width="155" height="170" rx="10"></rect>
+                    <rect id="Rectangle-Copy-11" fill="#606060" x="17.05" y="30.3181818" width="121.675" height="2.31818182" rx="1.15909091"></rect>
+                    <rect id="Rectangle-Copy-18" fill="#606060" x="40.3" y="38.8181818" width="75.175" height="2.31818182" rx="1.15909091"></rect>
+                    <rect id="Rectangle-Copy-8" fill="#606060" x="99.2" y="145.454545" width="38.75" height="13.1363636" rx="3"></rect>
+                    <rect id="Rectangle-Copy-8" fill="#606060" x="57.35" y="145.454545" width="38.75" height="13.1363636" rx="3"></rect>
+                    <rect id="Rectangle-Copy-8" fill="#606060" x="16.275" y="145.454545" width="38.75" height="13.1363636" rx="3"></rect>
+                    <path d="M107.92918,62.7727362 L107.929421,67.234778 C94.7920476,67.7367212 84.2961538,78.5170427 84.2961538,91.7422742 C84.2961538,105.287482 95.3060745,116.268042 108.8875,116.268042 C115.901589,116.268042 122.229811,113.339333 126.709814,108.641169 L129.872709,111.794684 C124.582808,117.299708 117.136499,120.727273 108.8875,120.727273 C92.8367245,120.727273 79.825,107.750247 79.825,91.7422742 C79.825,76.0541261 92.3219937,63.2770236 107.92918,62.7727362 Z M137.887855,93.6530615 C137.473729,99.9995407 135.011538,105.789036 131.153909,110.370665 L127.977625,107.203844 C131.039877,103.447668 133.009954,98.7702903 133.405324,93.6529565 L137.887855,93.6530615 Z M109.84582,62.7727362 C125.453006,63.2770236 137.95,76.0541261 137.95,91.7422742 L133.478846,91.7422742 C133.478846,78.5170427 122.982952,67.7367212 109.845579,67.234778 L109.84582,62.7727362 Z" id="Combined-Shape-Copy-2" fill="#606060" fill-rule="nonzero"></path>
+                    <rect id="Rectangle-Copy-13" fill="#606060" x="16.275" y="82.0909091" width="10.3941176" height="38.6363636"></rect>
+                    <rect id="Rectangle-Copy-15" fill="#606060" x="32.7323529" y="62.7727273" width="10.3941176" height="57.9545455"></rect>
+                    <rect id="Rectangle-Copy-17" fill="#606060" x="50.0558824" y="87.5" width="10.3941176" height="33.2272727"></rect>
+                    <g id="Group-3" transform="translate(123.000000, 0.000000)">
+                        <circle id="Oval" fill="#935287" cx="22.5" cy="22.5" r="22.5"></circle>
+                        <g id="Icon/more-Copy-3" transform="translate(14.361702, 12.446809)" fill="#FFFFFF" fill-rule="nonzero">
+                            <path d="M14.4781861,10.055435 L18.5310351,3.57622469 C18.6612594,3.36853039 18.6659809,3.10878572 18.5433862,2.89675895 C18.4207915,2.68473218 18.1899443,2.55339397 17.9395132,2.55319149 L-1.66851244,2.55319149 C-2.05135053,2.55319149 -2.36170213,2.85452541 -2.36170213,3.22623965 L-2.36170213,16.8801433 C-2.36170213,17.2518576 -2.05135053,17.5531915 -1.66851244,17.5531915 L17.9395132,17.5531915 C18.1896749,17.5531915 18.4206464,17.4229942 18.5448989,17.2121804 C18.6694309,17.000917 18.6694309,16.7414217 18.5448989,16.5301583 L14.4781861,10.055435 Z M-0.975322748,16.2070952 L-0.975322748,3.89928781 L16.7056356,3.89928781 L13.0733216,9.70544994 C12.9395775,9.92070493 12.9395775,10.190165 13.0733216,10.40542 L16.7056356,16.2070952 L-0.975322748,16.2070952 Z" id="Shape" transform="translate(8.138298, 10.053191) scale(-1, 1) rotate(-270.000000) translate(-8.138298, -10.053191) "></path>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

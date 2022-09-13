@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="14px" height="24px" viewBox="0 0 14 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>83CA836F-A504-47D4-891B-1AAA83B29890@1.5x</title>
+    <defs>
+        <path d="M12.658741,11.1912131 C13.1116591,11.6329218 13.1134945,12.3653754 12.6657333,12.8029374 L1.93618753,23.6558144 C1.49929467,24.1141634 0.776072987,24.1141634 0.3262808,23.6591957 C-0.109761493,23.219164 -0.107988088,22.4835701 0.330015233,22.0250937 L9.3646622,12.9037779 L10.2044091,11.9999638 L9.37137607,11.1028616 L0.326280799,1.95362448 C-0.108727055,1.51463671 -0.108727055,0.780826329 0.326081564,0.341014772 C0.775561642,-0.113637054 1.49660683,-0.114166729 1.9344671,0.342397175 L12.658741,11.1912131 Z" id="path-1"></path>
+        <rect id="path-3" x="0" y="0" width="24" height="24"></rect>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="2.5-/-Light-Mode-/-חיווי" transform="translate(-331.000000, -1044.000000)">
+            <g id="-שעון/תקלות/ערים/-Light-Copy-2" transform="translate(0.000000, 754.000000)">
+                <g id="Add-/-Rectangular-Copy-13" transform="translate(331.500000, 290.000000)">
+                    <mask id="mask-2" fill="white">
+                        <use xlink:href="#path-1"></use>
+                    </mask>
+                    <g id="Shape" fill-rule="nonzero"></g>
+                    <g id="↳🎨Color" mask="url(#mask-2)">
+                        <g transform="translate(-5.500000, 0.000000)">
+                            <mask id="mask-4" fill="white">
+                                <use xlink:href="#path-3"></use>
+                            </mask>
+                            <use id="Rectangular" stroke="none" fill="#B8B8B8" fill-rule="evenodd" xlink:href="#path-3"></use>
+                            <g id="↳⚙️State" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" mask="url(#mask-4)" opacity="0.100000001">
+                                <rect id="Rectangular" x="0" y="0" width="24" height="24"></rect>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
