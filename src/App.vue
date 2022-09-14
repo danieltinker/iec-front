@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-main>
+    <v-main class="app">
       <router-view/>
     </v-main>
   </v-app>
@@ -10,9 +10,20 @@
 
 export default {
   name: 'App',
-
   data: () => ({
     //
   }),
 };
 </script>
+
+<style>
+    html, body {
+  overflow-x: hidden;
+}
+body {
+  position: relative
+}
+.app{
+  width: 100%;
+}
+</style>

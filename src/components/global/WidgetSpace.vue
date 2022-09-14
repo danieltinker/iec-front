@@ -1,8 +1,23 @@
 <template>
-    <div >
+    <div>
         <div class="widgets" v-for="(widget,index) in responseData" :key="index">
-            <component :is="widget.template_id"
-            :CompConfig="widget.params"> </component>
+            <div class="clock-main">
+                <div class="headline-toolbar">
+                    <ThreeDotsNineDots :isExpand="widget.params.expand" @switch-expand="widget.params.expand = !widget.params.expand" />
+                    <h1 class="headline-text">{{widget.headline}}</h1>
+                    <p>icon</p>
+                </div>
+
+                <component 
+                    :is="widget.template_id"
+                    :CompConfig="widget.params"> 
+                </component>
+            </div>
+
+            <div class="clock-drilldown" v-if="widget.params.expand">
+                <component :is="widget.template_id"
+                    :CompConfig="widget.params"> </component>   
+            </div>
         </div>
     </div>
 
@@ -10,10 +25,12 @@
 
 <script lang="ts">
 import BasicKPI from '../widgets/BasicKPI.vue';
+import ThreeDotsNineDots from '../utils/ThreeDotsNineDots.vue';
         export default{
             components:{
-                BasicKPI
-            },
+            BasicKPI,
+            ThreeDotsNineDots,
+        },
             data(){
                 return{
                         responseData:[
@@ -21,10 +38,12 @@ import BasicKPI from '../widgets/BasicKPI.vue';
                                 view_ID:"103",
                                 division:"800",
                                 category:"1",
+                                headline:"STOP CLIENTS OR SOMTHING",
                                 template_id:"BasicKPI",
                                 data_url:"/myKPI",
                                 fav_icon:"kpi-icon",
                                 view_order:1,
+                                id:"777-0",
                                 params:{
                                     jsonData:[{
                                         "label":"michal",
@@ -39,9 +58,10 @@ import BasicKPI from '../widgets/BasicKPI.vue';
                                         "value":1,
                                         }
                                     ],
-                                    id:"777-0",
-                                    chartTitle:"<chart title>",
-                                    isExpand:false,
+                                    data_category:[],
+                                    selected_category:null,
+                                    chartTitle:"My first KPI",
+                                    expand:false,
                                     showMainClock:true,
                                     doneFetchingData:false,
                                 }
@@ -50,6 +70,7 @@ import BasicKPI from '../widgets/BasicKPI.vue';
                                 view_ID:"103",
                                 division:"800",
                                 category:"1",
+                                headline:"MY hELLo KPI",
                                 template_id:"BasicKPI",
                                 data_url:"/myKPI",
                                 fav_icon:"kpi-icon",
@@ -66,12 +87,11 @@ import BasicKPI from '../widgets/BasicKPI.vue';
                                     ],
                                     id:"777-0",
                                     chartTitle:"<chart title>",
-                                    isExpand:false,
+                                    expand:false,
                                     showMainClock:true,
                                     doneFetchingData:false,
                                 }
                             }
-                            
                         ]
                 }
             }
@@ -80,5 +100,21 @@ import BasicKPI from '../widgets/BasicKPI.vue';
 
 
 <style scoped>
-
+    .headline-toolbar{
+        display: flex;
+        justify-content: space-between;
+        padding-left: 0;
+        text-align: center;
+        padding-top: 10px;
+    }
+    .headline-text{
+        color: #935287;
+        font-family: almoni-medium;
+        font-size: 22px;
+        text-align: center;
+        width: 240px;
+    }
+    .dots{
+        border:1px solid #935287
+    }
 </style>

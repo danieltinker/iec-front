@@ -1,6 +1,6 @@
 <template>
     <div style="text-align: center;">
-        <span id="chartsHeaders" :style="'background:' + 'yellow'" >
+        <span id="chartsHeaders" >
             {{ CompConfig.chartTitle }}
         </span>
         <div class="container" dir="rtl">
