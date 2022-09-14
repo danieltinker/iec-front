@@ -1,10 +1,14 @@
 <template>
     <div style="text-align: center;">
         <span id="chartsHeaders" >
-            {{ CompConfig.chartTitle }}
+            {{ chartTitle }}
         </span>
         <div class="container" dir="rtl">
-            <div v-for="(item,index) in CompConfig.jsonData" :key="index" class="kpi-box" :style="'background:' + 'yellow'" @click="buttonFoo">
+            <div 
+            v-for="(item,index) in chartData" 
+            :key="index" class="kpi-box" 
+            :style="{backgroundColor: isDrillDown? '#FFFFFF' :'#EBEBEB'}"
+            @click="buttonFoo">
                 <span class="kpi-label">
                      {{ item.label }}
                 </span>
@@ -21,10 +25,11 @@
     <script>
     export default {
         props:{
-            CompConfig:{type:Object,required:false},
-            jsonData: { type: Array, required: false},
+            config:{type:Object,required:false},
+            chartData: { type: Array, required: false},
             chartTitle: { type: String, required: false },
             clickAble:{ type: Boolean, required: false, default: false },
+            isDrillDown:{type:Boolean}
         },
         methods:{
             buttonFoo(){
@@ -43,8 +48,6 @@
         grid-template-columns: auto auto;
         row-gap: 10px;
         column-gap: 10px;
-        /* text-align: center; */
-        /* align-items: center; */
         justify-content: center;
     }
     .kpi-box{
