@@ -37,7 +37,7 @@ import BasicKPI from '../widgets/BasicKPI.vue';
 import ThreeDotsNineDots from '../utils/ThreeDotsNineDots.vue';
 import BasicPie from '../widgets/BasicPie.vue';
         export default{
-            components:{
+        components:{
             BasicKPI,
             ThreeDotsNineDots,
             BasicPie
@@ -55,7 +55,8 @@ import BasicPie from '../widgets/BasicPie.vue';
                 return{
                         responseData:[
                             ///// ////////////  BASIC KPI //// ///////////////////
-                            {   doesHaveDrillDown:true,
+                            {   
+                                doesHaveDrillDown:true,
                                 view_ID:"103",
                                 division:"800",
                                 category:"1",
@@ -88,7 +89,6 @@ import BasicPie from '../widgets/BasicPie.vue';
                                     showMainClock:true,
                                     doneFetchingData:false,
                                 },
-                                
                                 drill_down_params:{
                                     jsonData:[{
                                         "label":"dddd",
@@ -107,7 +107,8 @@ import BasicPie from '../widgets/BasicPie.vue';
                             },
 
                             ///// ////////////  BASIC KPI  2 //// ///////////////////
-                            {   doesHaveDrillDown:true,
+                            {   
+                                doesHaveDrillDown:true,
                                 view_ID:"103",
                                 division:"800",
                                 category:"1",
@@ -119,14 +120,11 @@ import BasicPie from '../widgets/BasicPie.vue';
                                 fav_icon:"kpi-icon",
                                 view_order:1,
                                 params:{
-
                                     jsonData:{
                                         "T3":122,
                                         "T6":14,
                                         "T9":16,
-                                        }
-                                    ,
-
+                                        },
                                 singleDistrictJson:{},
                                 config:{
                                     pieInnerText:"<1כללי>",
@@ -182,14 +180,11 @@ import BasicPie from '../widgets/BasicPie.vue';
                                 view_order:1,
                                 id:"777-0",
                                 params:{
-
                                     jsonData:{
                                         "T3":122,
                                         "T6":14,
                                         "T9":16,
-                                        }
-                                    ,
-
+                                        },
                                 singleDistrictJson:{},
                                 config:{
                                     pieInnerText:"<1כללי>",
@@ -199,7 +194,6 @@ import BasicPie from '../widgets/BasicPie.vue';
                                     "T3":"3 שעות",
                                     "T6":"6 שעות",
                                     "T9":"9 שעות",
-    
                                 },
                                 backgroundColor: [
                                     "#00C853",
@@ -207,7 +201,6 @@ import BasicPie from '../widgets/BasicPie.vue';
                                     "#FFC107",
                                     ],
                                 },
-
                                 data_category:[],
                                 selected_category:null,
                                 chartTitle:"My first PieChart",
