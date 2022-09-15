@@ -6,8 +6,8 @@
                 :params="widget.params"
                 :isDrillDown="false"> 
             </component>
-            <div class="clock-spacing"></div>
         </div>
+
     </div>
 </template>
 
@@ -50,7 +50,6 @@ import BasicPie from '../widgets/BasicPie.vue';
                                     data_category:[],
                                     selected_category:null,
                                     chartTitle:"My first KPI",
-
                                     //fetch and build per component the jsonDATA and the jsonDataDrillDown
                                     data_url:"/myKPI",
                                     jsonData:[{
@@ -72,7 +71,7 @@ import BasicPie from '../widgets/BasicPie.vue';
                                 drillDownHeadline:"drill headline :)",
                             },
                         },
-                        ///// ////////////  BASIC KPI  2 //// ///////////////////
+                    ///// ////////////  BASIC KPI  2 //// ///////////////////
                     ///// ////////////  BASIC Pie //// ///////////////////
                     ]
                 }
@@ -82,39 +81,10 @@ import BasicPie from '../widgets/BasicPie.vue';
 
 
 <style scoped>
-     .clock-spacing{
-        height: 10px;
-        background-color: #E5E5E5;
-    }
     .widgets{
         background-color: white;
     }
-  
-    .headline-toolbar{
-        display: flex;
-        justify-content: space-between;
-        padding-left: 0;
-        text-align: center;
-        padding-top: 10px;
-    }
-    
-    .headline-title{
-        color: #935287;
-        font-family: almoni-medium;
-        font-size: 22px;
-        text-align: center;
-        width: 240px;
-    }
-    .drilldown-title{
-        color:#606060;
-        text-align: center;
-    }
+ 
 
-
-    .dots{
-        border:1px solid #935287
-    }
-
-    
    
 </style>

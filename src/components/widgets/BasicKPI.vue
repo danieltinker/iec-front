@@ -29,14 +29,13 @@
                     </div>
                 </div>
                 
-                <div class="main-clock-spacer"> </div>
                 <div class="clock-drilldown" v-if="expand && !isDrillDown">
                     <h1 class="drilldown-title">{{params.drillDownHeadline}}</h1>
                     <component 
                     :is="params.drill_down_template_type"
                     :params = params
                     :isDrillDown="true">
-                </component>   
+                    </component>   
             </div>
             
         </div>  
@@ -47,10 +46,10 @@
     import ThreeDotsNineDots from '../utils/ThreeDotsNineDots.vue'
 
     export default {
-        name:"basicKPI",
+        // name:"basicKPI",
         components:{
             ThreeDotsNineDots,
-            BasicKPI: () => import('../widgets/BasicKPI.vue')
+            BasicKPI: () => import('../widgets/BasicKPI.vue') // handle self import
         },
         data(){
                 return{
@@ -140,14 +139,6 @@
         text-align: center;
     }
 
-    .clock-spacing{
-        height: 10px;
-        background-color: #E5E5E5;
-    }
 
-    .main-clock-spacer{
-        height: 10px;
-        background-color: #FFFFFF;
-    }
 
     </style>
