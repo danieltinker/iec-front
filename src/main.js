@@ -6,7 +6,17 @@ import vuetify from './plugins/vuetify'
 
 Vue.config.productionTip = false
 Vue.prototype.$pieSize = 285
-
+Vue.mixin({
+  computed:{
+    getbookmarkIcon() {
+      if (true) {
+          return "mdi-bookmark";
+      } else {
+          return "mdi-bookmark-outline";
+      }
+  }
+  }
+})
 new Vue({
   router,
   store,

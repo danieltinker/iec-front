@@ -53,13 +53,7 @@ import BasicPie from '../widgets/BasicPie.vue';
 
         },
         computed:{
-            getbookmarkIcon() {
-                if (true) {
-                    return "mdi-bookmark";
-                } else {
-                    return "mdi-bookmark-outline";
-                }
-            }
+            
         },
         data(){
                 return{
