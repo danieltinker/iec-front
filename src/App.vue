@@ -1,18 +1,23 @@
 <template>
   <v-app>
+    <HQNavBar/>
     <v-main class="app">
+      <CategoryBar/>
       <router-view/>
     </v-main>
   </v-app>
 </template>
 
 <script>
+import HQNavBar from './components/global/HQNavBar.vue';
+import CategoryBar from './components/global/CategoryBar.vue';
 
 export default {
-  name: 'App',
-  data: () => ({
+    name: "App",
+    data: () => ({
     //
-  }),
+    }),
+    components: { HQNavBar, CategoryBar }
 };
 </script>
 

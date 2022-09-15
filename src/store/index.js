@@ -5,6 +5,8 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    selected_hq_id:600,
+    selected_cat_id:8,
     themeDetails:{
       "darkTheme":{
         "theme":"darkTheme",
