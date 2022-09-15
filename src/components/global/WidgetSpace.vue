@@ -5,7 +5,7 @@
                 <div class="headline-toolbar">
                     <ThreeDotsNineDots :isExpand="widget.params.expand" @switch-expand="widget.params.expand = !widget.params.expand" v-if="widget.doesHaveDrillDown" />
                     <h1 class="headline-title">{{widget.headline}}</h1>
-                    <v-icon color="#935287" style="font-size: 30px">{{ getbookmarkIcon }}</v-icon>
+                    <v-icon color="#935287" style="font-size: 30px" v-if="widget.isBookMarkBtn">{{ getbookmarkIcon }}</v-icon>
                 </div>
                 
                 <component 
@@ -18,6 +18,8 @@
             </div>
 
             <div class="clock-spacing"></div>
+
+
             <div class="clock-drilldown" v-if="widget.params.expand && widget.doesHaveDrillDown">
                 <h1 class="drilldown-title">{{widget.drillDownHeadline}}</h1>
                 <component 
@@ -42,6 +44,14 @@ import BasicPie from '../widgets/BasicPie.vue';
             ThreeDotsNineDots,
             BasicPie
         },
+        created(){
+                //  listen to store HQ,Category
+                //  fetch the server response GET /mobile/views/{hq_id}/{category_id}?sessoinid=xxx .
+                //  pass data uri into the components for the fetch
+                //
+                //
+
+        },
         computed:{
             getbookmarkIcon() {
                 if (true) {
@@ -53,10 +63,12 @@ import BasicPie from '../widgets/BasicPie.vue';
         },
         data(){
                 return{
+                        doneFetching:false,
                         responseData:[
                             ///// ////////////  BASIC KPI //// ///////////////////
                             {   
                                 doesHaveDrillDown:true,
+                                isBookMarkBtn:true,
                                 view_ID:"103",
                                 division:"800",
                                 category:"1",
