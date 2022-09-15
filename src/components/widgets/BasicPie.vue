@@ -38,7 +38,7 @@
                 :ripple="false"
                  v-for="(btnName,index) in buttons" :key="index"
                   @click="$refs.dount.onClickLegend(index)"
-                  :style="{backgroundColor: isDrillDown?'#232323' : '#344334'}">
+                  :style="{backgroundColor: isDrillDown?'#232323' : '#666666'}">
                     <span
                     class="dot"
                     :style="{backgroundColor:TemplateData.datasets[0].backgroundColor[index]}"></span>    
