@@ -1,6 +1,8 @@
 <template>
   <v-app>
+    <HQNavBar/>
     <v-main class="app">
+      <CategoryBar/>
       <!-- <router-view/> -->
       <WidgetSpaceTwo/>
     </v-main>
@@ -9,13 +11,15 @@
 
 <script>
 import WidgetSpaceTwo from './components/global/WidgetSpaceTwo.vue';
+import HQNavBar from './components/global/HQNavBar.vue';
+import CategoryBar from './components/global/CategoryBar.vue';
 
 export default {
     name: "App",
     data: () => ({
     //
-    }),
-    components: { WidgetSpaceTwo }
+      }),
+    components: { WidgetSpaceTwo,HQNavBar, CategoryBar }
 };
 </script>
 
