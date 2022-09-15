@@ -46,7 +46,7 @@ import BasicPie from '../widgets/BasicPie.vue';
                                         bookmarkEnabled:true,
                                         title:"STOP CLIENTS OR SOMTHING",
                                     },
-
+                                    clickableKPIEnabled:true,
                                     data_category:[],
                                     selected_category:null,
                                     chartTitle:"My first KPI",

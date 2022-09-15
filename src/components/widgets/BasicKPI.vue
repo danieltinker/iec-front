@@ -71,8 +71,8 @@
         },
         methods:{
             buttonFoo(){
-                if(this.clickAble){
-                    console.log("function")
+                if(this.params.clickableKPIEnabled){
+                    this.expand =! this.expand
                 }
             }
         }
