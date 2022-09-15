@@ -5,7 +5,7 @@
                 <div class="headline-toolbar">
                     <ThreeDotsNineDots :isExpand="widget.params.expand" @switch-expand="widget.params.expand = !widget.params.expand" v-if="widget.doesHaveDrillDown" />
                     <h1 class="headline-title">{{widget.headline}}</h1>
-                    <v-icon color="#935287" style="font-size: 30px" v-if="widget.isBookMarkBtn">{{ getbookmarkIcon }}</v-icon>
+                    <v-icon color="#935287" style="font-size: 30px">{{ getbookmarkIcon }}</v-icon>
                 </div>
                 
                 <component 

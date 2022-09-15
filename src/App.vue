@@ -1,18 +1,21 @@
 <template>
   <v-app>
     <v-main class="app">
-      <router-view/>
+      <!-- <router-view/> -->
+      <WidgetSpaceTwo/>
     </v-main>
   </v-app>
 </template>
 
 <script>
+import WidgetSpaceTwo from './components/global/WidgetSpaceTwo.vue';
 
 export default {
-  name: 'App',
-  data: () => ({
+    name: "App",
+    data: () => ({
     //
-  }),
+    }),
+    components: { WidgetSpaceTwo }
 };
 </script>
 

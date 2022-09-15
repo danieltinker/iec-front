@@ -10,6 +10,7 @@ import WidgetSpace from '@/components/global/WidgetSpace.vue';
     name: 'Home',
     components: {
     WidgetSpace
+    //listener for hq,categories prop from ran.
 },
   }
 </script>

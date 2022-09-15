@@ -1,35 +1,74 @@
-<template>
-    <div style="text-align: center;">
-        <span id="chartsHeaders" >
-            {{ chartTitle }}
-        </span>
-        <div class="container" dir="rtl">
-            <div 
-            v-for="(item,index) in chartData" 
-            :key="index" class="kpi-box" 
-            :style="{backgroundColor: isDrillDown? '#FFFFFF' :'#EBEBEB'}"
-            @click="buttonFoo">
-                <span class="kpi-label">
-                     {{ item.label }}
+    <template>
+        <div>
+
+
+            <div class="clock-main" style="text-align: center;">
+                <div class="headline-toolbar" v-if="!isDrillDown">
+                        <ThreeDotsNineDots :isExpand="params.expand" @switch-expand="expand = !expand" />
+                        <h1 class="headline-title">{{params.headline_config.title}}</h1>
+                        <v-icon color="#935287" style="font-size: 30px">{{ getbookmarkIcon }}</v-icon>
+                </div>
+        
+                <span id="chartsHeaders" >
+                    {{ params.chartTitle }}
                 </span>
-                <br>
-                <span class="kpi-sub-labels">
-                     {{ item.value }}
-                </span>
+
+                <div class="KPIcontainer" dir="rtl">
+                    <div 
+                    v-for="(item,index) in params.jsonData" 
+                    :key="index" class="kpi-box" 
+                    :style="{backgroundColor: isDrillDown? '#FFFFFF' :'#EBEBEB'}"
+                    @click="buttonFoo">
+                        <span class="kpi-label">
+                            {{ item.label }}
+                        </span>
+                        <br>
+                        <span class="kpi-sub-labels">
+                            {{ item.value }}
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="main-clock-spacer"> </div>
+                <div class="clock-drilldown" v-if="expand && !isDrillDown">
+                    <h1 class="drilldown-title">{{params.drillDownHeadline}}</h1>
+                    <component 
+                    :is="params.drill_down_template_type"
+                    :params = params
+                    :isDrillDown="true">
+                </component>   
             </div>
-        </div>
-    
+            
+        </div>  
     </div>
     </template>
     
     <script>
+    import ThreeDotsNineDots from '../utils/ThreeDotsNineDots.vue'
+
     export default {
+        name:"basicKPI",
+        components:{
+            ThreeDotsNineDots,
+            BasicKPI: () => import('../widgets/BasicKPI.vue')
+        },
+        data(){
+                return{
+                    expand:false    
+                }
+            },
         props:{
-            config:{type:Object,required:false},
-            chartData: { type: Array, required: false},
-            chartTitle: { type: String, required: false },
-            clickAble:{ type: Boolean, required: false, default: false },
-            isDrillDown:{type:Boolean}
+            isDrillDown:{type:Boolean},
+            params:{type:Object,required:false}
+        },
+        computed:{
+            getbookmarkIcon() {
+                if (true) {
+                    return "mdi-bookmark";
+                } else {
+                    return "mdi-bookmark-outline";
+                }
+            }
         },
         methods:{
             buttonFoo(){
@@ -42,8 +81,7 @@
     </script>
     
     <style scoped>
-    
-    .container{
+    .KPIcontainer{
         display: grid;
         grid-template-columns: auto auto;
         row-gap: 10px;
@@ -57,7 +95,6 @@
         width: 165px;
         height: 80px;
         border-radius: 4px;
-    
     }
     .kpi-box span:first-child{
         font-family: almoni;
@@ -77,4 +114,40 @@
       color: #606060;
       /* margin-bottom: 18px; */
     }
+
+    .clock-drilldown{
+        background-color: #E5E5E5;
+        padding-bottom: 20px;
+    }
+    
+    .headline-toolbar{
+        display: flex;
+        justify-content: space-between;
+        padding-left: 0;
+        text-align: center;
+        padding-top: 10px;
+    }
+    
+    .headline-title{
+        color: #935287;
+        font-family: almoni-medium;
+        font-size: 22px;
+        text-align: center;
+        width: 240px;
+    }
+    .drilldown-title{
+        color:#606060;
+        text-align: center;
+    }
+
+    .clock-spacing{
+        height: 10px;
+        background-color: #E5E5E5;
+    }
+
+    .main-clock-spacer{
+        height: 10px;
+        background-color: #FFFFFF;
+    }
+
     </style>
