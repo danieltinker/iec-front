@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app style="background-color: #ebebeb;">
     <HQNavBar/>
     <v-main class="app">
       <CategoryBar/>
