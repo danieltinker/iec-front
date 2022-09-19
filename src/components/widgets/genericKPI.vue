@@ -7,8 +7,8 @@
             <span id="chartsHeaders" >
                 {{ params.chartTitle }}
             </span>
-            
-            <div class="KPIcontainer" dir="rtl">
+            test 
+            <div class="KPIcontainer" dir="rtl" v-if="isBasic">
                 <div 
                 v-for="(item,index) in jsonData[0][params.selected_category]" 
                 :key="index" class="kpi-box" 
@@ -22,6 +22,43 @@
                         {{ item.value }}
                     </span>
                 </div>
+            </div>
+
+            <div class="kpi-carousel" v-if="isCarousel">
+                <v-carousel
+                  hide-delimiters
+                  :show-arrows="true"
+                  class="carousel-flex"
+                  ref="pieCarousel"
+                  :value="carouselIndex"
+                  v-model="carouselActiveIndex"
+                  height=auto
+                >
+                <template v-if="showArrows" v-slot:next="{ on, attr }">
+                   <img v-on="on" v-bind="attr" src="../../assets/playRight.svg" />
+                </template>
+                <template v-if="showArrows" v-slot:prev="{ on, attr }">
+                   <img v-on="on" v-bind="attr" src="../../assets/playLeft.svg" />
+                </template>
+
+                   <v-carousel-item v-for="(KPIarr,index) in jsonData[0][params.selected_category]" :key="index">
+                    <div class="KPIcontainer" dir="rtl">
+                    <div 
+                       v-for="(item,index) in isDrillDown? KPIarr :KPIarr" 
+                       :key="index" class="kpi-box" 
+                       :style="{backgroundColor: isDrillDown? '#FFFFFF' :'#EBEBEB'}"
+                       @click="buttonFoo">
+                    <span class="kpi-label">
+                        {{ item.label }}
+                    </span>
+                    <br>
+                    <span class="kpi-sub-labels">
+                        {{ item.value }}
+                    </span>
+                   </div>
+                </div>
+                   </v-carousel-item>
+                </v-carousel>
             </div>
 
             
@@ -47,7 +84,6 @@
         ></v-progress-circular>
     </div>
 </div>
-
 </template>
 
 <script>
@@ -64,10 +100,22 @@ export default {
     components:{
         ThreeDotsNineDots,
         BasicKPI: () => import('../widgets/BasicKPI.vue'), 
-        carouselKPI: () => import('../widgets/carouselKPI.vue') 
+        carouselKPI: () => import('../widgets/carouselKPI.vue'),
+        genericKPI: () => import('../widgets/genericKPI.vue')
+    },
+    data(){
+            return{
+                carouselActiveIndex:0,
+                carouselIndex:0,
+                showArrows:true,
+                drilldownData:[],
+                jsonData:[],
+                doneFetching:false,
+                isBasic:true,
+                isCarousel:false,
+            }
     },
     async created(){
-
         if(!this.isDrillDown){
             await axios.get(`http://20.102.120.232:5080/shavit/mobile/data/${this.params.data_url}`,{params: { sid: "xxx" }})
                         .then(response => {
@@ -88,16 +136,19 @@ export default {
         else{
             this.jsonData = this.drillDataProp
         }
+        console.log(Array.isArray(this.jsonData[0][this.params.selected_category][0]))
+        if(Array.isArray(this.jsonData[0][this.params.selected_category][0])){
+            this.isCarousel = true
+            this.isBasic = false
+        }
+        else{
+            this.isCarousel = false
+            this.isBasic=true
+        }
         this.doneFetching = true
 
     },
-    data(){
-            return{
-                drilldownData:[],
-                jsonData:[],
-                doneFetching:false
-            }
-        },
+  
    
     methods:{
         buttonFoo(){
@@ -167,6 +218,91 @@ export default {
     text-align: center;
 }
 
+.KPIcontainer{
+    display: grid;
+    grid-template-columns: auto auto;
+    row-gap: 10px;
+    column-gap: 10px;
+    justify-content: center;
+    padding-bottom: 20px;
+}
+.kpi-box{
+    padding-top: 10px;
+    text-align: center;
+    align-items: center;
+    width: 165px;
+    height: 80px;
+    border-radius: 4px;
+}
+.kpi-box span:first-child{
+    font-family: almoni;
+  font-size: 20px;
+  line-height: 30px;
+}
 
+.kpi-box span{
+    display: inline-block;
+    font-size: 20px;
+    font-family: almoni-demibold;
+    color: #a8699d;
+}
+#chartsHeaders {
+  font-family: almoni;
+  font-size: 18px;
+  color: #606060;
+  /* margin-bottom: 18px; */
+}
+
+.clock-drilldown{
+    background-color: #E5E5E5;
+    padding-bottom: 20px;
+}
+
+.drilldown-title{
+    color:#606060;
+    text-align: center;
+}
+.carousel-flex {
+  display: flex;
+  flex-direction: column;
+}
+
+.carousel-flex >>> .v-window__next {
+  background-color: transparent !important;
+  color: transparent !important;
+  top: 40% !important;
+}
+.carousel-flex >>> .v-window__prev {
+  background-color: transparent !important;
+  color: transparent !important;
+  top:40% !important;
+}
+.radio-btn{
+    display: inline-block !important;;
+
+}
+/* .pie-carousel >>> .carousel-flex .v-carousel__controls__item.v-btn {
+  color: lightgrey !important;
+}
+
+.pie-carousel >>> .carousel-flex .v-carousel__controls__item.v-btn.v-btn--active {
+  color: #f67200 !important;
+} */
+.flex-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  }
+  .loader{
+        height: 400px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        align-self: center;
+    }
+    .v-progress-circular{
+        padding:40px;
+    }
 
 </style>

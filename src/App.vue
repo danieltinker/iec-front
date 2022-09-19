@@ -12,7 +12,6 @@
 import WidgetSpaceTwo from './components/global/WidgetSpaceTwo.vue';
 import HQNavBar from './components/global/HQNavBar.vue';
 import CategoryBar from './components/global/CategoryBar.vue';
-
 export default {
     name: "App",
     data: () => ({
@@ -35,4 +34,16 @@ body {
 .app{
   width: 100%;
 }
+
+.loader{
+        height: 400px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        align-self: center;
+    }
+    .v-progress-circular{
+        padding:40px;
+    }
 </style>
