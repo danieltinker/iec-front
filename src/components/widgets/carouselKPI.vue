@@ -1,6 +1,6 @@
 <template>
-    <div v-if="doneFetching">
-        <div class="clock-main" style="text-align: center;">
+    <div >
+        <div class="clock-main" style="text-align: center;" v-if="doneFetching">
             <v-radio-group class="radio-btn"  v-model="params.selected_category" row id="districtRadioGroup" v-if="!isDrillDown && params.data_category.length >= 2">
                     <v-radio v-for="(category) in params.data_category" :key="category" :label="category" :value="category" color="#935287"></v-radio>
             </v-radio-group>
@@ -63,6 +63,12 @@
                 </component>   
         </div>
     </div>  
+        <div class="loader" v-else>
+            <v-progress-circular
+            indeterminate
+            color="red"
+            ></v-progress-circular>
+        </div>
 </div>
 </template>
 
@@ -202,5 +208,16 @@ export default {
   flex-direction: column;
   align-items: center;
   }
+  .loader{
+        height: 400px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        align-self: center;
+    }
+    .v-progress-circular{
+        padding:40px;
+    }
 
 </style>

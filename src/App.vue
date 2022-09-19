@@ -3,7 +3,6 @@
     <HQNavBar/>
     <v-main class="app">
       <CategoryBar/>
-      <h1>hey</h1>
       <WidgetSpaceTwo/>
     </v-main>
   </v-app>

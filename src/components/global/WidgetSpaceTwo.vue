@@ -1,8 +1,5 @@
 <template>
     <div v-if="doneFetching">
-     <h1>
-        {{$store.state.selected_hq_id}} , {{$store.state.selected_cat_id}}
-    </h1>
         <div class="widgets mt-3" v-for="(widget,index) in responseData" :key="index" >
             <div class="headline-toolbar" >
                 <div class="grid-item">

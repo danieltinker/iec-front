@@ -1,6 +1,6 @@
     <template>
-        <div v-if="doneFetching">
-            <div class="clock-main" style="text-align: center;">
+        <div>
+            <div class="clock-main" style="text-align: center;" v-if="doneFetching">
                 <v-radio-group  v-model="params.selected_category" row id="districtRadioGroup" v-if="!isDrillDown && params.data_category.length >= 2">
                         <v-radio v-for="(category) in params.data_category" :key="category" :label="category" :value="category" color="#935287"></v-radio>
                 </v-radio-group>
@@ -27,7 +27,6 @@
                 
                 <div class="clock-drilldown" v-if="params.expand && !isDrillDown && params.drill_down_params">
                     <h1 class="drilldown-title">{{params.drill_down_params.headline_config.title}}</h1>
-
                     <v-radio-group v-model="params.drill_down_params.selected_category" row id="districtRadioGroup" v-if="params.data_category.length >= 2">
                         <v-radio v-for="(categorydrill) in params.drill_down_params.data_category" :key="categorydrill" :label="categorydrill" :value="categorydrill" color="#935287"></v-radio>
                      </v-radio-group>
@@ -40,7 +39,16 @@
                     </component>   
             </div>
         </div>  
+
+        <div class="loader" v-else>
+            <v-progress-circular
+            indeterminate
+            color="red"
+            ></v-progress-circular>
+        </div>
     </div>
+
+    
     </template>
     
     <script>
@@ -125,7 +133,18 @@
       font-size: 20px;
       line-height: 30px;
     }
-    
+
+    .loader{
+        height: 400px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        align-self: center;
+    }
+    .v-progress-circular{
+        padding:40px;
+    }
     .kpi-box span{
         display: inline-block;
         font-size: 20px;
