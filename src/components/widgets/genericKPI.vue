@@ -4,11 +4,11 @@
             <v-radio-group  v-model="params.selected_category" row id="districtRadioGroup" v-if="!isDrillDown && params.data_category.length >= 2">
                     <v-radio v-for="(category) in params.data_category" :key="category" :label="category" :value="category" color="#935287"></v-radio>
             </v-radio-group>
-            <span id="chartsHeaders" >
-                {{ params.chart_title }}
+
             
+            <span id="chartsHeaders"  v-if="isBasic">
+                {{isDrillDown? params.drill_down_params.chart_titles[0]:params.chart_titles[0] }}
             </span>
- 
             <div class="KPIcontainer" dir="rtl" v-if="isBasic">
                 <div 
                 v-for="(item,index) in jsonData[0][params.selected_category]" 
@@ -26,6 +26,10 @@
             </div>
 
             <div class="kpi-carousel" v-if="isCarousel">
+                <span id="chartsHeaders" >
+                     {{ params.chart_titles[carouselActiveIndex] }}
+                </span>
+ 
                 <v-carousel
                   hide-delimiters
                   :show-arrows="true"
@@ -218,22 +222,6 @@ export default {
     text-align: center;
 }
 
-.KPIcontainer{
-    display: grid;
-    grid-template-columns: auto auto;
-    row-gap: 10px;
-    column-gap: 10px;
-    justify-content: center;
-    padding-bottom: 20px;
-}
-.kpi-box{
-    padding-top: 10px;
-    text-align: center;
-    align-items: center;
-    width: 165px;
-    height: 80px;
-    border-radius: 4px;
-}
 .kpi-box span:first-child{
     font-family: almoni;
   font-size: 20px;
@@ -246,22 +234,12 @@ export default {
     font-family: almoni-demibold;
     color: #a8699d;
 }
-#chartsHeaders {
-  font-family: almoni;
-  font-size: 18px;
-  color: #606060;
-  /* margin-bottom: 18px; */
-}
 
 .clock-drilldown{
     background-color: #E5E5E5;
     padding-bottom: 20px;
 }
 
-.drilldown-title{
-    color:#606060;
-    text-align: center;
-}
 .carousel-flex {
   display: flex;
   flex-direction: column;
