@@ -66,7 +66,7 @@
         <div class="loader" v-else>
             <v-progress-circular
             indeterminate
-            color="red"
+            color="purple"
             ></v-progress-circular>
         </div>
 </div>

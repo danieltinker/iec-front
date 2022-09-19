@@ -16,17 +16,11 @@ import CategoryBar from './components/global/CategoryBar.vue';
 export default {
     name: "App",
     data: () => ({
-    //
       }),
     components: { WidgetSpaceTwo,HQNavBar, CategoryBar },
     mounted(){
       this.$store.state.selected_hq_id = 100
       this.$store.state.selected_cat_id = 101
-    },
-    created(){
-      // console.log("puts")
-      // console.log(this.$store.state.selected_hq_id)
-      // console.log(this.$store.state.selected_hq_id)
     }
 };
 </script>
