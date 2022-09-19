@@ -5,9 +5,10 @@
                     <v-radio v-for="(category) in params.data_category" :key="category" :label="category" :value="category" color="#935287"></v-radio>
             </v-radio-group>
             <span id="chartsHeaders" >
-                {{ params.chartTitle }}
+                {{ params.chart_title }}
+            
             </span>
-            test 
+ 
             <div class="KPIcontainer" dir="rtl" v-if="isBasic">
                 <div 
                 v-for="(item,index) in jsonData[0][params.selected_category]" 
@@ -136,7 +137,6 @@ export default {
         else{
             this.jsonData = this.drillDataProp
         }
-        console.log(Array.isArray(this.jsonData[0][this.params.selected_category][0]))
         if(Array.isArray(this.jsonData[0][this.params.selected_category][0])){
             this.isCarousel = true
             this.isBasic = false
@@ -293,16 +293,5 @@ export default {
   flex-direction: column;
   align-items: center;
   }
-  .loader{
-        height: 400px;
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        align-self: center;
-    }
-    .v-progress-circular{
-        padding:40px;
-    }
 
 </style>
