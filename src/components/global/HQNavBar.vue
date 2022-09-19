@@ -49,7 +49,7 @@
       drawer: false,
       group: null,
       hqs: [],
-      title:""
+      title:'מטה מנכ"ל'
     }),
   
     watch: {

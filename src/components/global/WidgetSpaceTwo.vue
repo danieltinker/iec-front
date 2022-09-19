@@ -50,7 +50,6 @@ import axios from 'axios';
         {params: { sid: "xxx" }}
         )
         .then(response => {
-            console.log("good res",response)
             this.responseData = response.data
             this.doneFetching = true
     })

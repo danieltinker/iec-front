@@ -10,7 +10,7 @@
                 
                 <div class="KPIcontainer" dir="rtl">
                     <div 
-                    v-for="(item,index) in isDrillDown? drilldownData[0][params.drill_down_params.selected_category] : jsonData[0][params.selected_category]" 
+                    v-for="(item,index) in jsonData[0][params.selected_category]" 
                     :key="index" class="kpi-box" 
                     :style="{backgroundColor: isDrillDown? '#FFFFFF' :'#EBEBEB'}"
                     @click="buttonFoo">
@@ -35,7 +35,8 @@
                     <component 
                     :is="params.drill_down_params.template_type"
                     :params = params
-                    :isDrillDown="true">
+                    :isDrillDown="true"
+                    :drillDataProp="drilldownData">
                     </component>   
             </div>
         </div>  
@@ -48,40 +49,39 @@
 
     export default {
         // name:"basicKPI",
+        props:{
+            isDrillDown:{type:Boolean},
+            params:{type:Object,required:false},
+            drillDataProp:{type:Array, default:()=>[]}
+        },
         components:{
             ThreeDotsNineDots,
             BasicKPI: () => import('../widgets/BasicKPI.vue'), 
             carouselKPI: () => import('../widgets/carouselKPI.vue') 
         },
         async created(){
-            console.log(this.params)
-            // Main
-            await axios
-        .get(`http://20.102.120.232:5080/shavit/mobile/data/${this.params.data_url}`,
-        {params: { sid: "xxx" }}
-        )
-        .then(response => {
-            console.log("good res",response)
-            this.jsonData = response.data
-    })
-        .catch((error) => {
-          console.log(error);
-        });
 
-        //  DrillDown
-
-        await axios
-        .get(`http://20.102.120.232:5080/shavit/mobile/data/${this.params.drill_down_params.data_url}`,
-        {params: { sid: "xxx" }}
-        )
-        .then(response => {
-            console.log("good res",response)
-            this.drilldownData = response.data
-    })
-        .catch((error) => {
-          console.log(error);
-        });
-        this.doneFetching = true
+            if(!this.isDrillDown){
+                await axios.get(`http://20.102.120.232:5080/shavit/mobile/data/${this.params.data_url}`,{params: { sid: "xxx" }})
+                            .then(response => {
+                                    this.jsonData = response.data
+                                })
+                            .catch((error) => {
+                                    console.log(error);
+                                });
+                
+                await axios.get(`http://20.102.120.232:5080/shavit/mobile/data/${this.params.drill_down_params.data_url}`,{params: { sid: "xxx" }})
+                            .then(response => {
+                                this.drilldownData = response.data
+                            })
+                            .catch((error) => {
+                            console.log(error);
+                            });
+            }
+            else{
+                this.jsonData = this.drillDataProp
+            }
+            this.doneFetching = true
 
         },
         data(){
@@ -92,10 +92,7 @@
            
                 }
             },
-        props:{
-            isDrillDown:{type:Boolean},
-            params:{type:Object,required:false}
-        },
+       
         methods:{
             buttonFoo(){
                 if(this.params.click_open_drill_enabled){

@@ -3,7 +3,7 @@
     <HQNavBar/>
     <v-main class="app">
       <CategoryBar/>
-      <!-- <router-view/> -->
+      <h1>hey</h1>
       <WidgetSpaceTwo/>
     </v-main>
   </v-app>
@@ -19,7 +19,16 @@ export default {
     data: () => ({
     //
       }),
-    components: { WidgetSpaceTwo,HQNavBar, CategoryBar }
+    components: { WidgetSpaceTwo,HQNavBar, CategoryBar },
+    mounted(){
+      this.$store.state.selected_hq_id = 100
+      this.$store.state.selected_cat_id = 101
+    },
+    created(){
+      // console.log("puts")
+      // console.log(this.$store.state.selected_hq_id)
+      // console.log(this.$store.state.selected_hq_id)
+    }
 };
 </script>
 
