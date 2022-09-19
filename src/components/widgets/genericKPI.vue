@@ -9,7 +9,7 @@
                 <span id="chartsHeaders" >
                     {{ params.chart_titles[carouselActiveIndex] }}
                 </span>
- 
+                    <!-- {{jsonData}},<br><br>{{params}} -->
                 <v-carousel
                   hide-delimiters
                   :show-arrows="showArrows"
@@ -26,7 +26,8 @@
                         <img v-on="on" v-bind="attr" src="../../assets/playLeft.svg"/>
                     </template>
 
-                    <v-carousel-item v-for="(KPIarr,index) in jsonData[params.selected_category]" :key="index">
+                    <v-carousel-item v-for="(KPIarr,index) in isDrillDown ? jsonData[params.drill_down_params.selected_category]:jsonData[params.selected_category]" :key="index">
+                        {{KPIarr}}
                         <div class="KPIcontainer" dir="rtl">
                                 <div 
                                 class="kpi-box" 
@@ -49,7 +50,7 @@
 
             <div class="clock-drilldown" v-if="params.expand && !isDrillDown && params.drill_down_params">
                 <h1 class="drilldown-title">{{params.drill_down_params.headline_config.title}}</h1>
-                <v-radio-group v-model="params.drill_down_params.selected_category" row id="districtRadioGroup" v-if="params.data_category.length >= 2">
+                <v-radio-group v-model="params.drill_down_params.selected_category" row id="districtRadioGroup" v-if="params.drill_down_params.data_category.length >= 2">
                     <v-radio v-for="(categorydrill) in params.drill_down_params.data_category" :key="categorydrill" :label="categorydrill" :value="categorydrill" color="#935287"></v-radio>
                  </v-radio-group>
 
@@ -60,7 +61,7 @@
                 :drillDataProp="drilldownData">
                 </component>   
             </div>
-            
+
     </div>  
 
     <div class="loader" v-else>
@@ -106,7 +107,7 @@ export default {
                                 this.jsonData = response.data
                             })
                         .catch((error) => {
-                                console.log(error);
+                                console.log(error,"main DATA FETCH ERROR");
                             });
             
             await axios.get(`http://20.102.120.232:5080/shavit/mobile/data/${this.params.drill_down_params.data_url}`,{params: { sid: "xxx" }})
@@ -114,18 +115,29 @@ export default {
                             this.drilldownData = response.data
                         })
                         .catch((error) => {
-                        console.log(error);
+                        console.log(error,"drill DATA FETCH ERROR");
                         });
+
+
+            if(this.jsonData[this.params.selected_category].length>1){
+                this.showArrows=true
+            }
+            else{
+                this.showArrows= false
+            }
         }
         else{
             this.jsonData = this.drillDataProp
+            if(this.jsonData[this.params.drill_down_params.selected_category].length>1){
+                this.showArrows=true
+            }
+            else{
+                this.showArrows= false
+            }
         }
-        if(this.jsonData[this.params.selected_category].length>1){
-            this.showArrows=true
-        }
-        else{
-            this.showArrows= false
-        }
+        console.log(this.jsonData)
+
+        
         this.doneFetching = true
 
     },
