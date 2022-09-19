@@ -11,7 +11,7 @@ export default{
     //getting user fav
     getUserFav() {
         console.log("Getting user favorites")
-        return ShavitMobileFavReq.get(`${store.state.currUser.user_id}`,{},{
+        return ShavitMobileFavReq.get(`${store.state.currUser.user_id}`,{
             params: {
                 sid: store.state.currUser.sessionId,
             }

@@ -8,7 +8,7 @@ export default new Vuex.Store({
     selected_hq_id:600,
     selected_cat_id:8,
     selected_view_id: 100,
-    
+    serverAdrr: 'http://20.102.120.232:5080',
     quick_view: false,
     user_favorites: [],
     currUser: {"name":"yosef", "sessionId": "xxx","user_id": 999},
