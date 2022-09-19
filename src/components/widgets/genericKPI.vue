@@ -2,71 +2,51 @@
     <div>
         <div class="clock-main" style="text-align: center;" v-if="doneFetching">
             <v-radio-group  v-model="params.selected_category" row id="districtRadioGroup" v-if="!isDrillDown && params.data_category.length >= 2">
-                    <v-radio v-for="(category) in params.data_category" :key="category" :label="category" :value="category" color="#935287"></v-radio>
+                <v-radio v-for="(category) in params.data_category" :key="category" :label="category" :value="category" color="#935287"></v-radio>
             </v-radio-group>
 
-            
-            <span id="chartsHeaders"  v-if="isBasic">
-                {{isDrillDown? params.drill_down_params.chart_titles[0]:params.chart_titles[0] }}
-            </span>
-            <div class="KPIcontainer" dir="rtl" v-if="isBasic">
-                <div 
-                v-for="(item,index) in jsonData[0][params.selected_category]" 
-                :key="index" class="kpi-box" 
-                :style="{backgroundColor: isDrillDown? '#FFFFFF' :'#EBEBEB'}"
-                @click="buttonFoo">
-                    <span class="kpi-label">
-                        {{ item.label }}
-                    </span>
-                    <br>
-                    <span class="kpi-sub-labels">
-                        {{ item.value }}
-                    </span>
-                </div>
-            </div>
-
-            <div class="kpi-carousel" v-if="isCarousel">
+            <div class="kpi-carousel">
                 <span id="chartsHeaders" >
-                     {{ params.chart_titles[carouselActiveIndex] }}
+                    {{ params.chart_titles[carouselActiveIndex] }}
                 </span>
  
                 <v-carousel
                   hide-delimiters
-                  :show-arrows="true"
+                  :show-arrows="showArrows"
                   class="carousel-flex"
                   ref="pieCarousel"
                   :value="carouselIndex"
                   v-model="carouselActiveIndex"
                   height=auto
                 >
-                <template v-if="showArrows" v-slot:next="{ on, attr }">
-                   <img v-on="on" v-bind="attr" src="../../assets/playRight.svg" />
-                </template>
-                <template v-if="showArrows" v-slot:prev="{ on, attr }">
-                   <img v-on="on" v-bind="attr" src="../../assets/playLeft.svg" />
-                </template>
+                    <template  v-slot:next="{ on, attr }">
+                        <img v-on="on" v-bind="attr" src="../../assets/playRight.svg"/>
+                    </template>
+                    <template  v-slot:prev="{ on, attr }">
+                        <img v-on="on" v-bind="attr" src="../../assets/playLeft.svg"/>
+                    </template>
 
-                   <v-carousel-item v-for="(KPIarr,index) in jsonData[0][params.selected_category]" :key="index">
-                    <div class="KPIcontainer" dir="rtl">
-                    <div 
-                       v-for="(item,index) in isDrillDown? KPIarr :KPIarr" 
-                       :key="index" class="kpi-box" 
-                       :style="{backgroundColor: isDrillDown? '#FFFFFF' :'#EBEBEB'}"
-                       @click="buttonFoo">
-                    <span class="kpi-label">
-                        {{ item.label }}
-                    </span>
-                    <br>
-                    <span class="kpi-sub-labels">
-                        {{ item.value }}
-                    </span>
-                   </div>
-                </div>
-                   </v-carousel-item>
+                    <v-carousel-item v-for="(KPIarr,index) in jsonData[params.selected_category]" :key="index">
+                        <div class="KPIcontainer" dir="rtl">
+                                <div 
+                                class="kpi-box" 
+                                v-for="(item,index) in isDrillDown? KPIarr :KPIarr" :key="index"
+                                :style="{backgroundColor: isDrillDown? '#FFFFFF' :'#EBEBEB'}"
+                                @click="kpiBoxClick"
+                                >
+                                    <span class="kpi-label">
+                                        {{ item.label }}
+                                    </span>
+                                    <br>
+                                    <span class="kpi-sub-labels">
+                                        {{ item.value }}
+                                    </span>
+                                </div>
+                        </div>
+                    </v-carousel-item>
                 </v-carousel>
             </div>
 
-            
             <div class="clock-drilldown" v-if="params.expand && !isDrillDown && params.drill_down_params">
                 <h1 class="drilldown-title">{{params.drill_down_params.headline_config.title}}</h1>
                 <v-radio-group v-model="params.drill_down_params.selected_category" row id="districtRadioGroup" v-if="params.data_category.length >= 2">
@@ -79,7 +59,8 @@
                 :isDrillDown="true"
                 :drillDataProp="drilldownData">
                 </component>   
-        </div>
+            </div>
+            
     </div>  
 
     <div class="loader" v-else>
@@ -100,7 +81,7 @@ export default {
     props:{
         isDrillDown:{type:Boolean},
         params:{type:Object,required:false},
-        drillDataProp:{type:Array, default:()=>[]}
+        drillDataProp:{type:Object, default:()=>{}}
     },
     components:{
         ThreeDotsNineDots,
@@ -116,8 +97,6 @@ export default {
                 drilldownData:[],
                 jsonData:[],
                 doneFetching:false,
-                isBasic:true,
-                isCarousel:false,
             }
     },
     async created(){
@@ -141,13 +120,11 @@ export default {
         else{
             this.jsonData = this.drillDataProp
         }
-        if(Array.isArray(this.jsonData[0][this.params.selected_category][0])){
-            this.isCarousel = true
-            this.isBasic = false
+        if(this.jsonData[this.params.selected_category].length>1){
+            this.showArrows=true
         }
         else{
-            this.isCarousel = false
-            this.isBasic=true
+            this.showArrows= false
         }
         this.doneFetching = true
 
@@ -155,7 +132,7 @@ export default {
   
    
     methods:{
-        buttonFoo(){
+        kpiBoxClick(){
             if(this.params.click_open_drill_enabled){
                 this.params.expand =! this.params.expand
             }
