@@ -9,7 +9,7 @@
                 <span id="chartsHeaders" >
                     {{ params.chart_titles[carouselActiveIndex] }}
                 </span>
-                    <!-- {{jsonData}},<br><br>{{params}} -->
+
                 <v-carousel
                   hide-delimiters
                   :show-arrows="showArrows"
@@ -26,12 +26,11 @@
                         <img v-on="on" v-bind="attr" src="../../assets/playLeft.svg"/>
                     </template>
 
-                    <v-carousel-item v-for="(KPIarr,index) in isDrillDown ? jsonData[params.drill_down_params.selected_category]:jsonData[params.selected_category]" :key="index">
-                        {{KPIarr}}
+                    <v-carousel-item v-for="(KPIarr,index) in jsonData[params.selected_category]" :key="index">
                         <div class="KPIcontainer" dir="rtl">
                                 <div 
                                 class="kpi-box" 
-                                v-for="(item,index) in isDrillDown? KPIarr :KPIarr" :key="index"
+                                v-for="(item,index) in KPIarr" :key="index"
                                 :style="{backgroundColor: isDrillDown? '#FFFFFF' :'#EBEBEB'}"
                                 @click="kpiBoxClick"
                                 >
@@ -50,13 +49,9 @@
 
             <div class="clock-drilldown" v-if="params.expand && !isDrillDown && params.drill_down_params">
                 <h1 class="drilldown-title">{{params.drill_down_params.headline_config.title}}</h1>
-                <v-radio-group v-model="params.drill_down_params.selected_category" row id="districtRadioGroup" v-if="params.drill_down_params.data_category.length >= 2">
-                    <v-radio v-for="(categorydrill) in params.drill_down_params.data_category" :key="categorydrill" :label="categorydrill" :value="categorydrill" color="#935287"></v-radio>
-                 </v-radio-group>
-
                 <component 
                 :is="params.drill_down_params.template_type"
-                :params = params
+                :params = params.drill_down_params
                 :isDrillDown="true"
                 :drillDataProp="drilldownData">
                 </component>   
@@ -117,37 +112,20 @@ export default {
                         .catch((error) => {
                         console.log(error,"drill DATA FETCH ERROR");
                         });
-
-
-            if(this.jsonData[this.params.selected_category].length>1){
-                this.showArrows=true
-            }
-            else{
-                this.showArrows= false
-            }
         }
         else{
             this.jsonData = this.drillDataProp
-            if(this.jsonData[this.params.drill_down_params.selected_category].length>1){
-                this.showArrows=true
-            }
-            else{
-                this.showArrows= false
-            }
         }
-        console.log(this.jsonData)
 
-        
+        if (this.jsonData[this.params.selected_category].length>1) this.showArrows=true;
+        else this.showArrows= false
+            
         this.doneFetching = true
-
     },
   
-   
     methods:{
         kpiBoxClick(){
-            if(this.params.click_open_drill_enabled){
-                this.params.expand =! this.params.expand
-            }
+            if(this.params.click_open_drill_enabled) this.params.expand =! this.params.expand;
         }
     }
 }
@@ -211,12 +189,6 @@ export default {
     text-align: center;
 }
 
-.kpi-box span:first-child{
-    font-family: almoni;
-  font-size: 20px;
-  line-height: 30px;
-}
-
 .kpi-box span{
     display: inline-block;
     font-size: 20px;
@@ -248,17 +220,6 @@ export default {
     display: inline-block !important;;
 
 }
-/* .pie-carousel >>> .carousel-flex .v-carousel__controls__item.v-btn {
-  color: lightgrey !important;
-}
 
-.pie-carousel >>> .carousel-flex .v-carousel__controls__item.v-btn.v-btn--active {
-  color: #f67200 !important;
-} */
-.flex-center {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  }
 
 </style>
