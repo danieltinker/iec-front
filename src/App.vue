@@ -1,10 +1,14 @@
 <template>
   <v-app style="background-color: #ebebeb;">
-    <HQNavBar/>
-    
+    <!-- APP PAGE -->
     <v-main class="app">
-      <UserFavoritesVue/>
+      <!-- navigation bar + Theme Selector toggle + Log out BTN -->
+      <HQNavBar/> 
+      <!-- FAVORITES HORIZONTAL "instagram" SCROLL -->
+      <UserFavorites/>
+      <!-- CATEGORIES BAR HORIZONTAL SCROLL -->
       <CategoryBar/>
+      <!-- WIDGETS SPACE (CLOCKS) VERTICAL SCROLL  -->
       <WidgetSpace/>
     </v-main>
   </v-app>
@@ -14,14 +18,13 @@
 import WidgetSpace from './components/global/WidgetSpace.vue';
 import HQNavBar from './components/global/HQNavBar.vue';
 import CategoryBar from './components/global/CategoryBar.vue';
-// import QuickViewPopup from './components/global/QuickViewPopup.vue'
-import UserFavoritesVue from './components/global/UserFavorites.vue';
+import UserFavorites from './components/global/UserFavorites.vue';
 
 export default {
     name: "App",
     data: () => ({
       }),
-    components: { WidgetSpace,HQNavBar, CategoryBar, UserFavoritesVue },
+    components: { WidgetSpace,HQNavBar, CategoryBar, UserFavorites },
     mounted(){
       this.$store.state.selected_hq_id = 100
       this.$store.state.selected_cat_id = 101

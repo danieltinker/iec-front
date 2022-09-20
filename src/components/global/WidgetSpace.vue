@@ -10,9 +10,7 @@
           <ThreeDotsNineDots
             class="grid-item"
             :isExpand="widget.PARAMETERS.expand"
-            @switch-expand="
-              widget.PARAMETERS.expand = !widget.PARAMETERS.expand
-            "
+            @switch-expand="widget.PARAMETERS.expand = !widget.PARAMETERS.expand"
             v-if="widget.PARAMETERS.headline_config.three_dots_enabled"
           />
         </div>
@@ -22,7 +20,6 @@
         <div class="grid-item">
           <v-icon
             @click="BookMarkClick(widget.VIEW_ID)"
-            class=""
             color="#935287"
             style="font-size: 30px"
             v-if="widget.PARAMETERS.headline_config.bookmark_enabled"
@@ -57,26 +54,25 @@ export default {
     genericKPI,
   },
   watch: {
+    // user selected devision
     "$store.state.selected_hq_id": {
       async handler() {
         console.log(" GET /mobile/views/{hq_id}/{category_id}?sessoinid=xxx .");
       },
     },
+    //user selected category
     "$store.state.selected_cat_id": {
+      // fetch the widgets views from the DB
       async handler() {
-        console.log("selected_cat_id");
         await axios
-          .get(
-            "http://20.102.120.232:5080/shavit/mobile/views/" + 700 + "/" + 1,
-            { params: { sid: "xxx" } }
-          )
-          .then((response) => {
+        .get("http://20.102.120.232:5080/shavit/mobile/views/" + 700 + "/" + 1 , { params: { sid: "xxx" } })
+        .then((response) => {
             this.responseData = response.data;
             this.doneFetching = true;
-          })
-          .catch((error) => {
+        })
+        .catch((error) => {
             console.log(error);
-          });
+        });
       },
     },
   },
