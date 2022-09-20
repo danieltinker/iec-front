@@ -20,8 +20,8 @@ export default{
 
     //add to user fav
     AddUserFav() {
-        console.log("Adding favorite to user")
-        return ShavitMobileFavReq.post("",{"viewid":store.state.selected_view_id, "userid": store.state.currUser.user_id, "state": ""},{
+        console.log("Adding favorite to user",{"viewid":store.state.selected_view_id, "userid": store.state.currUser.user_id, "state": "{}"})
+        return ShavitMobileFavReq.post("add",{"viewid":store.state.selected_view_id, "userid": store.state.currUser.user_id, "state": "{}"},{
             params: {
                 sid: store.state.currUser.sessionId,
             }
@@ -30,7 +30,7 @@ export default{
     //remove favorite
     RemoveUserFav() {
         console.log("Remove favorite to user")
-        return ShavitMobileFavReq.delete(`${store.state.currUser.user_id}/${store.state.selected_view_id}`,{},{
+        return ShavitMobileFavReq.delete(`${store.state.currUser.user_id}/${store.state.selected_view_id}`,{
             params: {
                 sid: store.state.currUser.sessionId,
             }

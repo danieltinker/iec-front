@@ -7,7 +7,7 @@
                     </div>
                         <h1 class="headline-title grid-item">{{widget.PARAMETERS.headline_config.title}}</h1>
                         <div class="grid-item">
-                            <v-icon class="" color="#935287" style="font-size: 30px" v-if="widget.PARAMETERS.headline_config.bookmark_enabled">{{ CheckBookmark(widget.VIEW_ID) }}</v-icon>
+                            <v-icon @click="BoockMarkClick(widget.VIEW_ID)" class="" color="#935287" style="font-size: 30px" v-if="widget.PARAMETERS.headline_config.bookmark_enabled">{{ CheckBookmark(widget.VIEW_ID) ? "mdi-bookmark" : "mdi-bookmark-outline" }}</v-icon>
                         </div>
             </div>
             <component 
@@ -191,21 +191,58 @@ import axios from 'axios';
             GetUserFav: function(){
                 FavoriteAxios.getUserFav().then((response) => {
                 console.log("user fav: ",response);
-                this.$store.state.user_favorites = response
+                this.$store.state.user_favorites = response.data
 
             }).catch((error)=> {
                 console.log("Got error getting user fav: ", error)
             })
             },
+
             CheckBookmark(view_id){
-                console.log("testbookmark", view_id)
+                /*
+                    Function to check if viewId exist in user favorites list
+                */
+
+                console.log("testbookmark", view_id, this.$store.state.user_favorites)
+                
                 //check if user have this view in favorites
-                let FavId =  this.$store.state.user_favorites.find(element => {if(element.VIEW_ID == view_id) {return true} return false});
+                let fav_list = this.$store.state.user_favorites
+                let FavId =  fav_list.find(element => {if(element.VIEW_ID == view_id) {return true} return false});
+                //if user have view id in his fav list mark it as bookmarked
                 if(FavId)
                 {
-                    return "mdi-bookmark"
+                    return true//"mdi-bookmark"
                 }
-                return "mdi-bookmark-outline";
+                return false//"mdi-bookmark-outline";
+            },
+
+            BoockMarkClick(view_id)
+            {
+                this.$store.state.selected_view_id = view_id
+                console.log("book clicked", view_id)
+                if(this.CheckBookmark(view_id) == true)
+                {
+                    //already bookmarked 
+                                        //remove fav
+                        FavoriteAxios.RemoveUserFav().then((response) => {
+                        console.log("added fav", response)
+                    }).catch((error)=> {
+                        console.log("Got error removing user fav: ", error)
+                    })
+                }
+                else{
+
+
+                    //add user fav
+                    FavoriteAxios.AddUserFav().then((response) => {
+                        console.log("added fav", response)
+                    }).catch((error)=> {
+                        console.log("Got error adding user fav: ", error)
+                    })
+                }
+                //refresh fav list
+                this.GetUserFav()
+                this.$forceUpdate();
             }
         }
         }
