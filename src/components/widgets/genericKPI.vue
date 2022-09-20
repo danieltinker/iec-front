@@ -85,11 +85,17 @@ export default {
         carouselKPI: () => import('../widgets/carouselKPI.vue'),
         genericKPI: () => import('../widgets/genericKPI.vue')
     },
+    computed:{
+        showArrows(){
+            if (this.jsonData[this.params.selected_category].length>1) return true;
+            else return false 
+        }
+    }
+    ,
     data(){
             return{
                 carouselActiveIndex:0,
                 carouselIndex:0,
-                showArrows:true,
                 drilldownData:[],
                 jsonData:[],
                 doneFetching:false,
@@ -116,9 +122,6 @@ export default {
         else{
             this.jsonData = this.drillDataProp
         }
-
-        if (this.jsonData[this.params.selected_category].length>1) this.showArrows=true;
-        else this.showArrows= false
             
         this.doneFetching = true
     },
