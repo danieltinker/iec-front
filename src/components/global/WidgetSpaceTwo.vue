@@ -7,7 +7,7 @@
                     </div>
                         <h1 class="headline-title grid-item">{{widget.PARAMETERS.headline_config.title}}</h1>
                         <div class="grid-item">
-                            <v-icon class="" color="#935287" style="font-size: 30px" v-if="widget.PARAMETERS.headline_config.bookmark_enabled">{{ booktesttt(widget.VIEW_ID) }}</v-icon>
+                            <v-icon @click="BoockMarkClick(widget.VIEW_ID)" class="" color="#935287" style="font-size: 30px" v-if="widget.PARAMETERS.headline_config.bookmark_enabled">{{ CheckBookmark(widget.VIEW_ID) ? "mdi-bookmark" : "mdi-bookmark-outline" }}</v-icon>
                         </div>
             </div>
             <component 
@@ -25,7 +25,7 @@ import BasicKPI from '../widgets/BasicKPI.vue';
 import ThreeDotsNineDots from '../utils/ThreeDotsNineDots.vue';
 import BasicPie from '../widgets/BasicPie.vue';
 import carouselKPI from '../widgets/carouselKPI.vue';
-import genericKPI from '../widgets/genericKPI.vue';
+import FavoriteAxios from '../utils/FavoriteAxios';
 
 import axios from 'axios';
         export default{
@@ -65,9 +65,8 @@ import axios from 'axios';
                 //  listen to store HQ,Category
                 //  fetch the server response GET /mobile/views/{hq_id}/{category_id}?sessoinid=xxx .
                 //  pass data uri into the components for the fetch
-            
-                // this.GetUserFav();
-        },
+                this.GetUserFav();
+            },
         data(){
                 return{
                         doneFetching:false,
@@ -190,17 +189,61 @@ import axios from 'axios';
         methods:
         {
             //Get user favorites
-            // GetUserFav: function(){
-            //     FavoriteAxios.getUserFav().then((response) => {
-            //     console.log("user fav: ",response)
-            // }).catch((error)=> {
-            //     console.log("Got error getting user fav: ", error)
-            // })
-            // },
-            booktesttt(view_id){
-                console.log("ggg", view_id)
+            GetUserFav: function(){
+                FavoriteAxios.getUserFav().then((response) => {
+                console.log("user fav: ",response);
+                this.$store.state.user_favorites = response.data
+
+            }).catch((error)=> {
+                console.log("Got error getting user fav: ", error)
+            })
+            },
+
+            CheckBookmark(view_id){
+                /*
+                    Function to check if viewId exist in user favorites list
+                */
+
+                console.log("testbookmark", view_id, this.$store.state.user_favorites)
+                
                 //check if user have this view in favorites
-                return "mdi-bookmark";
+                let fav_list = this.$store.state.user_favorites
+                let FavId =  fav_list.find(element => {if(element.VIEW_ID == view_id) {return true} return false});
+                //if user have view id in his fav list mark it as bookmarked
+                if(FavId)
+                {
+                    return true//"mdi-bookmark"
+                }
+                return false//"mdi-bookmark-outline";
+            },
+
+            BoockMarkClick(view_id)
+            {
+                this.$store.state.selected_view_id = view_id
+                console.log("book clicked", view_id)
+                if(this.CheckBookmark(view_id) == true)
+                {
+                    //already bookmarked 
+                                        //remove fav
+                        FavoriteAxios.RemoveUserFav().then((response) => {
+                        console.log("added fav", response)
+                    }).catch((error)=> {
+                        console.log("Got error removing user fav: ", error)
+                    })
+                }
+                else{
+
+
+                    //add user fav
+                    FavoriteAxios.AddUserFav().then((response) => {
+                        console.log("added fav", response)
+                    }).catch((error)=> {
+                        console.log("Got error adding user fav: ", error)
+                    })
+                }
+                //refresh fav list
+                this.GetUserFav()
+                this.$forceUpdate();
             }
         }
         }
