@@ -88,7 +88,7 @@
             else{
                 this.jsonData = this.drillDataProp
             }
-            this.doneFetching = true
+            this.doneFetching=true
 
         },
         data(){
@@ -132,17 +132,7 @@
       line-height: 30px;
     }
 
-    .loader{
-        height: 400px;
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        align-self: center;
-    }
-    .v-progress-circular{
-        padding:40px;
-    }
+   
     .kpi-box span{
         display: inline-block;
         font-size: 20px;

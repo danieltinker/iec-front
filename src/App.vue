@@ -39,4 +39,16 @@ body {
 .app{
   width: 100%;
 }
+
+.loader{
+        height: 400px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        align-self: center;
+    }
+    .v-progress-circular{
+        padding:40px;
+    }
 </style>

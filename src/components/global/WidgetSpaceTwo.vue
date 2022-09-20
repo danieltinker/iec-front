@@ -50,7 +50,7 @@ import ThreeDotsNineDots from "../utils/ThreeDotsNineDots.vue";
 import BasicPie from "../widgets/BasicPie.vue";
 import carouselKPI from "../widgets/carouselKPI.vue";
 import FavoriteAxios from "../utils/FavoriteAxios";
-
+import genericKPI from '../widgets/genericKPI.vue';
 import axios from "axios";
 export default {
   components: {
@@ -58,6 +58,7 @@ export default {
     ThreeDotsNineDots,
     BasicPie,
     carouselKPI,
+            genericKPI,
   },
   watch: {
     "$store.state.selected_hq_id": {
@@ -185,37 +186,39 @@ export default {
       //                     template_type:"BasicKPI",
       //                 },
 
-      //                 jsonData:[{
-      //                     "label":"michal",
-      //                     "value":0,
-      //                 },
-      //                 {
-      //                     "label":"ran",
-      //                     "value":2,
-      //                 },
-      //                 {
-      //                     "label":"daniel",
-      //                     "value":1,
-      //                 }
-      //                 ],
-      //         },
-      //     },
-      // ///// ////////////  BASIC Pie //// ///////////////////
-      // ]
-    };
-  },
-  methods: {
-    //Get user favorites
-    GetUserFav: function () {
-      FavoriteAxios.getUserFav()
-        .then((response) => {
-          console.log("user fav: ", response);
-          this.$store.state.user_favorites = response.data;
-        })
-        .catch((error) => {
-          console.log("Got error getting user fav: ", error);
-        });
-    },
+
+
+                    //                 jsonData:[{
+                    //                     "label":"michal",
+                    //                     "value":0,
+                    //                 },
+                    //                 {
+                    //                     "label":"ran",
+                    //                     "value":2,
+                    //                 },
+                    //                 {
+                    //                     "label":"daniel",
+                    //                     "value":1,
+                    //                 }
+                    //                 ],
+                    //         },
+                    //     },
+                    // ///// ////////////  BASIC Pie //// ///////////////////
+                    // ]
+                }
+            },
+        methods:
+        {
+            //Get user favorites
+            GetUserFav: function(){
+                FavoriteAxios.getUserFav().then((response) => {
+                console.log("user fav: ",response);
+                this.$store.state.user_favorites = response.data
+
+            }).catch((error)=> {
+                console.log("Got error getting user fav: ", error)
+            })
+            },
 
     CheckBookmark(view_id) {
       /*
