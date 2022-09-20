@@ -21,7 +21,7 @@
         </h1>
         <div class="grid-item">
           <v-icon
-            @click="BoockMarkClick(widget.VIEW_ID)"
+            @click="BookMarkClick(widget.VIEW_ID)"
             class=""
             color="#935287"
             style="font-size: 30px"
@@ -90,6 +90,8 @@ export default {
     //  listen to store HQ,Category
     //  fetch the server response GET /mobile/views/{hq_id}/{category_id}?sessoinid=xxx .
     //  pass data uri into the components for the fetch
+
+    //function to get last user favorite list
     this.GetUserFav();
   },
   data() {
@@ -219,30 +221,29 @@ export default {
                 console.log("Got error getting user fav: ", error)
             })
             },
-
+        
     CheckBookmark(view_id) {
-      /*
-                    Function to check if viewId exist in user favorites list
-                */
+        /*
+            Function to check if viewId exist in user favorites list
+        */
 
-      console.log("testbookmark", view_id, this.$store.state.user_favorites);
+    
 
       //check if user have this view in favorites
       let fav_list = this.$store.state.user_favorites;
-      let FavId = fav_list.find((element) => {
-        if (element.VIEW_ID == view_id) {
-          return true;
+      let i;
+      //check if we have object inside user favorites without using filter...
+      for(i =0; i< fav_list.length; i++)
+      {
+        if(fav_list[i].VIEW_ID == view_id)
+        {
+            return true
         }
-        return false;
-      });
-      //if user have view id in his fav list mark it as bookmarked
-      if (FavId) {
-        return true; //"mdi-bookmark"
       }
-      return false; //"mdi-bookmark-outline";
+      return false
     },
 
-    BoockMarkClick(view_id) {
+    BookMarkClick(view_id) {
       this.$store.state.selected_view_id = view_id;
       console.log("book clicked", view_id);
       if (this.CheckBookmark(view_id)) {
@@ -250,7 +251,9 @@ export default {
         //remove fav
         FavoriteAxios.RemoveUserFav()
           .then((response) => {
-            console.log("removed fav", response);
+            // console.log("removed fav", response);
+            //if we got new info update user favorite list
+            this.GetUserFav();
           })
           .catch((error) => {
             console.log("Got error removing user fav: ", error);
@@ -259,15 +262,15 @@ export default {
         //add user fav
         FavoriteAxios.AddUserFav()
           .then((response) => {
-            console.log("added fav", response);
+            // console.log("added fav", response);
+            //if we got new info update user favorite list
+            this.GetUserFav();
           })
           .catch((error) => {
             console.log("Got error adding user fav: ", error);
           });
       }
-      //refresh fav list
-      this.GetUserFav();
-      this.$forceUpdate();
+
     },
   },
 };
