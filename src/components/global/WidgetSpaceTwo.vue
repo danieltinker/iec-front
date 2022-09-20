@@ -27,6 +27,7 @@ import BasicPie from '../widgets/BasicPie.vue';
 import carouselKPI from '../widgets/carouselKPI.vue';
 import FavoriteAxios from '../utils/FavoriteAxios';
 import genericKPI from '../widgets/genericKPI.vue';
+import genericPIE from '../widgets/genericPIE.vue';
 import axios from 'axios';
         export default{
         components:{
@@ -34,7 +35,8 @@ import axios from 'axios';
             ThreeDotsNineDots,
             BasicPie,
             carouselKPI,
-            genericKPI
+            genericKPI,
+            genericPIE
         },
         watch: {
       "$store.state.selected_hq_id": {
@@ -46,7 +48,7 @@ import axios from 'axios';
         async handler() {
         console.log("selected_cat_id")
         await axios
-        .get("http://20.102.120.232:5080/shavit/mobile/views/" + 700 + "/" + 1,
+        .get("http://20.102.120.232:5080/shavit/mobile/views/" + 600 + "/" + 1,
         {params: { sid: "xxx" }}
         )
         .then(response => {

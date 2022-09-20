@@ -7,14 +7,39 @@ export const convertLabelToHebrew = (labelsArr,labelsDict)=>{
         });
     return res 
 }
+export function baseTemplate2(myJson,innerText,innerNum){
+    innerNum
+    console.log(myJson,"dmdmdmdm");
+    const myColors=["#a8699d","#38ae10","#a8699d","#38ae10","#a8699d","#38ae10"],data1=[],labels =[]
+    myJson.forEach(item=>{
+    myColors.push(item.color)
+    data1.push(item.value)
+    labels.push(item.label)})
+    var chartDataTemplate = {
+        labels: labels,
+        datasets: [
+            {
+            pieInnerText:innerText,
+            pieInnerNum:88,
+            backgroundColor: myColors,
+            data: data1,
+            },
+        ],
+    }
+    // fill chart data
+    // chartDataTemplate.datasets[0].data = Object.values(myJson) 
+    //  display in the center of the pie. 
+    // chartDataTemplate.datasets[0].pieInnerNum=Object.values(myJson).reduce((a,b)=> a+b) 
+    return chartDataTemplate
 
+}
 /**
 * Creates a baseTemplate.
 * @param {Object} [chartData] - json data
-* @param {Object} [config.labelsDict] - labels to replace
-* @param {Object} [config.backgroundColor] - style colors
-* @param {Object} [config.pieInnerText] - ineer text show in pie
-* @param {Object} [config.pieInnerNum] - inner num Total
+* @param {Object} [configData.labelsDict] - labels to replace
+* @param {Object} [configData.backgroundColor] - style colors
+* @param {Object} [configData.pieInnerText] - ineer text show in pie
+* @param {Object} [configData.pieInnerNum] - inner num Total
 */
 export function baseTemplate(myJson,labelsDict,colors,innerText,innerNum){
     var chartDataTemplate = {
