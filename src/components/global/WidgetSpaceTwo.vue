@@ -45,19 +45,15 @@
 </template>
 
 <script lang="ts">
-import BasicKPI from "../widgets/BasicKPI.vue";
 import ThreeDotsNineDots from "../utils/ThreeDotsNineDots.vue";
 import BasicPie from "../widgets/BasicPie.vue";
-import carouselKPI from "../widgets/carouselKPI.vue";
 import FavoriteAxios from "../utils/FavoriteAxios";
 import genericKPI from '../widgets/genericKPI.vue';
 import axios from "axios";
 export default {
   components: {
-    BasicKPI,
     ThreeDotsNineDots,
     BasicPie,
-    carouselKPI,
     genericKPI,
   },
   watch: {

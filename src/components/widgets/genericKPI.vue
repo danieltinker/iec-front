@@ -81,8 +81,6 @@ export default {
     },
     components:{
         ThreeDotsNineDots,
-        BasicKPI: () => import('../widgets/BasicKPI.vue'), 
-        carouselKPI: () => import('../widgets/carouselKPI.vue'),
         genericKPI: () => import('../widgets/genericKPI.vue')
     },
     computed:{
