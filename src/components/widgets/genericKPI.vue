@@ -122,7 +122,6 @@ export default {
         else{
             this.jsonData = this.drillDataProp
         }
-            
         this.doneFetching = true
     },
   
