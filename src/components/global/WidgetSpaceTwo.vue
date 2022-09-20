@@ -1,7 +1,6 @@
 <template>
     <div v-if="doneFetching">
         <div class="widgets mt-3" v-for="(widget,index) in responseData" :key="index" >
-            {{widget}}
             <div class="headline-toolbar" >
                 <div class="grid-item">
                         <ThreeDotsNineDots class="grid-item" :isExpand="widget.PARAMETERS.expand" @switch-expand="widget.PARAMETERS.expand = !widget.PARAMETERS.expand" v-if="widget.PARAMETERS.headline_config.three_dots_enabled" />
@@ -26,11 +25,9 @@ import BasicKPI from '../widgets/BasicKPI.vue';
 import ThreeDotsNineDots from '../utils/ThreeDotsNineDots.vue';
 import BasicPie from '../widgets/BasicPie.vue';
 import carouselKPI from '../widgets/carouselKPI.vue';
-// import FavoriteAxios from '../utils/FavoriteAxios';
 import genericKPI from '../widgets/genericKPI.vue';
 
 import axios from 'axios';
-import { response } from 'express';
         export default{
         components:{
             BasicKPI,
