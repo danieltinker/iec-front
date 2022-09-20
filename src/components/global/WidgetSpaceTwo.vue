@@ -58,7 +58,7 @@ export default {
     ThreeDotsNineDots,
     BasicPie,
     carouselKPI,
-            genericKPI,
+    genericKPI,
   },
   watch: {
     "$store.state.selected_hq_id": {
@@ -71,7 +71,7 @@ export default {
         console.log("selected_cat_id");
         await axios
           .get(
-            "http://20.102.120.232:5080/shavit/mobile/views/" + 800 + "/" + 1,
+            "http://20.102.120.232:5080/shavit/mobile/views/" + 700 + "/" + 1,
             { params: { sid: "xxx" } }
           )
           .then((response) => {
@@ -85,193 +85,64 @@ export default {
     },
   },
   async created() {
-    //get hqs By sid
-
-    //  listen to store HQ,Category
+    //  get hqs By sid
+    //  listen to store HQ,Category from user DATA RAN AND TOMMY PLEASE FINISH 
     //  fetch the server response GET /mobile/views/{hq_id}/{category_id}?sessoinid=xxx .
-    //  pass data uri into the components for the fetch
 
     //function to get last user favorite list
     this.GetUserFav();
   },
   data() {
-    return {
-      doneFetching: false,
-      responseData: [],
-      //     responseData:[
-      //         ///// ////////////  BASIC KPI //// ///////////////////
-      //         {
-      //             view_id:"103",
-      //             division:"800",
-      //             category:"1",
-      //             template_type:"BasicKPI",
-      //             fav_icon:"kpi-icon",
-      //             view_order:1,
+      return{
+              doneFetching: false,
+              responseData: [],
+            }
+          },
+  methods:
+    {
+        //Get user favorites
+        GetUserFav: function(){
+            FavoriteAxios.getUserFav().then((response) => {
+            console.log("user fav: ",response);
+            this.$store.state.user_favorites = response.data
+        }).catch((error)=> {
+            console.log("Got error getting user fav: ", error)
+        })
+        },
+            
+        CheckBookmark(view_id) {
+          /*
+              Function to check if viewId exist in user favorites list
+          */
+          let fav_list = this.$store.state.user_favorites;
+          let i;
+          //check if we have object inside user favorites without using filter...
+          for(i =0; i< fav_list.length; i++){
+                if(fav_list[i].VIEW_ID == view_id) return true;
+            }
+          return false
+        },
 
-      //             params:{
-      //                 show_main_clock:true,
-      //                 click_open_drill_enabled:true,
-      //                 data_category:["michal","michal2"],
-      //                 selected_category:"michal",
-      //                 chart_title:"My first KPI",
-      //                 data_url:"/myKPI",
-      //                 expand:false,
-
-      //                 headline_config:{
-      //                     three_dots_enabled:true,
-      //                     bookmark_enabled:true,
-      //                     title:"STOP CLIENTS OR SOMTHING",
-      //                 },
-
-      //                 drill_down_params:{
-      //                     headline_config:{
-      //                         three_dots_enabled:true,
-      //                         bookmark_enabled:true,
-      //                         title:"drill headline :)",
-      //                     },
-      //                     data_category:["ran1","ran2"],
-      //                     selected_category:null,
-      //                     enabled:true,
-      //                     data_url:"/myDrillKpi",
-      //                     template_type:"BasicKPI",
-      //                 },
-
-      //                 jsonData:[{
-      //                     "label":"michal",
-      //                     "value":0,
-      //                 },
-      //                 {
-      //                     "label":"ran",
-      //                     "value":2,
-      //                 },
-      //                 {
-      //                     "label":"daniel",
-      //                     "value":1,
-      //                 }
-      //                 ],
-      //         },
-      //     },
-      // ///// ////////////  BASIC KPI  2 //// ///////////////////
-      // {
-      //             view_id:"103",
-      //             division:"800",
-      //             category:"1",
-      //             template_type:"carouselKPI",
-      //             fav_icon:"kpi-icon",
-      //             view_order:1,
-
-      //             params:{
-      //                 show_main_clock:true,
-      //                 click_open_drill_enabled:true,
-      //                 data_category:["michal","michal2"],
-      //                 selected_category:"michal",
-      //                 chart_title:"My first KPI",
-      //                 data_url:"/myKPI",
-      //                 expand:false,
-
-      //                 headline_config:{
-      //                     three_dots_enabled:true,
-      //                     bookmark_enabled:true,
-      //                     title:"STOP CLIENTS OR SOMTHING",
-      //                 },
-
-      //                 drill_down_params:{
-      //                     headline_config:{
-      //                         three_dots_enabled:true,
-      //                         bookmark_enabled:true,
-      //                         title:"drill headline :)",
-      //                     },
-      //                     data_category:["ran1","ran2"],
-      //                     selected_category:null,
-      //                     enabled:true,
-      //                     data_url:"/myDrillKpi",
-      //                     template_type:"BasicKPI",
-      //                 },
-
-
-
-                    //                 jsonData:[{
-                    //                     "label":"michal",
-                    //                     "value":0,
-                    //                 },
-                    //                 {
-                    //                     "label":"ran",
-                    //                     "value":2,
-                    //                 },
-                    //                 {
-                    //                     "label":"daniel",
-                    //                     "value":1,
-                    //                 }
-                    //                 ],
-                    //         },
-                    //     },
-                    // ///// ////////////  BASIC Pie //// ///////////////////
-                    // ]
-                }
-            },
-        methods:
-        {
-            //Get user favorites
-            GetUserFav: function(){
-                FavoriteAxios.getUserFav().then((response) => {
-                console.log("user fav: ",response);
-                this.$store.state.user_favorites = response.data
-
-            }).catch((error)=> {
-                console.log("Got error getting user fav: ", error)
-            })
-            },
-        
-    CheckBookmark(view_id) {
-        /*
-            Function to check if viewId exist in user favorites list
-        */
-
-    
-
-      //check if user have this view in favorites
-      let fav_list = this.$store.state.user_favorites;
-      let i;
-      //check if we have object inside user favorites without using filter...
-      for(i =0; i< fav_list.length; i++)
-      {
-        if(fav_list[i].VIEW_ID == view_id)
-        {
-            return true
-        }
-      }
-      return false
-    },
-
-    BookMarkClick(view_id) {
-      this.$store.state.selected_view_id = view_id;
-      console.log("book clicked", view_id);
-      if (this.CheckBookmark(view_id)) {
-        //already bookmarked
-        //remove fav
-        FavoriteAxios.RemoveUserFav()
-          .then((response) => {
-            // console.log("removed fav", response);
-            //if we got new info update user favorite list
-            this.GetUserFav();
-          })
-          .catch((error) => {
-            console.log("Got error removing user fav: ", error);
-          });
-      } else {
-        //add user fav
-        FavoriteAxios.AddUserFav()
-          .then((response) => {
-            // console.log("added fav", response);
-            //if we got new info update user favorite list
-            this.GetUserFav();
-          })
-          .catch((error) => {
-            console.log("Got error adding user fav: ", error);
-          });
-      }
-
-    },
+        BookMarkClick(view_id) {
+          this.$store.state.selected_view_id = view_id;
+          if (this.CheckBookmark(view_id)) {  //already bookmarked
+            FavoriteAxios.RemoveUserFav()
+              .then((response) => { //if we got new info update user favorite list
+                this.GetUserFav();
+              })
+              .catch((error) => {
+                console.log("Got error removing user fav: ", error);
+              });
+          } else {
+            FavoriteAxios.AddUserFav()
+              .then((response) => { //if we got new info update user favorite list
+                this.GetUserFav();
+              })
+              .catch((error) => {
+                console.log("Got error adding user fav: ", error);
+              });
+          }
+        },
   },
 };
 </script>
