@@ -1,5 +1,5 @@
 import { Doughnut } from "vue-chartjs";
-import {getSelectedRadius,handleChartRadius,handleChartInnerText,pluginInnerContentHelper} from '../../helpers/pieChartHelpers'
+import {getSelectedRadius,handleChartRadius,handleChartInnerText,pluginInnerContentHelper} from '../../../helpers/pieChartHelpers'
 
 export default {
     extends: Doughnut,

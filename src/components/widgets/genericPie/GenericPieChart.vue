@@ -1,30 +1,6 @@
 <template>
     <div style="position: relative">
-        <v-row
-      style="
-        margin: 0px;
-        direction: rtl;
-        align-items: center;
-        place-content: center;
-      "
-    >
-      <v-btn
-        class="bookmaerkBtn"
-        color="#935287"
-        text
-        icon
-        :ripple="false"
-        @click="bookmarkBtn"
-        v-if="id.endsWith('-0') == false"
-      >
-        <v-icon style="font-size: 30px">{{ getbookmarkIcon }}</v-icon>
-      </v-btn>
-      <span
-        id="chartsHeaders"
-        :style="'color:' + '#232323'"
-        >{{ chartTitle }}</span
-      >
-    </v-row>
+      {{TemplateData}}
         <genericPieChart 
         ref="dount"
         :data="TemplateData"
@@ -38,11 +14,11 @@
                 :ripple="false"
                  v-for="(btnName,index) in buttons" :key="index"
                   @click="$refs.dount.onClickLegend(index)"
-                  :style="{backgroundColor: isDrillDown?'#232323' : '#666666'}">
+                  :style="{backgroundColor: isDrillDown? '#FFFFFF' :'#EBEBEB'}">
                     <span
                     class="dot"
                     :style="{backgroundColor:TemplateData.datasets[0].backgroundColor[index]}"></span>    
-                    <span :style="'color:' + '#232323'">
+                    <span >
                         {{btnName}}
                     </span>
                   </v-btn>    
@@ -52,35 +28,32 @@
 </template>
 
 <script>
-    import genericPieChart from './genericPie/genericPieChart'
-    import {baseTemplate} from '../../helpers/pieChartHelpers'
+    import genericPieChart from './genericPieChart.js'
+    import {baseTemplate2} from '../../../helpers/pieChartHelpers'
+    import { mapState } from "vuex";
 export default {
-    props: {
-    chartTitle: { type: String, required: false, default: "" },
-    chartData: { type: Object, required: false },
-    id: { type: String, required: false, default: "777" },
-    isDrillDown: {type:Boolean,default:false},
-    config:{type: Object, required: false}
-  },
   watch:{
     chartData(){
-      this.TemplateData = baseTemplate(this.chartData,this.config.config.labelsDict,this.config.config.backgroundColor,this.config.config.pieInnerText,this.config.config.pieInnerNum)
+      this.TemplateData = baseTemplate2(this.chartData,this.configData.labelsDict,this.configData.backgroundColor,this.configData.pieInnerText,this.configData.pieInnerNum)
     }
     
   },
   created(){
-    console.log("heydudfe",this.config.pieInnerText)
-    console.log("heydudfe",this.config.config)
-
     if(Object.keys(this.chartData).length !== 0){
       //make template base on helpers function
-      this.TemplateData = baseTemplate(this.chartData,this.config.config.labelsDict,this.config.config.backgroundColor,this.config.config.pieInnerText,this.config.config.pieInnerNum)
+      this.TemplateData = baseTemplate2(this.chartData,this.configData.pieInnerText,this.configData.pieInnerNum)
     }
   },
   components: {
     genericPieChart
   },
- 
+  props: {
+    // chartTitle: { type: String, required: false, default: "" },
+    chartData: { type: Array, required: false },
+    // id: { type: String, required: false, default: "777" },
+    // isDrillDown: {type:Boolean,default:false},
+    // configData:{type: Object, required: false}
+  },
   methods:{
     bookmarkBtn() {
       this.$root.$emit("bookmarkBtn", this.id, "pie");
@@ -88,9 +61,17 @@ export default {
   },
   data(){
         return{
-            buttons:[],
-            myNewData:[],
-            chartOptions:{}
+          ////////////////////
+          TemplateData:[],
+          chartTitle:"test",
+          //chartData:{ "T3": 3302, "T6": 132, "T9": 0, "T12": 70, "T24": 1000, "T48MAX": 110 },
+          id:[1111],
+          isDrillDown:false,
+          configData:{ "pieInnerText": "<1כללי>", "pieInnerNum": null, "listIds": []},
+          ////////////////////
+          buttons:[],
+          myNewData:[],
+          chartOptions:{}
         }
   },
   mounted(){
@@ -98,8 +79,14 @@ export default {
         this.buttons = this.$refs.dount.$data._chart.data.labels 
   },
   computed:{
+    ...mapState({
+      sessionId: (state) => state.loginStore.currUserData.sessionId,
+      userID: (state) => state.loginStore.currUserData.userid,
+      currUserData: (state) => state.loginStore.currUserData,
+    }),
+  
     getbookmarkIcon() {
-      if (true) {
+      if (Object.keys(this.currUserData.favorites).includes(this.id)) {
         return "mdi-bookmark";
       } else {
         return "mdi-bookmark-outline";

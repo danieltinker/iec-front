@@ -7,7 +7,34 @@ export const convertLabelToHebrew = (labelsArr,labelsDict)=>{
         });
     return res 
 }
+export function baseTemplate2(myJson,innerText,innerNum){
+    innerNum
+    const myColors=["#E4E4E4","#E4E4E4","#E4E4E4"],data1=[],labels =[]
+    myJson.forEach(item=>{
+        console.log(item,"pp");
+        //myColors.push(item.color)
+        data1.push(item.value)
+        labels.push(item.label)
+    })
+    
+    var chartDataTemplate = {
+        labels: labels,
+        datasets: [
+            {
+            pieInnerText:innerText,
+            pieInnerNum:88,
+            backgroundColor: myColors,
+            data: data1,
+            },
+        ],
+    }
+    // fill chart data
+    // chartDataTemplate.datasets[0].data = Object.values(myJson) 
+    //  display in the center of the pie. 
+    // chartDataTemplate.datasets[0].pieInnerNum=Object.values(myJson).reduce((a,b)=> a+b) 
+    return chartDataTemplate
 
+}
 /**
 * Creates a baseTemplate.
 * @param {Object} [chartData] - json data
