@@ -1,13 +1,14 @@
 <template>
     <div v-if="doneFetching">
         <div class="widgets mt-3" v-for="(widget,index) in responseData" :key="index" >
+            {{widget}}
             <div class="headline-toolbar" >
                 <div class="grid-item">
                         <ThreeDotsNineDots class="grid-item" :isExpand="widget.PARAMETERS.expand" @switch-expand="widget.PARAMETERS.expand = !widget.PARAMETERS.expand" v-if="widget.PARAMETERS.headline_config.three_dots_enabled" />
                     </div>
                         <h1 class="headline-title grid-item">{{widget.PARAMETERS.headline_config.title}}</h1>
                         <div class="grid-item">
-                            <v-icon class="" color="#935287" style="font-size: 30px" v-if="widget.PARAMETERS.headline_config.bookmark_enabled">{{ getbookmarkIcon }}</v-icon>
+                            <v-icon class="" color="#935287" style="font-size: 30px" v-if="widget.PARAMETERS.headline_config.bookmark_enabled">{{ booktesttt(widget.VIEW_ID) }}</v-icon>
                         </div>
             </div>
             <component 
@@ -25,9 +26,11 @@ import BasicKPI from '../widgets/BasicKPI.vue';
 import ThreeDotsNineDots from '../utils/ThreeDotsNineDots.vue';
 import BasicPie from '../widgets/BasicPie.vue';
 import carouselKPI from '../widgets/carouselKPI.vue';
+// import FavoriteAxios from '../utils/FavoriteAxios';
 import genericKPI from '../widgets/genericKPI.vue';
 
 import axios from 'axios';
+import { response } from 'express';
         export default{
         components:{
             BasicKPI,
@@ -65,6 +68,8 @@ import axios from 'axios';
                 //  listen to store HQ,Category
                 //  fetch the server response GET /mobile/views/{hq_id}/{category_id}?sessoinid=xxx .
                 //  pass data uri into the components for the fetch
+            
+                // this.GetUserFav();
         },
         data(){
                 return{
@@ -184,7 +189,23 @@ import axios from 'axios';
                     // ///// ////////////  BASIC Pie //// ///////////////////
                     // ]
                 }
+            },
+        methods:
+        {
+            //Get user favorites
+            // GetUserFav: function(){
+            //     FavoriteAxios.getUserFav().then((response) => {
+            //     console.log("user fav: ",response)
+            // }).catch((error)=> {
+            //     console.log("Got error getting user fav: ", error)
+            // })
+            // },
+            booktesttt(view_id){
+                console.log("ggg", view_id)
+                //check if user have this view in favorites
+                return "mdi-bookmark";
             }
+        }
         }
 </script>
 

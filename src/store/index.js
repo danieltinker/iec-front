@@ -7,6 +7,11 @@ export default new Vuex.Store({
   state: {
     selected_hq_id:600,
     selected_cat_id:8,
+    selected_view_id: 100,
+    
+    quick_view: false,
+    user_favorites: [],
+    currUser: {"name":"yosef", "sessionId": "xxx","user_id": 999},
     themeDetails:{
       "darkTheme":{
         "theme":"darkTheme",
