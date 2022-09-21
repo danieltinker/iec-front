@@ -10,6 +10,8 @@
       <CategoryBar/>
       <!-- WIDGETS SPACE (CLOCKS) VERTICAL SCROLL  -->
       <WidgetSpace/>
+
+      <!-- {{$store.state.selected_view_param}} -->
     </v-main>
   </v-app>
 </template>
@@ -18,7 +20,7 @@
 import WidgetSpace from './components/global/WidgetSpace.vue';
 import HQNavBar from './components/global/HQNavBar.vue';
 import CategoryBar from './components/global/CategoryBar.vue';
-import UserFavoritesVue from './components/global/UserFavorites.vue';
+import UserFavorites from './components/global/UserFavorites.vue';
 import { mapActions } from 'vuex';
 export default {
     name: "App",

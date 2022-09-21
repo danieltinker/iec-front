@@ -21,7 +21,7 @@
     </v-row>
 
        <div>
-        <WidgetSpaceTwo :quickViewPopup="quickData"/>
+        <WidgetSpace :quickViewPopup="quickData"/>
          <!-- {{[quickData]}} -->
          
        </div>
@@ -30,11 +30,11 @@
 
 <script>
 // import { computed } from 'vue';
-import WidgetSpaceTwo from './WidgetSpaceTwo.vue';
+import WidgetSpace from './WidgetSpace.vue';
 export default {
     props:['mydata'],
     components: {
-      WidgetSpaceTwo
+      WidgetSpace
     },
     computed: {
       quickData: function(){
