@@ -5,8 +5,10 @@
                 <v-radio v-for="(category) in params.data_category" :key="category" :label="category" :value="category" color="#935287"></v-radio>
             </v-radio-group>
 
-            <div class="kpi-carousel">
-               
+            <div class="pie-carousel">
+                <span id="chartsHeaders" >
+                    {{ params.chart_titles[carouselActiveIndex] }}
+                </span>
 
                 <v-carousel
                   hide-delimiters
@@ -25,7 +27,7 @@
                     </template>
 
                     <v-carousel-item v-for="(KPIarr,index) in jsonData[params.selected_category]" :key="index">
-                        <div class="KPIcontainer" dir="rtl">
+                        <div class="PIEcontainer" dir="rtl">
                               <BaseGenericPie :chartData="KPIarr"/>
                         </div>
                     </v-carousel-item>
@@ -97,7 +99,7 @@ export default {
     },
     components:{
     ThreeDotsNineDots,
-    genericKPI: () => import("../widgets/genericKPI.vue"),
+    genericPIE: () => import("../widgets/genericPIE.vue"),
     BaseGenericPie
 },
     methods:{
@@ -158,7 +160,7 @@ export default {
 </script>
 
 <style scoped>
-.KPIcontainer{
+.PIEcontainer{
     display: grid;
     grid-template-columns: auto auto;
     row-gap: 10px;

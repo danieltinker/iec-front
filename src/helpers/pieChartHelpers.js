@@ -1,44 +1,33 @@
-export const convertLabelToHebrew = (labelsArr,labelsDict)=>{
-    var res = []
-         labelsArr.forEach(element => {
-                if(element in labelsDict){
-                    res.push(labelsDict[element])
-                }
-        });
-    return res 
-}
-
 /**
 * Creates a baseTemplate.
-* @param {Object} [chartData] - json data
-* @param {Object} [config.labelsDict] - labels to replace
-* @param {Object} [config.backgroundColor] - style colors
-* @param {Object} [config.pieInnerText] - ineer text show in pie
-* @param {Object} [config.pieInnerNum] - inner num Total
+* @param {Object} [myJson] - [*] json data
+* @param {Object} [innerText] - ineer text show in pie
+* @param {Object} [innerNum] - inner num Total
 */
-export function baseTemplate(myJson,labelsDict,colors,innerText,innerNum){
+export function baseTemplate(myJson,innerText,innerNum){
+    innerNum
+    //default colors static Array
+    const myColors=["#a8699d","#38ae10","#a8699d","#38ae10","#a8699d","#38ae10"],data=[],labels =[]
+    myJson.forEach(item=>{
+    myColors.push(item.color)
+    data.push(item.value)
+    labels.push(item.label)})
     var chartDataTemplate = {
-        labels: [],
+        labels: labels,
         datasets: [
             {
             pieInnerText:innerText,
-            pieInnerNum:innerNum,
-            backgroundColor: colors,
-            data: [],
+            pieInnerNum:88,
+            backgroundColor: myColors,
+            data: data,
             },
         ],
     }
-    // fill chart data
-    chartDataTemplate.datasets[0].data = Object.values(myJson) 
-
-    //  display in the center of the pie. 
-    chartDataTemplate.datasets[0].pieInnerNum=Object.values(myJson).reduce((a,b)=> a+b) 
-    // chart labels formatting
-    if (labelsDict !== undefined){
-        chartDataTemplate.labels =  convertLabelToHebrew(Object.keys(myJson),labelsDict) 
-    }
+    chartDataTemplate.datasets[0].pieInnerNum=data.reduce((a,b)=> a+b) 
     return chartDataTemplate
+
 }
+
 export const getSelectedRadius = (chartElements) =>{
     const innerRadiusArr =[]
     const outerRadiusArr= []

@@ -28,42 +28,30 @@
 
 <script>
     import genericPieChart from './genericPieChart'
-    import {baseTemplate2} from '../../../helpers/pieChartHelpers'
+    import {baseTemplate} from '../../../helpers/pieChartHelpers'
     import { mapState } from "vuex";
 export default {
   watch:{
-    // chartData(){
-    //   this.TemplateData = baseTemplate2(this.chartData,this.configData.labelsDict,this.configData.backgroundColor,this.configData.pieInnerText,this.configData.pieInnerNum)
-    // }
+    chartData(){
+      this.TemplateData = baseTemplate(this.chartData,this.configData.pieInnerText,this.configData.pieInnerNum)
+    }
     
   },
   created(){
     if(Object.keys(this.chartData).length !== 0){
       //make template base on helpers function
-      this.TemplateData = baseTemplate2(this.chartData,this.configData.pieInnerText,this.configData.pieInnerNum)
+      this.TemplateData = baseTemplate(this.chartData,this.configData.pieInnerText,this.configData.pieInnerNum)
     }
   },
   components: {
     genericPieChart
   },
   props: {
-    // chartTitle: { type: String, required: false, default: "" },
     chartData: { type: Array, required: false },
-    // id: { type: String, required: false, default: "777" },
-    // isDrillDown: {type:Boolean,default:false},
-    // configData:{type: Object, required: false}
-  },
-  methods:{
-    bookmarkBtn() {
-      this.$root.$emit("bookmarkBtn", this.id, "pie");
-    },
   },
   data(){
         return{
-          ////////////////////
           chartTitle:"test",
-          //chartData:{ "T3": 3302, "T6": 132, "T9": 0, "T12": 70, "T24": 1000, "T48MAX": 110 },
-          id:[1111],
           isDrillDown:false,
           configData:{ "pieInnerText": "<1כללי>", "pieInnerNum": null, "listIds": []},
           ////////////////////
@@ -83,13 +71,6 @@ export default {
       currUserData: (state) => state.loginStore.currUserData,
     }),
   
-    getbookmarkIcon() {
-      if (Object.keys(this.currUserData.favorites).includes(this.id)) {
-        return "mdi-bookmark";
-      } else {
-        return "mdi-bookmark-outline";
-      }
-    },
   }
 }
 </script>
