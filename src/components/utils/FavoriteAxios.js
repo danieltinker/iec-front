@@ -20,8 +20,10 @@ export default{
 
     //add to user fav
     AddUserFav() {
-        console.log("Adding favorite to user",{"viewid":store.state.selected_view_id, "userid": store.state.currUser.user_id, "state": "{}"})
-        return ShavitMobileFavReq.post("add",{"viewid":store.state.selected_view_id, "userid": store.state.currUser.user_id, "state": "{}"},{
+        let fav_state = { "PARAMETERS": store.state.selected_view_param, "CUSTOM_SETTINGS": store.state.custom_bookmark_data}
+        let final_fav_setttings = {"viewid":store.state.selected_view_id, "userid": store.state.currUser.user_id, "state": fav_state}
+        console.log("Adding favorite to user",{"viewid":store.state.selected_view_id, "userid": store.state.currUser.user_id, "state": fav_state})
+        return ShavitMobileFavReq.post("add",final_fav_setttings,{
             params: {
                 sid: store.state.currUser.sessionId,
             }

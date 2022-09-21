@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-
+import FavoriteAxios from '../components/utils/FavoriteAxios'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -8,6 +8,8 @@ export default new Vuex.Store({
     selected_hq_id:600,
     selected_cat_id:8,
     selected_view_id: 100,
+    selected_view_param: {}, //saved clicked bookmark view parameters
+    custom_bookmark_data: {}, //save custom bookmark data want to save
     serverAdrr: 'http://20.102.120.232:5080',
     quick_view: false,
     user_favorites: [],
@@ -57,10 +59,32 @@ export default new Vuex.Store({
     },
   },
   getters: {
+    //getter for user list
+    GET_USER_FAV: state => {
+      return state.user_favorites
+    }
   },
   mutations: {
+    SET_FAVORITES_LIST(state, fav_list)
+    {
+      //set user favorite list
+      console.log("setting favlist", fav_list)
+      state.user_favorites = fav_list
+    }
   },
   actions: {
+    SET_FAV_LIST: ({commit}) => {
+      /*
+        Function to fetch user favorite list
+      */
+       FavoriteAxios.getUserFav().then((response) => {
+          console.log("user fav: ",response.data);
+          commit("SET_FAVORITES_LIST", response.data)
+
+      }).catch((error)=> {
+          console.log("Got error getting user fav: ", error)
+      })
+    }
   },
   modules: {
   }

@@ -19,28 +19,39 @@
       >
       <v-col cols="4" style="padding-top:0;padding:bottom:0;"></v-col>
     </v-row>
-        das1dasdasd
-        <br>
-        {{mydata}}
-        <br>
-        dsadas
-        <br>
-        dsadas
-        <br>
-        dsadas
+
+       <div>
+        <WidgetSpaceTwo :quickViewPopup="quickData"/>
+         <!-- {{[quickData]}} -->
+         
+       </div>
     </div>
 </template>
 
 <script>
+// import { computed } from 'vue';
+import WidgetSpaceTwo from './WidgetSpaceTwo.vue';
 export default {
-    props:['mydata']
+    props:['mydata'],
+    components: {
+      WidgetSpaceTwo
+    },
+    computed: {
+      quickData: function(){
+        //modify data to work in WidgetSpaceTwo correct
+        this.mydata.STATE['VIEW_ID'] = this.mydata.VIEW_ID
+        this.mydata.STATE["TEMPLATE_TYPE"] = this.mydata.STATE.PARAMETERS.TEMPLATE_TYPE
+      
+        return [this.mydata.STATE]
+      }
+    }
 }
 </script>
 <style scoped>
 
 .main_container {
     position: fixed;
-  background-color: red;
+  background-color: rgb(255, 255, 255);
   height: 100vh;
   width: 100vw;
   overflow: visible;

@@ -18,16 +18,29 @@
 import WidgetSpace from './components/global/WidgetSpace.vue';
 import HQNavBar from './components/global/HQNavBar.vue';
 import CategoryBar from './components/global/CategoryBar.vue';
-import UserFavorites from './components/global/UserFavorites.vue';
-
+import UserFavoritesVue from './components/global/UserFavorites.vue';
+import { mapActions } from 'vuex';
 export default {
     name: "App",
     data: () => ({
       }),
     components: { WidgetSpace,HQNavBar, CategoryBar, UserFavorites },
     mounted(){
+      
       this.$store.state.selected_hq_id = 100
       this.$store.state.selected_cat_id = 101
+      //this.$store.actions.SET_FAV_LIST
+      
+    },
+    created() {
+      this.updatelist()
+    },
+    methods: {
+      ...mapActions(["SET_FAV_LIST"]),
+      updatelist ()
+      {
+        this.SET_FAV_LIST()
+      }
     }
 };
 </script>
