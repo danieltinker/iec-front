@@ -1,41 +1,25 @@
 <template>
   <div v-if="doneFetching">
-    <div
-      class="widgets mt-3"
-      v-for="(widget, index) in responseDataComp"
-      :key="index"
-    >
+    <div class="widgets mt-3" v-for="(widget, index) in responseDataComp" :key="index">
       <div class="headline-toolbar">
         <div class="grid-item">
-          <ThreeDotsNineDots
-            class="grid-item"
-            :isExpand="widget.PARAMETERS.expand"
+          <ThreeDotsNineDots class="grid-item" :isExpand="widget.PARAMETERS.expand"
             @switch-expand="widget.PARAMETERS.expand = !widget.PARAMETERS.expand"
-            v-if="widget.PARAMETERS.headline_config.three_dots_enabled"
-          />
+            v-if="widget.PARAMETERS.headline_config.three_dots_enabled" />
         </div>
         <h1 class="headline-title grid-item">
           {{ widget.PARAMETERS.headline_config.title }}
         </h1>
         <div class="grid-item">
-          <v-icon
-            @click="BookMarkClick(widget)"
-            color="#935287"
-            style="font-size: 30px"
-            v-if="widget.PARAMETERS.headline_config.bookmark_enabled"
-            >{{
-              CheckBookmark(widget.VIEW_ID)
-                ? "mdi-bookmark"
-                : "mdi-bookmark-outline"
-            }}</v-icon
-          >
+          <v-icon @click="BookMarkClick(widget)" color="#935287" style="font-size: 30px"
+            v-if="widget.PARAMETERS.headline_config.bookmark_enabled">{{
+            CheckBookmark(widget.VIEW_ID)
+            ? "mdi-bookmark"
+            : "mdi-bookmark-outline"
+            }}</v-icon>
         </div>
       </div>
-      <component
-        :is="widget.TEMPLATE_TYPE"
-        :params="widget.PARAMETERS"
-        :isDrillDown="false"
-      >
+      <component :is="widget.TEMPLATE_TYPE" :params="widget.PARAMETERS" :isDrillDown="false">
       </component>
     </div>
   </div>
@@ -58,8 +42,8 @@ export default {
   },
   props: {
     quickViewPopup: {
-        type: Array,
-        default() {return []}
+      type: Array,
+      default() { return [] }
     }
   },
   watch: {
@@ -74,21 +58,20 @@ export default {
       // fetch the widgets views from the DB
       async handler() {
         await axios
-        .get("http://20.102.120.232:5080/shavit/mobile/views/" + 900 + "/" + 1 , { params: { sid: "xxx" } })
-        .then((response) => {
+          .get("http://20.102.120.232:5080/shavit/mobile/views/" + 900 + "/" + 1, { params: { sid: "xxx" } })
+          .then((response) => {
             this.responseData = response.data;
             this.doneFetching = true;
-        })
-        .catch((error) => {
+          })
+          .catch((error) => {
             console.log(error);
-        });
+          });
       },
     },
   },
   async created() {
-    if(this.quickViewPopup.length > 0)
-    {
-        this.doneFetching = true
+    if (this.quickViewPopup.length > 0) {
+      this.doneFetching = true
     }
     //  get hqs By sid
     //  listen to store HQ,Category from user DATA RAN AND TOMMY PLEASE FINISH 
@@ -99,77 +82,81 @@ export default {
   },
   computed:
   {
-    ...mapGetters(["GET_USER_FAV"]),
-        responseDataComp: function() {
-            return !this.quickViewPopup.length ? this.responseData : this.quickViewPopup
-        }
+    ...mapGetters(["GET_USER_FAV","IS_FETCHING"]),
+    responseDataComp: function () {
+      return !this.quickViewPopup.length ? this.responseData : this.quickViewPopup
+    }
   },
   data() {
-      return{
-              doneFetching: false,
-              responseData: [],
-            }
-          },
+    return {
+      doneFetching: false,
+      responseData: [],
+    }
+  },
   methods:
-    {
-      ...mapActions(["SET_FAV_LIST"]),
-            //Get user favorites
-            GetUserFav: function(){
-                this.SET_FAV_LIST()
-            },
-        
-        //Get user favorites
-            
-        CheckBookmark(view_id) {
-          /*
-              Function to check if viewId exist in user favorites list
-          */
-          let fav_list = this.$store.state.user_favorites;
-          let i;
-          //check if we have object inside user favorites without using filter...
-          for(i =0; i< fav_list.length; i++){
-                if(fav_list[i].VIEW_ID == view_id) return true;
-            }
-          return false
-        },
+  {
+    ...mapActions(["SET_FAV_LIST","DO_FETCH","END_FETCH"]),
+    //Get user favorites
+    GetUserFav: function () {
+      this.SET_FAV_LIST()
+    },
 
-        
+    //Get user favorites
+
+    CheckBookmark(view_id) {
+      /*
+          Function to check if viewId exist in user favorites list
+      */
+      let fav_list = this.$store.state.user_favorites;
+      let i;
+      //check if we have object inside user favorites without using filter...
+      for (i = 0; i < fav_list.length; i++) {
+        if (fav_list[i].VIEW_ID == view_id) return true;
+      }
+      return false
+    },
+
+
     BookMarkClick(widget) {
       let view_id = widget.VIEW_ID
       //save curr widget params for bookmark
-    //   widget.PARAMETERS['TEMPLATE_TYPE'] = widget.TEMPLATE_TYPE
-    console.log(widget.PARAMETERS,"click params")
+      //   widget.PARAMETERS['TEMPLATE_TYPE'] = widget.TEMPLATE_TYPE
+      console.log(widget.PARAMETERS, "click params")
       this.$store.state.selected_view_param = widget.PARAMETERS
-      this.$store.state.selected_view_param["TEMPLATE_TYPE"] = widget.TEMPLATE_TYPE 
+      this.$store.state.selected_view_param["TEMPLATE_TYPE"] = widget.TEMPLATE_TYPE
       ///Maybe to save custom things to custom_bookmark_data in store
       //
       this.$store.state.selected_view_id = view_id;
-      console.log("book clicked", view_id);
-      if (this.CheckBookmark(view_id)) {
-        //already bookmarked
-        //remove fav
-        FavoriteAxios.RemoveUserFav()
-          .then((response) => {
-            // console.log("removed fav", response);
-            //if we got new info update user favorite list
-            this.GetUserFav();
-          })
-          .catch((error) => {
-            console.log("Got error removing user fav: ", error);
-          });
-      } else {
-        //add user fav
-        FavoriteAxios.AddUserFav()
-          .then((response) => {
-            // console.log("added fav", response);
-            //if we got new info update user favorite list
-            this.GetUserFav();
-          })
-          .catch((error) => {
-            console.log("Got error adding user fav: ", error);
-          });
-      }
+      if (this.IS_FETCHING === false) {
+        this.DO_FETCH()
+        // console.log("book clicked", view_id);
+        if (this.CheckBookmark(view_id)) {
+          //already bookmarked
+          //remove fav
+          FavoriteAxios.RemoveUserFav()
+            .then((response) => {
+              // console.log("removed fav", response);
+              //if we got new info update user favorite list
+              this.GetUserFav();
+            })
+            .catch((error) => {
+              console.log("Got error removing user fav: ", error);
+            });
+        } else {
+          //add user fav
+          FavoriteAxios.AddUserFav()
+            .then((response) => {
+              // console.log("added fav", response);
+              //if we got new info update user favorite list
+              this.GetUserFav();
+            })
+            .catch((error) => {
+              console.log("Got error adding user fav: ", error);
+            });
+        }
+        // this.END_FETCH()
 
+      }
     },
   },
 };
@@ -197,6 +184,7 @@ export default {
   text-align: center;
   width: 240px;
 }
+
 .grid-item {
   text-align: center;
 }

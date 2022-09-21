@@ -5,6 +5,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    fetching: false,
     selected_hq_id:600,
     selected_cat_id:8,
     selected_view_id: 100,
@@ -62,14 +63,23 @@ export default new Vuex.Store({
     //getter for user list
     GET_USER_FAV: state => {
       return state.user_favorites
+    },
+    IS_FETCHING: state => {
+      return state.fetching
     }
   },
   mutations: {
     SET_FAVORITES_LIST(state, fav_list)
     {
       //set user favorite list
-      console.log("setting favlist", fav_list)
+      // console.log("setting favlist", fav_list)
       state.user_favorites = fav_list
+    },
+    SET_FETCHING(state, level)
+    {
+      //set user favorite list
+      // console.log("setting favlist", fav_list)
+      state.fetching = level
     }
   },
   actions: {
@@ -77,13 +87,29 @@ export default new Vuex.Store({
       /*
         Function to fetch user favorite list
       */
+        commit("SET_FETCHING", true)
        FavoriteAxios.getUserFav().then((response) => {
-          console.log("user fav: ",response.data);
+          // console.log("user fav: ",response.data);
           commit("SET_FAVORITES_LIST", response.data)
+          commit("SET_FETCHING", false)
 
       }).catch((error)=> {
           console.log("Got error getting user fav: ", error)
       })
+    },
+
+    
+    DO_FETCH: ({commit}) => {
+      /*
+        Function to set fetch on
+      */
+          commit("SET_FETCHING", true)
+    },
+    END_FETCH: ({commit}) => {
+      /*
+        Function to set fetch off
+      */
+          commit("SET_FETCHING", false)
     }
   },
   modules: {

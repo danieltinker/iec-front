@@ -40,7 +40,7 @@ export default {
     methods: {
       
         openQuickView(data){
-            console.log("quick",data);
+            // console.log("quick",data);
             this.data = data
             //save quick view id clicked
             this.$store.state.selected_view_id = data.VIEW_ID
@@ -72,7 +72,7 @@ export default {
       }
     },
     mounted() {
-    console.log("stories", this.$store.getters.GET_USER_FAV);
+    // console.log("stories", this.$store.getters.GET_USER_FAV);
   },
     data: () => ({
         data:"",
