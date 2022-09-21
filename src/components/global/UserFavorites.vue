@@ -1,13 +1,29 @@
 <template>
     <div dir="rtl" class="mb-10 container">
     <div>
-        <v-btn v-for="item in getUserFavData" :key="item.template_id"
-              color="#935287"
-              outlined
-              fab
-              class="ml-4 story"
-              @click="openQuickView(item)"
-              ><img v-if="item.icon != ''" :src="getImg(item.icon)" /></v-btn>
+      <!-- {{GET_USER_FAV}} -->
+        <div class="fav-btn" v-for="item in GET_USER_FAV" :key="item.VIEW_ID">
+          <v-btn 
+          
+                color="#935287"
+                outlined
+                fab
+                class="ml-4 story"
+                @click="openQuickView(item)"
+                >
+                <img v-if="item.STATE.PARAMETERS.fav_icon != ''" :src="getImg(item.STATE.PARAMETERS.fav_icon)" />
+            </v-btn>
+            <span class="fav-span" v-if="item.STATE.PARAMETERS.headline_config.title.length < 8">{{ item.STATE.PARAMETERS.headline_config.title }}</span>
+            <v-tooltip top v-else>
+                <template v-slot:activator="{ on, attrs }">
+                    <span class="fav-span" v-bind="attrs" v-on="on">
+                        {{ item.STATE.PARAMETERS.headline_config.title.substring(0, 8) + ".." }}
+                    </span>
+                </template>
+                <span class="fav-span">{{ item.STATE.PARAMETERS.headline_config.title}}</span>
+            </v-tooltip>
+        </div>
+              
         
     </div>
     <QuickViewPopup v-if="$store.state.quick_view" :mydata="data" @closeQuickView="closeQuickView" />
@@ -17,11 +33,17 @@
 
 <script>
 import QuickViewPopup from './QuickViewPopup.vue';
+import { mapGetters } from 'vuex'
 export default {
+  created() {
+  },
     methods: {
+      
         openQuickView(data){
-            console.log(data);
+            console.log("quick",data);
             this.data = data
+            //save quick view id clicked
+            this.$store.state.selected_view_id = data.VIEW_ID
             this.$store.state.quick_view = !this.$store.state.quick_view
         },
         closeQuickView(){
@@ -38,28 +60,54 @@ export default {
             }
         }
     },
+    computed:
+    {
+      ...mapGetters(["GET_USER_FAV"]),
+      getUserFavData() {
+        return this.$store.state.user_favorites
+      },
+      getfav ()
+      {
+        return this.$store.getters.GET_USER_FAV
+      }
+    },
+    mounted() {
+    console.log("stories", this.$store.getters.GET_USER_FAV);
+  },
     data: () => ({
         data:"",
         QuickViewState:false,
-        getUserFavData: [{ template_id: 11, parameters: "Dsadsa", icon: "bar", state: "", title: "test1" }, { template_id: 22, parameters: "", icon: "pie", state: "", title: "test2" }, { template_id: 33, parameters: "Dsadsa", icon: "bar", state: "" }, { template_id: 44, parameters: "Dsadsa", icon: "bar", state: "" }]
+        //getUserFavData: store.state.user_favorites//[{ template_id: 11, parameters: "Dsadsa", icon: "bar", state: "", title: "test1" }, { template_id: 22, parameters: "", icon: "pie", state: "", title: "test2" }, { template_id: 33, parameters: "Dsadsa", icon: "bar", state: "" }, { template_id: 44, parameters: "Dsadsa", icon: "bar", state: "" }]
     }),
     components: { QuickViewPopup }
 }
 </script>
 
 <style scoped>
-
+::v-deep .v-application {
+    font-family: "Roboto", sans-serif;
+    line-height: 1.4 !important;
+}
+.fav-span {
+  font-size: 0.95rem;
+}
+.fav-btn {
+  display: flex;
+  flex-direction: column;
+}
 .container {
   background-color: rgb(244, 244, 244);
   display: flex;
-  overflow-x: auto;
+  /* overflow-x: auto; */
   height: 80px;
   width: auto;
+  
 }
 
 .container div:first-child {
   display: flex;
   align-self: center;
+
 }
 .favContainer {
   direction: rtl;

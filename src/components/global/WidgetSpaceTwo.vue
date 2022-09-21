@@ -1,8 +1,10 @@
 <template>
   <div v-if="doneFetching">
+    <!-- {{GET_USER_FAV}} -->
+    <!-- {{quickViewPopup}} -->
     <div
       class="widgets mt-3"
-      v-for="(widget, index) in responseData"
+      v-for="(widget, index) in responseDataComp"
       :key="index"
     >
       <div class="headline-toolbar">
@@ -21,7 +23,7 @@
         </h1>
         <div class="grid-item">
           <v-icon
-            @click="BookMarkClick(widget.VIEW_ID)"
+            @click="BookMarkClick(widget)"
             class=""
             color="#935287"
             style="font-size: 30px"
@@ -52,13 +54,22 @@ import carouselKPI from "../widgets/carouselKPI.vue";
 import FavoriteAxios from "../utils/FavoriteAxios";
 import genericKPI from '../widgets/genericKPI.vue';
 import axios from "axios";
+import { mapActions, mapGetters } from "vuex";
 export default {
+    // name: "",
   components: {
     BasicKPI,
     ThreeDotsNineDots,
     BasicPie,
     carouselKPI,
             genericKPI,
+  },
+  //added for option pass single view
+  props: {
+    quickViewPopup: {
+        type: Array,
+        default() {return []}
+    }
   },
   watch: {
     "$store.state.selected_hq_id": {
@@ -71,7 +82,7 @@ export default {
         console.log("selected_cat_id");
         await axios
           .get(
-            "http://20.102.120.232:5080/shavit/mobile/views/" + 800 + "/" + 1,
+            "http://20.102.120.232:5080/shavit/mobile/views/" + 700 + "/" + 1,
             { params: { sid: "xxx" } }
           )
           .then((response) => {
@@ -85,6 +96,10 @@ export default {
     },
   },
   async created() {
+    if(this.quickViewPopup.length > 0)
+    {
+        this.doneFetching = true
+    }
     //get hqs By sid
 
     //  listen to store HQ,Category
@@ -92,7 +107,14 @@ export default {
     //  pass data uri into the components for the fetch
 
     //function to get last user favorite list
-    this.GetUserFav();
+    // this.GetUserFav();
+  },
+  computed:
+  {
+    ...mapGetters(["GET_USER_FAV"]),
+    responseDataComp: function() {
+        return !this.quickViewPopup.length ? this.responseData : this.quickViewPopup
+    }
   },
   data() {
     return {
@@ -211,23 +233,16 @@ export default {
             },
         methods:
         {
+            ...mapActions(["SET_FAV_LIST"]),
             //Get user favorites
             GetUserFav: function(){
-                FavoriteAxios.getUserFav().then((response) => {
-                console.log("user fav: ",response);
-                this.$store.state.user_favorites = response.data
-
-            }).catch((error)=> {
-                console.log("Got error getting user fav: ", error)
-            })
+                this.SET_FAV_LIST()
             },
         
     CheckBookmark(view_id) {
         /*
             Function to check if viewId exist in user favorites list
         */
-
-    
 
       //check if user have this view in favorites
       let fav_list = this.$store.state.user_favorites;
@@ -243,7 +258,14 @@ export default {
       return false
     },
 
-    BookMarkClick(view_id) {
+    BookMarkClick(widget) {
+      let view_id = widget.VIEW_ID
+      //save curr widget params for bookmark
+    //   widget.PARAMETERS['TEMPLATE_TYPE'] = widget.TEMPLATE_TYPE
+      this.$store.state.selected_view_param = widget.PARAMETERS
+      this.$store.state.selected_view_param["TEMPLATE_TYPE"] = widget.TEMPLATE_TYPE 
+      ///Maybe to save custom things to custom_bookmark_data in store
+      //
       this.$store.state.selected_view_id = view_id;
       console.log("book clicked", view_id);
       if (this.CheckBookmark(view_id)) {
