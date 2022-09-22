@@ -1,6 +1,7 @@
 <template >
   <v-app style="background-color: #ebebeb;">
     <!-- APP PAGE -->
+
     <v-main class="app">
       <!-- navigation bar + Theme Selector toggle + Log out BTN -->
       <HQNavBar/> 
@@ -42,6 +43,12 @@ export default {
         //Get all user favorite list
         this.SET_FAV_LIST()
       }
+    },
+    computed:{
+      getCurrentTheme(){
+        // console.log(this.$store.getters.currentTheme.theme);
+        return this.$store.getters.currentTheme
+    }
     }
 };
 </script>
