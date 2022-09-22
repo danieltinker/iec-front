@@ -44,7 +44,6 @@ export default {
             this.data = data
             //save quick view id clicked
             this.$store.state.selected_view_id = data.VIEW_ID
-            document.querySelector('html').style.overflowY == "hidden !important"
             this.$store.state.quick_view = !this.$store.state.quick_view
         },
         closeQuickView(){

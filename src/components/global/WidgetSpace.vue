@@ -154,7 +154,7 @@ export default {
               console.log("Got error adding user fav: ", error);
             });
         }
-        // this.END_FETCH()
+        this.END_FETCH()
 
       }
     },
