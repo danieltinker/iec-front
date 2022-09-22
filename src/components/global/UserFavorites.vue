@@ -25,8 +25,8 @@
         </div>
               
         
-    </div>
-    <QuickViewPopup v-if="$store.state.quick_view" :mydata="data" @closeQuickView="closeQuickView" />
+    </div >
+    <QuickViewPopup class="quick-view" v-if="$store.state.quick_view" :mydata="data" @closeQuickView="closeQuickView" />
     </div>
 </template>
 
@@ -44,6 +44,7 @@ export default {
             this.data = data
             //save quick view id clicked
             this.$store.state.selected_view_id = data.VIEW_ID
+            document.querySelector('html').style.overflowY == "hidden !important"
             this.$store.state.quick_view = !this.$store.state.quick_view
         },
         closeQuickView(){
@@ -88,8 +89,11 @@ export default {
     font-family: "Roboto", sans-serif;
     line-height: 1.4 !important;
 }
+.quick-view{
+  overflow-y: auto;
+}
 .fav-span {
-  font-size: 0.95rem;
+  font-size: 0.8rem;
 }
 .fav-btn {
   display: flex;
@@ -98,8 +102,8 @@ export default {
 .container {
   background-color: rgb(244, 244, 244);
   display: flex;
-  /* overflow-x: auto; */
-  height: 80px;
+  overflow-x: auto;
+  /* height: 80px; */
   width: auto;
   
 }

@@ -1,4 +1,4 @@
-<template>
+<template >
   <div v-if="doneFetching">
     <div class="widgets mt-3" v-for="(widget, index) in responseDataComp" :key="index">
       <div class="headline-toolbar">
@@ -58,7 +58,7 @@ export default {
       // fetch the widgets views from the DB
       async handler() {
         await axios
-          .get("http://20.102.120.232:5080/shavit/mobile/views/" + 900 + "/" + 1, { params: { sid: "xxx" } })
+          .get("http://20.102.120.232:5080/shavit/mobile/views/" + 600 + "/" + 1, { params: { sid: "xxx" } })
           .then((response) => {
             this.responseData = response.data;
             this.doneFetching = true;
@@ -188,4 +188,5 @@ export default {
 .grid-item {
   text-align: center;
 }
+
 </style>

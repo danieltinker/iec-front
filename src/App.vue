@@ -1,4 +1,4 @@
-<template>
+<template >
   <v-app style="background-color: #ebebeb;">
     <!-- APP PAGE -->
     <v-main class="app">
@@ -9,8 +9,7 @@
       <!-- CATEGORIES BAR HORIZONTAL SCROLL -->
       <CategoryBar/>
       <!-- WIDGETS SPACE (CLOCKS) VERTICAL SCROLL  -->
-      <WidgetSpace/>
-
+      <WidgetSpace :class="{removeDisplay: this.$store.state.quick_view}" />
       <!-- {{$store.state.selected_view_param}} -->
     </v-main>
   </v-app>
@@ -28,19 +27,19 @@ export default {
       }),
     components: { WidgetSpace,HQNavBar, CategoryBar, UserFavorites },
     mounted(){
-      
       this.$store.state.selected_hq_id = 100
-      this.$store.state.selected_cat_id = 101
-      //this.$store.actions.SET_FAV_LIST
-      
+      this.$store.state.selected_cat_id = 101      
     },
     created() {
       this.updatelist()
+    },
+    watch: {
     },
     methods: {
       ...mapActions(["SET_FAV_LIST"]),
       updatelist ()
       {
+        //Get all user favorite list
         this.SET_FAV_LIST()
       }
     }
@@ -57,7 +56,9 @@ body {
 .app{
   width: 100%;
 }
-
+.removeDisplay{
+  display: none !important;
+}
 .loader{
         height: 400px;
         width: 100%;

@@ -20,7 +20,7 @@
       <v-col cols="4" style="padding-top:0;padding:bottom:0;"></v-col>
     </v-row>
 
-       <div>
+       <div >
         <WidgetSpace :quickViewPopup="quickData"/>
          <!-- {{[quickData]}} -->
          
@@ -48,7 +48,9 @@ export default {
 }
 </script>
 <style scoped>
-
+.quick-view{
+  overflow-y: auto;
+}
 .main_container {
     position: fixed;
   background-color: rgb(255, 255, 255);
