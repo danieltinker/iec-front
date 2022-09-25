@@ -23,6 +23,57 @@
       </component>
     </div>
   </div>
+
+  <div class="skeleton-loader" v-else>
+    <div class="skl"  v-if="!errorMsg || errorMsg.length === 0">
+      <template>
+          <v-sheet
+            :color="`grey ${theme.isDark ? 'darken-2' : 'lighten-4'}`"
+            class="pa-3"
+          >
+            <v-skeleton-loader
+              class="mx-auto"
+              max-width="300"
+              type="card"
+            ></v-skeleton-loader>
+          </v-sheet>
+        </template>
+        <template>
+          <v-sheet
+            :color="`grey ${theme.isDark ? 'darken-2' : 'lighten-4'}`"
+            class="pa-3"
+          >
+            <v-skeleton-loader
+              class="mx-auto"
+              max-width="300"
+              type="card"
+            ></v-skeleton-loader>
+          </v-sheet>
+        </template>
+        <template >
+          <v-sheet
+            :color="`grey ${theme.isDark ? 'darken-2' : 'lighten-4'}`"
+            class="pa-3"
+          >
+            <v-skeleton-loader
+              class="mx-auto"
+              max-width="300"
+              type="card"
+            ></v-skeleton-loader>
+          </v-sheet>
+        </template>
+    </div>
+    <h1 v-else>  {{errorMsg}} </h1>
+        
+        <!-- <div class="loader" v-if="!errorMsg || errorMsg.length === 0">
+            <v-progress-circular
+            indeterminate
+            color="purple"
+            ></v-progress-circular>
+        </div>
+        
+        <h1 v-else>  {{errorMsg}} </h1> -->
+    </div>  
 </template>
 
 <script lang="ts">
@@ -58,10 +109,14 @@ export default {
       // fetch the widgets views from the DB
       async handler() {
         await axios
-          .get("http://20.102.120.232:5080/shavit/mobile/views/" + 600 + "/" + 1, { params: { sid: "xxx" } })
+          .get("http://20.102.120.232:5080/shavit/mobile/views/" + 500 + "/" + 1, { params: { sid: "xxx" } })
           .then((response) => {
             this.responseData = response.data;
-            this.doneFetching = true;
+            setTimeout(()=>{
+              // this.doneFetching = true;
+
+              this.errorMsg = "View Page Unavaliable"
+            },3000)
           })
           .catch((error) => {
             console.log(error);
@@ -70,7 +125,7 @@ export default {
     },
   },
   async created() {
-    if (this.quickViewPopup.length > 0) {
+    if (this.quickViewPopup.length > 0 && this.errorMsg.length === 0) {
       this.doneFetching = true
     }
     //  get hqs By sid
@@ -89,10 +144,16 @@ export default {
   },
   data() {
     return {
+      errorMsg:"",
       doneFetching: false,
       responseData: [],
     }
   },
+  inject: {
+      theme: {
+        default: { isDark: false },
+      },
+    },
   methods:
   {
     ...mapActions(["SET_FAV_LIST","DO_FETCH","END_FETCH"]),
@@ -163,6 +224,13 @@ export default {
 </script>
 
 <style scoped>
+  .skeleton-loader{
+    width:100%;
+    display: block;
+  }
+  v-skeleton-loader{
+    width:100%;
+  }
 .widgets {
   background-color: white;
 }

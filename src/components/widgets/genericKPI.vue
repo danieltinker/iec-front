@@ -58,15 +58,18 @@
                 :drillDataProp="drilldownData">
                 </component>   
             </div>
-
     </div>  
 
     <div class="loader" v-else>
-        <v-progress-circular
-        indeterminate
-        color="purple"
-        ></v-progress-circular>
-    </div>
+        <div class="loader" v-if="!errorMSG || errorMSG.length === 0">
+            <v-progress-circular
+            indeterminate
+            color="purple"
+            ></v-progress-circular>
+        </div>
+        <h1 v-else>  {{errorMSG}} </h1>
+    </div>  
+ 
 </div>
 </template>
 
@@ -77,6 +80,7 @@ import axios from 'axios';
 export default {
     // name:"basicKPI",
     props:{
+      
         isDrillDown:{type:Boolean},
         drillDataProp:{type:Object, default:()=>{}},
         /** */
@@ -130,6 +134,7 @@ export default {
     },
     data(){
             return{
+                errorMSG:"",
                 /* */
                 carouselActiveIndex:0,
                 /* */
@@ -152,6 +157,10 @@ export default {
                             })
                         .catch((error) => {
                                 console.log(error,"main DATA FETCH ERROR");
+                                console.log("Main Clock Data GET request FAIL, PLEASE Check Backend")
+                                setTimeout(()=>{
+                                    this.errorMSG = "NO DATA"
+                                },4000)
                             });
             
             await axios.get(`http://20.102.120.232:5080/shavit/mobile/data/${this.params.drill_down_params.data_url}`,{params: { sid: "xxx" }})
@@ -160,6 +169,9 @@ export default {
                         })
                         .catch((error) => {
                         console.log(error,"drill DATA FETCH ERROR");
+                        setTimeout(()=>{
+                                    this.errorMSG = "NO DATA"
+                                },1000)
                         });
         }
         /*  if drill down get data from the prop  */
@@ -167,7 +179,10 @@ export default {
             this.jsonData = this.drillDataProp
         }
         //  flag used to render the charts syncronously only after data is ready
-        this.doneFetching = true
+        setTimeout(()=>{
+                                    this.errorMSG = "NO DATA"
+                                    if(this.errorMSG.length === 0) this.doneFetching = true
+                                },2000)
     }
 }
 </script>
