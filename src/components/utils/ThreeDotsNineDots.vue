@@ -1,6 +1,6 @@
 <template>
     <div>
-      <v-tooltip v-if="true">
+      <v-tooltip v-if="getCurrentTheme.theme == 'lightTheme'">
         <template v-slot:activator="{ attrs }">
           <img
             style=""
@@ -21,7 +21,7 @@
         </template>
       </v-tooltip>
       
-      <v-tooltip v-if="false">
+      <v-tooltip v-if="getCurrentTheme.theme == 'darkTheme'">
         <template v-slot:activator="{ attrs }">
           <img
             style=""

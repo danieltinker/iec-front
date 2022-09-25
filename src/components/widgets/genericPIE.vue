@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="clock-main" style="text-align: center;" v-if="doneFetching">
+        <div :style="!isDrillDown ? 'background-color:' + getCurrentTheme.genericClock.main_background : 'background-color:' + getCurrentTheme.genericClock.drill_background" class="clock-main" style="text-align: center;" v-if="doneFetching">
           <div class="flex-center">
             <v-radio-group  v-model="params.selected_category" row id="districtRadioGroup" v-if=" params.data_category.length >= 2">
                 <v-radio v-for="(category) in params.data_category" :key="category" :label="category" :value="category" color="#935287"></v-radio>
@@ -30,13 +30,13 @@
 
                     <v-carousel-item v-for="(KPIarr,index) in jsonData[params.selected_category]" :key="index">
                         <div class="PIEcontainer" dir="rtl">
-                              <BaseGenericPie :chartData="KPIarr"/>
+                              <BaseGenericPie :chartData="KPIarr" :isDrill="isDrillDown"/>
                         </div>
                     </v-carousel-item>
                 </v-carousel>
             </div>
 
-            <div class="clock-drilldown" v-if="params.expand && !isDrillDown && params.drill_down_params">
+            <div :style="'background-color:' + getCurrentTheme.genericClock.drill_background" class="clock-drilldown" v-if="params.expand && !isDrillDown && params.drill_down_params">
                 <h1 class="drilldown-title">{{params.drill_down_params.headline_config.title}}</h1>
                 <component 
                 :is="params.drill_down_params.template_type"

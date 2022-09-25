@@ -99,7 +99,7 @@ export default {
   flex-direction: column;
 }
 .container {
-  background-color: rgb(244, 244, 244);
+  /* background-color: rgb(244, 244, 244); */
   display: flex;
   overflow-x: auto;
   /* height: 80px; */

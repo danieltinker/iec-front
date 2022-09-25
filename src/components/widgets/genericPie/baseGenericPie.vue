@@ -13,11 +13,11 @@
                 :ripple="false"
                  v-for="(btnName,index) in buttons" :key="index"
                   @click="$refs.dount.onClickLegend(index)"
-                  :style="{backgroundColor: isDrillDown? '#FFFFFF' :'#EBEBEB'}">
+                  :style="{backgroundColor: isDrill ? getCurrentTheme.baseGenericPie.btn_color_drill : getCurrentTheme.baseGenericPie.btn_color}">
                     <span
                     class="dot"
                     :style="{backgroundColor:TemplateData.datasets[0].backgroundColor[index]}"></span>    
-                    <span >
+                    <span :style="'color:' + getCurrentTheme.baseGenericPie.span_color">
                         {{btnName}}
                     </span>
                   </v-btn>    
@@ -48,6 +48,7 @@ export default {
   },
   props: {
     chartData: { type: Array, required: false },
+    isDrill:{type:Boolean}
   },
   data(){
         return{

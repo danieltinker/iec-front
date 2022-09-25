@@ -19,16 +19,68 @@ export default new Vuex.Store({
     themeDetails:{
       "darkTheme":{
         "theme":"darkTheme",
+        "app_background":"#121212",
+        "app_color":"#FFFFFF",
+        "hq_navbar":{
+          "span_color_first":"#FFFFFF",
+          "span_color_sec":"#424242",
+          "span_color_third":"#FFFFFF",
+          "app_bar":"#121212",
+          "bar_icon":"#FFFFFF",
+          "toolbar_title":"#FFFFFF",
+          "navigation_drawer":"#282828"
+        },
+        "category_bar":{
+          "btn_chip":"#424242",
+          "btn_color":"#FFFFFF",
+          "background_color":"#282828"
+        },
         "headline":{
-          "test":8888
+          "title_color":"#E4E4E4",
+          "background":"#282828"
         }, // headline style
-        "genericMain":{}, // generic Main clock components
+        "genericClock":{
+          "main_background":"#282828",
+          "drill_background":"#121212"
+        }, // generic Main clock components
+        "baseGenericPie":{
+          "span_color":"#FFFFFF",
+          "btn_color_drill":"#424242",
+          "btn_color":"#424242"
+        },
         "global":{} // global style
       },
       "lightTheme":{
+        "app_background":"#EBEBEB",
+        "app_color":"#000000",
         "theme":"lightTheme",
-        "headline":{}, // headline style
-        "genericMain":{}, // generic Main clock components
+        "hq_navbar":{
+          "span_color_first":"#000000",
+          "span_color_sec":"#EBEBEB",
+          "span_color_third":"#606060",
+          "app_bar":"#EBEBEB",
+          "bar_icon":"#000000",
+          "toolbar_title":"#000000",
+          "navigation_drawer":"#FFFFFF"
+        },
+        "category_bar":{
+          "btn_chip":"#EBEBEB",
+          "btn_color":"#000000",
+          "background_color":"#FFFFFF"
+        },
+        "headline":{
+          "title_color":"#935287",
+          "background":"#FFFFFF"
+        }, // headline style
+        "genericClock":{
+          "main_background":"#FFFFFF",
+          "drill_background":"#EBEBEB"
+        }, // generic Main clock components
+        "baseGenericPie":{
+          "span_color":"#606060",
+          "btn_color_drill":"#FDFDFD",
+          "btn_color":"#EBEBEB"
+        },
         "global":{} // global style
       }
     },

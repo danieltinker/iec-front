@@ -7,12 +7,13 @@
 export function baseTemplate(myJson,innerText,innerNum){
     innerNum
     //default colors static Array
+
     const myColors=["#a8699d","#38ae10","#a8699d","#38ae10","#a8699d","#38ae10"],data=[],labels =[]
     myJson.forEach(item=>{
     myColors.push(item.color)
     data.push(item.value)
     labels.push(item.label)})
-    var chartDataTemplate = {
+    const chartDataTemplate = {
         labels: labels,
         datasets: [
             {

@@ -9,6 +9,9 @@ Vue.prototype.$pieSize = 285;
 // function booktest(p) {return {data: function(){return{test: true}}}}
 Vue.mixin({
   computed: {
+    getCurrentTheme(){
+      return this.$store.getters.currentTheme
+    },
     // booktest(param)
     getbookmarkIcon() {
      console.log("ddd");

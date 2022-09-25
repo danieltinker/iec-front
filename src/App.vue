@@ -1,5 +1,5 @@
 <template >
-  <v-app style="background-color: #ebebeb;">
+  <v-app :style="'background-color:'+getCurrentTheme.app_background+'; color: '+getCurrentTheme.app_color">
     <!-- APP PAGE -->
 
     <v-main class="app">
@@ -67,14 +67,55 @@ body {
   display: none !important;
 }
 .loader{
-        height: 400px;
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        align-self: center;
-    }
-    .v-progress-circular{
-        padding:40px;
-    }
+  height: 400px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+}
+.v-progress-circular{
+  padding:40px;
+}
+
+    @font-face {
+  font-family: almoni-black;
+  src: url(./assets/fonts/almoni-black-aaa.otf);
+}
+@font-face {
+  font-family: almoni-bold;
+  src: url(./assets/fonts/almoni-bold-aaa.otf);
+}
+@font-face {
+  font-family: almoni-demibold;
+  src: url(./assets/fonts/almoni-demibold-aaa.otf);
+}
+@font-face {
+  font-family: almoni-light;
+  src: url(./assets/fonts/almoni-light-aaa.otf);
+}
+@font-face {
+  font-family: almoni-medium;
+  src: url(./assets/fonts/almoni-medium-aaa.otf);
+}
+@font-face {
+  font-family: almoni;
+  src: url(./assets/fonts/almoni-regular-aaa.otf);
+}
+@font-face {
+  font-family: almoni-thin;
+  src: url(./assets/fonts/almoni-thin-aaa.otf);
+}
+@font-face {
+  font-family: almoni-ultrablack;
+  src: url(./assets/fonts/almoni-ultrablack-aaa.otf);
+}
+@font-face {
+  font-family: almoni-ultrabold;
+  src: url(./assets/fonts/almoni-ultrabold-aaa.otf);
+}
+@font-face {
+  font-family: almoni-ultralight;
+  src: url(./assets/fonts/almoni-ultralight-aaa.otf);
+}
 </style>

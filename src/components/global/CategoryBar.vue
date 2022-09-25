@@ -1,10 +1,14 @@
 <template>
-    <div dir="rtl" class="mb-10 container">
+    <div dir="rtl" class="mb-10 container" :style="'background-color: ' + getCurrentTheme.category_bar.background_color">
       <div>
         <div v-for="(category, index) in categories" :key="index">
-          <v-btn class="chipBtn ml-3" :id="index" elevation="0"
+          <v-btn class="chipBtn ml-3" :color="getCurrentTheme.category_bar.btn_chip" :id="index" elevation="0"
             @click="setCategory(index,category.CATEGORY_ID)"
-            :style=" active == index ? 'color: #FFFFFF; background-color:#935287' : 'color: black;'"
+            :style="
+                  active == index
+                    ? 'color: #FFFFFF; background-color:#935287'
+                    : 'color: ' + getCurrentTheme.category_bar.btn_color + ';'
+                "
           >{{ category.LABEL }}</v-btn>
         </div>
       </div>
