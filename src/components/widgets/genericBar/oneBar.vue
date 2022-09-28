@@ -1,0 +1,52 @@
+<template>
+    <div
+      :style="
+        'background-color: #777; height: 169px; transform: rotate(180deg); margin-left: auto; margin-right: auto; width: ' +
+        cWidth +
+        ';'
+      "
+    >
+      <div
+        :style="{
+          backgroundColor: data.color,
+          width: cWidth,
+          height: toINT(precentage) + '%',
+          marginTop: 'auto',
+          cursor: 'default',
+          maxHeight: '100%',
+          transitionProperty: 'height',
+          transitionDuration: '0.4s',
+        }"
+      >
+        &emsp;
+      </div>
+    </div>
+
+</template>
+
+<script>
+export default {
+// Component Parameters
+props: {
+  data: { type: Object, required: true },
+  cWidth: { type: String, required: false, default: "34px" },
+  backgroundColor: { type: String, required: false, default: "#FFFFFF" },
+},
+computed: {
+  precentage: function () {
+    return (this.data.value / (this.data.max_value / 100)).toFixed(2);
+  },
+},
+};
+</script>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped>
+.name {
+text-align: right;
+color: #777;
+font-family: almoni;
+font-weight: 600;
+font-size: 1.1rem;
+}
+</style>

@@ -8,6 +8,12 @@ Vue.config.productionTip = false;
 Vue.prototype.$pieSize = 285;
 // function booktest(p) {return {data: function(){return{test: true}}}}
 Vue.mixin({
+  methods:{
+    toINT(value){
+      let result = parseInt(value)
+      return isNaN(result) ? 0 : result
+    } ,
+  },
   computed: {
     // booktest(param)
     getbookmarkIcon() {

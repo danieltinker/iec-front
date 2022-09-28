@@ -31,6 +31,7 @@ import BasicPie from "../widgets/BasicPie.vue";
 import FavoriteAxios from "../utils/FavoriteAxios";
 import genericKPI from '../widgets/genericKPI.vue';
 import genericPIE from "../widgets/genericPIE.vue";
+import genericBAR from "../widgets/genericBAR.vue";
 import axios from "axios";
 import { mapActions, mapGetters } from "vuex";
 export default {
@@ -38,7 +39,8 @@ export default {
     ThreeDotsNineDots,
     BasicPie,
     genericKPI,
-    genericPIE
+    genericPIE,
+    genericBAR
   },
   props: {
     quickViewPopup: {
