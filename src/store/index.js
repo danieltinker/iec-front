@@ -15,7 +15,7 @@ export default new Vuex.Store({
     quick_view: false,
     user_favorites: [],
     currUser: {"name":"yosef", "sessionId": "xxx","user_id": 999},
-    prefTheme:"darkTheme",
+    prefTheme:"lightTheme",
     themeDetails:{
       "darkTheme":{
         "theme":"darkTheme",
@@ -46,7 +46,8 @@ export default new Vuex.Store({
         "baseGenericPie":{
           "span_color":"#FFFFFF",
           "btn_color_drill":"#424242",
-          "btn_color":"#424242"
+          "btn_color":"#424242",
+          "innerContentColor":"#FFFFFF"
         },
         "global":{} // global style
       },
@@ -79,7 +80,8 @@ export default new Vuex.Store({
         "baseGenericPie":{
           "span_color":"#606060",
           "btn_color_drill":"#FDFDFD",
-          "btn_color":"#EBEBEB"
+          "btn_color":"#EBEBEB",
+          "innerContentColor":"#000000"
         },
         "global":{} // global style
       }

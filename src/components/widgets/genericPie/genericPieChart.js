@@ -14,6 +14,12 @@ export default {
         data() {
             console.log("hehehehffff");
             this.renderChart(this.data, this.newOptions)
+        },
+        "$store.state.prefTheme": {
+          handler() {
+            pluginInnerContentHelper(this,this.getCurrentTheme.baseGenericPie.innerContentColor)
+        this.renderChart(this.data, this.newOptions)
+        }
         }
     },
     mounted(){
@@ -33,7 +39,7 @@ export default {
                 }
             }
         }
-        pluginInnerContentHelper(this,'#000000')
+        pluginInnerContentHelper(this,this.getCurrentTheme.baseGenericPie.innerContentColor)
         this.renderChart(this.data, this.newOptions)
     },
     methods:{
