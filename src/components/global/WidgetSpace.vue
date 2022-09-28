@@ -123,6 +123,10 @@ export default {
       //   widget.PARAMETERS['TEMPLATE_TYPE'] = widget.TEMPLATE_TYPE
       console.log(widget.PARAMETERS, "click params")
       this.$store.state.selected_view_param = widget.PARAMETERS
+      //set fav icon
+      this.$store.state.selected_view_param["fav_icon"] = widget.FAV_ICON
+      // console.log('aaa',this.$store.state.selected_view_param)
+      // this.$store.state.selected_view_param["TEMPLATE_TYPE"] = widget.TEMPLATE_TYPE
       this.$store.state.selected_view_param["TEMPLATE_TYPE"] = widget.TEMPLATE_TYPE
       ///Maybe to save custom things to custom_bookmark_data in store
       //
