@@ -143,13 +143,6 @@ export default {
       return !this.quickViewPopup.length ? this.responseData : this.quickViewPopup
     }
   },
-  data() {
-    return {
-      doneFetching: false,
-      responseData: [],
-    }
-  },
-
   // skeleton loader config
   inject: {
       theme: {
