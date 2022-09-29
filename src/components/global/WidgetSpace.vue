@@ -19,8 +19,7 @@
             }}</v-icon>
         </div>
       </div>
-      <component :is="widget.TEMPLATE_TYPE" :params="widget.PARAMETERS" :isDrillDown="false">
-      </component>
+      <component :is="widget.TEMPLATE_TYPE" :params="widget.PARAMETERS" :isDrillDown="false" :carouselActiveIndex="carouselActiveIndexx(widget)"/>
     </div>
   </div>
 </template>
@@ -44,7 +43,7 @@ export default {
     quickViewPopup: {
       type: Array,
       default() { return [] }
-    }
+    },
   },
   watch: {
     // user selected devision
@@ -85,7 +84,7 @@ export default {
     ...mapGetters(["GET_USER_FAV","IS_FETCHING"]),
     responseDataComp: function () {
       return !this.quickViewPopup.length ? this.responseData : this.quickViewPopup
-    }
+    },
   },
   data() {
     return {
@@ -96,6 +95,21 @@ export default {
   methods:
   {
     ...mapActions(["SET_FAV_LIST","DO_FETCH","END_FETCH"]),
+
+    //get activecarusel
+    carouselActiveIndexx(widget)
+    {
+      //check if exist active index
+      if(typeof widget.CUSTOM_SETTINGS !== 'undefined')
+      {
+      if(typeof widget.CUSTOM_SETTINGS.carouselActiveIndex !== 'undefined')//this.quickViewPopup.length)
+      {
+          return widget.CUSTOM_SETTINGS.carouselActiveIndex
+      }
+    }
+      return 0
+    },
+
     //Get user favorites
     GetUserFav: function () {
       this.SET_FAV_LIST()

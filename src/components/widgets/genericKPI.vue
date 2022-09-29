@@ -109,7 +109,21 @@ export default {
                 "template_type": STRING
             }
              } */
-        params:{type:Object,required:false}
+        params:{type:Object,required:false},
+
+        //Added as props for future getting req index to open popup
+        carouselActiveIndex: {
+            type: Number,
+            default: 0
+        }
+    },
+    //add watch after carouselindex
+    watch: {
+        carouselActiveIndex: function(newVal, oldVal){
+            console.log("rrr", newVal)
+            //store index to our custom bookmark saves
+            this.$store.state.custom_bookmark_data['carouselActiveIndex'] = newVal
+        }
     },
     components:{
         ThreeDotsNineDots,
@@ -131,7 +145,7 @@ export default {
     data(){
             return{
                 /* */
-                carouselActiveIndex:0,
+                //carouselActiveIndex:0,
                 /* */
                 carouselIndex:0,
                 /* */
