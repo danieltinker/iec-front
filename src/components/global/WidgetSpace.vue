@@ -24,44 +24,23 @@
     </div>
   </div>
 
-  <div class="skeleton-loader" v-else>
+  <div class="skeleton-loader" v-else >
     <div class="skl" v-if="!isErrorMsg">
-      <template>
-          <v-sheet
-            :color="`grey ${theme.isDark ? 'darken-2' : 'lighten-4'}`"
-            class="pa-3"
-          >
-            <v-skeleton-loader
-              class="mx-auto"
-              max-width="300"
-              type="image, actions"
-            ></v-skeleton-loader>
-          </v-sheet>
-        </template>
-        <template>
-          <v-sheet
-            :color="`grey ${theme.isDark ? 'darken-2' : 'lighten-4'}`"
-            class="pa-3"
-          >
-            <v-skeleton-loader
-              class="mx-auto"
-              max-width="300"
-              type="image, actions"
-            ></v-skeleton-loader>
-          </v-sheet>
-        </template>
+      <div class="skely"  v-for="i in [1,2,3]" :key="i">
         <template >
           <v-sheet
-            :color="`grey ${theme.isDark ? 'darken-2' : 'lighten-4'}`"
+            :color="getCurrentTheme.theme ==='darkTheme' ? getCurrentTheme.baseGenericPie.btn_color_drill : getCurrentTheme.baseGenericPie.btn_color"
             class="pa-3"
           >
             <v-skeleton-loader
               class="mx-auto"
               max-width="300"
               type="image, actions"
+              :dark= "getCurrentTheme.theme ==='darkTheme'"
             ></v-skeleton-loader>
           </v-sheet>
         </template>
+      </div>      
     </div>
     <h1 class="error-msg" v-else>  {{errorMsg}} </h1>
     </div>  
@@ -75,7 +54,6 @@ import genericKPI from '../widgets/genericKPI.vue';
 import genericPIE from "../widgets/genericPIE.vue";
 import axios from "axios";
 import { mapActions, mapGetters } from "vuex";
-import { getCurrentInstance } from "vue";
 export default {
   components: {
     ThreeDotsNineDots,
