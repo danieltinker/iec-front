@@ -140,7 +140,13 @@ export default {
     ...mapGetters(["GET_USER_FAV","IS_FETCHING"]),
     responseDataComp: function () {
       return !this.quickViewPopup.length ? this.responseData : this.quickViewPopup
-    },
+    }
+  },
+  data() {
+    return {
+      doneFetching: false,
+      responseData: [],
+    }
   },
 
   // skeleton loader config
