@@ -2,10 +2,10 @@
     <div>
         <div class="clock-main" style="text-align: center;" v-if="doneFetching">
             <div class="flex-center">
-            <v-radio-group  v-model="params.selected_category" row id="districtRadioGroup" v-if=" params.data_category.length >= 2">
-                <v-radio v-for="(category) in params.data_category" :key="category" :label="category" :value="category" color="#935287"></v-radio>
-            </v-radio-group>
-        </div>
+                <v-radio-group  v-model="params.selected_category" row id="districtRadioGroup" v-if=" params.data_category.length >= 2">
+                    <v-radio v-for="(category) in params.data_category" :key="category" :label="category" :value="category" color="#935287"></v-radio>
+                </v-radio-group>
+            </div>
 
             <div class="kpi-carousel">
                 <span id="chartsHeaders" >
@@ -50,7 +50,7 @@
             </div>
 
             <div class="clock-drilldown" v-if="params.expand && !isDrillDown && params.drill_down_params">
-                <h1 class="drilldown-title">{{params.drill_down_params.headline_config.title}}</h1>
+                <h1 class="drilldown-title" v-if="params.drill_down_params.headline_config">{{params.drill_down_params.headline_config.title}}</h1>
                 <component 
                 :is="params.drill_down_params.template_type"
                 :params = params.drill_down_params
@@ -61,7 +61,7 @@
     </div>  
 
     <div class="loader" v-else>
-        <div class="loader" v-if="!errorMSG || errorMSG.length === 0">
+        <div class="loader" v-if="!isErrorMsg">
             <v-progress-circular
             indeterminate
             color="purple"
@@ -69,7 +69,6 @@
         </div>
         <h1 v-else>  {{errorMSG}} </h1>
     </div>  
- 
 </div>
 </template>
 
@@ -80,47 +79,26 @@ import axios from 'axios';
 export default {
     // name:"basicKPI",
     props:{
-      
         isDrillDown:{type:Boolean},
         drillDataProp:{type:Object, default:()=>{}},
-        /** */
-        /** */
-        /** */
-        /** */
-        /* {
-            "show_main_clock": BOOLEAN,
-	        "headline_config": {
-                "three_dots_enabled": BOOLEAN,
-                "bookmark_enabled": BOOLEAN,
-                "title": STRING
-	        },
-            "click_open_drill_enabled": BOOLEAN,
-            "data_category": STRING_ARR,
-            "selected_category": STRING,
-            "chart_titles": STRING_ARR,
-            "data_url": /STRING,
-            "expand": BOOLEAN,
-            "drill_down_params": {
-                "headline_config": {
-                    "three_dots_enabled": BOOLEAN,
-                    "bookmark_enabled": BOOLEAN,
-                    "title": STRING
-                },
-                "data_category": STRING_ARR,
-                "selected_category": STRING,
-                "chart_titles": STRING_ARR,
-                "data_url": /STRING,
-                "template_type": STRING
-            }
-             } */
         params:{type:Object,required:false}
+    },
+    data(){
+            return{
+                errorMSG:"",
+                carouselActiveIndex:0,
+                carouselIndex:0,
+                drilldownData:[],
+                jsonData:[],
+                doneFetching:false,
+            }
     },
     components:{
         ThreeDotsNineDots,
         genericKPI: () => import('../widgets/genericKPI.vue')
     },
     methods:{
-        // click open the drill down from a label click if enabled = true in the config
+        // toggel drill down from a label click if click_open_drill_enabled = true in the config
         kpiBoxClick(){
             if(this.params.click_open_drill_enabled) this.params.expand =! this.params.expand;
         }
@@ -130,59 +108,48 @@ export default {
         showArrows(){
             if (this.jsonData[this.params.selected_category].length>1) return true;
             else return false 
+        },
+        isErrorMsg(){
+            return this.errorMSG.length !== 0;
         }
     },
-    data(){
-            return{
-                errorMSG:"",
-                /* */
-                carouselActiveIndex:0,
-                /* */
-                carouselIndex:0,
-                /* */
-                drilldownData:[],
-                /* {cat1:[[basic kpi dictionary 1],[basic kpi dictionary 2],...], cat2:[...], ... }*/
-                jsonData:[],
-                /* */
-                doneFetching:false,
-                /* */
-            }
-    },
+
     async created(){
         /*  if not drill down get data for main and drill  */
         if(!this.isDrillDown){
             await axios.get(`http://20.102.120.232:5080/shavit/mobile/data/${this.params.data_url}`,{params: { sid: "xxx" }})
                         .then(response => {
                                 this.jsonData = response.data
+                                this.errorMSG = ""
                             })
                         .catch((error) => {
-                                console.log(error,"main DATA FETCH ERROR");
-                                console.log("Main Clock Data GET request FAIL, PLEASE Check Backend")
-                                setTimeout(()=>{
-                                    this.errorMSG = "NO DATA"
-                                },4000)
+                                console.log(response.status,error,"Main Clock Data GET request FAIL, PLEASE Check Backend")
+                                this.errorMSG =  "אין מידע"
                             });
             
             await axios.get(`http://20.102.120.232:5080/shavit/mobile/data/${this.params.drill_down_params.data_url}`,{params: { sid: "xxx" }})
                         .then(response => {
                             this.drilldownData = response.data
+                            this.errorMSG = ""
+                            if(this.data_category == undefined || this.selected_category == undefined){
+                                console.log("radio btns config failed fix data_category, selected category")
+                                this.errorMSG = "אין מידע"
+                            }
                         })
                         .catch((error) => {
-                        console.log(error,"drill DATA FETCH ERROR");
-                        setTimeout(()=>{
-                                    this.errorMSG = "NO DATA"
-                                },1000)
+                            console.log(response.status,error,"drill DATA FETCH ERROR");
+                            this.errorMSG = "אין מידע"
                         });
         }
         /*  if drill down get data from the prop  */
         else{
             this.jsonData = this.drillDataProp
         }
+
         //  flag used to render the charts syncronously only after data is ready
-        setTimeout(()=>{
-                                    this.errorMSG = "NO DATA"
-                                    if(this.errorMSG.length === 0) this.doneFetching = true
-                                },2000)
+        if(this.errorMSG.length === 0){
+            this.doneFetching = true
+        }
     }
 }
 </script>

@@ -5,14 +5,14 @@
         <div class="grid-item">
           <ThreeDotsNineDots class="grid-item" :isExpand="widget.PARAMETERS.expand"
             @switch-expand="widget.PARAMETERS.expand = !widget.PARAMETERS.expand"
-            v-if="widget.PARAMETERS.headline_config.three_dots_enabled" />
+            v-if="widget.PARAMETERS.headline_config && widget.PARAMETERS.headline_config.three_dots_enabled" />
         </div>
-        <h1 class="headline-title grid-item">
+        <h1 class="headline-title grid-item" v-if="widget.PARAMETERS.headline_config">
           {{ widget.PARAMETERS.headline_config.title }}
         </h1>
         <div class="grid-item">
           <v-icon @click="BookMarkClick(widget)" color="#935287" style="font-size: 30px"
-            v-if="widget.PARAMETERS.headline_config.bookmark_enabled">{{
+            v-if="widget.PARAMETERS.headline_config && widget.PARAMETERS.headline_config.bookmark_enabled">{{
             CheckBookmark(widget.VIEW_ID)
             ? "mdi-bookmark"
             : "mdi-bookmark-outline"
@@ -25,7 +25,7 @@
   </div>
 
   <div class="skeleton-loader" v-else>
-    <div class="skl"  v-if="!errorMsg || errorMsg.length === 0">
+    <div class="skl" v-if="!isErrorMsg">
       <template>
           <v-sheet
             :color="`grey ${theme.isDark ? 'darken-2' : 'lighten-4'}`"
@@ -34,7 +34,7 @@
             <v-skeleton-loader
               class="mx-auto"
               max-width="300"
-              type="card"
+              type="image, actions"
             ></v-skeleton-loader>
           </v-sheet>
         </template>
@@ -46,7 +46,7 @@
             <v-skeleton-loader
               class="mx-auto"
               max-width="300"
-              type="card"
+              type="image, actions"
             ></v-skeleton-loader>
           </v-sheet>
         </template>
@@ -58,21 +58,12 @@
             <v-skeleton-loader
               class="mx-auto"
               max-width="300"
-              type="card"
+              type="image, actions"
             ></v-skeleton-loader>
           </v-sheet>
         </template>
     </div>
-    <h1 v-else>  {{errorMsg}} </h1>
-        
-        <!-- <div class="loader" v-if="!errorMsg || errorMsg.length === 0">
-            <v-progress-circular
-            indeterminate
-            color="purple"
-            ></v-progress-circular>
-        </div>
-        
-        <h1 v-else>  {{errorMsg}} </h1> -->
+    <h1 class="error-msg" v-else>  {{errorMsg}} </h1>
     </div>  
 </template>
 
@@ -97,6 +88,13 @@ export default {
       default() { return [] }
     }
   },
+  data() {
+    return {
+      errorMsg:"",
+      doneFetching: false,
+      responseData: [],
+    }
+  },
   watch: {
     // user selected devision
     "$store.state.selected_hq_id": {
@@ -112,18 +110,17 @@ export default {
           .get("http://20.102.120.232:5080/shavit/mobile/views/" + 500 + "/" + 1, { params: { sid: "xxx" } })
           .then((response) => {
             this.responseData = response.data;
-            setTimeout(()=>{
-              // this.doneFetching = true;
-
-              this.errorMsg = "View Page Unavaliable"
-            },3000)
+            this.doneFetching = true;
+            this.errorMsg = ""
           })
           .catch((error) => {
+            this.errorMsg = "תצוגת דף לא זמינה"
             console.log(error);
           });
       },
     },
   },
+
   async created() {
     if (this.quickViewPopup.length > 0 && this.errorMsg.length === 0) {
       this.doneFetching = true
@@ -135,25 +132,24 @@ export default {
     //function to get last user favorite list
     this.GetUserFav();
   },
-  computed:
-  {
+
+  computed:{
+    isErrorMsg(){
+        return this.errorMsg.length !== 0;
+    },
     ...mapGetters(["GET_USER_FAV","IS_FETCHING"]),
     responseDataComp: function () {
       return !this.quickViewPopup.length ? this.responseData : this.quickViewPopup
-    }
+    },
   },
-  data() {
-    return {
-      errorMsg:"",
-      doneFetching: false,
-      responseData: [],
-    }
-  },
+
+  // skeleton loader config
   inject: {
       theme: {
         default: { isDark: false },
       },
     },
+
   methods:
   {
     ...mapActions(["SET_FAV_LIST","DO_FETCH","END_FETCH"]),
@@ -169,9 +165,8 @@ export default {
           Function to check if viewId exist in user favorites list
       */
       let fav_list = this.$store.state.user_favorites;
-      let i;
       //check if we have object inside user favorites without using filter...
-      for (i = 0; i < fav_list.length; i++) {
+      for (let i = 0; i < fav_list.length; i++) {
         if (fav_list[i].VIEW_ID == view_id) return true;
       }
       return false
@@ -181,22 +176,16 @@ export default {
     BookMarkClick(widget) {
       let view_id = widget.VIEW_ID
       //save curr widget params for bookmark
-      //   widget.PARAMETERS['TEMPLATE_TYPE'] = widget.TEMPLATE_TYPE
-      console.log(widget.PARAMETERS, "click params")
       this.$store.state.selected_view_param = widget.PARAMETERS
       this.$store.state.selected_view_param["TEMPLATE_TYPE"] = widget.TEMPLATE_TYPE
       ///Maybe to save custom things to custom_bookmark_data in store
-      //
       this.$store.state.selected_view_id = view_id;
       if (this.IS_FETCHING === false) {
         this.DO_FETCH()
-        // console.log("book clicked", view_id);
         if (this.CheckBookmark(view_id)) {
-          //already bookmarked
-          //remove fav
+          //already bookmarked remove fav
           FavoriteAxios.RemoveUserFav()
             .then((response) => {
-              // console.log("removed fav", response);
               //if we got new info update user favorite list
               this.GetUserFav();
             })
@@ -207,7 +196,6 @@ export default {
           //add user fav
           FavoriteAxios.AddUserFav()
             .then((response) => {
-              // console.log("added fav", response);
               //if we got new info update user favorite list
               this.GetUserFav();
             })
@@ -216,7 +204,6 @@ export default {
             });
         }
         this.END_FETCH()
-
       }
     },
   },
@@ -244,7 +231,12 @@ export default {
   text-align: center;
   padding-top: 10px;
 }
-
+.error-msg{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
 .headline-title {
   color: #935287;
   font-family: almoni-medium;
