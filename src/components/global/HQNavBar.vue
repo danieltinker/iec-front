@@ -1,25 +1,96 @@
 <template>
     <div>
       <v-overlay :value="drawer" z-index="4"></v-overlay>
-      <!-- :color="getTheme.mainColor" -->
-      <v-app-bar color="#ffffff" app clipped-right flat dir="rtl">
-        <!-- :color="getTheme.labelsColors.mainLabelColor" -->
-        <v-app-bar-nav-icon color="red" style="margin-right: -10px;" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-        <!-- :style="'margin-right: 15px; font-family: almoni; font-size: 27px; color:' +
-            getTheme.labelsColors.mainLabelColor
-        "-->
-        <v-toolbar-title>{{title}}</v-toolbar-title>
+      <v-app-bar :color="getCurrentTheme.hq_navbar.app_bar" app clipped-right flat dir="rtl">
+        <v-app-bar-nav-icon :color="getCurrentTheme.hq_navbar.bar_icon" style="margin-right: -10px;" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+        <v-toolbar-title :style="'margin-right: 15px; font-family: almoni; font-size: 27px; color:' +
+        getCurrentTheme.hq_navbar.toolbar_title">
+          {{title}}
+        </v-toolbar-title>
       </v-app-bar>
-      <!-- :color="getTheme.secColor" -->
-      <v-navigation-drawer v-model="drawer" app right clipped hide-overlay dir="rtl">
+      <v-navigation-drawer :color="getCurrentTheme.hq_navbar.navigation_drawer" v-model="drawer" app right clipped hide-overlay dir="rtl">
         <v-icon class="my-2" dir @click="drawer = !drawer" style="font-size: 30px; justify-content: right;">mdi-close</v-icon>
         <v-list nav dense>
-          <v-list-item-group v-model="group" active-class="deep-purple--text text--accent-4">
+          <v-list-item-group v-model="group">
             <v-list-item v-for="item in hqs" :key="item.HQ_ID" @click="setHQ(item)">
-              <v-list-item-title>{{item.LABEL}}</v-list-item-title>
+              <v-list-item-title style="font-size: 18px; font-family: almoni; color: #935287">{{item.LABEL}}</v-list-item-title>
             </v-list-item>
           </v-list-item-group>
         </v-list>
+
+        <!-- myTheme -->
+
+        <v-row dir="rtl" class="" style="padding: 12px; text-align: center; align-content: baseline;">
+        <v-col cols="5" style="align-self: center"
+          ><span
+            :style="
+              'font-size: 18px; font-family: almoni;color: ' +
+              getCurrentTheme.hq_navbar.span_color_first
+            "
+            >תצוגת מסך</span
+          ></v-col
+        >
+        <v-col cols="7" style="">
+          <label class="switch">
+            <input type="checkbox" v-model="theme" />
+            <span
+              class="slider round"
+              :style="'background-color:' + getCurrentTheme.hq_navbar.span_color_sec"
+            ></span>
+            <div class="light-theme-label">
+              <img
+                v-if="getCurrentTheme.theme == 'lightTheme'"
+                src="../../assets/menusPhotos/AppBar/lightTheme/sun.svg"
+                alt=""
+                class=""
+              />
+              <img
+                v-if="getCurrentTheme.theme == 'darkTheme'"
+                src="../../assets/menusPhotos/AppBar/darkTheme/sun.svg"
+                alt=""
+                class="ml-1"
+              />
+
+              <span
+                :style="
+                  theme == false
+                    ? 'color: #935287; font-family:almoni; font-size: 16px;'
+                    : 'color:' +
+                    getCurrentTheme.hq_navbar.span_color_third +
+                      ' ; font-family:almoni; font-size: 16px;'
+                "
+                >בהירה</span
+              >
+            </div>
+            <div class="dark-theme-label">
+              <img
+                v-if="getCurrentTheme.theme == 'lightTheme'"
+                src="../../assets/menusPhotos/AppBar/lightTheme/moon.svg"
+                alt=""
+                class=""
+              />
+              <img
+                v-if="getCurrentTheme.theme == 'darkTheme'"
+                src="../../assets/menusPhotos/AppBar/darkTheme/moon.svg"
+                alt=""
+                class="ml-1"
+              />
+              <span
+                :style="
+                  theme == true
+                    ? 'color: #935287; font-family:almoni; font-size: 16px;'
+                    : 'color:' +
+                    getCurrentTheme.hq_navbar.span_color_third +
+                      ' ; font-family:almoni; font-size: 16px;'
+                "
+                >כהה</span
+              >
+            </div>
+          </label>
+        </v-col>
+      </v-row>
+
+
       </v-navigation-drawer>
     </div>
   </template>
@@ -35,6 +106,8 @@
   
     },
     async created() {
+      //set switch button true/false by theme
+      this.$store.state.prefTheme == "darkTheme" ? this.theme = true : this.theme = false
       //get hqs By sid
       await axios
         .get("http://20.102.120.232:5080/shavit/mobile/hq", 
@@ -46,6 +119,7 @@
         });
     },
     data: () => ({
+      theme:false,
       drawer: false,
       group: null,
       hqs: [],
@@ -55,11 +129,84 @@
     watch: {
       group() {
         this.drawer = false;
+      },
+      theme(){
+        // change store theme by user
+        this.theme ? this.$store.state.prefTheme = "darkTheme" : this.$store.state.prefTheme = "lightTheme"
       }
     }
   };
   </script>
   
   <style scoped>
-  
+    ::v-deep .v-navigation-drawer--is-mobile:not(.v-navigation-drawer--close),
+.v-navigation-drawer--temporary:not(.v-navigation-drawer--close) {
+  width: 85% !important;
+}
+
+    .light-theme-label {
+  position: absolute;
+  top: 10px;
+  right: 9px;
+  color: #606060;
+  display: flex;
+  align-self: center;
+}
+
+.dark-theme-label {
+  position: absolute;
+  top: 10px;
+  left: 18px;
+  color: #935287;
+  display: flex;
+  align-self: center;
+}
+.switch {
+  width: 157px;
+  height: 43px;
+  position: relative;
+  display: block;
+}
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #e4e4e4;
+  transition: 0.5s;
+  border-radius: 21.6px;
+}
+.slider::before {
+  position: absolute;
+  content: "";
+  top: 4px;
+  right: 5px;
+  background-color: #ffffff;
+  transition: 0.5s;
+}
+
+.switch input {
+  display: none;
+}
+
+input:checked + .slider {
+  background-color: #b8b8b8;
+}
+
+.slider.round {
+  border-radius: 35px;
+}
+
+.slider.round:before {
+  width: 74.5px;
+  height: 35px;
+  border-radius: 21.6px;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.31);
+}
+
+input:checked + .slider:before {
+  transform: translateX(-73px);
+}
   </style>

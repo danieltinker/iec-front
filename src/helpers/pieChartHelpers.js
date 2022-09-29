@@ -7,23 +7,24 @@
 export function baseTemplate(myJson,innerText,innerNum){
     innerNum
     //default colors static Array
-    const myColors=["#a8699d","#38ae10","#a8699d","#38ae10","#a8699d","#38ae10"],data=[],labels =[]
-    myJson.forEach(item=>{
-    myColors.push(item.color)
+    const defaultColors = ["#a8699d","#38ae10","#a8699d","#38ae10","#a8699d","#38ae10"]
+
+    const myColors=[],data=[],labels =[]
+    myJson.forEach((item,index)=>{
+    myColors.push(item.color || defaultColors[index])
     data.push(item.value)
     labels.push(item.label)})
-    var chartDataTemplate = {
+    const chartDataTemplate = {
         labels: labels,
         datasets: [
             {
             pieInnerText:innerText,
-            pieInnerNum:88,
+            pieInnerNum:data.reduce((a,b)=> a+b) ,
             backgroundColor: myColors,
             data: data,
             },
         ],
     }
-    chartDataTemplate.datasets[0].pieInnerNum=data.reduce((a,b)=> a+b) 
     return chartDataTemplate
 
 }

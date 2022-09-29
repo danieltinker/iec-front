@@ -15,51 +15,84 @@ export default new Vuex.Store({
     quick_view: false,
     user_favorites: [],
     currUser: {"name":"yosef", "sessionId": "xxx","user_id": 999},
+    prefTheme:"lightTheme",
     themeDetails:{
       "darkTheme":{
         "theme":"darkTheme",
-        "mainColor": "#121212", //background, childCard background
-        "secColor":"#282828", //mainCategory div background, hamburger background, fatherCard background, addFavoriteGuide background, logout Popup
-        "thirdColor":"#000000", //separation background
-        "fourthColor":"#424242", //chips background, fatherCard legends background
-        "fifthColor":"#424242", //childCard legends background
-        "sixthColor":"#424242", //hamburger userDetails background
-        "seventhColor":"#424242", //hamburger themeToggle background
-        "eighthColor":"#FFFFFF", //signOut btn
-        "ninethColor":"#424242", //kpi div color
-        "tenthColor":"#3B3B3B", //bar background color
-        "labelsColors":{
-          "mainLabelColor": "#FFFFFF",
-          "secLabelColor":"#FFFFFF", //toggle labelColor, second pie headline
-          "thirdColor":"#E4E4E4", //bar headline
-          "fourthColor":"#E4E4E4", //bar headline
-          "fifthColor":"#FFFFFF",
-        }
+        "app_background":"#121212",
+        "app_color":"#FFFFFF",
+        "hq_navbar":{
+          "span_color_first":"#FFFFFF",
+          "span_color_sec":"#424242",
+          "span_color_third":"#FFFFFF",
+          "app_bar":"#121212",
+          "bar_icon":"#FFFFFF",
+          "toolbar_title":"#FFFFFF",
+          "navigation_drawer":"#282828"
+        },
+        "category_bar":{
+          "btn_chip":"#424242",
+          "btn_color":"#FFFFFF",
+          "background_color":"#282828"
+        },
+        "headline":{
+          "title_color":"#E4E4E4",
+          "background":"#282828"
+        }, // headline style
+        "genericClock":{
+          "main_background":"#282828",
+          "drill_background":"#121212"
+        }, // generic Main clock components
+        "baseGenericPie":{
+          "span_color":"#FFFFFF",
+          "btn_color_drill":"#424242",
+          "btn_color":"#424242",
+          "innerContentColor":"#FFFFFF"
+        },
+        "global":{} // global style
       },
       "lightTheme":{
+        "app_background":"#EBEBEB",
+        "app_color":"#000000",
         "theme":"lightTheme",
-        "labelColor": "black",
-        "mainColor": "#EBEBEB", //background, childCard background
-        "secColor":"#FFFFFF", //mainCategory div background, hamburger background, fatherCard background, addFavoriteGuide background, logout Popup
-        "thirdColor":"#D8D8D8", //separation background
-        "fourthColor":"#EBEBEB", //chips background, fatherCard legends background
-        "fifthColor":"#FDFDFD", //childCard legends background
-        "sixthColor": "#F4F4F4", //hamburger userDetails background
-        "seventhColor":"#EBEBEB", //hamburger themeToggle background
-        "eighthColor":"#935287", //signOut btn
-        "ninethColor":"#FFFFFF", //kpi div color
-        "tenthColor":"#F4F4F4", //bar background color
-        "labelsColors":{
-          "mainLabelColor": "#000000",
-          "secLabelColor":"#606060", //toggle labelColor, second pie headline
-          "thirdColor":"#935287", //bar headline
-          "fourthColor":"#606060", //bar headline
-          "fifthColor":"#010101",
-        }
+        "hq_navbar":{
+          "span_color_first":"#000000",
+          "span_color_sec":"#EBEBEB",
+          "span_color_third":"#606060",
+          "app_bar":"#EBEBEB",
+          "bar_icon":"#000000",
+          "toolbar_title":"#000000",
+          "navigation_drawer":"#FFFFFF"
+        },
+        "category_bar":{
+          "btn_chip":"#EBEBEB",
+          "btn_color":"#000000",
+          "background_color":"#FFFFFF"
+        },
+        "headline":{
+          "title_color":"#935287",
+          "background":"#FFFFFF"
+        }, // headline style
+        "genericClock":{
+          "main_background":"#FFFFFF",
+          "drill_background":"#EBEBEB"
+        }, // generic Main clock components
+        "baseGenericPie":{
+          "span_color":"#606060",
+          "btn_color_drill":"#FDFDFD",
+          "btn_color":"#EBEBEB",
+          "innerContentColor":"#000000"
+        },
+        "global":{} // global style
       }
     },
   },
   getters: {
+    //getter for theme
+    currentTheme(state){
+      return state.themeDetails[state.prefTheme]
+    }
+    ,
     //getter for user list
     GET_USER_FAV: state => {
       return state.user_favorites
