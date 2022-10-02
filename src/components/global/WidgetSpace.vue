@@ -72,6 +72,7 @@ export default {
       errorMsg:"",
       doneFetching: false,
       responseData: [],
+      fetch_interval:undefined
     }
   },
   watch: {
@@ -86,16 +87,31 @@ export default {
       // fetch the widgets views from the DB
       async handler() {
         await axios
-          .get("http://20.102.120.232:5080/shavit/mobile/views/" + 500 + "/" + 1, { params: { sid: "xxx" } })
-          .then((response) => {
-            this.responseData = response.data;
-            this.doneFetching = true;
-            this.errorMsg = ""
-          })
-          .catch((error) => {
-            this.errorMsg = "תצוגת דף לא זמינה"
-            console.log(error);
-          });
+            .get("http://20.102.120.232:5080/shavit/mobile/views/" + 700 + "/" + 1, { params: { sid: "xxx" } })
+            .then((response) => {
+              this.responseData = response.data;
+              this.doneFetching = true;
+              this.errorMsg = ""
+            })
+            .catch((error) => {
+              this.errorMsg = "תצוגת דף לא זמינה"
+              console.log(error);
+            });
+
+        this.fetch_interval = setInterval(async ()=>{
+          console.log("Refreshing Page")
+          await axios
+            .get("http://20.102.120.232:5080/shavit/mobile/views/" + 700 + "/" + 1, { params: { sid: "xxx" } })
+            .then((response) => {
+              this.responseData = response.data;
+              this.doneFetching = true;
+              this.errorMsg = ""
+            })
+            .catch((error) => {
+              this.errorMsg = "תצוגת דף לא זמינה"
+              console.log(error);
+            });
+        },120000)
       },
     },
   },

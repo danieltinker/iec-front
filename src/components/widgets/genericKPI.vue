@@ -34,7 +34,7 @@
                                 class="kpi-box" 
                                 v-for="(item,index) in KPIarr" :key="index"
                                 :style="{backgroundColor: isDrillDown? '#FFFFFF' :'#EBEBEB'}"
-                                @click="kpiBoxClick"
+                                @click="kpiBoxClick(index)"
                                 >
                                     <span class="kpi-label">
                                         {{ item.label }}
@@ -75,7 +75,7 @@
 <script>
 import ThreeDotsNineDots from '../utils/ThreeDotsNineDots.vue'
 import axios from 'axios';
-
+// axios.defaults.timeout = 1000
 export default {
     // name:"basicKPI",
     props:{
@@ -83,14 +83,60 @@ export default {
         drillDataProp:{type:Object, default:()=>{}},
         params:{type:Object,required:false}
     },
+    watch:{
+        drillDataProp(){
+            this.jsonData = this.drillDataProp
+        }
+    },
     data(){
             return{
+                succ_req: true,
+                clicked_index:undefined,
                 errorMSG:"",
                 carouselActiveIndex:0,
                 carouselIndex:0,
                 drilldownData:[],
                 jsonData:[],
                 doneFetching:false,
+                static_drill_data:{
+                    "label1":{
+                        "*": [
+                                [
+                                {
+                                    "label": "sivan",
+                                    "value": 0
+                                },
+                                {
+                                    "label": "michal",
+                                    "value": 1
+                                },
+                                {
+                                    "label": "armon",
+                                    "value": 1
+                                }
+                                ]
+                            ]
+                },
+
+                "label2":{
+                    "*": [
+                                [
+                                {
+                                    "label": "tomer",
+                                    "value": 0
+                                },
+                                {
+                                    "label": "veronika",
+                                    "value": 1
+                                },
+                                {
+                                    "label": "sex",
+                                    "value": 1
+                                }
+                                ]
+                            ]
+                }
+                }
             }
     },
     components:{
@@ -99,8 +145,20 @@ export default {
     },
     methods:{
         // toggel drill down from a label click if click_open_drill_enabled = true in the config
-        kpiBoxClick(){
-            if(this.params.click_open_drill_enabled) this.params.expand =! this.params.expand;
+        kpiBoxClick(i){
+            if(this.params.data_intersection){
+                this.drilldownData = {}
+                this.drilldownData = this.static_drill_data[this.jsonData[this.params.selected_category][this.carouselActiveIndex][i].label]    
+            }
+            if(this.params.click_open_drill_enabled){
+                if(!this.params.expand ||  i != this.clicked_index){
+                    this.params.expand = true
+                }
+                else{
+                    this.params.expand = false
+                }
+            }
+            this.clicked_index = i
         }
     },
     computed:{
@@ -115,33 +173,57 @@ export default {
     },
 
     async created(){
-        /*  if not drill down get data for main and drill  */
         if(!this.isDrillDown){
-            await axios.get(`http://20.102.120.232:5080/shavit/mobile/data/${this.params.data_url}`,{params: { sid: "xxx" }})
-                        .then(response => {
-                                this.jsonData = response.data
-                                this.errorMSG = ""
-                            })
-                        .catch((error) => {
-                                console.log(response.status,error,"Main Clock Data GET request FAIL, PLEASE Check Backend")
-                                this.errorMSG =  "אין מידע"
-                            });
-            
-            await axios.get(`http://20.102.120.232:5080/shavit/mobile/data/${this.params.drill_down_params.data_url}`,{params: { sid: "xxx" }})
-                        .then(response => {
-                            this.drilldownData = response.data
-                            this.errorMSG = ""
-                            if(this.params.data_category == undefined || this.params.selected_category == undefined){
-                                console.log("radio btns config failed fix data_category, selected category")
-                                this.errorMSG = "אין מידע"
-                            }
-                        })
-                        .catch((error) => {
-                            console.log(response.status,error,"drill DATA FETCH ERROR");
+            await axios({
+                method: "get",
+                url: `http://20.102.120.232:5080/shavit/mobile/data/${this.params.data_url}`,
+                timeout: 1000 * 8, // Wait for 8 seconds
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                params: {
+                    sid: "xxx"
+                }
+                })
+                .then(response => {
+                    this.jsonData = response.data
+                    this.errorMSG = ""
+                    // do sth ...
+                })
+                .catch(error => {
+                    console.log(error);
+                    console.log(error,"Main Clock Data GET request FAIL, PLEASE Check Backend")
+                    this.errorMSG =  "אין מידע"
+                    this.succ_req = false
+                });
+                if(this.succ_req){
+                    await axios({
+                    method: "get",
+                    url: `http://20.102.120.232:5080/shavit/mobile/data/${this.params.drill_down_params.data_url}`,
+                    timeout: 1000 * 8, // Wait for 8 seconds
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    params: {
+                        sid: "xxx"
+                    }
+                    })
+                    .then(response => {
+                        console.log(response.data)
+                        this.drilldownData = response.data
+                        this.errorMSG = ""
+                        if(this.params.data_category == undefined || this.params.selected_category == undefined){
+                            console.log("radio btns config failed fix data_category, selected category")
                             this.errorMSG = "אין מידע"
-                        });
+                        }
+                        // do sth ...
+                    })
+                    .catch(error => {
+                        console.log(response.status,error,"drill DATA FETCH ERROR");
+                        this.errorMSG = "אין מידע"
+                    });
+                }
         }
-        /*  if drill down get data from the prop  */
         else{
             this.jsonData = this.drillDataProp
         }
