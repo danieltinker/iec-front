@@ -30,11 +30,12 @@
 
                     <v-carousel-item v-for="(BARarr,index) in jsonData[params.selected_category]" :key="index">
                         <div class="KPIcontainer" dir="rtl">
-                            {{BARarr}}
+                            <!-- {{BARarr}} -->
                             <v-row dir="rtl"
-                                style="margin-right: 2%; margin-bottom: 20px; place-content: center"
+                                style="margin-top:10px;margin-bottom: 20px; place-content: center"
                             >
-                            <OneBar v-for="(item,index) in BARarr" :key="index" :data="item"/>
+                            <OneBar v-for="(item,index) in BARarr" :key="index" :params="params" :data="item.max_value ? item : getTotal(BARarr,item)" />
+                            
                             </v-row>
                                 <!-- <div 
                                 class="kpi-box" 
@@ -127,6 +128,10 @@ export default {
         // click open the drill down from a label click if enabled = true in the config
         kpiBoxClick(){
             if(this.params.click_open_drill_enabled) this.params.expand =! this.params.expand;
+        },
+        getTotal(item,obj){
+            obj.max_value = item.reduce(function (acc, obj) { return acc + obj.value; }, 0);
+            return obj
         }
     },
     computed:{
@@ -134,7 +139,7 @@ export default {
         showArrows(){
             if (this.jsonData[this.params.selected_category].length>1) return true;
             else return false 
-        }
+        },
     },
     data(){
             return{
@@ -157,12 +162,49 @@ export default {
             await axios.get(`http://20.102.120.232:5080/shavit/mobile/data/${this.params.data_url}`,{params: { sid: "xxx" }})
                         .then(response => {
                                 this.jsonData = response.data
+                                this.jsonData = {
+  "*": [
+    [
+      {
+        "label": "label11",
+        "value": 4,
+        "max_value" : 44,
+        "color" : "red",
+        "switch":false,
+        "precentage":false,
+        "displayUpper":true,
+        "displayLower":true
+      },
+      {
+        "label": "label2",
+        "value": 4,
+        "max_value" : 22,
+        "color" : "green",
+        "switch":false,
+        "precentage":false,
+        "displayUpper":true,
+        "displayLower":true
+      },
+      {
+        "label": "label3",
+        "value": 4,
+        "max_value" : 11,
+        "color" : "blue",
+        
+        "switch":false,
+        "precentage":false,
+        "displayUpper":true,
+        "displayLower":true
+      },
+    ]
+  ]
+}
                             })
                         .catch((error) => {
                                 console.log(error,"main DATA FETCH ERROR");
                             });
             
-            await axios.get(`http://20.102.120.232:5080/shavit/mobile/data/${this.params.drill_down_params.data_url}`,{params: { sid: "xxx" }})
+            await axios.get(`http://20.102.120.232:5080/shavit/mobile/data/${this.params.drill_down_params.data_url}`,{params: { sid: "xxx" }},{timeout:2})
                         .then(response => {
                             this.drilldownData = response.data
                         })
