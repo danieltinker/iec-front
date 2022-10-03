@@ -13,7 +13,7 @@
       <div
         :style="{
           backgroundColor: data.color,
-          opacity:1,
+          opacity: isSelected ? isSelectedIndex? 1: 0.3 : 1,
           width: cWidth,
           height: toINT(precentage) + '%',
           marginTop: 'auto',
@@ -39,7 +39,9 @@ props: {
   data: { type: Object, required: true },
   cWidth: { type: String, required: false, default: "34px" },
   backgroundColor: { type: String, required: false, default: "#FFFFFF" },
-  params:{type:Object,required:false}
+  params:{type:Object,required:false},
+  isSelectedIndex:{type:Boolean,required:false},
+  isSelected:{type:Boolean,required:false},
 },
 computed: {
   precentage: function () {

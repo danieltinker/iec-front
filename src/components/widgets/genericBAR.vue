@@ -33,7 +33,7 @@
                                 style="margin-top:10px;margin-bottom: 20px; place-content: center"
 
                             >
-                            <oneBar  v-for="(item,index) in BARarr" :key="index" v-on:click.native="kpiBoxClick(index)" :params="params" :data="item.color ? item.max_value ? item : getTotal(BARarr,item) : item.max_value ? getColor(item,index) : getColor(getTotal(BARarr,item),index)" />
+                            <oneBar  v-for="(item,index) in BARarr" :isSelectedIndex="activeIndex===index" :isSelected="activeIndex!= -1" :key="index" v-on:click.native="kpiBoxClick(index)" :params="params" :data="item.color ? item.max_value ? item : getTotal(BARarr,item) : item.max_value ? getColor(item,index) : getColor(getTotal(BARarr,item),index)" />
                         </v-row>
 
                         <div class="btn-container">
