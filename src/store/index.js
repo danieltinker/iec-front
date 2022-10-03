@@ -50,6 +50,10 @@ export default new Vuex.Store({
           "btn_color":"#424242",
           "innerContentColor":"#FFFFFF"
         },
+        "one_bar":{
+          "background_bar":"#3B3B3B",
+          "label_color":"#E4E4E4"
+        },
         "global":{} // global style
       },
       "lightTheme":{
@@ -84,6 +88,10 @@ export default new Vuex.Store({
           "btn_color_drill":"#FDFDFD",
           "btn_color":"#EBEBEB",
           "innerContentColor":"#000000"
+        },
+        "one_bar":{
+          "background_bar":"#F4F4F4",
+          "label_color":"#606060"
         },
         "global":{} // global style
       }

@@ -29,9 +29,31 @@
 
                     <v-carousel-item v-for="(BARarr,index) in jsonData[params.selected_category]" :key="index">
                         <div class="KPIcontainer" dir="rtl">
-                            {{BARarr}}
-                            <oneBar v-for="(item,index) in BARarr" :key="index" :params="params" :data="item.max_value ? item : getTotal(BARarr,item)" />
- 
+                            <v-row dir="rtl"
+                                style="margin-top:10px;margin-bottom: 20px; place-content: center"
+
+                            >
+                            <oneBar  v-for="(item,index) in BARarr" :key="index" v-on:click.native="kpiBoxClick(index)" :params="params" :data="item.color ? item.max_value ? item : getTotal(BARarr,item) : item.max_value ? getColor(item,index) : getColor(getTotal(BARarr,item),index)" />
+                        </v-row>
+
+                        <div class="btn-container">
+            <v-row dir="rtl" style="place-content:center">
+                <v-btn class="btn"
+                :ripple="false"
+                 v-for="(btnName,index) in BARarr" :key="index"
+                 :style="{backgroundColor: isDrillDown ? getCurrentTheme.baseGenericPie.btn_color_drill : getCurrentTheme.baseGenericPie.btn_color ,border : activeIndex == index ? 'solid black 2px' : ' solid black 0px'}"
+                 @click="kpiBoxClick(index)">
+                    <span
+                    class="dot"
+                    :style="{backgroundColor :  btnName.color ? btnName.color: getColor(btnName,index).color}"></span>    
+                    <span :style="'color:' + getCurrentTheme.baseGenericPie.span_color">
+                        {{btnName.label}}
+                    </span>
+                  </v-btn>    
+            </v-row>
+        </div>
+
+
                         </div>
                     </v-carousel-item>
                 </v-carousel>
@@ -90,7 +112,8 @@ export default {
                 drilldownData:[],
                 jsonData:[],
                 doneFetching:false,
-                static_drill_data:{}
+                static_drill_data:{},
+                defaultColors:["#0073FF","#FF8D00","#8FC602","#C10015"]
             }
     },
     components:{
@@ -102,6 +125,7 @@ export default {
     methods:{
         // toggel drill down from a label click if click_open_drill_enabled = true in the config
         kpiBoxClick(i){
+            console.log("ieieiei");
             this.activeTitle = i
             if(this.params.data_intersection){
                 this.drilldownData = {}
@@ -122,6 +146,11 @@ export default {
         getTotal(item,obj){
             obj.max_value = item.reduce(function (acc, obj) { return acc + obj.value; }, 0);
             return obj
+        },
+        getColor(obj,index){
+            console.log(obj,"d");
+            obj.color = this.defaultColors[index]
+            return obj
         }
     },
     computed:{
@@ -132,7 +161,7 @@ export default {
         },
         isErrorMsg(){
             return this.errorMSG.length !== 0;
-        }
+        },
     },
 
     async created(){
@@ -140,6 +169,32 @@ export default {
             await this.$myApi(this.params.data_url)
                 .then(response => {
                     this.jsonData = response.data
+                    //#########
+//                     this.jsonData = {
+//   "*": [
+//     [
+//       {
+//         "label": "label11",
+//         "value": 4,
+//         "max_value" : 44,
+//         "color" : "red",
+//       },
+//       {
+//         "label": "label2",
+//         "value": 4,
+//         "max_value" : 22,
+//         "color" : "green",
+//       },
+//       {
+//         "label": "label3",
+//         "value": 4,
+//         "max_value" : 11,
+//         "color" : "blue",
+//       },
+//     ]
+//   ]
+// }
+//#############
                     this.errorMSG = ""
                     // do sth ...
                 })
@@ -185,27 +240,7 @@ export default {
   flex-direction: column;
   align-items: center;
 }
-.KPIcontainer{
-    display: grid;
-    grid-template-columns: auto auto;
-    row-gap: 10px;
-    column-gap: 10px;
-    justify-content: center;
-    padding-bottom: 20px;
-}
-.kpi-box{
-    padding-top: 10px;
-    text-align: center;
-    align-items: center;
-    width: 165px;
-    height: 80px;
-    border-radius: 4px;
-}
-.kpi-box span:first-child{
-    font-family: almoni;
-    font-size: 20px;
-    line-height: 30px;
-}
+
 
 .loader{
     height: 400px;
@@ -218,12 +253,7 @@ export default {
 .v-progress-circular{
     padding:40px;
 }
-.kpi-box span{
-    display: inline-block;
-    font-size: 20px;
-    font-family: almoni-demibold;
-    color: #a8699d;
-}
+
 #chartsHeaders {
     font-family: almoni;
     font-size: 18px;
@@ -241,12 +271,6 @@ export default {
     text-align: center;
 }
 
-.kpi-box span{
-    display: inline-block;
-    font-size: 20px;
-    font-family: almoni-demibold;
-    color: #a8699d;
-}
 
 .clock-drilldown{
     background-color: #E5E5E5;

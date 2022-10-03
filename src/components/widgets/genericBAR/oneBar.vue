@@ -1,11 +1,11 @@
 <template>
   <div style="margin-left:10px">
-    <label v-if="data.displayUpper">{{
+    <label v-if="params.displayUpper" :style="'color : '+getCurrentTheme.one_bar.label_color">{{
       upperLabel
           }}</label>
     <div
       :style="
-        'background-color: #777; height: 169px; transform: rotate(180deg); margin-left: auto; margin-right: auto; width: ' +
+        'background-color: '+ getCurrentTheme.one_bar.background_bar + '; height: 169px; transform: rotate(180deg); margin-left: auto; margin-right: auto; width: ' +
         cWidth +
         ';'
       "
@@ -13,6 +13,7 @@
       <div
         :style="{
           backgroundColor: data.color,
+          opacity:1,
           width: cWidth,
           height: toINT(precentage) + '%',
           marginTop: 'auto',
@@ -25,12 +26,13 @@
         &emsp;
       </div>
     </div>
-    <label v-if="data.displayLower">{{lowerLabel}}</label>
+    <label v-if="params.displayLower" :style="'color : '+getCurrentTheme.one_bar.label_color">{{lowerLabel}}</label>
   </div>
 
 </template>
 
 <script>
+
 export default {
 // Component Parameters
 props: {
@@ -65,4 +67,9 @@ font-family: almoni;
 font-weight: 600;
 font-size: 1.1rem;
 }
+label {
+  font-family: almoni;
+  font-size: 16px;
+}
+
 </style>
