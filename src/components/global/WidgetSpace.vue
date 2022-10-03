@@ -52,6 +52,7 @@ import BasicPie from "../widgets/BasicPie.vue";
 import FavoriteAxios from "../utils/FavoriteAxios";
 import genericKPI from '../widgets/genericKPI.vue';
 import genericPIE from "../widgets/genericPIE.vue";
+import genericBAR from "../widgets/genericBAR.vue";
 import axios from "axios";
 import { mapActions, mapGetters } from "vuex";
 export default {
@@ -59,7 +60,8 @@ export default {
     ThreeDotsNineDots,
     BasicPie,
     genericKPI,
-    genericPIE
+    genericPIE,
+    genericBAR
   },
   props: {
     quickViewPopup: {
@@ -87,7 +89,7 @@ export default {
       // fetch the widgets views from the DB
       async handler() {
         await axios
-            .get("http://20.102.120.232:5080/shavit/mobile/views/" + 700 + "/" + 1, { params: { sid: "xxx" } })
+            .get("http://20.102.120.232:5080/shavit/mobile/views/" + 600 + "/" + 1, { params: { sid: "xxx" } })
             .then((response) => {
               this.responseData = response.data;
               this.doneFetching = true;
