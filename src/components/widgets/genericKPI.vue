@@ -174,17 +174,7 @@ export default {
 
     async created(){
         if(!this.isDrillDown){
-            await axios({
-                method: "get",
-                url: `http://20.102.120.232:5080/shavit/mobile/data/${this.params.data_url}`,
-                timeout: 1000 * 8, // Wait for 8 seconds
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                params: {
-                    sid: "xxx"
-                }
-                })
+            await this.$myApi(this.params.data_url)
                 .then(response => {
                     this.jsonData = response.data
                     this.errorMSG = ""
@@ -197,17 +187,7 @@ export default {
                     this.succ_req = false
                 });
                 if(this.succ_req){
-                    await axios({
-                    method: "get",
-                    url: `http://20.102.120.232:5080/shavit/mobile/data/${this.params.drill_down_params.data_url}`,
-                    timeout: 1000 * 8, // Wait for 8 seconds
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    params: {
-                        sid: "xxx"
-                    }
-                    })
+                    await this.$myApi(this.params.drill_down_params.data_url)
                     .then(response => {
                         console.log(response.data)
                         this.drilldownData = response.data
@@ -219,7 +199,7 @@ export default {
                         // do sth ...
                     })
                     .catch(error => {
-                        console.log(response.status,error,"drill DATA FETCH ERROR");
+                        console.log(error,"drill DATA FETCH ERROR");
                         this.errorMSG = "אין מידע"
                     });
                 }
