@@ -32,7 +32,8 @@
                                 <div 
                                 class="kpi-box" 
                                 v-for="(item,index) in KPIarr" :key="index"
-                                :style="{backgroundColor: isDrillDown? getCurrentTheme.kpi.drill_background :getCurrentTheme.kpi.main_background, border: activeIndex==index ? getCurrentTheme.solid_selected_border : 'solid black 0px'}"
+                                :style="{backgroundColor: isDrillDown? getCurrentTheme.kpi.drill_background :getCurrentTheme.kpi.main_background, 
+                                    border: activeIndex==index ? getCurrentTheme.solid_selected_border : 'solid black 0px'}"
                                 @click="kpiBoxClick(index)"
                                 >
                                     <span class="kpi-label">
