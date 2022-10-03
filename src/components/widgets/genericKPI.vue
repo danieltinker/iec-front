@@ -6,10 +6,9 @@
                     <v-radio v-for="(category) in params.data_category" :key="category" :label="category" :value="category" color="#935287"></v-radio>
                 </v-radio-group>
             </div>
-
             <div class="kpi-carousel">
                 <span id="chartsHeaders" >
-                    {{ params.chart_titles[carouselActiveIndex] }}
+                    {{ params.chart_titles[activeTitle] }}
                 </span>
 
                 <v-carousel
@@ -33,7 +32,7 @@
                                 <div 
                                 class="kpi-box" 
                                 v-for="(item,index) in KPIarr" :key="index"
-                                :style="{backgroundColor: isDrillDown? '#FFFFFF' :'#EBEBEB'}"
+                                :style="{backgroundColor: isDrillDown? '#FFFFFF' :'#EBEBEB', border: activeIndex==index ? getCurrentTheme.solid_selected_border : 'solid black 0px'}"
                                 @click="kpiBoxClick(index)"
                                 >
                                     <span class="kpi-label">
@@ -75,6 +74,7 @@
 <script>
 import ThreeDotsNineDots from '../utils/ThreeDotsNineDots.vue'
 import axios from 'axios';
+import genericPieChart from './genericPieChart';
 // axios.defaults.timeout = 1000
 export default {
     // name:"basicKPI",
@@ -90,6 +90,8 @@ export default {
     },
     data(){
             return{
+                activeTitle:0,
+                activeIndex:-1,
                 succ_req: true,
                 clicked_index:undefined,
                 errorMSG:"",
@@ -98,54 +100,18 @@ export default {
                 drilldownData:[],
                 jsonData:[],
                 doneFetching:false,
-                static_drill_data:{
-                    "label1":{
-                        "*": [
-                                [
-                                {
-                                    "label": "sivan",
-                                    "value": 0
-                                },
-                                {
-                                    "label": "michal",
-                                    "value": 1
-                                },
-                                {
-                                    "label": "armon",
-                                    "value": 1
-                                }
-                                ]
-                            ]
-                },
-
-                "label2":{
-                    "*": [
-                                [
-                                {
-                                    "label": "tomer",
-                                    "value": 0
-                                },
-                                {
-                                    "label": "veronika",
-                                    "value": 1
-                                },
-                                {
-                                    "label": "sex",
-                                    "value": 1
-                                }
-                                ]
-                            ]
-                }
-                }
+                static_drill_data:{}
             }
     },
     components:{
         ThreeDotsNineDots,
-        genericKPI: () => import('../widgets/genericKPI.vue')
+        genericKPI: () => import('../widgets/genericKPI.vue'),
+        genericPIE: () => import('../widgets/genericPIE.vue')
     },
     methods:{
         // toggel drill down from a label click if click_open_drill_enabled = true in the config
         kpiBoxClick(i){
+            this.activeTitle = i
             if(this.params.data_intersection){
                 this.drilldownData = {}
                 this.drilldownData = this.static_drill_data[this.jsonData[this.params.selected_category][this.carouselActiveIndex][i].label]    
@@ -153,9 +119,11 @@ export default {
             if(this.params.click_open_drill_enabled){
                 if(!this.params.expand ||  i != this.clicked_index){
                     this.params.expand = true
+                    this.activeIndex = i
                 }
                 else{
                     this.params.expand = false
+                    this.activeIndex = -1
                 }
             }
             this.clicked_index = i

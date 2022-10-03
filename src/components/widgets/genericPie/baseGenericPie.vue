@@ -6,14 +6,15 @@
         :options="chartOptions"
         :width = "$pieSize"
         :height = "$pieSize"
+        @clickIndex="myActiveIndex()"
         />
         <div class="btn-container">
             <v-row dir="rtl" style="place-content:center">
                 <v-btn class="btn"
                 :ripple="false"
                  v-for="(btnName,index) in buttons" :key="index"
-                  @click="$refs.dount.onClickLegend(index)"
-                  :style="{backgroundColor: isDrill ? getCurrentTheme.baseGenericPie.btn_color_drill : getCurrentTheme.baseGenericPie.btn_color}">
+                  @click="$refs.dount.onClickLegend(index);"
+                  :style="{backgroundColor: isDrill ? getCurrentTheme.baseGenericPie.btn_color_drill : getCurrentTheme.baseGenericPie.btn_color ,border : activeIm == index ? 'solid black 2px' : ' solid black 0px'}">
                     <span
                     class="dot"
                     :style="{backgroundColor:TemplateData.datasets[0].backgroundColor[index]}"></span>    
@@ -52,6 +53,7 @@ export default {
   },
   data(){
         return{
+          activeIndex:undefined,
           chartTitle:"test",
           isDrillDown:false,
           configData:{ "pieInnerText": "<1כללי>", "pieInnerNum": null, "listIds": []},
@@ -70,8 +72,16 @@ export default {
       sessionId: (state) => state.loginStore.currUserData.sessionId,
       userID: (state) => state.loginStore.currUserData.userid,
       currUserData: (state) => state.loginStore.currUserData,
+      activeIm(){
+        return this.activeIndex
+      }
     }),
   
+  },
+  methods:{
+    myActiveIndex(){
+      this.activeIndex = this.$refs.dount.getSelected()
+    }
   }
 }
 </script>

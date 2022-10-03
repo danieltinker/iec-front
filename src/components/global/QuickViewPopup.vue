@@ -56,7 +56,7 @@ export default {
   background-color: rgb(255, 255, 255);
   height: 100vh;
   width: 100vw;
-  overflow: visible;
+  overflow: hidden;
   z-index: 100;
   top: 0%;
   left: 0%;

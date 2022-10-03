@@ -8,6 +8,7 @@ export default {
         return{
             defaultInnerText: this.data.datasets[0].pieInnerText,
             defaultInnerNum: this.data.datasets[0].pieInnerNum,
+            indexSelcted:undefined
         }
     },
     watch: {
@@ -35,6 +36,7 @@ export default {
 
             onClick: (event,element) => {
                 if(element.length!==0){
+                    console.log("click from chart only",element[0]._index )
                     this.onClickLegend(element[0]._index)
                 }
             }
@@ -50,6 +52,13 @@ export default {
             handleChartRadius(items.data, indexClick, indexLabelSelected) // increase and decrease size of radius on click
             handleChartInnerText(data, indexClick, indexLabelSelected,this.defaultInnerText,this.defaultInnerNum) // plugin to render inner text data
             this._data._chart.render();
+            this.$emit('clickIndex')
+        },
+        getSelected(){
+            var data = this._data._chart.tooltip._data
+            var items = Object.values(Object.values(data.datasets)[0]._meta)[0]
+            return getSelectedRadius(items.data)
         }
+
     },
 }

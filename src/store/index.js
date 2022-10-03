@@ -21,6 +21,7 @@ export default new Vuex.Store({
         "theme":"darkTheme",
         "app_background":"#121212",
         "app_color":"#FFFFFF",
+        "solid_selected_border":"solid purple 4px",
         "hq_navbar":{
           "span_color_first":"#FFFFFF",
           "span_color_sec":"#424242",
@@ -55,6 +56,7 @@ export default new Vuex.Store({
         "app_background":"#EBEBEB",
         "app_color":"#000000",
         "theme":"lightTheme",
+        "solid_selected_border":"solid black 2px",
         "hq_navbar":{
           "span_color_first":"#000000",
           "span_color_sec":"#EBEBEB",
