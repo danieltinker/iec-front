@@ -22,6 +22,13 @@ export default new Vuex.Store({
         "app_background":"#121212",
         "app_color":"#FFFFFF",
         "solid_selected_border":"solid purple 4px",
+        "kpi_sec_value": "#828282",
+        "kpi":{
+          "kpi_value_color":"#000000",
+          "kpi_sec_value": "#828282",
+          "main_background":"#424242",
+          "drill_background":"#424242",
+        },
         "hq_navbar":{
           "span_color_first":"#FFFFFF",
           "span_color_sec":"#424242",
@@ -57,6 +64,12 @@ export default new Vuex.Store({
         "app_color":"#000000",
         "theme":"lightTheme",
         "solid_selected_border":"solid black 2px",
+        "kpi":{
+          "kpi_value_color":"#000000",
+          "kpi_sec_value": "#828282",
+          "main_background":"#EBEBEB",
+          "drill_background":"#FFFFFF",
+        },
         "hq_navbar":{
           "span_color_first":"#000000",
           "span_color_sec":"#EBEBEB",

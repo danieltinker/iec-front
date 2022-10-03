@@ -32,15 +32,19 @@
                                 <div 
                                 class="kpi-box" 
                                 v-for="(item,index) in KPIarr" :key="index"
-                                :style="{backgroundColor: isDrillDown? '#FFFFFF' :'#EBEBEB', border: activeIndex==index ? getCurrentTheme.solid_selected_border : 'solid black 0px'}"
+                                :style="{backgroundColor: isDrillDown? getCurrentTheme.kpi.drill_background :getCurrentTheme.kpi.main_background, border: activeIndex==index ? getCurrentTheme.solid_selected_border : 'solid black 0px'}"
                                 @click="kpiBoxClick(index)"
                                 >
                                     <span class="kpi-label">
                                         {{ item.label }}
                                     </span>
                                     <br>
-                                    <span class="kpi-sub-labels">
+                                    <span class="kpi-value">
                                         {{ item.value }}
+                                    </span>
+                                    <br>
+                                    <span :style="{color: getCurrentTheme.kpi.kpi_sec_value}">
+                                        {{item.secondary_value}}
                                     </span>
                                 </div>
                         </div>
@@ -48,7 +52,9 @@
                 </v-carousel>
             </div>
 
-            <div class="clock-drilldown" v-if="params.expand && !isDrillDown && params.drill_down_params">
+            <div class="clock-drilldown"
+             v-if="params.expand && !isDrillDown && params.drill_down_params"
+             :style="{backgroundColor:getCurrentTheme.genericClock.drill_background }">
                 <h1 class="drilldown-title" v-if="params.drill_down_params.headline_config">{{params.drill_down_params.headline_config.title}}</h1>
                 <component 
                 :is="params.drill_down_params.template_type"
@@ -199,18 +205,18 @@ export default {
     padding-bottom: 20px;
 }
 .kpi-box{
-    padding-top: 10px;
+    padding-top: 4px;
     text-align: center;
     align-items: center;
     width: 165px;
     height: 80px;
     border-radius: 4px;
 }
-.kpi-box span:first-child{
+/* .kpi-box span:first-child{
     font-family: almoni;
     font-size: 20px;
     line-height: 30px;
-}
+} */
 
 .loader{
     height: 400px;
@@ -225,13 +231,16 @@ export default {
 }
 .kpi-box span{
     display: inline-block;
-    font-size: 20px;
+    font-size: 16px;
     font-family: almoni-demibold;
     color: #a8699d;
 }
+.kpi-box .kpi-sec-value{
+    color:#606060
+}
 #chartsHeaders {
     font-family: almoni;
-    font-size: 18px;
+    font-size: 16px;
     color: #606060;
     /* margin-bottom: 18px; */
 }
@@ -248,7 +257,7 @@ export default {
 
 .kpi-box span{
     display: inline-block;
-    font-size: 20px;
+    font-size: 18px;
     font-family: almoni-demibold;
     color: #a8699d;
 }
