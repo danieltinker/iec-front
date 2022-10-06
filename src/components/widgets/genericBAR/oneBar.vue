@@ -13,7 +13,7 @@
       <div
         :style="{
           backgroundColor: data.color,
-          opacity: isSelected ? isSelectedIndex? 1: 0.3 : 1,
+          opacity: isSelected ? isSelectedIndex? 1: 0.15 : 1,
           width: cWidth,
           height: toINT(precentage) + '%',
           marginTop: 'auto',

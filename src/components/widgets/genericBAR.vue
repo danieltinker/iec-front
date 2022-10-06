@@ -36,20 +36,32 @@
                             <oneBar  v-for="(item,index) in BARarr" :isSelectedIndex="activeIndex===index" :isSelected="activeIndex!= -1" :key="index" v-on:click.native="kpiBoxClick(index)" :params="params" :data="item.color ? item.max_value ? item : getTotal(BARarr,item) : item.max_value ? getColor(item,index) : getColor(getTotal(BARarr,item),index)" />
                         </v-row>
 
-                        <div class="btn-container">
-            <v-row dir="rtl" style="place-content:center">
-                <v-btn class="btn"
+                        <div class="btn-container" style="margin-left:4%;margin-right:4%;">
+            <v-row dir="rtl" style="place-content:right;">
+                <v-btn class="main-btn"
                 :ripple="false"
                  v-for="(btnName,index) in BARarr" :key="index"
-                 :style="{backgroundColor: isDrillDown ? getCurrentTheme.baseGenericPie.btn_color_drill : getCurrentTheme.baseGenericPie.btn_color ,border : activeIndex == index ? 'solid black 2px' : ' solid black 0px'}"
+                 :style="{backgroundColor: isDrillDown ? getCurrentTheme.baseGenericPie.btn_color_drill : getCurrentTheme.baseGenericPie.btn_color ,border : activeIndex == index ? 'solid black 1px' : ' solid black 0px'}"
                  @click="kpiBoxClick(index)">
+                    <span
+                    class="dot"
+                    :style="{backgroundColor :  btnName.color ? btnName.color: getColor(btnName,index).color}"></span>    
+                    <span class="test" :style="'color:' + getCurrentTheme.baseGenericPie.span_color">
+                        {{btnName.label}}
+                    </span>
+                  </v-btn>    
+            </v-row>
+
+            <v-row dir="rtl" style="place-content:center;">
+                <div
+                 v-for="(btnName,index) in BARarr" :key="index" style="font-family: almoni;display: -webkit-inline-box;-webkit-box-align: center;margin-left:10px">
                     <span
                     class="dot"
                     :style="{backgroundColor :  btnName.color ? btnName.color: getColor(btnName,index).color}"></span>    
                     <span :style="'color:' + getCurrentTheme.baseGenericPie.span_color">
                         {{btnName.label}}
                     </span>
-                  </v-btn>    
+                  </div>    
             </v-row>
         </div>
 
@@ -85,8 +97,7 @@
 <script>
 import ThreeDotsNineDots from '../utils/ThreeDotsNineDots.vue'
 import oneBar from './genericBAR/oneBar.vue';
-import axios from 'axios';
-import genericPieChart from './genericPieChart';
+
 // axios.defaults.timeout = 1000
 export default {
     // name:"basicKPI",
@@ -113,7 +124,7 @@ export default {
                 jsonData:[],
                 doneFetching:false,
                 static_drill_data:{},
-                defaultColors:["#0073FF","#FF8D00","#8FC602","#C10015"]
+                defaultColors:["#0073FF","#FF8D00","#8FC602","#C10015","#0073FF","#FF8D00","#8FC602","#C10015"]
             }
     },
     components:{
@@ -170,30 +181,35 @@ export default {
                 .then(response => {
                     this.jsonData = response.data
                     //#########
-//                     this.jsonData = {
-//   "*": [
-//     [
-//       {
-//         "label": "label11",
-//         "value": 4,
-//         "max_value" : 44,
-//         "color" : "red",
-//       },
-//       {
-//         "label": "label2",
-//         "value": 4,
-//         "max_value" : 22,
-//         "color" : "green",
-//       },
-//       {
-//         "label": "label3",
-//         "value": 4,
-//         "max_value" : 11,
-//         "color" : "blue",
-//       },
-//     ]
-//   ]
-// }
+                    this.jsonData = {
+  "*": [
+    [
+      {
+        "label": "חתיכות",
+        "value": 4,
+        "max_value" : 44,
+      },
+      {
+        "label": "אלמוג זה טקסט ארוך",
+        "value": 4,
+        "max_value" : 22,
+      },
+      {
+        "label": "אלמוג א",
+        "value": 4,
+        "max_value" : 11,
+      },{
+        "label": "רן הגבר",
+        "value": 4,
+        "max_value" : 11,
+      },{
+        "label": "רן חשמלים",
+        "value": 4,
+        "max_value" : 11,
+      },
+    ]
+  ]
+}
 //#############
                     this.errorMSG = ""
                     // do sth ...
@@ -235,6 +251,35 @@ export default {
 </script>
 
 <style scoped>
+    ::v-deep .v-btn:not(.v-btn--round).v-size--default {
+    height: 36px;
+    min-width: 64px;
+    padding: 0px;
+    justify-content: right;
+    padding-right: 8px;
+    /* margin-right: 10px; */
+}
+
+    .test{
+        text-overflow: ellipsis;
+  overflow: hidden; 
+  width: 68px; 
+  white-space: nowrap;
+    }
+    .main-btn{
+        font-family: almoni;
+  margin:8px;
+  justify-content: right;
+        overflow: hidden;
+        border-radius: 6px;
+        width: 102px !important;
+        text-align: -webkit-right;
+        
+        box-shadow:0px 0px !important;
+    }
+    .main-btn::before {
+    display:none;
+  }
 .flex-center {
   display: flex;
   flex-direction: column;
@@ -294,5 +339,17 @@ export default {
 }
 .radio-btn{
     display: inline-block !important;;
+}
+
+.dot {
+    align-self: center;
+  height: 10px;
+  width: 10px;
+  border-radius: 50%;
+  display: flex;
+  margin: 2%;
+  margin-right: 0;
+  direction: rtl;
+  margin-left: 5px;
 }
 </style>
