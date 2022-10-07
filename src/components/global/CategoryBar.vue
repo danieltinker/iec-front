@@ -1,5 +1,5 @@
 <template>
-    <div dir="rtl" class="mb-10 container" :style="'background-color: ' + getCurrentTheme.category_bar.background_color">
+    <div dir="rtl" class="container" :style="'background-color: ' + getCurrentTheme.category_bar.background_color">
       <div>
         <div v-for="(category, index) in categories" :key="index">
           <v-btn class="chipBtn ml-3" :color="getCurrentTheme.category_bar.btn_chip" :id="index" elevation="0"

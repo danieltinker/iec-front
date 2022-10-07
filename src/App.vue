@@ -1,7 +1,6 @@
 <template >
-  <v-app :style="'background-color:'+getCurrentTheme.app_background+'; color: '+getCurrentTheme.app_color">
+  <v-app :style="{'background-color':getCurrentTheme.app_background,'color':getCurrentTheme.app_color}">
     <!-- APP PAGE -->
-
     <v-main class="app">
       <!-- navigation bar + Theme Selector toggle + Log out BTN -->
       <HQNavBar/> 

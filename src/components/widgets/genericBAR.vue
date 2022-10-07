@@ -6,7 +6,7 @@
                     <v-radio v-for="(category) in params.data_category" :key="category" :label="category" :value="category" color="#935287"></v-radio>
                 </v-radio-group>
             </div>
-            <div class="kpi-carousel">
+            <div class="bar-carousel">
                 <span id="chartsHeaders" >
                     {{ params.chart_titles[activeTitle] }}
                 </span>
@@ -28,33 +28,33 @@
                     </template>
 
                     <v-carousel-item v-for="(BARarr,index) in jsonData[params.selected_category]" :key="index">
-                        <div class="KPIcontainer" dir="rtl">
+                        <div class="barcontainer" dir="rtl">
                             <v-row dir="rtl"
                                 style="margin-top:10px;margin-bottom: 20px; place-content: center"
 
                             >
-                            <oneBar  v-for="(item,index) in BARarr" :isSelectedIndex="activeIndex===index" :isSelected="activeIndex!= -1" :key="index" v-on:click.native="kpiBoxClick(index)" :params="params" :data="item.color ? item.max_value ? item : getTotal(BARarr,item) : item.max_value ? getColor(item,index) : getColor(getTotal(BARarr,item),index)" />
+                            <oneBar  v-for="(item,index) in BARarr" :isSelectedIndex="activeIndex===index" :isSelected="activeIndex!= -1" :key="index" v-on:click.native="barBoxClick(index)" :params="params" :data="item.color ? item.max_value ? item : getTotal(BARarr,item) : item.max_value ? getColor(item,index) : getColor(getTotal(BARarr,item),index)" />
                         </v-row>
 
-                        <div class="btn-container" style="margin-left:4%;margin-right:4%;">
-            <v-row dir="rtl" style="place-content:right;">
+                        <div class="btn-container">
+            <v-row dir="rtl" style="place-content:right;" v-if="params.data_intersection || params.click_open_drill_enabled">
                 <v-btn class="main-btn"
                 :ripple="false"
                  v-for="(btnName,index) in BARarr" :key="index"
                  :style="{backgroundColor: isDrillDown ? getCurrentTheme.baseGenericPie.btn_color_drill : getCurrentTheme.baseGenericPie.btn_color ,border : activeIndex == index ? 'solid black 1px' : ' solid black 0px'}"
-                 @click="kpiBoxClick(index)">
+                 @click="barBoxClick(index)">
                     <span
                     class="dot"
                     :style="{backgroundColor :  btnName.color ? btnName.color: getColor(btnName,index).color}"></span>    
-                    <span class="test" :style="'color:' + getCurrentTheme.baseGenericPie.span_color">
+                    <span class="btn-span" :style="'color:' + getCurrentTheme.baseGenericPie.span_color">
                         {{btnName.label}}
                     </span>
                   </v-btn>    
             </v-row>
 
-            <v-row dir="rtl" style="place-content:center;">
+            <v-row dir="rtl" style="place-content:center;" v-if="!params.data_intersection && !params.click_open_drill_enabled">
                 <div
-                 v-for="(btnName,index) in BARarr" :key="index" style="font-family: almoni;display: -webkit-inline-box;-webkit-box-align: center;margin-left:10px">
+                 v-for="(btnName,index) in BARarr" :key="index" class="labels">
                     <span
                     class="dot"
                     :style="{backgroundColor :  btnName.color ? btnName.color: getColor(btnName,index).color}"></span>    
@@ -135,8 +135,7 @@ export default {
     },
     methods:{
         // toggel drill down from a label click if click_open_drill_enabled = true in the config
-        kpiBoxClick(i){
-            console.log("ieieiei");
+        barBoxClick(i){
             this.activeTitle = i
             if(this.params.data_intersection){
                 this.drilldownData = {}
@@ -159,7 +158,6 @@ export default {
             return obj
         },
         getColor(obj,index){
-            console.log(obj,"d");
             obj.color = this.defaultColors[index]
             return obj
         }
@@ -181,35 +179,35 @@ export default {
                 .then(response => {
                     this.jsonData = response.data
                     //#########
-                    this.jsonData = {
-  "*": [
-    [
-      {
-        "label": "חתיכות",
-        "value": 4,
-        "max_value" : 44,
-      },
-      {
-        "label": "אלמוג זה טקסט ארוך",
-        "value": 4,
-        "max_value" : 22,
-      },
-      {
-        "label": "אלמוג א",
-        "value": 4,
-        "max_value" : 11,
-      },{
-        "label": "רן הגבר",
-        "value": 4,
-        "max_value" : 11,
-      },{
-        "label": "רן חשמלים",
-        "value": 4,
-        "max_value" : 11,
-      },
-    ]
-  ]
-}
+//                     this.jsonData = {
+//   "*": [
+//     [
+//       {
+//         "label": "חתיכות",
+//         "value": 4,
+//         "max_value" : 44,
+//       },
+//       {
+//         "label": "אלמוג זה טקסט ארוך",
+//         "value": 4,
+//         "max_value" : 22,
+//       },
+//       {
+//         "label": "אלמוג א",
+//         "value": 4,
+//         "max_value" : 11,
+//       },{
+//         "label": "רן הגבר",
+//         "value": 4,
+//         "max_value" : 11,
+//       },{
+//         "label": "רן חשמלים",
+//         "value": 4,
+//         "max_value" : 11,
+//       },
+//     ]
+//   ]
+// }
 //#############
                     this.errorMSG = ""
                     // do sth ...
@@ -251,25 +249,35 @@ export default {
 </script>
 
 <style scoped>
+    .labels{
+        font-size:16px;
+        font-family: almoni;
+        display: -webkit-inline-box;
+        -webkit-box-align: center;
+        margin-left:10px
+
+    }
+    .btn-container{
+        margin-left:4%;
+        margin-right:4%;
+
+    }
     ::v-deep .v-btn:not(.v-btn--round).v-size--default {
-    height: 36px;
-    min-width: 64px;
-    padding: 0px;
-    justify-content: right;
     padding-right: 8px;
-    /* margin-right: 10px; */
 }
 
-    .test{
+    .btn-span{
         text-overflow: ellipsis;
-  overflow: hidden; 
-  width: 68px; 
-  white-space: nowrap;
+        overflow: hidden; 
+        width: 68px; 
+        white-space: nowrap;
+        font-size: 16px;
+        letter-spacing: 0;
     }
     .main-btn{
         font-family: almoni;
-  margin:8px;
-  justify-content: right;
+        margin:8px;
+        justify-content: right;
         overflow: hidden;
         border-radius: 6px;
         width: 102px !important;
@@ -343,13 +351,13 @@ export default {
 
 .dot {
     align-self: center;
-  height: 10px;
-  width: 10px;
-  border-radius: 50%;
-  display: flex;
-  margin: 2%;
-  margin-right: 0;
-  direction: rtl;
-  margin-left: 5px;
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+    display: flex;
+    margin: 2%;
+    margin-right: 0;
+    direction: rtl;
+    margin-left: 5px;
 }
 </style>

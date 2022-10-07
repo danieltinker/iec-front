@@ -1,5 +1,5 @@
 <template>
-    <div dir="rtl" class="mb-10 container">
+    <div dir="rtl" class="mb-2 container">
     <div>
       <!-- {{GET_USER_FAV}} -->
         <div class="fav-btn" v-for="item in GET_USER_FAV" :key="item.VIEW_ID">
