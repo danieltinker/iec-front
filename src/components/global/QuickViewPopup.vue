@@ -1,7 +1,9 @@
+<!-- :style="{backgroundColor: isDrillDown? getCurrentTheme.app_background :getCurrentTheme.app_background}" -->
 <template>
     <div dir="ltr"
     class="main_container"
-    :style="{backgroundColor: isDrillDown? getCurrentTheme.app_background :getCurrentTheme.app_background}"
+    :style="{backgroundColor: getCurrentTheme.app_background}"
+    
     >
      <v-row
       class=""
