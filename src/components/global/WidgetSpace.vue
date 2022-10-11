@@ -3,20 +3,24 @@
     <div :style="'background-color:' + getCurrentTheme.headline.background" class=" mt-3" v-for="(widget, index) in responseDataComp" :key="index">
       <div class="headline-toolbar">
         <div class="grid-item">
+          <div style="width:40px">
           <ThreeDotsNineDots class="grid-item" :isExpand="widget.PARAMETERS.expand"
             @switch-expand="widget.PARAMETERS.expand = !widget.PARAMETERS.expand"
             v-if="widget.PARAMETERS.headline_config && widget.PARAMETERS.headline_config.three_dots_enabled" />
+          </div>
         </div>
         <h1 :style="'color:' + getCurrentTheme.headline.title_color" class="headline-title grid-item" v-if="widget.PARAMETERS.headline_config">
           {{ widget.PARAMETERS.headline_config.title }}
         </h1>
         <div class="grid-item">
+          <div style="width:40px">
           <v-icon @click="BookMarkClick(widget)" color="#935287" style="font-size: 30px"
             v-if="widget.PARAMETERS.headline_config && widget.PARAMETERS.headline_config.bookmark_enabled">{{
             CheckBookmark(widget.VIEW_ID)
             ? "mdi-bookmark"
             : "mdi-bookmark-outline"
             }}</v-icon>
+          </div>
         </div>
       </div>
       <component :is="widget.TEMPLATE_TYPE" :params="widget.PARAMETERS" :isDrillDown="false">

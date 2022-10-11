@@ -37,7 +37,7 @@
                         </v-row>
 
                         <div class="btn-container">
-            <v-row dir="rtl" style="place-content:right;" v-if="params.data_intersection || params.click_open_drill_enabled">
+            <v-row dir="rtl" style="place-content:right;display: inline-flex;" v-if="params.data_intersection || params.click_open_drill_enabled">
                 <v-btn class="main-btn"
                 :ripple="false"
                  v-for="(btnName,index) in BARarr" :key="index"
@@ -52,7 +52,7 @@
                   </v-btn>    
             </v-row>
 
-            <v-row dir="rtl" style="place-content:center;" v-if="!params.data_intersection && !params.click_open_drill_enabled">
+            <v-row dir="rtl" style="place-content:center;display: inline-flex;" v-if="!params.data_intersection && !params.click_open_drill_enabled">
                 <div
                  v-for="(btnName,index) in BARarr" :key="index" class="labels">
                     <span
@@ -281,8 +281,8 @@ export default {
         overflow: hidden;
         border-radius: 6px;
         width: 102px !important;
-        text-align: -webkit-right;
-        
+        /* text-align: -webkit-right;
+         */
         box-shadow:0px 0px !important;
     }
     .main-btn::before {
@@ -358,6 +358,6 @@ export default {
     margin: 2%;
     margin-right: 0;
     direction: rtl;
-    margin-left: 5px;
+    /* margin-left: 5px; */
 }
 </style>
