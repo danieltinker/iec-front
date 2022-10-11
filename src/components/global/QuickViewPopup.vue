@@ -1,6 +1,8 @@
 <template>
     <div dir="ltr"
-    class="main_container">
+    class="main_container"
+    :style="{backgroundColor: isDrillDown? getCurrentTheme.app_background :getCurrentTheme.app_background}"
+    >
      <v-row
       class=""
       style="text-align: center; margin-top: 5px; margin-bottom: 5px"
@@ -52,8 +54,7 @@ export default {
   overflow-y: auto;
 }
 .main_container {
-    position: fixed;
-  background-color: rgb(255, 255, 255);
+  position: fixed;
   height: 100vh;
   width: 100vw;
   overflow: hidden;
