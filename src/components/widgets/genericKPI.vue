@@ -1,6 +1,7 @@
 <template>
     <div>
-        <div class="clock-main" style="text-align: center;" v-if="doneFetching">
+        <div v-if="doneFetching">
+        <div class="clock-main" style="text-align: center;" v-if="params.show_clock">
             <div class="flex-center">
                 <v-radio-group  v-model="params.selected_category" row id="districtRadioGroup" v-if=" params.data_category.length >= 2">
                     <v-radio v-for="(category) in params.data_category" :key="category" :label="category" :value="category" color="#935287"></v-radio>
@@ -53,19 +54,19 @@
                 </v-carousel>
             </div>
 
-            <div class="clock-drilldown"
-             v-if="params.expand && !isDrillDown && params.drill_down_params"
-             :style="{backgroundColor:getCurrentTheme.genericClock.drill_background }">
-                <h1 class="drilldown-title" v-if="params.drill_down_params.headline_config">{{params.drill_down_params.headline_config.title}}</h1>
-                <component 
-                :is="params.drill_down_params.template_type"
-                :params = params.drill_down_params
-                :isDrillDown="true"
-                :drillDataProp="drilldownData">
-                </component>   
-            </div>
-    </div>  
-
+        </div>  
+        <div class="clock-drilldown"
+         v-if="params.expand && !isDrillDown && params.drill_down_params"
+         :style="{backgroundColor:getCurrentTheme.genericClock.drill_background }">
+            <h1 class="drilldown-title" v-if="params.drill_down_params.headline_config">{{params.drill_down_params.headline_config.title}}</h1>
+            <component 
+            :is="params.drill_down_params.template_type"
+            :params = params.drill_down_params
+            :isDrillDown="true"
+            :drillDataProp="drilldownData">
+            </component>   
+        </div>
+    </div>
     <div class="loader" v-else>
         <div class="loader" v-if="!isErrorMsg">
             <v-progress-circular

@@ -1,7 +1,7 @@
 <template >
   <div v-if="doneFetching">
     <div :style="'background-color:' + getCurrentTheme.headline.background" class=" mt-3" v-for="(widget, index) in responseDataComp" :key="index">
-      <div class="headline-toolbar">
+      <div class="headline-toolbar" v-if="widget.PARAMETERS.show_clock">
         <div class="grid-item">
           <div style="width:40px">
           <ThreeDotsNineDots class="grid-item" :isExpand="widget.PARAMETERS.expand"
@@ -14,7 +14,7 @@
         </h1>
         <div class="grid-item">
           <div style="width:40px">
-          <v-icon @click="BookMarkClick(widget)" color="#935287" style="font-size: 30px"
+          <v-icon @click="BookMarkClick(widget.VIEW_ID,widget.PARAMETERS,widget.TEMPLATE_TYPE,false)" color="#935287" style="font-size: 30px"
             v-if="widget.PARAMETERS.headline_config && widget.PARAMETERS.headline_config.bookmark_enabled">{{
             CheckBookmark(widget.VIEW_ID)
             ? "mdi-bookmark"
@@ -167,12 +167,17 @@ export default {
       return false
     },
 
-
-    BookMarkClick(widget) {
-      let view_id = widget.VIEW_ID
+    BookMarkClick(viewID,parameters,templateType, isDrillDown) {
+      let view_id = viewID
       //save curr widget params for bookmark
-      this.$store.state.selected_view_param = Object.assign({},widget.PARAMETERS)
-      this.$store.state.selected_view_param["TEMPLATE_TYPE"] = widget.TEMPLATE_TYPE
+      this.$store.state.selected_view_param = Object.assign({},parameters)
+      this.$store.state.selected_view_param["TEMPLATE_TYPE"] = templateType
+      if(isDrillDown){
+        this.$store.state.selected_view_param["show_clock"] = false
+      }
+      else{
+        this.$store.state.selected_view_param["show_clock"] = true
+      }
       ///Maybe to save custom things to custom_bookmark_data in store
       this.$store.state.selected_view_id = view_id;
       if (this.IS_FETCHING === false) {
