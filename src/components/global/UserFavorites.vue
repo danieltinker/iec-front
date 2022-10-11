@@ -2,7 +2,18 @@
     <div dir="rtl" class="mb-2 container">
     <div>
       <!-- {{GET_USER_FAV}} -->
-        <div class="fav-btn" v-for="item in GET_USER_FAV" :key="item.VIEW_ID">
+      <div v-if="GET_USER_FAV.length == 0">
+        <v-btn   
+                color="#935287"
+                outlined
+                fab
+                class="ml-4 story"
+                @click="openQuickView('plus')"
+                >
+                <img src="../../assets/FavBar/plus.svg" />
+            </v-btn>
+      </div>
+        <div v-else class="fav-btn" v-for="item in GET_USER_FAV" :key="item.VIEW_ID">
           <v-btn 
           
                 color="#935287"
@@ -27,7 +38,58 @@
         
     </div >
     <QuickViewPopup class="quick-view" v-if="$store.state.quick_view" :mydata="data" @closeQuickView="closeQuickView" />
+
+
+    <vue-bottom-sheet ref="addFavoriteGuide">
+      <div id="sheetContent" style="">
+        <span id="headline" class="" style="">מבט מהיר</span>
+        <img
+          v-if="getCurrentTheme.theme == 'lightTheme'"
+          src="../../assets/menusPhotos/QuickViewPopup/FavBarStructure-lightTheme.svg"
+          alt=""
+        />
+        <img
+          v-else
+          src="../../assets/menusPhotos/QuickViewPopup/FavBarStructure-darkTheme.svg"
+          alt=""
+        />
+        <span
+          class="mb-3"
+          style="font-size: 18px; width: 75%; justify-self: center"
+          >צפה במהירות במידע הרלוונטי עבורך על ידי לחיצה על כפתוח "שמירה".</span
+        >
+        <v-icon class="mb-3" style="font-size: 30px" color="#935287"
+          >mdi-bookmark-outline</v-icon
+        >
+        <span
+          class="mb-2"
+          style="
+            font-size: 16px;
+            width: 75%;
+            justify-self: center;
+            color: #606060;
+          "
+        >
+          ניתן להוסיף 6 שעונים לבחירתך
+        </span>
+        <div id="allDataTemplate" style="">
+          <img
+            v-if="getCurrentTheme.theme == 'lightTheme'"
+            src="../../assets/menusPhotos/QuickViewPopup/watchStructure-lightTheme.svg"
+            alt=""
+          />
+          <img
+            v-else
+            src="../../assets/menusPhotos/QuickViewPopup/watchStructure-darkTheme.svg"
+            alt=""
+          />
+        </div>
+      </div>
+    </vue-bottom-sheet>
+
+
     </div>
+    
 </template>
 
 
@@ -41,10 +103,17 @@ export default {
       
         openQuickView(data){
             // console.log("quick",data);
+            if (data ==  "plus") {
+        this.$refs.addFavoriteGuide.open();
+        this.$refs.addFavoriteGuide.$refs.bottomSheetCard.style.backgroundColor =
+          this.getCurrentTheme.hq_navbar.navigation_drawer;
+      } else {
             this.data = data
             //save quick view id clicked
             this.$store.state.selected_view_id = data.VIEW_ID
             this.$store.state.quick_view = !this.$store.state.quick_view
+      }
+
         },
         closeQuickView(){
             this.$store.state.quick_view = !this.$store.state.quick_view
@@ -133,5 +202,67 @@ export default {
   overflow: hidden;
   /* word-wrap: break-word; */
   text-overflow: ellipsis;
+}
+
+
+
+
+
+
+
+
+
+
+.favContainer {
+  direction: rtl;
+  margin-top: 65px;
+  right: 0;
+  display: grid;
+}
+
+::-webkit-scrollbar {
+  height: 0px;
+  width: 0px;
+  border: 0px solid #d5d5d5;
+}
+
+.story {
+  box-shadow: none;
+  height: 58px;
+  width: 58px;
+}
+
+.favoriteLabels {
+  font-family: almoni;
+  size: 16px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  /* word-wrap: break-word; */
+  text-overflow: ellipsis;
+}
+
+.favRow {
+  overflow-x: auto;
+  margin-top: 2rem;
+}
+
+::v-deep .bottom-sheet__card.fx-default {
+  height: max-content !important;
+}
+
+#sheetContent {
+  font-family: almoni;
+  text-align: center;
+  justify-items: center;
+  display: grid;
+  padding-bottom: 10px;
+}
+
+#headline {
+  font-family: almoni-medium;
+  font-size: 24px;
+  color: #935287;
 }
 </style>
