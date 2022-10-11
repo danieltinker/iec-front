@@ -9,6 +9,12 @@ Vue.prototype.$pieSize = 285;
 Vue.prototype.$myApi = myApi
 // function booktest(p) {return {data: function(){return{test: true}}}}
 Vue.mixin({
+  methods:{
+    toINT(value) {
+      let result = parseInt(value)
+      return isNaN(result) ? 0 : result
+    },
+  },
   computed: {
     getCurrentTheme(){
       return this.$store.getters.currentTheme
