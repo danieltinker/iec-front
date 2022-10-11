@@ -129,7 +129,6 @@ export default {
     //  get hqs By sid
     //  listen to store HQ,Category from user DATA RAN AND TOMMY PLEASE FINISH 
     //  fetch the server response GET /mobile/views/{hq_id}/{category_id}?sessoinid=xxx .
-
     //function to get last user favorite list
     this.GetUserFav();
   },
@@ -158,12 +157,8 @@ export default {
       this.SET_FAV_LIST()
     },
 
-    //Get user favorites
-
     CheckBookmark(view_id) {
-      /*
-          Function to check if viewId exist in user favorites list
-      */
+      /* Function to check if viewId exist in user favorites list */
       let fav_list = this.$store.state.user_favorites;
       //check if we have object inside user favorites without using filter...
       for (let i = 0; i < fav_list.length; i++) {
@@ -176,7 +171,7 @@ export default {
     BookMarkClick(widget) {
       let view_id = widget.VIEW_ID
       //save curr widget params for bookmark
-      this.$store.state.selected_view_param = widget.PARAMETERS
+      this.$store.state.selected_view_param = Object.assign({},widget.PARAMETERS)
       this.$store.state.selected_view_param["TEMPLATE_TYPE"] = widget.TEMPLATE_TYPE
       ///Maybe to save custom things to custom_bookmark_data in store
       this.$store.state.selected_view_id = view_id;
