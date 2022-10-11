@@ -1,15 +1,14 @@
 <template>
     <div>
-        <div :style="!isDrillDown ? 'background-color:' + getCurrentTheme.genericClock.main_background : 'background-color:' + getCurrentTheme.genericClock.drill_background" class="clock-main" style="text-align: center;" v-if="doneFetching">
-          <div class="flex-center">
-            <v-radio-group  v-model="params.selected_category" row id="districtRadioGroup" v-if=" params.data_category.length >= 2">
-                <v-radio v-for="(category) in params.data_category" :key="category" :label="category" :value="category" color="#935287"></v-radio>
-            </v-radio-group>
-          </div>
-
-            <div class="pie-carousel">
+        <div class="clock-main" style="text-align: center;" v-if="doneFetching">
+            <div class="flex-center">
+                <v-radio-group  v-model="params.selected_category" row id="districtRadioGroup" v-if=" params.data_category.length >= 2">
+                    <v-radio v-for="(category) in params.data_category" :key="category" :label="category" :value="category" color="#935287"></v-radio>
+                </v-radio-group>
+            </div>
+            <div class="bar-carousel">
                 <span id="chartsHeaders" >
-                    {{ params.chart_titles[carouselActiveIndex] }}
+                    {{ params.chart_titles[activeTitle] }}
                 </span>
 
                 <v-carousel
@@ -28,16 +27,21 @@
                         <img v-on="on" v-bind="attr" src="../../assets/playLeft.svg"/>
                     </template>
 
-                    <v-carousel-item v-for="(KPIarr,index) in jsonData[params.selected_category]" :key="index">
+                    <v-carousel-item v-for="(bararr,index) in jsonData[params.selected_category]" :key="index">
                         <div class="PIEcontainer" dir="rtl">
-                              <BaseGenericPie :chartData="KPIarr" :isDrill="isDrillDown"/>
+                              <BaseGenericPie  :chartData="bararr" :isDrill="isDrillDown"/>
+                              
                         </div>
                     </v-carousel-item>
                 </v-carousel>
+
+
             </div>
 
-            <div :style="'background-color:' + getCurrentTheme.genericClock.drill_background" class="clock-drilldown" v-if="params.expand && !isDrillDown && params.drill_down_params">
-                <h1 class="drilldown-title">{{params.drill_down_params.headline_config.title}}</h1>
+            <div class="clock-drilldown"
+             v-if="params.expand && !isDrillDown && params.drill_down_params"
+             :style="{backgroundColor:getCurrentTheme.genericClock.drill_background }">
+                <h1 class="drilldown-title" v-if="params.drill_down_params.headline_config">{{params.drill_down_params.headline_config.title}}</h1>
                 <component 
                 :is="params.drill_down_params.template_type"
                 :params = params.drill_down_params
@@ -45,69 +49,77 @@
                 :drillDataProp="drilldownData">
                 </component>   
             </div>
-
     </div>  
 
     <div class="loader" v-else>
-        <v-progress-circular
-        indeterminate
-        color="purple"
-        ></v-progress-circular>
-    </div>
+        <div class="loader" v-if="!isErrorMsg">
+            <v-progress-circular
+            indeterminate
+            color="purple"
+            ></v-progress-circular>
+        </div>
+        <h1 v-else>  {{errorMSG}} </h1>
+    </div>  
 </div>
 </template>
 
 <script>
 import ThreeDotsNineDots from '../utils/ThreeDotsNineDots.vue'
-import axios from 'axios';
-import BaseGenericPie from './genericPie/baseGenericPie.vue';
+import BaseGenericPie from './genericPie/baseGenericPie.vue'
 
+// axios.defaults.timeout = 1000
 export default {
     // name:"basicKPI",
     props:{
         isDrillDown:{type:Boolean},
         drillDataProp:{type:Object, default:()=>{}},
-        /** */
-        /** */
-        /** */
-        /** */
-        /* {
-            "show_main_clock": BOOLEAN,
-	        "headline_config": {
-                "three_dots_enabled": BOOLEAN,
-                "bookmark_enabled": BOOLEAN,
-                "title": STRING
-	        },
-            "click_open_drill_enabled": BOOLEAN,
-            "data_category": STRING_ARR,
-            "selected_category": STRING,
-            "chart_titles": STRING_ARR,
-            "data_url": /STRING,
-            "expand": BOOLEAN,
-            "drill_down_params": {
-                "headline_config": {
-                    "three_dots_enabled": BOOLEAN,
-                    "bookmark_enabled": BOOLEAN,
-                    "title": STRING
-                },
-                "data_category": STRING_ARR,
-                "selected_category": STRING,
-                "chart_titles": STRING_ARR,
-                "data_url": /STRING,
-                "template_type": STRING
-            }
-             } */
         params:{type:Object,required:false}
+    },
+    watch:{
+        drillDataProp(){
+            this.jsonData = this.drillDataProp
+        }
+    },
+    data(){
+            return{
+                activeTitle:0,
+                activeIndex:-1,
+                succ_req: true,
+                clicked_index:undefined,
+                errorMSG:"",
+                carouselActiveIndex:0,
+                carouselIndex:0,
+                drilldownData:[],
+                jsonData:[],
+                doneFetching:false,
+                static_drill_data:{}
+            }
     },
     components:{
     ThreeDotsNineDots,
+    genericKPI: () => import("../widgets/genericKPI.vue"),
     genericPIE: () => import("../widgets/genericPIE.vue"),
     BaseGenericPie
 },
     methods:{
-        // click open the drill down from a label click if enabled = true in the config
-        kpiBoxClick(){
-            if(this.params.click_open_drill_enabled) this.params.expand =! this.params.expand;
+        // toggel drill down from a label click if click_open_drill_enabled = true in the config
+        barBoxClick(i){
+            this.activeTitle = i
+            if(this.params.data_intersection){
+                this.drilldownData = {}
+                this.drilldownData = this.static_drill_data[this.jsonData[this.params.selected_category][this.carouselActiveIndex][i].label]    
+            }
+            if(this.params.click_open_drill_enabled){
+                if(!this.params.expand ||  i != this.clicked_index){
+                    this.params.expand = true
+                    this.activeIndex = i
+                }
+                else{
+                    this.params.expand = false
+                    this.activeIndex = -1
+                }
+            }
+            this.clicked_index = i
         }
     },
     computed:{
@@ -115,48 +127,52 @@ export default {
         showArrows(){
             if (this.jsonData[this.params.selected_category].length>1) return true;
             else return false 
+        },
+        isErrorMsg(){
+            return this.errorMSG.length !== 0;
         }
     },
-    data(){
-            return{
-                /* */
-                carouselActiveIndex:0,
-                /* */
-                carouselIndex:0,
-                /* */
-                drilldownData:[],
-                /* {cat1:[[basic kpi dictionary 1],[basic kpi dictionary 2],...], cat2:[...], ... }*/
-                jsonData:[],
-                /* */
-                doneFetching:false,
-                /* */
-            }
-    },
+
     async created(){
-        /*  if not drill down get data for main and drill  */
         if(!this.isDrillDown){
-            await axios.get(`http://20.102.120.232:5080/shavit/mobile/data/${this.params.data_url}`,{params: { sid: "xxx" }})
-                        .then(response => {
-                                this.jsonData = response.data
-                            })
-                        .catch((error) => {
-                                console.log(error,"main DATA FETCH ERROR");
-                            });
-            
-            await axios.get(`http://20.102.120.232:5080/shavit/mobile/data/${this.params.drill_down_params.data_url}`,{params: { sid: "xxx" }})
-                        .then(response => {
-                            this.drilldownData = response.data
-                        })
-                        .catch((error) => {
+            await this.$myApi(this.params.data_url)
+                .then(response => {
+                    this.jsonData = response.data
+                    this.errorMSG = ""
+                    // do sth ...
+                })
+                .catch(error => {
+                    console.log(error);
+                    console.log(error,"Main Clock Data GET request FAIL, PLEASE Check Backend")
+                    this.errorMSG =  "אין מידע"
+                    this.succ_req = false
+                });
+                if(this.succ_req){
+                    await this.$myApi(this.params.drill_down_params.data_url)
+                    .then(response => {
+                        console.log(response.data)
+                        this.drilldownData = response.data
+                        this.errorMSG = ""
+                        if(this.params.data_category == undefined || this.params.selected_category == undefined){
+                            console.log("radio btns config failed fix data_category, selected category")
+                            this.errorMSG = "אין מידע"
+                        }
+                        // do sth ...
+                    })
+                    .catch(error => {
                         console.log(error,"drill DATA FETCH ERROR");
-                        });
+                        this.errorMSG = "אין מידע"
+                    });
+                }
         }
-        /*  if drill down get data from the prop  */
         else{
             this.jsonData = this.drillDataProp
         }
+
         //  flag used to render the charts syncronously only after data is ready
-        this.doneFetching = true
+        if(this.errorMSG.length === 0){
+            this.doneFetching = true
+        }
     }
 }
 </script>
@@ -167,7 +183,7 @@ export default {
   flex-direction: column;
   align-items: center;
 }
-.PIEcontainer{
+.barcontainer{
     display: grid;
     grid-template-columns: auto auto;
     row-gap: 10px;
@@ -175,19 +191,19 @@ export default {
     justify-content: center;
     padding-bottom: 20px;
 }
-.kpi-box{
-    padding-top: 10px;
+.bar-box{
+    padding-top: 4px;
     text-align: center;
     align-items: center;
     width: 165px;
     height: 80px;
     border-radius: 4px;
 }
-.kpi-box span:first-child{
+/* .kpi-box span:first-child{
     font-family: almoni;
     font-size: 20px;
     line-height: 30px;
-}
+} */
 
 .loader{
     height: 400px;
@@ -200,15 +216,18 @@ export default {
 .v-progress-circular{
     padding:40px;
 }
-.kpi-box span{
+.bar-box span{
     display: inline-block;
-    font-size: 20px;
+    font-size: 16px;
     font-family: almoni-demibold;
     color: #a8699d;
 }
+.bar-box .bar-sec-value{
+    color:#606060
+}
 #chartsHeaders {
     font-family: almoni;
-    font-size: 18px;
+    font-size: 16px;
     color: #606060;
     /* margin-bottom: 18px; */
 }
@@ -223,9 +242,9 @@ export default {
     text-align: center;
 }
 
-.kpi-box span{
+.bar-box span{
     display: inline-block;
-    font-size: 20px;
+    font-size: 18px;
     font-family: almoni-demibold;
     color: #a8699d;
 }

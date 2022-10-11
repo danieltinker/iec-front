@@ -9,8 +9,8 @@
         @clickIndex="myActiveIndex()"
         />
         <div class="btn-container">
-            <v-row dir="rtl" style="place-content:center">
-                <v-btn class="btn"
+            <v-row dir="rtl" style="place-content:right;display: inline-flex;">
+                <v-btn class="main-btn"
                 :ripple="false"
                  v-for="(btnName,index) in buttons" :key="index"
                   @click="$refs.dount.onClickLegend(index);"
@@ -18,7 +18,7 @@
                     <span
                     class="dot"
                     :style="{backgroundColor:TemplateData.datasets[0].backgroundColor[index]}"></span>    
-                    <span :style="'color:' + getCurrentTheme.baseGenericPie.span_color">
+                    <span class="btn-span" :style="'color:' + getCurrentTheme.baseGenericPie.span_color">
                         {{btnName}}
                     </span>
                   </v-btn>    
@@ -88,6 +88,8 @@ export default {
 
 <style>
    .btn-container{
+    margin-left:4%;
+    margin-right:4%;
     padding-bottom: 20px;
    }
     .btn{
@@ -100,15 +102,39 @@ export default {
         /* box-shadow:1px 1px !important; */
         box-shadow: 2px 2px 2px rgba(148, 148, 148, 0.427) !important;
     }
-
-  .btn::before {
+    .main-btn{
+        font-family: almoni;
+        margin:8px;
+        justify-content: right;
+        overflow: hidden;
+        border-radius: 6px;
+        width: 102px !important;
+        /* text-align: -webkit-right;
+         */
+        box-shadow:0px 0px !important;
+    }
+  .main-btn::before {
     display:none;
   }
-    .dot{
-        width: 10px;
-        height: 10px;
-        border-radius: 100%;
-        margin-left: 2px;
+
+  .btn-span{
+        text-overflow: ellipsis;
+        overflow: hidden; 
+        width: 68px; 
+        white-space: nowrap;
+        font-size: 16px;
+        letter-spacing: 0;
     }
+  .dot {
+    align-self: center;
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+    display: flex;
+    margin: 2%;
+    margin-right: 0;
+    direction: rtl;
+    /* margin-left: 5px; */
+}
 
 </style>
