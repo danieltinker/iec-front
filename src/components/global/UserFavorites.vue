@@ -1,17 +1,11 @@
 <template>
     <div dir="rtl" class="mb-2 container">
     <div>
-      <!-- {{GET_USER_FAV}} -->
       <div v-if="GET_USER_FAV.length == 0">
-        <v-btn   
-                color="#935287"
-                outlined
-                fab
-                class="ml-4 story"
-                @click="openQuickView('plus')"
-                >
-                <img src="../../assets/FavBar/plus.svg" />
-            </v-btn>
+        <v-btn color="#935287" outlined fab class="ml-4 story" @click="openQuickView('plus')"><img src="../../assets/FavBar/plus.svg" /></v-btn>
+
+
+<!-- {{GET_USER_FAV}} -->
       </div>
         <div v-else class="fav-btn" v-for="item in GET_USER_FAV" :key="item.VIEW_ID">
           <v-btn 
@@ -34,6 +28,10 @@
                 <span class="fav-span">{{ item.STATE.PARAMETERS.headline_config.title}}</span>
             </v-tooltip>
         </div>
+
+
+        
+        <v-btn v-for="index in 5 - GET_USER_FAV.length" :key="index" color="#935287" outlined fab class="ml-4 story"> </v-btn>
               
         
     </div >
