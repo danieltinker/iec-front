@@ -1,5 +1,7 @@
 <template >
   <div v-if="doneFetching">
+    {{isMaxFavorite}} 44
+    <MaxFavoritePopup v-if="isMaxFavorite" ref="RefMaxFavoritePopup" @exitPopUp='openMaxFavoritePopup'/>
     <div :style="'background-color:' + getCurrentTheme.headline.background" class=" mt-3" v-for="(widget, index) in responseDataComp" :key="index">
       <div class="headline-toolbar">
         <div class="grid-item">
@@ -59,14 +61,16 @@ import genericPIE from "../widgets/genericPIE.vue";
 import genericBAR from "../widgets/genericBAR.vue";
 import axios from "axios";
 import { mapActions, mapGetters } from "vuex";
+import MaxFavoritePopup from "./maxFavoritePopup.vue";
 export default {
   components: {
     ThreeDotsNineDots,
     BasicPie,
     genericKPI,
     genericPIE,
-    genericBAR
-  },
+    genericBAR,
+    MaxFavoritePopup
+},
   props: {
     quickViewPopup: {
       type: Array,
@@ -75,6 +79,7 @@ export default {
   },
   data() {
     return {
+      isMaxFavorite:false,
       errorMsg:"",
       doneFetching: false,
       responseData: [],
@@ -152,6 +157,11 @@ export default {
 
   methods:
   {
+    openMaxFavoritePopup(){
+      console.log("ehehe");
+      this.isMaxFavorite = !this.isMaxFavorite
+
+    },
     ...mapActions(["SET_FAV_LIST","DO_FETCH","END_FETCH"]),
     //Get user favorites
     GetUserFav: function () {
@@ -174,12 +184,24 @@ export default {
 
 
     BookMarkClick(widget) {
+      this.openMaxFavoritePopup()
+      // console.log(this.$refs.RefMaxFavoritePopup.dialog);
+      // this.$refs.RefMaxFavoritePopup.dialog = true
       let view_id = widget.VIEW_ID
       //save curr widget params for bookmark
-      this.$store.state.selected_view_param = widget.PARAMETERS
+      this.$store.state.selected_view_param = Object.assign({},widget.PARAMETERS) 
       this.$store.state.selected_view_param["TEMPLATE_TYPE"] = widget.TEMPLATE_TYPE
       ///Maybe to save custom things to custom_bookmark_data in store
       this.$store.state.selected_view_id = view_id;
+      /* eslint-disable */
+      if(true){
+        return 2
+      } else {
+        console.log("dasdas");
+      }
+      /* eslint-enable */
+
+      
       if (this.IS_FETCHING === false) {
         this.DO_FETCH()
         if (this.CheckBookmark(view_id)) {
@@ -201,6 +223,10 @@ export default {
             })
             .catch((error) => {
               console.log("Got error adding user fav: ", error);
+              console.log("Maximum favorites =>" ,error.response.status);
+              if(error.response.status == 400){
+                this.$refs.RefMaxFavoritePopup.dialog = true
+              }
             });
         }
         this.END_FETCH()

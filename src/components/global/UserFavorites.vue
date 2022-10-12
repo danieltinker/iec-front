@@ -30,8 +30,8 @@
         </div>
 
 
-        
-        <v-btn v-for="index in 5 - GET_USER_FAV.length" :key="index" color="#935287" outlined fab class="ml-4 story"> </v-btn>
+
+        <v-btn v-for="index in 6 - GET_USER_FAV.length" :key="index" color="#935287" outlined fab class="ml-4 story"> </v-btn>
               
         
     </div >
