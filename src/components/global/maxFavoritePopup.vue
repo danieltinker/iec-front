@@ -10,29 +10,17 @@
             getCurrentTheme.max_fevorite.card_background_color
           "
         >
-        {{Object.keys(newFav).length}}
-          <v-card-title
-            style="
-              place-content: center;
-              font-family: almoni-demibold;
-              font-size: 26px;
-              color: #935287;
-              position: relative;
-            "
-            class="mb-1"
-          >
+          <v-card-title class="mb-1 card-title">
             <v-icon
-              class=""
+              class="card-icon"
               @click="exitPopup"
               :color="getCurrentTheme.max_fevorite.card_color"
-              style="position: absolute; left: 10px; top: 10px"
               >mdi-close</v-icon
             >
             <span> שעוני מבט מהיר</span></v-card-title
           >
   
-          <v-card-subtitle
-            :style="
+          <v-card-subtitle :style="
               'text-align: center; padding-bottom:10px !important; font-size:18px; font-family:almoni; color:' +
               getCurrentTheme.max_fevorite.card_subtitle
             "
@@ -52,7 +40,7 @@
   
           <div class="FavDiv" dir="rtl">
             <span
-              v-if="emptyFav"
+              v-if="this.userCurrentFav.length === 0"
               class="mt-4 mb-3"
               :style="
                 'padding: 0 24px 20px;font-family:almoni; font-size:18px; color:' +
@@ -174,14 +162,14 @@
   
   
   <script>
-  import axios from "axios";
-  import { mapGetters } from 'vuex'
+  import { mapGetters,mapActions } from 'vuex'
+  import FavoriteAxios from "../utils/FavoriteAxios";
   export default {
     data: () => {
       return {
+        currentViewId:0,
         dialog: true,
         newFav: [],
-        id: "",
         userCurrentFav: [],
         maxFav: false,
         emptyFav: false,
@@ -189,72 +177,27 @@
     },
   
     created() {
-        console.log(this.$store.state.selected_view_param,"dskdsakskfdsfjsdfj");
         this.newFav.push(this.$store.state.selected_view_param);
-        console.log(JSON.stringify(this.$store.state.selected_view_param));
+        this.currentViewId = this.$store.state.selected_view_id;
         this.userCurrentFav = [...this.GET_USER_FAV]
-        //this.userCurrentFav = [{"USER_ID":999,"VIEW_ID":100,"VIEW_ORDER":3,"STATE":{"PARAMETERS":{"show_main_clock":true,"headline_config":{"three_dots_enabled":true,"bookmark_enabled":true,"title":"example CLIENTS"},"click_open_drill_enabled":true,"data_category":["*"],"selected_category":"*","chart_titles":["My first PIE"],"data_url":"/basicKPITest","expand":false,"fav_icon":"pie","innerPieText":"כללי","drill_down_params":{"innerPieText":"כללי","headline_config":{"three_dots_enabled":true,"bookmark_enabled":true,"title":"drill headline"},"data_category":["*"],"chart_titles":["My first KPI","my second","my third"],"selected_category":"*","enabled":true,"data_url":"/carouselKPItest","template_type":"genericPIE"},"TEMPLATE_TYPE":"genericPIE"},"CUSTOM_SETTINGS":{}}},{"USER_ID":999,"VIEW_ID":101,"VIEW_ORDER":4,"STATE":{"PARAMETERS":{"show_main_clock":true,"headline_config":{"three_dots_enabled":true,"bookmark_enabled":true,"title":"example CLIENTS1"},"click_open_drill_enabled":true,"data_category":["*"],"selected_category":"*","chart_titles":["My first PIE"],"data_url":"/basicKPITest","expand":false,"fav_icon":"pie","innerPieText":"כללי","drill_down_params":{"innerPieText":"כללי","headline_config":{"three_dots_enabled":true,"bookmark_enabled":true,"title":"drill headline"},"data_category":["*"],"chart_titles":["My first KPI","my second","my third"],"selected_category":"*","enabled":true,"data_url":"/carouselKPItest","template_type":"genericPIE"},"TEMPLATE_TYPE":"genericPIE"},"CUSTOM_SETTINGS":{}}},{"USER_ID":999,"VIEW_ID":105,"VIEW_ORDER":5,"STATE":{"PARAMETERS":{"show_clock":true,"headline_config":{"three_dots_enabled":true,"bookmark_enabled":true,"title":"FULL GENERIC"},"click_open_drill_enabled":true,"data_category":["*"],"selected_category":"*","chart_titles":["My first KPI","my second","my third"],"data_url":"/basicKPITest","expand":true,"data_intersection":true,"fav_icon":"pie","drill_down_params":{"show_clock":true,"headline_config":{"three_dots_enabled":true,"bookmark_enabled":true,"title":"drill headline"},"data_category":["*"],"selected_category":"*","chart_titles":["one_title","two_title","three_title"],"data_url":"/carouselKPItest","template_type":"genericKPI"},"TEMPLATE_TYPE":"genericKPI"},"CUSTOM_SETTINGS":{}}}]
-        console.log(JSON.stringify(this.GET_USER_FAV));
   
     },
   
     computed: {
     ...mapGetters(["GET_USER_FAV"]),
-  
-      getUserFavData() {
-        return this.$store.state.loginStore.currUserData.favorites;
-      },
-  
-     
     },
-    // watch:{
-    //     getUserFavData(){
-    //         this.userCurrentFav = Object.assign({}, this.getUserFavData);
-    //     }
-    // },
-  
     methods: {
-        getTitle(item){
-            //{{ item.STATE.PARAMETERS.headline_config.title ? item.STATE.PARAMETERS.headline_config.title : item.headline_config.title}}
-            
-            
-            return item.STATE ? item.STATE.PARAMETERS.headline_config.title : item.headline_config.title
+      ...mapActions(["SET_FAV_LIST","DO_FETCH","END_FETCH"]),
+    //Get user favorites
+    GetUserFav: function () {
+      this.SET_FAV_LIST()
+    },
 
-        },
-        getFavIcon(item){
-            return item.fav_icon || "item.STATE.PARAMETERS.fav_icon"
-
-        },
-        getNevFavorites(){
-            this.newFav.push(this.$store.state.selected_view_param)
-        },
       exitPopup() {
         this.$emit('exitPopUp')
         this.maxFav = false;
         this.emptyFav = false;
       },
-  
-      getNewFav(id) {
-        axios
-          .post(
-            this.$store.state.serverUrl +
-              "/shavit/system/mobile/getFavoritesCatalog",
-            null,
-            { params: { sid: this.sessionId } }
-          )
-          .then((result) => {
-            if (result.data.success) {
-              //update the store and the localStorage
-              let tmpNewFav = {};
-              tmpNewFav[id] = result.data.data[0][id];
-              this.newFav = {
-                ...this.newFav,
-                ...tmpNewFav,
-              };
-            }
-          });
-      },
-  
       getImg(img) {
             try {
                 return require(`@/assets/FavBar/${img}.svg`);
@@ -266,31 +209,15 @@
         },
   
       removeFav(favId) {
-        console.log(this.userCurrentFav);
         this.maxFav = false;
         this.emptyFav = false;
-        //this.newFav = [this.userCurrentFav[favId],this.newFav]
         this.newFav.push(this.userCurrentFav[favId]);
         this.userCurrentFav.splice(favId, 1)
-        // this.newFav = Object.assign(this.userCurrentFav[favId], this.newFav);
-        //this.newFav[favId] = this.userCurrentFav[favId];
-        //delete this.userCurrentFav[favId];
-        //this.userCurrentFav = Object.assign({}, this.userCurrentFav);
-        //if (Object.keys(this.userCurrentFav).length == 0) {
-        //  console.log("DEVELOPER MSG - empty Fav list");
-        //  this.emptyFav = true;
-        //}
       },
   
       addFav(newFIndex) {
         this.emptyFav = false;
         if (this.userCurrentFav.length < 6) {
-          // var tmpObj = {}
-          // tmpObj[newFIndex] = this.newFav[newFIndex]
-          // this.userCurrentFav = {newFIndex:this.newFav[newFIndex], ...this.userCurrentFav}
-          //this.userCurrentFav[newFIndex] = this.newFav[newFIndex];
-          //delete this.newFav[newFIndex];
-          //this.newFav = Object.assign({}, this.newFav);
           this.userCurrentFav.push(this.newFav[newFIndex]);
           this.newFav.splice(newFIndex, 1)
         } else {
@@ -299,24 +226,61 @@
       },
   
       save() {
-        console.log(this.userCurrentFav);
-        console.log(this.newFav);
         for(let item in this.newFav){
             if(this.newFav[item].VIEW_ID){
-            console.log(this.newFav[item].VIEW_ID);
+            this.$store.state.selected_view_id = this.newFav[item].VIEW_ID
+            FavoriteAxios.RemoveUserFav()
+            .then((response) => {
+              //if we got new info update user favorite list
+              this.GetUserFav();
+            })
+            .catch((error) => {
+              console.log("Got error removing user fav: ", error);
+            });
             } else {
                 console.log("nn");
             }}
-        //this.$root.$emit("updateUserPref", this.userCurrentFav);
-        // this.$store.state.loginStore.currUserData.favorites =
+        for(let item in this.userCurrentFav){
+            if(!this.userCurrentFav[item].VIEW_ID){
+               this.$store.state.selected_view_id = this.userCurrentFav[item].VIEW_ID
+               this.$store.state.selected_view_param = Object.assign({},this.userCurrentFav[item]) 
+               this.$store.state.selected_view_param["TEMPLATE_TYPE"] = this.userCurrentFav[item].TEMPLATE_TYPE
+               this.$store.state.selected_view_id = this.currentViewId;
+               FavoriteAxios.AddUserFav()
+                  .then((response) => {
+                    //if we got new info update user favorite list
+                      this.GetUserFav();
+                  })
+                  .catch((error) => {
+                    console.log("Got error adding user fav: ", error);
+                    console.log("Maximum favorites =>" ,error.response.status);
+                    if(error.response.status == 400){
+                      this.$refs.RefMaxFavoritePopup.dialog = true
+                    }
+                  });
+            } else {
+                console.log("nn");
+            }}
+
         this.maxFav = false;
-        this.dialog = false;
+        this.$emit('exitPopUp')
       },
     },
   };
   </script>
   
   <style scoped>
+    .card-icon{
+      position: absolute; left: 10px; top: 10px
+    }
+    .card-title{
+      place-content: center;
+      font-family: almoni-demibold;
+      font-size: 26px;
+      color: #935287;
+      position: relative;
+
+    }
   .story {
     box-shadow: none;
     height: 58px !important;
