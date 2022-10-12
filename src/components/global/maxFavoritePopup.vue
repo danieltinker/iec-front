@@ -300,7 +300,14 @@
   
       save() {
         console.log(this.userCurrentFav);
-        this.$root.$emit("updateUserPref", this.userCurrentFav);
+        console.log(this.newFav);
+        for(let item in this.newFav){
+            if(this.newFav[item].VIEW_ID){
+            console.log(this.newFav[item].VIEW_ID);
+            } else {
+                console.log("nn");
+            }}
+        //this.$root.$emit("updateUserPref", this.userCurrentFav);
         // this.$store.state.loginStore.currUserData.favorites =
         this.maxFav = false;
         this.dialog = false;
