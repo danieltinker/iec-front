@@ -11,7 +11,7 @@
                 <span>
                     <v-icon @click="DrillBookMarkClick(view_ID,params,params.template_type,true)" color="#935287" style="font-size: 30px"
             v-if="isDrillDown && params.headline_config && params.headline_config.bookmark_enabled">{{
-                    true
+                    CheckBookmark(view_ID)
                     ? "mdi-bookmark"
                     : "mdi-bookmark-outline"
             }}</v-icon>
@@ -126,6 +126,15 @@ export default {
         genericPIE: () => import('../widgets/genericPIE.vue')
     },
     methods:{
+        CheckBookmark(view_id) {
+      /* Function to check if viewId exist in user favorites list */
+      let fav_list = this.$store.state.user_favorites;
+      //check if we have object inside user favorites without using filter...
+      for (let i = 0; i < fav_list.length; i++) {
+        if (fav_list[i].VIEW_ID == view_id) return true;
+      }
+      return false
+    },
         DrillBookMarkClick(view_ID,params,templatetype,isDrillDown){
                 console.log("click drill btn",view_ID,params,templatetype,isDrillDown)
                 this.$parent.$emit('drill-click',view_ID,params,templatetype,isDrillDown)
@@ -162,7 +171,6 @@ export default {
     },
 
     async created(){
-        console.log("view",this.view_ID)
         this.$on('drill-click', (viewID,params,templateType,isDrillDown)=>{
             console.log("hey drill cllick",viewID,params,templateType,isDrillDown)
             this.$parent.$emit("bookmark-drill",viewID,this.params,templateType,isDrillDown)
