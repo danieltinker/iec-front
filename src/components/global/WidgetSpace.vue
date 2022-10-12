@@ -1,5 +1,6 @@
 <template >
   <div v-if="doneFetching">
+    
     <div :style="'background-color:' + getCurrentTheme.headline.background" class=" mt-3" v-for="(widget, index) in responseDataComp" :key="index">
       <div class="headline-toolbar" v-if="widget.PARAMETERS.show_clock">
         <div class="grid-item">
@@ -10,7 +11,7 @@
           </div>
         </div>
         <h1 :style="'color:' + getCurrentTheme.headline.title_color" class="headline-title grid-item" v-if="widget.PARAMETERS.headline_config">
-          {{ widget.PARAMETERS.headline_config.title }}
+          {{ widget.PARAMETERS.headline_config.title }} {{widget.VIEW_ID}}
         </h1>
         <div class="grid-item">
           <div style="width:40px">
@@ -23,7 +24,7 @@
           </div>
         </div>
       </div>
-      <component :is="widget.TEMPLATE_TYPE" :params="widget.PARAMETERS" :isDrillDown="false">
+      <component :is="widget.TEMPLATE_TYPE" :params="widget.PARAMETERS" :isDrillDown="false" :view_ID="widget.VIEW_ID">
       </component>
     </div>
   </div>
@@ -123,6 +124,12 @@ export default {
   },
 
   async created() {
+
+    this.$on('bookmark-drill', (viewID,params,templateType,isDrillDown)=>{
+            console.log("widget lets make the save",viewID,params,templateType,isDrillDown)
+            this.BookMarkClick(viewID,params,templateType,isDrillDown)
+        })
+
     if (this.quickViewPopup.length > 0 && this.errorMsg.length === 0) {
       this.doneFetching = true
     }
@@ -170,6 +177,7 @@ export default {
     BookMarkClick(viewID,parameters,templateType, isDrillDown) {
       let view_id = viewID
       //save curr widget params for bookmark
+      console.log("parameters",parameters)
       this.$store.state.selected_view_param = Object.assign({},parameters)
       this.$store.state.selected_view_param["TEMPLATE_TYPE"] = templateType
       if(isDrillDown){

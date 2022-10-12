@@ -8,6 +8,14 @@
                 </v-radio-group>
             </div>
             <div class="kpi-carousel">
+                <span>
+                    <v-icon @click="DrillBookMarkClick(view_ID,params,params.template_type,true)" color="#935287" style="font-size: 30px"
+            v-if="isDrillDown && params.headline_config && params.headline_config.bookmark_enabled">{{
+                    true
+                    ? "mdi-bookmark"
+                    : "mdi-bookmark-outline"
+            }}</v-icon>
+                </span>
                 <span id="chartsHeaders" >
                     {{ params.chart_titles[activeTitle] }}
                 </span>
@@ -53,7 +61,6 @@
                     </v-carousel-item>
                 </v-carousel>
             </div>
-
         </div>  
         <div class="clock-drilldown"
          v-if="params.expand && !isDrillDown && params.drill_down_params"
@@ -63,6 +70,7 @@
             :is="params.drill_down_params.template_type"
             :params = params.drill_down_params
             :isDrillDown="true"
+            :view_ID="view_ID"
             :drillDataProp="drilldownData">
             </component>   
         </div>
@@ -89,7 +97,8 @@ export default {
     props:{
         isDrillDown:{type:Boolean},
         drillDataProp:{type:Object, default:()=>{}},
-        params:{type:Object,required:false}
+        params:{type:Object,required:false},
+        view_ID:{type:Number}
     },
     watch:{
         drillDataProp(){
@@ -117,6 +126,10 @@ export default {
         genericPIE: () => import('../widgets/genericPIE.vue')
     },
     methods:{
+        DrillBookMarkClick(view_ID,params,templatetype,isDrillDown){
+                console.log("click drill btn",view_ID,params,templatetype,isDrillDown)
+                this.$parent.$emit('drill-click',view_ID,params,templatetype,isDrillDown)
+        },
         // toggel drill down from a label click if click_open_drill_enabled = true in the config
         kpiBoxClick(i){
             this.activeTitle = i
@@ -149,6 +162,13 @@ export default {
     },
 
     async created(){
+        console.log("view",this.view_ID)
+        this.$on('drill-click', (viewID,params,templateType,isDrillDown)=>{
+            console.log("hey drill cllick",viewID,params,templateType,isDrillDown)
+            this.$parent.$emit("bookmark-drill",viewID,this.params,templateType,isDrillDown)
+        })
+
+
         if(!this.isDrillDown){
             await this.$myApi(this.params.data_url)
                 .then(response => {
