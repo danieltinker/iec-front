@@ -51,7 +51,7 @@
     </div>  
 </template>
 
-<script lang="ts">
+<script>
 import ThreeDotsNineDots from "../utils/ThreeDotsNineDots.vue";
 import BasicPie from "../widgets/BasicPie.vue";
 import FavoriteAxios from "../utils/FavoriteAxios";
