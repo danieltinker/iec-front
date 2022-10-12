@@ -75,28 +75,11 @@ Vue.mixin({
         this.END_FETCH()
       }
     },
-
-
   },
   computed: {
     ...mapGetters(["GET_USER_FAV","IS_FETCHING"]),
-
     getCurrentTheme(){
       return this.$store.getters.currentTheme
-    },
-    
-
-
-
-
-    // booktest(param)
-    getbookmarkIcon() {
-     console.log("ddd");
-      if (true) {
-        return "mdi-bookmark";
-      } else {
-        return "mdi-bookmark-outline";
-      }
     },
   }
 });

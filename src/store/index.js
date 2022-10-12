@@ -127,13 +127,11 @@ export default new Vuex.Store({
   mutations: {
     SET_FAVORITES_LIST(state, fav_list)
     {
-      //set user favorite list
       // console.log("setting favlist", fav_list)
       state.user_favorites = fav_list
     },
     SET_FETCHING(state, level)
     {
-      //set user favorite list
       // console.log("setting favlist", fav_list)
       state.fetching = level
     }

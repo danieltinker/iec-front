@@ -9,7 +9,7 @@
             </div>
             <div class="kpi-carousel">
                 <span>
-                    <v-icon @click="DrillBookMarkClick(view_ID,params,params.template_type,true)" color="#935287" style="font-size: 30px"
+                    <v-icon @click="BookMarkClick(view_ID,params,params.template_type,true)" color="#935287" style="font-size: 30px"
             v-if="isDrillDown && params.headline_config && params.headline_config.bookmark_enabled">{{
                     CheckBookmark(view_ID)
                     ? "mdi-bookmark"
@@ -89,9 +89,6 @@
 
 <script>
 import ThreeDotsNineDots from '../utils/ThreeDotsNineDots.vue'
-import axios from 'axios';
-import genericPieChart from './genericPieChart';
-// axios.defaults.timeout = 1000
 export default {
     // name:"basicKPI",
     props:{
@@ -126,19 +123,6 @@ export default {
         genericPIE: () => import('../widgets/genericPIE.vue')
     },
     methods:{
-        CheckBookmark(view_id) {
-      /* Function to check if viewId exist in user favorites list */
-      let fav_list = this.$store.state.user_favorites;
-      //check if we have object inside user favorites without using filter...
-      for (let i = 0; i < fav_list.length; i++) {
-        if (fav_list[i].VIEW_ID == view_id) return true;
-      }
-      return false
-    },
-        DrillBookMarkClick(view_ID,params,templatetype,isDrillDown){
-                console.log("click drill btn",view_ID,params,templatetype,isDrillDown)
-                this.$parent.$emit('drill-click',view_ID,params,templatetype,isDrillDown)
-        },
         // toggel drill down from a label click if click_open_drill_enabled = true in the config
         kpiBoxClick(i){
             this.activeTitle = i
@@ -171,12 +155,6 @@ export default {
     },
 
     async created(){
-        this.$on('drill-click', (viewID,params,templateType,isDrillDown)=>{
-            console.log("hey drill cllick",viewID,params,templateType,isDrillDown)
-            this.$parent.$emit("bookmark-drill",viewID,this.params,templateType,isDrillDown)
-        })
-
-
         if(!this.isDrillDown){
             await this.$myApi(this.params.data_url)
                 .then(response => {
@@ -211,7 +189,7 @@ export default {
         else{
             this.jsonData = this.drillDataProp
         }
-
+        
         //  flag used to render the charts syncronously only after data is ready
         if(this.errorMSG.length === 0){
             this.doneFetching = true
