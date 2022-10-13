@@ -1,8 +1,8 @@
 <template>
   <div style="margin-left:10px">
-    <label v-if="params.displayUpper" :style="'color : '+getCurrentTheme.one_bar.label_color">{{
-      upperLabel
-          }}</label>
+    <label v-if="params.displayUpper" :style="'color : '+getCurrentTheme.one_bar.label_color">
+        {{upperLabel}}
+    </label>
     <div
       :style="
         'background-color: '+ getCurrentTheme.one_bar.background_bar + '; height: 169px; transform: rotate(180deg); margin-left: auto; margin-right: auto; width: ' +

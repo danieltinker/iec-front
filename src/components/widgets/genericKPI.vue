@@ -51,8 +51,17 @@
                                     </span>
                                     <br>
                                     <span class="kpi-value">
-                                        {{ item.value }}
+                                        20 / {{ item.value }} 
                                     </span>
+                                    <!-- <div class="out-of">
+                                        <span class="kpi-value">
+                                            {{ item.value }}
+                                        </span>
+                                         /
+                                        <span class="kpi-value">
+                                            {{ item.value }}
+                                        </span>
+                                    </div> -->
                                     <br>
                                     <span :style="{color: getCurrentTheme.kpi.kpi_sec_value}">
                                         {{item.secondary_value}}
