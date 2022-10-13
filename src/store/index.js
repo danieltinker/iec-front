@@ -11,6 +11,7 @@ export default new Vuex.Store({
     selected_view_id: 100,
     selected_view_param: {}, //saved clicked bookmark view parameters
     custom_bookmark_data: {}, //save custom bookmark data want to save
+    max_favorite_popup:false, // open favorite popup
     serverAdrr: 'http://20.102.120.232:5080',
     quick_view: false,
     user_favorites: [],

@@ -11,6 +11,7 @@
       <!-- WIDGETS SPACE (CLOCKS) VERTICAL SCROLL  -->
       <WidgetSpace :class="{removeDisplay: this.$store.state.quick_view}" />
       <!-- {{$store.state.selected_view_param}} -->
+      <MaxFavoritePopup v-if="$store.state.max_favorite_popup"/>
     </v-main>
   </v-app>
 </template>
@@ -21,11 +22,12 @@ import HQNavBar from './components/global/HQNavBar.vue';
 import CategoryBar from './components/global/CategoryBar.vue';
 import UserFavorites from './components/global/UserFavorites.vue';
 import { mapActions } from 'vuex';
+import MaxFavoritePopup from './components/global/maxFavoritePopup.vue';
 export default {
     name: "App",
     data: () => ({
       }),
-    components: { WidgetSpace,HQNavBar, CategoryBar, UserFavorites },
+    components: { WidgetSpace, HQNavBar, CategoryBar, UserFavorites, MaxFavoritePopup },
     mounted(){
       this.$store.state.selected_hq_id = 100
       this.$store.state.selected_cat_id = 101      

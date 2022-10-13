@@ -194,7 +194,7 @@
     },
 
       exitPopup() {
-        this.$emit('exitPopUp')
+        this.$store.state.max_favorite_popup = false
         this.maxFav = false;
         this.emptyFav = false;
       },
@@ -225,11 +225,12 @@
         }
       },
   
-      save() {
+      async save() {
         for(let item in this.newFav){
             if(this.newFav[item].VIEW_ID){
+            console.log(this.newFav[item].VIEW_ID);
             this.$store.state.selected_view_id = this.newFav[item].VIEW_ID
-            FavoriteAxios.RemoveUserFav()
+            await FavoriteAxios.RemoveUserFav()
             .then((response) => {
               //if we got new info update user favorite list
               this.GetUserFav();
@@ -263,7 +264,7 @@
             }}
 
         this.maxFav = false;
-        this.$emit('exitPopUp')
+        this.$store.state.max_favorite_popup = false
       },
     },
   };

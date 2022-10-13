@@ -38,6 +38,7 @@ Vue.mixin({
     },
 
     BookMarkClick(viewID,parameters,templateType, isDrillDown) {
+      console.log("here");
       let view_id = viewID
       //save curr widget params for bookmark
       console.log("parameters",parameters)
@@ -72,6 +73,9 @@ Vue.mixin({
             })
             .catch((error) => {
               console.log("Got error adding user fav: ", error);
+              if(error.response.status == 405){
+                this.$store.state.max_favorite_popup = true
+              }
             });
         }
         this.END_FETCH()
