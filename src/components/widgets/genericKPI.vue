@@ -1,12 +1,21 @@
 <template>
     <div>
-        <div class="clock-main" style="text-align: center;" v-if="doneFetching">
+        <div v-if="doneFetching">
+        <div class="clock-main" style="text-align: center;" v-if="params.show_clock">
             <div class="flex-center">
                 <v-radio-group  v-model="params.selected_category" row id="districtRadioGroup" v-if=" params.data_category.length >= 2">
                     <v-radio v-for="(category) in params.data_category" :key="category" :label="category" :value="category" color="#935287"></v-radio>
                 </v-radio-group>
             </div>
             <div class="kpi-carousel">
+                <span>
+                    <v-icon @click="BookMarkClick(view_ID,params,params.template_type,true)" color="#935287" style="font-size: 30px"
+            v-if="isDrillDown && params.headline_config && params.headline_config.bookmark_enabled">{{
+                    CheckBookmark(view_ID)
+                    ? "mdi-bookmark"
+                    : "mdi-bookmark-outline"
+            }}</v-icon>
+                </span>
                 <span id="chartsHeaders" >
                     {{ params.chart_titles[activeTitle] }}
                 </span>
@@ -52,20 +61,20 @@
                     </v-carousel-item>
                 </v-carousel>
             </div>
-
-            <div class="clock-drilldown"
-             v-if="params.expand && !isDrillDown && params.drill_down_params"
-             :style="{backgroundColor:getCurrentTheme.genericClock.drill_background }">
-                <h1 class="drilldown-title" v-if="params.drill_down_params.headline_config">{{params.drill_down_params.headline_config.title}}</h1>
-                <component 
-                :is="params.drill_down_params.template_type"
-                :params = params.drill_down_params
-                :isDrillDown="true"
-                :drillDataProp="drilldownData">
-                </component>   
-            </div>
-    </div>  
-
+        </div>  
+        <div class="clock-drilldown"
+         v-if="params.expand && !isDrillDown && params.drill_down_params"
+         :style="{backgroundColor:getCurrentTheme.genericClock.drill_background }">
+            <h1 class="drilldown-title" v-if="params.drill_down_params.headline_config">{{params.drill_down_params.headline_config.title}}</h1>
+            <component 
+            :is="params.drill_down_params.template_type"
+            :params = params.drill_down_params
+            :isDrillDown="true"
+            :view_ID="view_ID"
+            :drillDataProp="drilldownData">
+            </component>   
+        </div>
+    </div>
     <div class="loader" v-else>
         <div class="loader" v-if="!isErrorMsg">
             <v-progress-circular
@@ -80,15 +89,13 @@
 
 <script>
 import ThreeDotsNineDots from '../utils/ThreeDotsNineDots.vue'
-import axios from 'axios';
-import genericPieChart from './genericPieChart';
-// axios.defaults.timeout = 1000
 export default {
     // name:"basicKPI",
     props:{
         isDrillDown:{type:Boolean},
         drillDataProp:{type:Object, default:()=>{}},
-        params:{type:Object,required:false}
+        params:{type:Object,required:false},
+        view_ID:{type:Number}
     },
     watch:{
         drillDataProp(){
@@ -182,7 +189,7 @@ export default {
         else{
             this.jsonData = this.drillDataProp
         }
-
+        
         //  flag used to render the charts syncronously only after data is ready
         if(this.errorMSG.length === 0){
             this.doneFetching = true

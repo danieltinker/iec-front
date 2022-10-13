@@ -12,7 +12,11 @@
       <v-col cols="4" style="text-align: left;padding-top:0;padding:bottom:0;"
         ><v-icon
           @click="$emit('closeQuickView')"
-          style="font-size: 30px"
+          :style="
+              'font-size: 30px ' +
+              '; color: ' +
+              getCurrentTheme.app_color
+            "
           >mdi-close</v-icon
         ></v-col
       >

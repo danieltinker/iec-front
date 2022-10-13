@@ -1,7 +1,8 @@
 <template >
   <div v-if="doneFetching">
+    
     <div :style="'background-color:' + getCurrentTheme.headline.background" class=" mt-3" v-for="(widget, index) in responseDataComp" :key="index">
-      <div class="headline-toolbar">
+      <div class="headline-toolbar" v-if="widget.PARAMETERS.show_clock">
         <div class="grid-item">
           <div style="width:40px">
           <ThreeDotsNineDots class="grid-item" :isExpand="widget.PARAMETERS.expand"
@@ -10,11 +11,11 @@
           </div>
         </div>
         <h1 :style="'color:' + getCurrentTheme.headline.title_color" class="headline-title grid-item" v-if="widget.PARAMETERS.headline_config">
-          {{ widget.PARAMETERS.headline_config.title }}
+          {{ widget.PARAMETERS.headline_config.title }} {{widget.VIEW_ID}}
         </h1>
         <div class="grid-item">
           <div style="width:40px">
-          <v-icon @click="BookMarkClick(widget)" color="#935287" style="font-size: 30px"
+          <v-icon @click="BookMarkClick(widget.VIEW_ID,widget.PARAMETERS,widget.TEMPLATE_TYPE,false)" color="#935287" style="font-size: 30px"
             v-if="widget.PARAMETERS.headline_config && widget.PARAMETERS.headline_config.bookmark_enabled">{{
             CheckBookmark(widget.VIEW_ID)
             ? "mdi-bookmark"
@@ -23,7 +24,7 @@
           </div>
         </div>
       </div>
-      <component :is="widget.TEMPLATE_TYPE" :params="widget.PARAMETERS" :isDrillDown="false">
+      <component :is="widget.TEMPLATE_TYPE" :params="widget.PARAMETERS" :isDrillDown="false" :view_ID="widget.VIEW_ID">
       </component>
     </div>
   </div>
@@ -93,7 +94,7 @@ export default {
       // fetch the widgets views from the DB
       async handler() {
         await axios
-            .get("http://20.102.120.232:5080/shavit/mobile/views/" + 600 + "/" + 1, { params: { sid: "xxx" } })
+            .get("http://20.102.120.232:5080/shavit/mobile/views/" + 700 + "/" + 1, { params: { sid: "xxx" } })
             .then((response) => {
               this.responseData = response.data;
               this.doneFetching = true;
@@ -107,7 +108,7 @@ export default {
         this.fetch_interval = setInterval(async ()=>{
           console.log("Refreshing Page")
           await axios
-            .get("http://20.102.120.232:5080/shavit/mobile/views/" + 600 + "/" + 1, { params: { sid: "xxx" } })
+            .get("http://20.102.120.232:5080/shavit/mobile/views/" + 700 + "/" + 1, { params: { sid: "xxx" } })
             .then((response) => {
               this.responseData = response.data;
               this.doneFetching = true;
@@ -123,13 +124,18 @@ export default {
   },
 
   async created() {
+
+    this.$on('bookmark-drill', (viewID,params,templateType,isDrillDown)=>{
+            console.log("widget lets make the save",viewID,params,templateType,isDrillDown)
+            this.BookMarkClick(viewID,params,templateType,isDrillDown)
+        })
+
     if (this.quickViewPopup.length > 0 && this.errorMsg.length === 0) {
       this.doneFetching = true
     }
     //  get hqs By sid
     //  listen to store HQ,Category from user DATA RAN AND TOMMY PLEASE FINISH 
     //  fetch the server response GET /mobile/views/{hq_id}/{category_id}?sessoinid=xxx .
-
     //function to get last user favorite list
     this.GetUserFav();
   },
@@ -152,60 +158,7 @@ export default {
 
   methods:
   {
-    ...mapActions(["SET_FAV_LIST","DO_FETCH","END_FETCH"]),
-    //Get user favorites
-    GetUserFav: function () {
-      this.SET_FAV_LIST()
-    },
-
-    //Get user favorites
-
-    CheckBookmark(view_id) {
-      /*
-          Function to check if viewId exist in user favorites list
-      */
-      let fav_list = this.$store.state.user_favorites;
-      //check if we have object inside user favorites without using filter...
-      for (let i = 0; i < fav_list.length; i++) {
-        if (fav_list[i].VIEW_ID == view_id) return true;
-      }
-      return false
-    },
-
-
-    BookMarkClick(widget) {
-      let view_id = widget.VIEW_ID
-      //save curr widget params for bookmark
-      this.$store.state.selected_view_param = widget.PARAMETERS
-      this.$store.state.selected_view_param["TEMPLATE_TYPE"] = widget.TEMPLATE_TYPE
-      ///Maybe to save custom things to custom_bookmark_data in store
-      this.$store.state.selected_view_id = view_id;
-      if (this.IS_FETCHING === false) {
-        this.DO_FETCH()
-        if (this.CheckBookmark(view_id)) {
-          //already bookmarked remove fav
-          FavoriteAxios.RemoveUserFav()
-            .then((response) => {
-              //if we got new info update user favorite list
-              this.GetUserFav();
-            })
-            .catch((error) => {
-              console.log("Got error removing user fav: ", error);
-            });
-        } else {
-          //add user fav
-          FavoriteAxios.AddUserFav()
-            .then((response) => {
-              //if we got new info update user favorite list
-              this.GetUserFav();
-            })
-            .catch((error) => {
-              console.log("Got error adding user fav: ", error);
-            });
-        }
-        this.END_FETCH()
-      }
-    },
+   
   },
 };
 </script>
