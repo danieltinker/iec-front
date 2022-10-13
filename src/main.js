@@ -4,6 +4,8 @@ import router from "./router";
 import store from "./store";
 import vuetify from "./plugins/vuetify";
 import FavoriteAxios from "./components/utils/FavoriteAxios";
+import VueBottomSheet from "@webzlodimir/vue-bottom-sheet";
+import { mapActions, mapGetters } from "vuex";
 
 import {myApi} from "./services/myAxiosRequests";
 Vue.config.productionTip = false;
