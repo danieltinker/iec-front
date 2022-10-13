@@ -57,6 +57,7 @@ import FavoriteAxios from "../utils/FavoriteAxios";
 import genericKPI from '../widgets/genericKPI.vue';
 import genericPIE from "../widgets/genericPIE.vue";
 import genericBAR from "../widgets/genericBAR.vue";
+import genericKPITWO from "../widgets/genericKPITWO.vue"
 import axios from "axios";
 import { mapActions, mapGetters } from "vuex";
 import MaxFavoritePopup from "./maxFavoritePopup.vue";
@@ -67,7 +68,8 @@ export default {
     genericKPI,
     genericPIE,
     genericBAR,
-    MaxFavoritePopup
+    MaxFavoritePopup,
+    genericKPITWO
 },
   props: {
     quickViewPopup: {
