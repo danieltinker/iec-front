@@ -54,7 +54,9 @@
                 :is="params.drill_down_params.template_type"
                 :params = params.drill_down_params
                 :isDrillDown="true"
-                :drillDataProp="drilldownData">
+                :view_ID="view_ID"
+                :drillDataProp="drilldownData"
+                :parentsParam="params">
                 </component>   
             </div>
     </div>  
