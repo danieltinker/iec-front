@@ -7,6 +7,16 @@
                 </v-radio-group>
             </div>
             <div class="bar-carousel">
+
+                <span>
+                    <v-icon @click="BookMarkClick(view_ID,parentsParam,params.template_type,true)" color="#935287" style="font-size: 30px"
+                    v-if="isDrillDown && params.headline_config && params.headline_config.bookmark_enabled">{{
+                            CheckBookmark(view_ID)
+                            ? "mdi-bookmark"
+                            : "mdi-bookmark-outline"
+                    }}</v-icon>
+                </span>
+
                 <span id="chartsHeaders" >
                     {{ params.chart_titles[activeTitle] }}
                 </span>
@@ -104,7 +114,9 @@ export default {
     props:{
         isDrillDown:{type:Boolean},
         drillDataProp:{type:Object, default:()=>{}},
-        params:{type:Object,required:false}
+        params:{type:Object,required:false},
+        view_ID:{type:Number},
+        parentsParam:{type:Object}
     },
     watch:{
         drillDataProp(){
