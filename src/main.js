@@ -6,8 +6,8 @@ import vuetify from "./plugins/vuetify";
 import FavoriteAxios from "./components/utils/FavoriteAxios";
 
 import {myApi} from "./services/myAxiosRequests";
-import { mapActions, mapGetters } from "vuex";
 Vue.config.productionTip = false;
+Vue.use(VueBottomSheet);
 Vue.prototype.$pieSize = 285;
 Vue.prototype.$myApi = myApi
 // function booktest(p) {return {data: function(){return{test: true}}}}
