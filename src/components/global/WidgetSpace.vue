@@ -160,60 +160,11 @@ export default {
 
   methods:
   {
-    ...mapActions(["SET_FAV_LIST","DO_FETCH","END_FETCH"]),
     //Get user favorites
     GetUserFav: function () {
       this.SET_FAV_LIST()
     },
-
     //Get user favorites
-
-    CheckBookmark(view_id) {
-      /*
-          Function to check if viewId exist in user favorites list
-      */
-      let fav_list = this.$store.state.user_favorites;
-      //check if we have object inside user favorites without using filter...
-      for (let i = 0; i < fav_list.length; i++) {
-        if (fav_list[i].VIEW_ID == view_id) return true;
-      }
-      return false
-    },
-
-
-    BookMarkClick(widget) {
-      let view_id = widget.VIEW_ID
-      //save curr widget params for bookmark
-      this.$store.state.selected_view_param = widget.PARAMETERS
-      this.$store.state.selected_view_param["TEMPLATE_TYPE"] = widget.TEMPLATE_TYPE
-      ///Maybe to save custom things to custom_bookmark_data in store
-      this.$store.state.selected_view_id = view_id;
-      if (this.IS_FETCHING === false) {
-        this.DO_FETCH()
-        if (this.CheckBookmark(view_id)) {
-          //already bookmarked remove fav
-          FavoriteAxios.RemoveUserFav()
-            .then((response) => {
-              //if we got new info update user favorite list
-              this.GetUserFav();
-            })
-            .catch((error) => {
-              console.log("Got error removing user fav: ", error);
-            });
-        } else {
-          //add user fav
-          FavoriteAxios.AddUserFav()
-            .then((response) => {
-              //if we got new info update user favorite list
-              this.GetUserFav();
-            })
-            .catch((error) => {
-              console.log("Got error adding user fav: ", error);
-            });
-        }
-        this.END_FETCH()
-      }
-    },
   },
 };
 </script>
