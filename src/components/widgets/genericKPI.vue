@@ -10,16 +10,13 @@
             <div class="kpi-carousel">
                 <span>
                     <v-icon @click="BookMarkClick(view_ID,parentsParam,params.template_type,true)" color="#935287" style="font-size: 30px"
-            v-if="isDrillDown && params.headline_config && params.headline_config.bookmark_enabled">{{
-                    CheckBookmark(view_ID)
-                    ? "mdi-bookmark"
-                    : "mdi-bookmark-outline"
-            }}</v-icon>
+                    v-if="isDrillDown && params.headline_config && params.headline_config.bookmark_enabled">{{
+                            CheckBookmark(view_ID)
+                            ? "mdi-bookmark"
+                            : "mdi-bookmark-outline"
+                    }}</v-icon>
                 </span>
-                <span id="chartsHeaders" >
-                    {{ params.chart_titles[activeTitle] }}
-                </span>
-
+                
                 <v-carousel
                   hide-delimiters
                   :show-arrows="showArrows"
@@ -29,6 +26,10 @@
                   v-model="carouselActiveIndex"
                   height=auto
                 >
+                <span id="chartsHeaders" >
+                    {{ params.chart_titles[carouselActiveIndex] }}
+                </span>
+
                     <template  v-slot:next="{ on, attr }">
                         <img v-on="on" v-bind="attr" src="../../assets/playRight.svg"/>
                     </template>
