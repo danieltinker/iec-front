@@ -67,6 +67,12 @@ export default new Vuex.Store({
           "card_background_color":"#282828",
           "card_subtitle":"FFFFFF"
         },
+        "cyber_status":{
+          "box_color_1":"#FFFFFF",
+          "box_color_2":"#FFFFFF",
+          "color_1":"#282828",
+          "color_2":"#121212",
+        },
         "global":{} // global style
       },
       "lightTheme":{
@@ -116,6 +122,12 @@ export default new Vuex.Store({
           "card_color":"#000000",
           "card_background_color":"#FFFFFF",
           "card_subtitle":"606060"
+        },
+        "cyber_status":{
+          "box_color_1":"#010101",
+          "box_color_2":"#606060",
+          "color_1":"#FFFFFF",
+          "color_2":"#EBEBEB",
         },
         "global":{} // global style
       }

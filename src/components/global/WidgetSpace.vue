@@ -58,6 +58,7 @@ import genericKPI from '../widgets/genericKPI.vue';
 import genericPIE from "../widgets/genericPIE.vue";
 import genericBAR from "../widgets/genericBAR.vue";
 import genericKPITWO from "../widgets/genericKPITWO.vue"
+import cyberStatus from "../widgets/cyberStatus.vue"
 import axios from "axios";
 import { mapActions, mapGetters } from "vuex";
 import MaxFavoritePopup from "./maxFavoritePopup.vue";
@@ -69,7 +70,8 @@ export default {
     genericPIE,
     genericBAR,
     MaxFavoritePopup,
-    genericKPITWO
+    genericKPITWO,
+    cyberStatus
 },
   props: {
     quickViewPopup: {
