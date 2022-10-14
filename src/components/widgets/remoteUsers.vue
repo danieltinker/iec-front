@@ -1,0 +1,92 @@
+<template>
+    <div :style="'background-color:' + getCurrentTheme.cyber_status.color_1" style="position: relative">
+  
+        <div class="updateDate">
+          <p v-if="lastUpdateTimestamp">
+            <strong>נכון לתאריך:</strong>
+            {{ lastUpdateTimestamp }}
+          </p>
+        </div>
+  
+        <div class="container">
+          <!-- title -->
+          <div class="statusBox">
+            <h1 style="font-family: almoni-ultralight; font-size: 22px">
+              {{ remoteUsers }}
+            </h1>
+          </div>
+        </div>
+    </div>
+  </template>
+  
+  <script>
+  import axios from 'axios'
+  export default {
+    props: {
+      params:{type:Object,required:false},
+      view_ID:{type:Number},
+    },
+    async created() {
+        await axios
+    .post("http://localhost:5000/shavit/tikshuv/metric/query/system/remote_users?sid=518e6116-d1a2-49ee-bcca-90ad295cded6",{params: {
+            sid: this.$store.state.currUser.sessionId
+        }
+        })
+    .then((response) => {
+        if (response.data.success) {
+            console.log("herhehehe",response);
+          // get the data
+          console.log(response.data.data[0].last_update_timestamp);
+          this.lastUpdateTimestamp = response.data.data[0].last_update_timestamp;
+  
+        if (response.data.data[0].metrics_data.length > 0) {
+          this.remoteUsers = response.data.data[0].metrics_data[0].details.value;
+        }
+        }
+    })
+    .catch((err) => console.log(err));
+    },
+    data() {
+      return {
+        lastUpdateTime: "",
+        lastUpdateTimestamp: true,
+        remoteUsers: 0,
+      };
+    },
+  };
+  </script>
+  
+  
+  <style scoped>
+  .container {
+    position: absolute;
+    top: 30%;
+  }
+  .updateDate {
+    height: 300px;
+    margin-top: 16px;
+    font-family: almoni-light;
+    font-size: 16px;
+    text-align: center;
+    margin-bottom: 0px;
+  }
+
+  .statusBox {
+    background-color: #ff9900;
+    text-align: center;
+    line-height: 50px;
+    margin: auto;
+    width: 50%;
+    margin-top: 44px;
+    width: 180px;
+    height: 50px;
+  }
+  
+  .statusBox h1 {
+    color: #ffffff;
+    font-size: 18px;
+    text-align: center;
+    justify-content: center;
+    justify-items: center;
+  }
+  </style>
