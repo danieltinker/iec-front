@@ -4,7 +4,7 @@
 * @param {Object} [innerText] - ineer text show in pie
 * @param {Object} [innerNum] - inner num Total
 */
-export function baseTemplate(myJson,innerText,innerNum){
+export function baseTemplate(myJson,innerText,innerNum,precentage){
     innerNum
     //default colors static Array
     const defaultColors = ["#a8699d","#38ae10","#a8699d","#38ae10","#a8699d","#38ae10"]
@@ -18,6 +18,7 @@ export function baseTemplate(myJson,innerText,innerNum){
         labels: labels,
         datasets: [
             {
+            isPrecentage:precentage,
             pieInnerText:innerText,
             pieInnerNum:data.reduce((a,b)=> a+b) ,
             backgroundColor: myColors,
@@ -79,6 +80,7 @@ export const pluginInnerContentHelper = (thisChart,myTheme) => {
     thisChart.addPlugin({
         id:"my-plugin",
         afterDraw: function (chart) {
+            const precentage = (num)=> {return (num / (data.datasets[0].data.reduce((a, b) => a + b,0) / 100)).toFixed(0) + "%";}
             var data = chart.tooltip._data
             var items = Object.values(Object.values(data.datasets)[0]._meta)[0].data
             var MyOuterRadius = []
@@ -94,10 +96,14 @@ export const pluginInnerContentHelper = (thisChart,myTheme) => {
             Math.max(...MyOuterRadius) === Math.min(...MyOuterRadius) ? ctx.fillStyle = myTheme :  ctx.fillStyle = chart.data.datasets[0].backgroundColor[MyOuterRadius.indexOf(Math.max(...MyOuterRadius))]
             var text = chart.tooltip._data.datasets[0].pieInnerText
             var text2 = chart.tooltip._data.datasets[0].pieInnerNum
-            ctx.fillText(text, chart.width / 2, chart.height / 2 - 25,200);
+            let number = data.datasets[0].isPrecentage? 45 : 25
+            let heightNum = data.datasets[0].isPrecentage? 0 : 25
+            var text24 = precentage(chart.tooltip._data.datasets[0].pieInnerNum)
+            ctx.fillText(text, chart.width / 2, chart.height / 2 - number,200);
             ctx.fillStyle = myTheme
             ctx.font = "32px" + " almoni-medium"
-            ctx.fillText(text2, chart.width / 2, chart.height / 2 + 25,200);
+            ctx.fillText(text2, chart.width / 2, chart.height / 2 + heightNum,200);
+            if(data.datasets[0].isPrecentage){ctx.fillText(text24, chart.width / 2, chart.height / 2 + number,200);}
             ctx.save();
           }
     })

@@ -28,7 +28,7 @@
     },
     async created() {
         await axios
-    .post("http://localhost:5000/shavit/tikshuv/metric/query/system/remote_users?sid=518e6116-d1a2-49ee-bcca-90ad295cded6",{params: {
+    .post("http://localhost:5000/shavit/tikshuv/metric/query/system/remote_users?sid=36727725-ddd1-4bf8-959e-ff137b3510b4",{params: {
             sid: this.$store.state.currUser.sessionId
         }
         })

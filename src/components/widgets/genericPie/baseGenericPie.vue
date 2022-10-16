@@ -34,14 +34,14 @@
 export default {
   watch:{
     chartData(){
-      this.TemplateData = baseTemplate(this.chartData,this.configData.pieInnerText,this.configData.pieInnerNum)
+      this.TemplateData = baseTemplate(this.chartData,this.configData.pieInnerText,this.configData.pieInnerNum,this.isPrecentage)
     }
     
   },
   created(){
     if(Object.keys(this.chartData).length !== 0){
       //make template base on helpers function
-      this.TemplateData = baseTemplate(this.chartData,this.configData.pieInnerText,this.configData.pieInnerNum)
+      this.TemplateData = baseTemplate(this.chartData,this.configData.pieInnerText,this.configData.pieInnerNum,this.isPrecentage)
     }
   },
   components: {
@@ -49,7 +49,8 @@ export default {
   },
   props: {
     chartData: { type: Array, required: false },
-    isDrill:{type:Boolean}
+    isDrill:{type:Boolean},
+    isPrecentage:{type:Boolean}
   },
   data(){
         return{

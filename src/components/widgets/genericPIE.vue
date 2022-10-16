@@ -37,7 +37,7 @@
 
                     <v-carousel-item v-for="(bararr,index) in jsonData[params.selected_category]" :key="index">
                         <div class="PIEcontainer" dir="rtl">
-                              <BaseGenericPie  :chartData="bararr" :isDrill="isDrillDown"/>
+                              <BaseGenericPie  :chartData="bararr" :isDrill="isDrillDown" :isPrecentage="params.isPrecentage"/>
                               
                         </div>
                     </v-carousel-item>
