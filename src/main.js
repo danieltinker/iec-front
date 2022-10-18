@@ -57,7 +57,7 @@ Vue.mixin({
         if (this.CheckBookmark(view_id)) {
           //already bookmarked remove fav
           FavoriteAxios.RemoveUserFav()
-            .then((response) => {
+            .then(() => {
               //if we got new info update user favorite list
               this.GetUserFav();
             })
@@ -67,7 +67,7 @@ Vue.mixin({
         } else {
           //add user fav
           FavoriteAxios.AddUserFav()
-            .then((response) => {
+            .then(() => {
               //if we got new info update user favorite list
               this.GetUserFav();
             })

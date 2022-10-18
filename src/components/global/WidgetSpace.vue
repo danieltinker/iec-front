@@ -53,7 +53,6 @@
 <script>
 import ThreeDotsNineDots from "../utils/ThreeDotsNineDots.vue";
 import BasicPie from "../widgets/BasicPie.vue";
-import FavoriteAxios from "../utils/FavoriteAxios";
 import genericKPI from '../widgets/genericKPI.vue';
 import genericPIE from "../widgets/genericPIE.vue";
 import genericBAR from "../widgets/genericBAR.vue";
@@ -61,7 +60,7 @@ import genericKPITWO from "../widgets/genericKPITWO.vue"
 import cyberStatus from "../widgets/cyberStatus.vue"
 import remoteUsers from "../widgets/remoteUsers.vue"
 import axios from "axios";
-import { mapActions, mapGetters } from "vuex";
+import { mapGetters } from "vuex";
 import MaxFavoritePopup from "./maxFavoritePopup.vue";
 export default {
   components: {

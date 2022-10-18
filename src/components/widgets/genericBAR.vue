@@ -1,3 +1,4 @@
+<!-- eslint-disable -->
 <template>
     <div>
         <div class="clock-main" style="text-align: center;" v-if="doneFetching">
@@ -41,7 +42,6 @@
                         <div class="barcontainer" dir="rtl">
                             <v-row dir="rtl"
                                 style="margin-top:10px;margin-bottom: 20px; place-content: center"
-
                             >
                             <oneBar  v-for="(item,index) in BARarr" :isSelectedIndex="activeIndex===index" :isSelected="activeIndex!= -1" :key="index" v-on:click.native="barBoxClick(index)" :params="params" :data="item.color ? item.max_value ? item : getTotal(BARarr,item) : item.max_value ? getColor(item,index) : getColor(getTotal(BARarr,item),index)" />
                         </v-row>
@@ -157,10 +157,12 @@ export default {
             }
             if(this.params.click_open_drill_enabled){
                 if(!this.params.expand ||  i != this.clicked_index){
+                    // eslint-disable-next-line
                     this.params.expand = true
                     this.activeIndex = i
                 }
                 else{
+                    // eslint-disable-next-line
                     this.params.expand = false
                     this.activeIndex = -1
                 }

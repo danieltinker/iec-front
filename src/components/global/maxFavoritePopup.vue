@@ -231,7 +231,7 @@
             console.log(this.newFav[item].VIEW_ID);
             this.$store.state.selected_view_id = this.newFav[item].VIEW_ID
             await FavoriteAxios.RemoveUserFav()
-            .then((response) => {
+            .then(() => {
               //if we got new info update user favorite list
               this.GetUserFav();
             })
@@ -248,7 +248,7 @@
                this.$store.state.selected_view_param["TEMPLATE_TYPE"] = this.userCurrentFav[item].TEMPLATE_TYPE
                this.$store.state.selected_view_id = this.currentViewId;
                FavoriteAxios.AddUserFav()
-                  .then((response) => {
+                  .then(() => {
                     //if we got new info update user favorite list
                       this.GetUserFav();
                   })

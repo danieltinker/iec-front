@@ -35,7 +35,6 @@
        </div>
     </div>
 </template>
-
 <script>
 // import { computed } from 'vue';
 import WidgetSpace from './WidgetSpace.vue';
@@ -45,9 +44,13 @@ export default {
       WidgetSpace
     },
     computed: {
+      // eslint-disable-next-line
       quickData: function(){
         //modify data to work in WidgetSpaceTwo correct
+
+        // eslint-disable-next-line 
         this.mydata.STATE['VIEW_ID'] = this.mydata.VIEW_ID
+        // eslint-disable-next-line 
         this.mydata.STATE["TEMPLATE_TYPE"] = this.mydata.STATE.PARAMETERS.TEMPLATE_TYPE
       
         return [this.mydata.STATE]

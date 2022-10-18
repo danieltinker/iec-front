@@ -1,3 +1,4 @@
+<!-- eslint-disable -->
 <template>
     <div>
         <div class="clock-main" style="text-align: center;" v-if="doneFetching">
@@ -123,10 +124,12 @@ export default {
             }
             if(this.params.click_open_drill_enabled){
                 if(!this.params.expand ||  i != this.clicked_index){
+                     // eslint-disable-next-line
                     this.params.expand = true
                     this.activeIndex = i
                 }
                 else{
+                     // eslint-disable-next-line
                     this.params.expand = false
                     this.activeIndex = -1
                 }
