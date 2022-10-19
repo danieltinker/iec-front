@@ -60,6 +60,7 @@ import genericKPITWO from "../widgets/genericKPITWO.vue"
 import cyberStatus from "../widgets/cyberStatus.vue"
 import remoteUsers from "../widgets/remoteUsers.vue"
 import genericLIST from "../widgets/genericLIST.vue"
+import totalElectricityLevel from "../widgets/totalElectricityLevel"
 import axios from "axios";
 import { mapGetters } from "vuex";
 import MaxFavoritePopup from "./maxFavoritePopup.vue";
@@ -74,7 +75,8 @@ export default {
     genericKPITWO,
     cyberStatus,
     remoteUsers,
-    genericLIST
+    genericLIST,
+    totalElectricityLevel
 },
   props: {
     quickViewPopup: {
