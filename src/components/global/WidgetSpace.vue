@@ -57,6 +57,7 @@ import genericKPI from '../widgets/genericKPI.vue';
 import genericPIE from "../widgets/genericPIE.vue";
 import genericBAR from "../widgets/genericBAR.vue";
 import genericKPITWO from "../widgets/genericKPITWO.vue"
+import genericGraph from "../widgets/genericGraph.vue"
 import cyberStatus from "../widgets/cyberStatus.vue"
 import remoteUsers from "../widgets/remoteUsers.vue"
 import axios from "axios";
@@ -69,8 +70,9 @@ export default {
     genericKPI,
     genericPIE,
     genericBAR,
-    MaxFavoritePopup,
+    genericGraph,
     genericKPITWO,
+    MaxFavoritePopup,
     cyberStatus,
     remoteUsers
 },
