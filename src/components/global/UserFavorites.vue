@@ -2,7 +2,7 @@
     <div dir="rtl" class="mb-2 container">
     <div>
       <div v-if="GET_USER_FAV.length == 0">
-        <v-btn color="#935287" outlined fab class="ml-4 story" @click="openQuickView('plus')"><img src="../../assets/FavBar/plus.svg" /></v-btn>
+        <v-btn color="#935287" outlined fab class="ml-4 storyClear" @click="openQuickView('plus')"><img src="../../assets/FavBar/plus.svg" /></v-btn>
 
 
 <!-- {{GET_USER_FAV}} -->
@@ -31,7 +31,7 @@
 
 
 
-        <v-btn v-for="index in 6 - GET_USER_FAV.length" :key="index" color="#935287" outlined fab class="ml-4 story"> </v-btn>
+        <v-btn v-for="index in 6 - GET_USER_FAV.length" :key="index" color="#935287" outlined fab class="ml-4 storyClear"> </v-btn>
               
         
     </div >
@@ -164,6 +164,10 @@ export default {
 .fav-btn {
   display: flex;
   flex-direction: column;
+  margin-left:10px;
+  text-align: center;
+
+
 }
 .container {
   /* background-color: rgb(244, 244, 244); */
@@ -176,19 +180,11 @@ export default {
 
 .container div:first-child {
   display: flex;
-  align-self: center;
-
 }
 .favContainer {
   direction: rtl;
   right: 0;
   display: grid;
-}
-
-.story {
-  box-shadow: none;
-  height: 58px;
-  width: 58px;
 }
 
 .favoriteLabels {
@@ -228,6 +224,14 @@ export default {
   box-shadow: none;
   height: 58px;
   width: 58px;
+  margin-left:auto !important
+}
+
+.storyClear {
+  box-shadow: none;
+  height: 58px;
+  width: 58px;
+  margin-left:10px !important
 }
 
 .favoriteLabels {
