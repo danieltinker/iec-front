@@ -59,6 +59,7 @@ import genericBAR from "../widgets/genericBAR.vue";
 import genericKPITWO from "../widgets/genericKPITWO.vue"
 import cyberStatus from "../widgets/cyberStatus.vue"
 import remoteUsers from "../widgets/remoteUsers.vue"
+import genericLIST from "../widgets/genericLIST.vue"
 import axios from "axios";
 import { mapGetters } from "vuex";
 import MaxFavoritePopup from "./maxFavoritePopup.vue";
@@ -72,7 +73,8 @@ export default {
     MaxFavoritePopup,
     genericKPITWO,
     cyberStatus,
-    remoteUsers
+    remoteUsers,
+    genericLIST
 },
   props: {
     quickViewPopup: {
