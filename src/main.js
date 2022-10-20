@@ -8,8 +8,13 @@ import VueBottomSheet from "@webzlodimir/vue-bottom-sheet";
 import { mapActions, mapGetters } from "vuex";
 
 import {myApi} from "./services/myAxiosRequests";
-Vue.config.productionTip = false;
+import VueApexCharts from 'vue-apexcharts'
+
+Vue.use(VueApexCharts)
 Vue.use(VueBottomSheet);
+Vue.component('apexchart', VueApexCharts)
+
+Vue.config.productionTip = false;
 Vue.prototype.$pieSize = 285;
 Vue.prototype.$myApi = myApi
 // function booktest(p) {return {data: function(){return{test: true}}}}
