@@ -35,7 +35,8 @@ export default{
                     }
                 }
         this.option.xaxis.categories = ['1','2','3','4','5']
-
+        console.log(this.option.xaxis.axisBorder.color )
+        // this.option.xaxis.axisBorder.color = "black"
         this.showData = true
     }
 }
