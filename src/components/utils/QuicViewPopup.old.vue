@@ -68,7 +68,6 @@
     },
     computed: {
       selectedQuickView() {
-        console.log(this.$store.state.selectedQuickView)
         return this.$store.state.selectedQuickView;
       },
       // getProps(){

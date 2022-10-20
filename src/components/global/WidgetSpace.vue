@@ -57,6 +57,7 @@ import genericKPI from '../widgets/genericKPI.vue';
 import genericPIE from "../widgets/genericPIE.vue";
 import genericBAR from "../widgets/genericBAR.vue";
 import genericKPITWO from "../widgets/genericKPITWO.vue"
+import genericGraph from "../widgets/genericGraph.vue"
 import cyberStatus from "../widgets/cyberStatus.vue"
 import remoteUsers from "../widgets/remoteUsers.vue"
 import genericLIST from "../widgets/genericLIST.vue"
@@ -70,8 +71,9 @@ export default {
     genericKPI,
     genericPIE,
     genericBAR,
-    MaxFavoritePopup,
+    genericGraph,
     genericKPITWO,
+    MaxFavoritePopup,
     cyberStatus,
     remoteUsers,
     genericLIST
@@ -95,7 +97,7 @@ export default {
     // user selected devision
     "$store.state.selected_hq_id": {
       async handler() {
-        console.log(" GET /mobile/views/{hq_id}/{category_id}?sessoinid=xxx .");
+        // console.log(" GET /mobile/views/{hq_id}/{category_id}?sessoinid=xxx .");
       },
     },
     //user selected category
@@ -103,7 +105,7 @@ export default {
       // fetch the widgets views from the DB
       async handler() {
         await axios
-            .get("http://20.102.120.232:5080/shavit/mobile/views/" + 600 + "/" + 1, { params: { sid: "xxx" } })
+            .get("http://20.102.120.232:5080/shavit/mobile/views/" + 700 + "/" + 1, { params: { sid: "xxx" } })
             .then((response) => {
               this.responseData = response.data;
               this.doneFetching = true;
@@ -117,7 +119,7 @@ export default {
         this.fetch_interval = setInterval(async ()=>{
           console.log("Refreshing Page")
           await axios
-            .get("http://20.102.120.232:5080/shavit/mobile/views/" + 600 + "/" + 1, { params: { sid: "xxx" } })
+            .get("http://20.102.120.232:5080/shavit/mobile/views/" + 700 + "/" + 1, { params: { sid: "xxx" } })
             .then((response) => {
               this.responseData = response.data;
               this.doneFetching = true;

@@ -150,12 +150,10 @@ export default new Vuex.Store({
   mutations: {
     SET_FAVORITES_LIST(state, fav_list)
     {
-      // console.log("setting favlist", fav_list)
       state.user_favorites = fav_list
     },
     SET_FETCHING(state, level)
     {
-      // console.log("setting favlist", fav_list)
       state.fetching = level
     }
   },
@@ -166,7 +164,6 @@ export default new Vuex.Store({
       */
         commit("SET_FETCHING", true)
        FavoriteAxios.getUserFav().then((response) => {
-          // console.log("user fav: ",response.data);
           commit("SET_FAVORITES_LIST", response.data)
           commit("SET_FETCHING", false)
 

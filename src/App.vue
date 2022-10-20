@@ -47,7 +47,6 @@ export default {
     },
     computed:{
       getCurrentTheme(){
-        // console.log(this.$store.getters.currentTheme.theme);
         return this.$store.getters.currentTheme
     }
     }

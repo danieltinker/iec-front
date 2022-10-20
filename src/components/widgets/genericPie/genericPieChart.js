@@ -13,7 +13,6 @@ export default {
     },
     watch: {
         data() {
-            console.log("hehehehffff");
             this.renderChart(this.data, this.newOptions)
         },
         "$store.state.prefTheme": {
@@ -36,7 +35,7 @@ export default {
 
             onClick: (event,element) => {
                 if(element.length!==0){
-                    console.log("click from chart only",element[0]._index )
+                    // console.log("click from chart only",element[0]._index )
                     this.onClickLegend(element[0]._index)
                 }
             }

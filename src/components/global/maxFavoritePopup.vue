@@ -238,9 +238,8 @@
             .catch((error) => {
               console.log("Got error removing user fav: ", error);
             });
-            } else {
-                console.log("nn");
-            }}
+            }
+          }
         for(let item in this.userCurrentFav){
             if(!this.userCurrentFav[item].VIEW_ID){
                this.$store.state.selected_view_id = this.userCurrentFav[item].VIEW_ID
@@ -259,9 +258,8 @@
                       this.$refs.RefMaxFavoritePopup.dialog = true
                     }
                   });
-            } else {
-                console.log("nn");
-            }}
+            } 
+          }
 
         this.maxFav = false;
         this.$store.state.max_favorite_popup = false

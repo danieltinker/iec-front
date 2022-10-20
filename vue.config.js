@@ -1,6 +1,6 @@
 const { defineConfig } = require('@vue/cli-service')
 module.exports = defineConfig({
-  lintOnSave:true,
+  lintOnSave:false,
   transpileDependencies: [
     'vuetify'
   ]

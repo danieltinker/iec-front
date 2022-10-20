@@ -9,7 +9,6 @@ const ShavitMobileFavReq = axios.create({
 export default {
   //getting user fav
   getUserFav() {
-    // console.log("Getting user favorites")
     return ShavitMobileFavReq.get(`${store.state.currUser.user_id}`, {
       params: {
         sid: store.state.currUser.sessionId,
@@ -28,7 +27,6 @@ export default {
       userid: store.state.currUser.user_id,
       state: fav_state,
     };
-    // console.log("Adding favorite to user",{"viewid":store.state.selected_view_id, "userid": store.state.currUser.user_id, "state": fav_state})
     return ShavitMobileFavReq.post("add", final_fav_setttings, {
       params: {
         sid: store.state.currUser.sessionId,
@@ -37,7 +35,6 @@ export default {
   },
   //remove favorite
   RemoveUserFav() {
-    // console.log("Remove favorite to user")
     return ShavitMobileFavReq.delete(
       `${store.state.currUser.user_id}/${store.state.selected_view_id}`,
       {

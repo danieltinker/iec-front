@@ -165,7 +165,6 @@ export default {
                 if(this.succ_req){
                     await this.$myApi(this.params.drill_down_params.data_url)
                     .then(response => {
-                        console.log(response.data)
                         this.drilldownData = response.data
                         this.errorMSG = ""
                         if(this.params.data_category == undefined || this.params.selected_category == undefined){
