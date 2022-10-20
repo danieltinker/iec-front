@@ -41,7 +41,7 @@
                     <v-carousel-item v-for="(KPIarr,index) in jsonData[params.selected_category]" :key="index">
                         <div class="KPIcontainer" dir="rtl">
                               <!-- start -->
-                          <div class="clock-main" style="text-align: center;margin-left:10px;margin-right:10px" v-if="params.show_clock">
+                          <div class="clock-main" style="margin-left:10px;margin-right:10px" v-if="params.show_clock">
                              <v-data-table ref="tttt" id="mytable" style="width:100%"
                                     :headers="headers"
                                     :items="KPIarr"
@@ -81,7 +81,7 @@
                                    </template>
                                     <template v-slot:body.append>
                                            <tr>
-                                               <td v-for="(item,i) in headers" :key="i" class="">
+                                               <td v-for="(item,i) in headers" :key="i" class="" style="font-size:10px !important">
                                                    <span v-if="totalGet.includes(item.text)"> {{ sumField(item.text).toFixed(2)}} </span>
                                                    <span v-else>  </span></td>
                                                
@@ -342,8 +342,8 @@ export default {
 }
 
 ::v-deep .v-data-table > .v-data-table__wrapper > table > tbody > tr > td, .v-data-table > .v-data-table__wrapper > table > tbody > tr > th, .v-data-table > .v-data-table__wrapper > table > thead > tr > td, .v-data-table > .v-data-table__wrapper > table > thead > tr > th, .v-data-table > .v-data-table__wrapper > table > tfoot > tr > td, .v-data-table > .v-data-table__wrapper > table > tfoot > tr > th {
-    padding: 0 0px;
-    padding-right: 5px;
+    /* padding: 0 0px;
+    padding-right: 5px; */
     /* word-wrap: break-word; */
     text-overflow: ellipsis;
     overflow: hidden; 

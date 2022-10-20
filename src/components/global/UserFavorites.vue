@@ -22,7 +22,7 @@
             <v-tooltip top v-else>
                 <template v-slot:activator="{ on, attrs }">
                     <span class="fav-span" v-bind="attrs" v-on="on">
-                        {{ item.STATE.PARAMETERS.headline_config.title.substring(0, 8) + ".." }}
+                        {{ item.STATE.PARAMETERS.headline_config.title }}
                     </span>
                 </template>
                 <span class="fav-span">{{ item.STATE.PARAMETERS.headline_config.title}}</span>
@@ -159,12 +159,19 @@ export default {
   overflow-y: auto;
 }
 .fav-span {
-  font-size: 0.8rem;
+  font-family: almoni;
+  width: 40px;
+  align-self: center;
+  height: 40px;
+  font-size: 12px;
+  text-overflow: ellipsis;
+    overflow: hidden; 
+    transition: height 0.2s cubic-bezier(0.4, 0, 0.6, 1);
 }
 .fav-btn {
   display: flex;
   flex-direction: column;
-  margin-left:10px;
+  margin-left:20px;
   text-align: center;
 
 
