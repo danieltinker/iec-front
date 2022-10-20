@@ -238,7 +238,7 @@ export default {
   box-shadow: none;
   height: 58px;
   width: 58px;
-  margin-left:10px !important
+  margin-left:20px !important
 }
 
 .favoriteLabels {
