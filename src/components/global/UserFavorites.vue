@@ -2,7 +2,7 @@
     <div dir="rtl" class="mb-2 container">
     <div>
       <div v-if="GET_USER_FAV.length == 0">
-        <v-btn color="#935287" outlined fab class="ml-4 story" @click="openQuickView('plus')"><img src="../../assets/FavBar/plus.svg" /></v-btn>
+        <v-btn color="#935287" outlined fab class="ml-4 storyClear" @click="openQuickView('plus')"><img src="../../assets/FavBar/plus.svg" /></v-btn>
 
 
 <!-- {{GET_USER_FAV}} -->
@@ -22,7 +22,7 @@
             <v-tooltip top v-else>
                 <template v-slot:activator="{ on, attrs }">
                     <span class="fav-span" v-bind="attrs" v-on="on">
-                        {{ item.STATE.PARAMETERS.headline_config.title.substring(0, 8) + ".." }}
+                        {{ item.STATE.PARAMETERS.headline_config.title }}
                     </span>
                 </template>
                 <span class="fav-span">{{ item.STATE.PARAMETERS.headline_config.title}}</span>
@@ -31,7 +31,7 @@
 
 
 
-        <v-btn v-for="index in 6 - GET_USER_FAV.length" :key="index" color="#935287" outlined fab class="ml-4 story"> </v-btn>
+        <v-btn v-for="index in 6 - GET_USER_FAV.length" :key="index" color="#935287" outlined fab class="ml-4 storyClear"> </v-btn>
               
         
     </div >
@@ -159,11 +159,22 @@ export default {
   overflow-y: auto;
 }
 .fav-span {
-  font-size: 0.8rem;
+  font-family: almoni;
+  width: 40px;
+  align-self: center;
+  height: 40px;
+  font-size: 12px;
+  text-overflow: ellipsis;
+    overflow: hidden; 
+    transition: height 0.2s cubic-bezier(0.4, 0, 0.6, 1);
 }
 .fav-btn {
   display: flex;
   flex-direction: column;
+  margin-left:20px;
+  text-align: center;
+
+
 }
 .container {
   /* background-color: rgb(244, 244, 244); */
@@ -176,19 +187,11 @@ export default {
 
 .container div:first-child {
   display: flex;
-  align-self: center;
-
 }
 .favContainer {
   direction: rtl;
   right: 0;
   display: grid;
-}
-
-.story {
-  box-shadow: none;
-  height: 58px;
-  width: 58px;
 }
 
 .favoriteLabels {
@@ -228,6 +231,14 @@ export default {
   box-shadow: none;
   height: 58px;
   width: 58px;
+  margin-left:auto !important
+}
+
+.storyClear {
+  box-shadow: none;
+  height: 58px;
+  width: 58px;
+  margin-left:10px !important
 }
 
 .favoriteLabels {

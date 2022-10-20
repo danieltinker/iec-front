@@ -73,6 +73,12 @@ export default new Vuex.Store({
           "color_1":"#282828",
           "color_2":"#121212",
         },
+        "list_data":{
+          "main_header":"black",
+          "sub_title":"#FFFFFF",
+          "color_1":"#282828",
+          "color_2":"#121212",
+        },
         "global":{} // global style
       },
       "lightTheme":{
@@ -128,6 +134,12 @@ export default new Vuex.Store({
           "box_color_2":"#606060",
           "color_1":"#FFFFFF",
           "color_2":"#EBEBEB",
+        },
+        "list_data":{
+          "main_header":"#646464",
+          "sub_title":"#e0dcdc",
+          "color_1":"#282828",
+          "color_2":"#121212",
         },
         "global":{} // global style
       }
