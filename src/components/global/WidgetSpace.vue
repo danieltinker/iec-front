@@ -52,7 +52,6 @@
 
 <script>
 import ThreeDotsNineDots from "../utils/ThreeDotsNineDots.vue";
-import BasicPie from "../widgets/BasicPie.vue";
 import genericKPI from '../widgets/genericKPI.vue';
 import genericPIE from "../widgets/genericPIE.vue";
 import genericBAR from "../widgets/genericBAR.vue";
@@ -68,7 +67,6 @@ import MaxFavoritePopup from "./maxFavoritePopup.vue";
 export default {
   components: {
     ThreeDotsNineDots,
-    BasicPie,
     genericKPI,
     genericPIE,
     genericBAR,

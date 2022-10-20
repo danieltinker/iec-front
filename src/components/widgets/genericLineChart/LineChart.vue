@@ -34,8 +34,8 @@ export default{
                     //return new Date(timestamp) // The formatter function overrides format property
                     }
                 }
-
         this.option.xaxis.categories = ['1','2','3','4','5']
+
         this.showData = true
     }
 }
