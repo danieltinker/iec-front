@@ -100,7 +100,7 @@ export default {
     methods: {
       
         openQuickView(data){
-            // console.log("quick",data);
+
             if (data ==  "plus") {
         this.$refs.addFavoriteGuide.open();
         this.$refs.addFavoriteGuide.$refs.bottomSheetCard.style.backgroundColor =

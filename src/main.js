@@ -43,10 +43,8 @@ Vue.mixin({
     },
 
     BookMarkClick(viewID,parameters,templateType, isDrillDown) {
-      console.log("here");
       let view_id = viewID
       //save curr widget params for bookmark
-      console.log("parameters",parameters)
       this.$store.state.selected_view_param = Object.assign({},parameters)
       this.$store.state.selected_view_param["TEMPLATE_TYPE"] = templateType
       if(isDrillDown){

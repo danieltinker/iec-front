@@ -95,7 +95,7 @@ export default {
     // user selected devision
     "$store.state.selected_hq_id": {
       async handler() {
-        console.log(" GET /mobile/views/{hq_id}/{category_id}?sessoinid=xxx .");
+        // console.log(" GET /mobile/views/{hq_id}/{category_id}?sessoinid=xxx .");
       },
     },
     //user selected category
