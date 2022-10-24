@@ -9,7 +9,7 @@
         </v-toolbar-title>
       </v-app-bar>
       <v-navigation-drawer :color="getCurrentTheme.hq_navbar.navigation_drawer" v-model="drawer" app right clipped hide-overlay dir="rtl">
-        <v-icon class="my-2" dir @click="drawer = !drawer" style="font-size: 30px; justify-content: right;">mdi-close</v-icon>
+        <v-icon class="my-2" dir @click="drawer = !drawer" :color="getCurrentTheme.hq_navbar.span_color_first" style="font-size: 30px; justify-content: right;">mdi-close</v-icon>
         <v-list nav dense>
           <v-list-item-group v-model="group">
             <v-list-item v-for="item in hqs" :key="item.HQ_ID" @click="setHQ(item)">

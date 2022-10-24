@@ -105,7 +105,7 @@ export default {
       // fetch the widgets views from the DB
       async handler() {
         await axios
-            .get("http://20.102.120.232:5080/shavit/mobile/views/" + 700 + "/" + 1, { params: { sid: "xxx" } })
+            .get("http://20.102.120.232:5080/shavit/mobile/views/" + 600 + "/" + 1, { params: { sid: "xxx" } })
             .then((response) => {
               this.responseData = response.data;
               this.doneFetching = true;
@@ -119,7 +119,7 @@ export default {
         this.fetch_interval = setInterval(async ()=>{
           console.log("Refreshing Page")
           await axios
-            .get("http://20.102.120.232:5080/shavit/mobile/views/" + 700 + "/" + 1, { params: { sid: "xxx" } })
+            .get("http://20.102.120.232:5080/shavit/mobile/views/" + 600 + "/" + 1, { params: { sid: "xxx" } })
             .then((response) => {
               this.responseData = response.data;
               this.doneFetching = true;
