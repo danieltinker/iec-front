@@ -1,7 +1,7 @@
 <template>
     <div :style="'background-color:' + getCurrentTheme.cyber_status.color_1" style="position: relative">
   
-        <div style="height:400px; ">
+        <div style="height:400px; " v-if="doneFetching">
                 
         <v-row id="test" class="mt-2" style="place-content: center; background: #FFFFFF;  color:black;"> 
             <div class="eachBar" v-for="(bar, key) in prodData" :key="key">
@@ -35,6 +35,16 @@
         </v-row>
 
     </div>
+
+    <div class="loader" v-else>
+        <div class="loader" v-if="!isErrorMsg">
+            <v-progress-circular
+            indeterminate
+            color="purple"
+            ></v-progress-circular>
+        </div>
+        <h1 v-else>  {{errorMSG}} </h1>
+    </div>  
 
 
     </div>
@@ -86,10 +96,18 @@ import OneBar from './genericBAR/oneBar.vue';
                 this.prodData = prodData;
             }
         })
-            .catch((err) => console.log(err));
-    },
+        .catch((err) => {this.errorMSG = "אין מידע"
+  console.log(err)});
+  },
+  computed:{
+    isErrorMsg(){
+            return this.errorMSG.length !== 0;
+        }
+  },
     data() {
         return {
+            doneFetching:false,
+            errorMSG:"",
             prodData: [],
         };
     },

@@ -54,6 +54,17 @@
           </div>
         </div>
       </div>
+
+      <div class="loader" v-else>
+        <div class="loader" v-if="!isErrorMsg">
+            <v-progress-circular
+            indeterminate
+            color="purple"
+            ></v-progress-circular>
+        </div>
+        <h1 style="color:black" v-else>  {{errorMSG}} </h1>
+    </div>  
+
     </div>
   </template>
   
@@ -88,13 +99,20 @@
           this.isData = true;
         }
     })
-    .catch((err) => console.log(err));
-    },
+    .catch((err) => {this.errorMSG = "אין מידע"
+  console.log(err)});
+  },
+  computed:{
+    isErrorMsg(){
+            return this.errorMSG.length !== 0;
+        }
+  },
     components: {
       customCyberStatus,
     },
     data() {
       return {
+        errorMSG:"",
         carouselActiveIndex: "",
         pieChartsData: ["1", "2"],
         totalChartTitle: "סייבר",
