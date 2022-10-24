@@ -51,7 +51,7 @@
                 <v-btn class="main-btn"
                 :ripple="false"
                  v-for="(btnName,index) in BARarr" :key="index"
-                 :style="{backgroundColor: isDrillDown ? getCurrentTheme.baseGenericPie.btn_color_drill : getCurrentTheme.baseGenericPie.btn_color ,border : activeIndex == index ? 'solid black 1px' : ' solid black 0px'}"
+                 :style="{backgroundColor: isDrillDown ? getCurrentTheme.baseGenericPie.btn_color_drill : getCurrentTheme.baseGenericPie.btn_color ,border : activeIndex == index ? getCurrentTheme.legend_border_color : ' solid black 0px'}"
                  @click="barBoxClick(index)">
                     <span
                     class="dot"

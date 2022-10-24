@@ -14,7 +14,7 @@
                 :ripple="false"
                  v-for="(btnName,index) in buttons" :key="index"
                   @click="$refs.dount.onClickLegend(index);"
-                  :style="{backgroundColor: isDrill ? getCurrentTheme.baseGenericPie.btn_color_drill : getCurrentTheme.baseGenericPie.btn_color ,border : activeIm == index ? 'solid black 1px' : ' solid black 0px'}">
+                  :style="{backgroundColor: isDrill ? getCurrentTheme.baseGenericPie.btn_color_drill : getCurrentTheme.baseGenericPie.btn_color ,border : activeIm == index ? getCurrentTheme.legend_border_color : ' solid black 0px'}">
                     <span
                     class="dot"
                     :style="{backgroundColor:TemplateData.datasets[0].backgroundColor[index]}"></span>    
