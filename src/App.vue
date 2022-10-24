@@ -12,6 +12,8 @@
       <WidgetSpace :class="{removeDisplay: this.$store.state.quick_view}" />
       <!-- {{$store.state.selected_view_param}} -->
       <MaxFavoritePopup v-if="$store.state.max_favorite_popup"/>
+
+      <RemoveBookmark v-if="$store.state.removeBookmarkDialog"></RemoveBookmark>
     </v-main>
   </v-app>
 </template>
@@ -23,11 +25,12 @@ import CategoryBar from './components/global/CategoryBar.vue';
 import UserFavorites from './components/global/UserFavorites.vue';
 import { mapActions } from 'vuex';
 import MaxFavoritePopup from './components/global/maxFavoritePopup.vue';
+import RemoveBookmark from './components/global/removeBookmark.vue';
 export default {
     name: "App",
     data: () => ({
       }),
-    components: { WidgetSpace, HQNavBar, CategoryBar, UserFavorites, MaxFavoritePopup },
+    components: { WidgetSpace, HQNavBar, CategoryBar, UserFavorites, MaxFavoritePopup, RemoveBookmark },
     mounted(){
       this.$store.state.selected_hq_id = 100
       this.$store.state.selected_cat_id = 101      

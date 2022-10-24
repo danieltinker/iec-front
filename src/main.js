@@ -32,6 +32,17 @@ Vue.mixin({
       this.SET_FAV_LIST()
     },
 
+    async removeBookmark(){
+      await FavoriteAxios.RemoveUserFav()
+            .then(() => {
+              //if we got new info update user favorite list
+              this.GetUserFav();
+            })
+            .catch((error) => {
+              console.log("Got error removing user fav: ", error);
+            });
+    },
+
     CheckBookmark(view_id) {
       /* Function to check if viewId exist in user favorites list */
       let fav_list = this.$store.state.user_favorites;
@@ -59,14 +70,17 @@ Vue.mixin({
         this.DO_FETCH()
         if (this.CheckBookmark(view_id)) {
           //already bookmarked remove fav
-          FavoriteAxios.RemoveUserFav()
-            .then(() => {
-              //if we got new info update user favorite list
-              this.GetUserFav();
-            })
-            .catch((error) => {
-              console.log("Got error removing user fav: ", error);
-            });
+
+          // OLDD
+          // FavoriteAxios.RemoveUserFav()
+          //   .then(() => {
+          //     //if we got new info update user favorite list
+          //     this.GetUserFav();
+          //   })
+          //   .catch((error) => {
+          //     console.log("Got error removing user fav: ", error);
+          //   });
+          this.$store.state.removeBookmarkDialog = true
         } else {
           //add user fav
           FavoriteAxios.AddUserFav()

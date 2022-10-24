@@ -5,6 +5,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    removeBookmarkDialog:false,
     fetching: false,
     selected_hq_id:600,
     selected_cat_id:8,
@@ -81,6 +82,12 @@ export default new Vuex.Store({
           "color_1":"#282828",
           "color_2":"#121212",
         },
+        "remove_dialog":{
+          "card_main":"#FFFFFF",
+          "icon":"#282828",
+          "button_style":"#E4E4E4",
+          "button_style_secc":"",
+        },
         "global":{} // global style
       },
       "lightTheme":{
@@ -144,6 +151,12 @@ export default new Vuex.Store({
           "sub_title":"#e0dcdc",
           "color_1":"#282828",
           "color_2":"#121212",
+        },
+        "remove_dialog":{
+          "card_main":"#000000",
+          "icon":"#FFFFFF",
+          "button_style":"#935287",
+          "button_style_secc":"",
         },
         "global":{} // global style
       }
