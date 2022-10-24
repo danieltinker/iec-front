@@ -14,6 +14,10 @@
       <MaxFavoritePopup v-if="$store.state.max_favorite_popup"/>
 
       <RemoveBookmark v-if="$store.state.removeBookmarkDialog"></RemoveBookmark>
+      <BookmarkSnackbar v-if="snackbar" :text="snackText" :success="success" style="height: 40px; 
+    position: fixed; 
+    bottom:0%;
+    width:100%;"/>
     </v-main>
   </v-app>
 </template>
@@ -26,17 +30,31 @@ import UserFavorites from './components/global/UserFavorites.vue';
 import { mapActions } from 'vuex';
 import MaxFavoritePopup from './components/global/maxFavoritePopup.vue';
 import RemoveBookmark from './components/global/removeBookmark.vue';
+import BookmarkSnackbar from './components/global/bookmarkSnackbar.vue';
 export default {
     name: "App",
     data: () => ({
+      snackbar:false,
+      success:false,
+      snackText:""
       }),
-    components: { WidgetSpace, HQNavBar, CategoryBar, UserFavorites, MaxFavoritePopup, RemoveBookmark },
+    components: { WidgetSpace, HQNavBar, CategoryBar, UserFavorites, MaxFavoritePopup, RemoveBookmark, BookmarkSnackbar },
     mounted(){
       this.$store.state.selected_hq_id = 100
       this.$store.state.selected_cat_id = 101      
     },
     created() {
       this.updatelist()
+
+      this.$root.$on("addBookmarkSnackbar", (text,success) => {
+        this.success = success
+        this.snackbar = true;
+        this.snackText = text;
+        setTimeout(() => {
+            this.snackbar = false;
+          }, 3000);
+        
+      });
     },
     watch: {
     },

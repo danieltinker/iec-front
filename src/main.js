@@ -87,11 +87,13 @@ Vue.mixin({
             .then(() => {
               //if we got new info update user favorite list
               this.GetUserFav();
+              this.$root.$emit("addBookmarkSnackbar", "השעון נוסף בהצלחה למבט מהיר!",true);
             })
             .catch((error) => {
               console.log("Got error adding user fav: ", error);
               if(error.response.status == 405){
                 this.$store.state.max_favorite_popup = true
+                this.$root.$emit("addBookmarkSnackbar", "אירעה שגיאה! אנא נסה שנית",false);
               }
             });
         }
