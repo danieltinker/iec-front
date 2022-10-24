@@ -9,7 +9,7 @@
       class=""
       style="text-align: center; margin-top: 5px; margin-bottom: 5px"
     >
-      <v-col cols="4" style="text-align: left;padding-top:0;padding:bottom:0;"
+      <v-col cols="4" style="text-align: left;padding-top:5px;padding-bottom:0px;padding-left:25px"
         ><v-icon
           @click="$emit('closeQuickView')"
           :style="
@@ -20,8 +20,9 @@
           >mdi-close</v-icon
         ></v-col
       >
-      <v-col cols="4" style="padding-top:0;padding:bottom:0;"
-        ><span
+      <v-col cols="4" style="padding-top:0;padding-bottom:0;font-family:almoni;font-size:24px"
+        >
+        <span
           >מבט מהיר</span
         ></v-col
       >
