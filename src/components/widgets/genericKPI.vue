@@ -262,7 +262,7 @@ export default {
 #chartsHeaders {
     font-family: almoni;
     font-size: 16px;
-    color: #606060;
+    color: v-bind('getCurrentTheme.generic_title_color');
     /* margin-bottom: 18px; */
 }
 

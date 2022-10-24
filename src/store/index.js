@@ -24,6 +24,7 @@ export default new Vuex.Store({
         "app_color":"#FFFFFF",
         "solid_selected_border":"solid purple 4px",
         "kpi_sec_value": "#828282",
+        "generic_title_color" : "#FFFFFF",
         "kpi":{
           "kpi_value_color":"#000000",
           "kpi_sec_value": "#828282",
@@ -86,6 +87,7 @@ export default new Vuex.Store({
         "app_color":"#000000",
         "theme":"lightTheme",
         "solid_selected_border":"solid black 2px",
+        "generic_title_color" : "#606060",
         "kpi":{
           "kpi_value_color":"#000000",
           "kpi_sec_value": "#828282",
