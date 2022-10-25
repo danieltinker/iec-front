@@ -37,10 +37,10 @@
   
   <style>
     .errorClass{
-      background-color: #BC3131;
+      background-color: #935287;
   ;
     }
     .successClass{
-      background-color: green;
+      background-color: #935287;
     }
   </style>

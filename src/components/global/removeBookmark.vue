@@ -26,6 +26,7 @@
             ></v-btn
           >
           <v-card-title
+          dir="rtl"
             style="
               text-align: center;
               word-break: normal !important;
@@ -36,7 +37,7 @@
             "
             class="mb-2"
           >
-            ?האם ברצונך להסיר שעון זה מתצוגת מבט מהיר</v-card-title
+            האם ברצונך להסיר שעון זה מתצוגת מבט מהיר?</v-card-title
           >
   
           <v-card-actions

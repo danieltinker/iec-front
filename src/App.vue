@@ -14,7 +14,7 @@
       <MaxFavoritePopup v-if="$store.state.max_favorite_popup"/>
 
       <RemoveBookmark v-if="$store.state.removeBookmarkDialog"></RemoveBookmark>
-      <BookmarkSnackbar v-if="snackbar" :text="snackText" :success="success" style="height: 40px; 
+      <BookmarkSnackbar v-if="snackbar" :text="snackText" :success="success" style="height: 40px;margin-bottom: 10px;;
     position: fixed; 
     bottom:0%;
     width:100%;"/>

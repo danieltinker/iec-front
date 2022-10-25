@@ -93,7 +93,6 @@ Vue.mixin({
               console.log("Got error adding user fav: ", error);
               if(error.response.status == 405){
                 this.$store.state.max_favorite_popup = true
-                this.$root.$emit("addBookmarkSnackbar", "אירעה שגיאה! אנא נסה שנית",false);
               }
             });
         }
