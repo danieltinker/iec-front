@@ -60,7 +60,7 @@ import OneBar from './genericBAR/oneBar.vue';
     },
     async created() {
         await axios
-            .post("http://localhost:5000/shavit/metric/queryList/iec/reserve_total,total_peak_reserve?sid=983eabf8-c5a3-41b3-9c8e-0c4103797712", { params: {
+            .post("http://20.102.120.232:5080/shavit/metric/queryList/iec/reserve_total,total_peak_reserve?sid=xxx", { params: {
                 sid: this.$store.state.currUser.sessionId
             }
         })
@@ -94,6 +94,7 @@ import OneBar from './genericBAR/oneBar.vue';
                     prodData.push(tempObj);
                 }
                 this.prodData = prodData;
+                this.doneFetching = true
             }
         })
         .catch((err) => {this.errorMSG = "אין מידע"

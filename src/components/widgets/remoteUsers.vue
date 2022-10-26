@@ -42,7 +42,7 @@ export default {
   },
   async created() {
       await axios
-  .post("http://localhost:5000/shavit/tikshuv/metric/query/system/remote_users?sid=36727725-ddd1-4bf8-959e-ff137b3510b4",{params: {
+  .post("http://20.102.120.232:5080/shavit/tikshuv/metric/query/system/remote_users?sid=xxx",{params: {
           sid: this.$store.state.currUser.sessionId
       }
       })
