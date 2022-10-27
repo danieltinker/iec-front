@@ -71,8 +71,6 @@
   
   <script>
   import customCyberStatus from "./cyberStatus/customCyberStatus.vue";
-  import axios from "axios";
-  
   export default {
     props: {
       params:{type:Object,required:false},
@@ -86,11 +84,7 @@
       },
     },
     async mounted() {
-      await axios
-    .post("http://localhost:5000/shavit/tikshuv/metric/query/cyber/cyber_alert_status?sid=36727725-ddd1-4bf8-959e-ff137b3510b4",{params: {
-            sid: this.$store.state.currUser.sessionId
-        }
-        })
+      await this.$myShavitApi("/tikshuv/metric/query/cyber/cyber_alert_status")
     .then((response) => {
         if (response.data.success) {
           // get the data

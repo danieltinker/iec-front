@@ -34,18 +34,14 @@
 </template>
 
 <script>
-import axios from 'axios'
+
 export default {
   props: {
     params:{type:Object,required:false},
     view_ID:{type:Number},
   },
   async created() {
-      await axios
-  .post("http://20.102.120.232:5080/shavit/tikshuv/metric/query/system/remote_users?sid=xxx",{params: {
-          sid: this.$store.state.currUser.sessionId
-      }
-      })
+      await this.$myShavitApi("/tikshuv/metric/query/system/remote_users")
   .then((response) => {
       if (response.data.success) {
         // get the data

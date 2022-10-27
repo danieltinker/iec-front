@@ -51,7 +51,6 @@
   </template>
   
   <script>
-  import axios from 'axios'
 import OneBar from './genericBAR/oneBar.vue';
   export default {
     props: {
@@ -59,11 +58,7 @@ import OneBar from './genericBAR/oneBar.vue';
         view_ID: { type: Number },
     },
     async created() {
-        await axios
-            .post("http://20.102.120.232:5080/shavit/metric/queryList/iec/reserve_total,total_peak_reserve?sid=xxx", { params: {
-                sid: this.$store.state.currUser.sessionId
-            }
-        })
+        await this.$myShavitApi("metric/queryList/iec/reserve_total,total_peak_reserve")
             .then((response) => {
             if (response.data.success) {
                 console.log("herhehehe", response);
