@@ -148,7 +148,7 @@ export default new Vuex.Store({
           "color_2":"#EBEBEB",
         },
         "list_data":{
-          "main_header":"#646464",
+          "main_header":"#935287",
           "sub_title":"#e0dcdc",
           "color_1":"#282828",
           "color_2":"#121212",

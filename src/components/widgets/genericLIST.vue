@@ -50,7 +50,7 @@
                                     :items-per-page="100"
                                     calculate-widths
                                     hide-default-footer
-                                    group-by="category"
+                                    :group-by="params.group_by ? 'category' : null"
                                     sort-by=""
                                     :footer-props="{showFooterBorder: false}"
                                     :header-props="{showHeaderBorder: false}"
@@ -65,7 +65,7 @@
                                     dir="rtl"
                                   >
                                      <template v-slot:group.header="{ items }">
-                                        <td  :colspan="headers.length" class="text-start text-xs-right" style="padding-right:30px;background-color:#e0dcdc">
+                                        <td  :colspan="headers.length" class="list-total" style="height:30px">
                                           <strong>{{ items[0].category.charAt(1) == '-' ? items[0].category.split('-')[1] : items[0].category }}</strong>
                                           <!-- <hr>
                                           <strong>{{ items[0].category }}</strong> -->
@@ -81,8 +81,8 @@
                                    </template>
                                     <template v-slot:body.append>
                                            <tr>
-                                               <td v-for="(item,i) in headers" :key="i" class="" style="font-size:10px !important">
-                                                   <span v-if="totalGet.includes(item.text)"> {{ sumField(item.text).toFixed(2)}} </span>
+                                               <td v-for="(item,i) in headers" :key="i" class="list-total" style="height:30px;">
+                                                   <span v-if="totalGet.includes(item.text)" @click="testttt(sumField(item.text).toFixed(1),$event)"> {{ sumField(item.text).toFixed(1)}} </span>
                                                    <span v-else>  </span></td>
                                                
                                            </tr>
@@ -152,19 +152,8 @@ export default {
             return{
                 cardData:'',
                 colortest: "green",
-                headers: [
-                {
-                    text: "name",
-                    align: "start",
-                    sortable: false,
-                    value: "name"
-                },
-                { text: "calories", value: "calories", sortable: false,align: "center",},
-                { text: "fat", value: "fat", sortable: false,align: "center"},
-                { text: "carbs", value: "carbs", sortable: false,align: "center"},
-                
-                ],
-                totalGet: ["fat","calories"],
+                headers: undefined,
+                totalGet: undefined,
 
 
                 activeTitle:0,
@@ -231,6 +220,9 @@ export default {
     },
 
     async created(){
+        console.log(this.params,"dsssssssssssssssssss")
+        this.headers = this.params.headers
+        this.totalGet = this.params.totalGet
         if(!this.isDrillDown){
             await this.$myApi(this.params.data_url)
                 .then(response => {
@@ -335,6 +327,13 @@ export default {
 </script>
 
 <style scoped>
+.list-total{
+    font-family: almoni-bold !important;
+    font-size:20px !important;
+    background-color: rgba(128,128,128,0.24);
+    padding: 0px !important;
+
+}
 ::v-deep .v-data-table > .v-data-table__wrapper > table {
     table-layout: fixed;
   width: 100% !important;  
@@ -351,14 +350,21 @@ export default {
     transition: height 0.2s cubic-bezier(0.4, 0, 0.6, 1);
 }
 
+::v-deep .v-data-table > .v-data-table__wrapper > table > tbody > tr > td, .v-data-table > .v-data-table__wrapper > table > tbody > tr > th, .v-data-table > .v-data-table__wrapper > table > thead > tr > td, .v-data-table > .v-data-table__wrapper > table > thead > tr > th, .v-data-table > .v-data-table__wrapper > table > tfoot > tr > td, .v-data-table > .v-data-table__wrapper > table > tfoot > tr {
+    font-size: 16px;
+    font-family: almoni-light;
+    color:#606060
+
+}
+
 
 
 ::v-deep .theme--light.v-data-table > .v-data-table__wrapper > table > tbody > tr:not(:last-child) > td:not(.v-data-table__mobile-row), .theme--light.v-data-table > .v-data-table__wrapper > table > tbody > tr:not(:last-child) > th:not(.v-data-table__mobile-row) {
     border-bottom: 4px solid white;
 }
-#mytable tbody td {
+/* #mytable tbody td {
     font-size: 20px !important;
-}
+} */
 
 .v-data-table::v-deep th {
   font-size: 15px !important;
@@ -374,7 +380,10 @@ export default {
 
 
 ::v-deep .v-data-table-header {
-  background-color:  v-bind('getCurrentTheme.list_data.main_header')
+  background-color:  v-bind('getCurrentTheme.list_data.main_header');
+  font-family: almoni;
+  font-size:222px !important;
+  height: 4px !important;
 }
 #mytable >>> tr:hover {
     background: inherit !important;

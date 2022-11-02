@@ -238,6 +238,7 @@ export default {
                     .then(response => {
                         this.drilldownData = response.data
                         this.errorMSG = ""
+                        // IF STATEMENT handling miss configurations - need to complete
                         if(this.params.data_category == undefined || this.params.selected_category == undefined){
                             console.log("radio btns config failed fix data_category, selected category")
                             this.errorMSG = "אין מידע"
