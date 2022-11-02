@@ -29,8 +29,8 @@
       "$store.state.selected_hq_id": {
         async handler() {
           await axios
-            .get(
-              `http://20.102.120.232:5080/shavit/mobile/${this.$store.state.selected_hq_id}/categories`,
+            .get(this.$store.state.serverAdrr+"/shavit-mobile"+
+              `/${this.$store.state.selected_hq_id}/categories`,
               { params: { sid: "xxx" } }
             )
             .then(response => {

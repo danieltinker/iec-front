@@ -110,7 +110,7 @@
       this.$store.state.prefTheme == "darkTheme" ? this.theme = true : this.theme = false
       //get hqs By sid
       await axios
-        .get("http://20.102.120.232:5080/shavit/mobile/hq", 
+        .get(this.$store.state.serverAdrr+"/shavit-mobile/hq", 
         {params: { sid: "xxx" }}
         )
         .then(response => {this.hqs = response.data;})
