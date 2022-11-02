@@ -42,7 +42,6 @@ export const getSelectedRadius = (chartElements) =>{
 export const handleChartRadius = (chartElements,indexClick,indexOpen)=>{
 
     if(indexOpen === -1){
-        console.log("open")
         chartElements[indexClick]._model.outerRadius += 5;
         chartElements[indexClick]._model.innerRadius -= 5;
     } else{

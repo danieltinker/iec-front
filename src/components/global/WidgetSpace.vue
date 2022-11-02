@@ -97,15 +97,9 @@ export default {
     // user selected devision
     "$store.state.selected_hq_id": {
       async handler() {
-        // console.log(" GET /mobile/views/{hq_id}/{category_id}?sessoinid=xxx .");
-      },
-    },
-    //user selected category
-    "$store.state.selected_cat_id": {
-      // fetch the widgets views from the DB
-      async handler() {
+        this.$store.state.selected_cat_id=1
         await axios
-            .get("http://20.102.120.232:5080/shavit/mobile/views/" + 600 + "/" + 1, { params: { sid: "xxx" } })
+            .get("http://20.102.120.232:5080/shavit/mobile/views/" + this.$store.state.selected_hq_id + "/" + this.$store.state.selected_cat_id, { params: { sid: "xxx" } })
             .then((response) => {
               this.responseData = response.data;
               this.doneFetching = true;
@@ -116,10 +110,39 @@ export default {
               console.log(error);
             });
 
-        this.fetch_interval = setInterval(async ()=>{
+ 
+        // console.log(" GET /mobile/views/{hq_id}/{category_id}?sessoinid=xxx .");
+      },
+    },
+    //user selected category
+    "$store.state.selected_cat_id": {
+      // fetch the widgets views from the DB
+
+      
+      async handler() {
+        this.$store.state.selected_cat_id=1
+        await axios
+            .get("http://20.102.120.232:5080/shavit/mobile/views/" + this.$store.state.selected_hq_id + "/" + this.$store.state.selected_cat_id, { params: { sid: "xxx" } })
+            .then((response) => {
+              this.responseData = response.data;
+              this.doneFetching = true;
+              this.errorMsg = ""
+            })
+            .catch((error) => {
+              this.errorMsg = "תצוגת דף לא זמינה"
+              console.log(error);
+            });
+
+ 
+      },
+    },
+  },
+
+  async created() {
+    this.fetch_interval = setInterval(async ()=>{
           console.log("Refreshing Page")
           await axios
-            .get("http://20.102.120.232:5080/shavit/mobile/views/" + 600 + "/" + 1, { params: { sid: "xxx" } })
+            .get("http://20.102.120.232:5080/shavit/mobile/views/" + this.$store.state.selected_hq_id + "/" + this.$store.state.selected_cat_id, { params: { sid: "xxx" } })
             .then((response) => {
               this.responseData = response.data;
               this.doneFetching = true;
@@ -130,11 +153,6 @@ export default {
               console.log(error);
             });
         },120000)
-      },
-    },
-  },
-
-  async created() {
 
     this.$on('bookmark-drill', (viewID,params,templateType,isDrillDown)=>{
             console.log("widget lets make the save",viewID,params,templateType,isDrillDown)

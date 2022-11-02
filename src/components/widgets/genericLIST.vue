@@ -220,7 +220,6 @@ export default {
     },
 
     async created(){
-        console.log(this.params,"dsssssssssssssssssss")
         this.headers = this.params.headers
         this.totalGet = this.params.totalGet
         if(!this.isDrillDown){

@@ -61,7 +61,6 @@ import OneBar from './genericBAR/oneBar.vue';
         await this.$myShavitApi("metric/queryList/iec/reserve_total,total_peak_reserve")
             .then((response) => {
             if (response.data.success) {
-                console.log("herhehehe", response);
                 var prodData = [];
                 for (var index in response.data.data[0]) {
                     var tempObj = {};

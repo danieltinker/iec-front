@@ -12,7 +12,6 @@ export default {
     },
     watch: {
         data() {
-            console.log("hehehehffff");
             this.renderChart(this.data, this.newOptions)
         }
     },
