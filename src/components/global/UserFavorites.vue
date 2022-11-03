@@ -142,7 +142,7 @@ export default {
         // console.log(width,"srcrrn");
         // let test = (width/85).toFixed(1)
         // let xn = 4
-        let xn = (Math.floor(width/(58+20)))
+        let xn = Math.min(Math.floor(width/(58+20)),6)
         return (((width-(xn*58+58/2))/xn)-2).toString() + "px"
       }
     },
