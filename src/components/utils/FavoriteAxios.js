@@ -2,7 +2,7 @@ import axios from "axios";
 import store from "../../store";
 
 //Base shavit mobile
-const ShavitMobileFavReq = axios.create({
+const    = axios.create({
   baseURL: store.state.serverAdrr + "/shavit-mobile/favorite/",
 });
 
