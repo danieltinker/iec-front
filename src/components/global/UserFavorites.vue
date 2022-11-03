@@ -33,7 +33,6 @@
 
         <v-btn v-for="index in 6 - GET_USER_FAV.length" :key="index" color="#935287" outlined fab class="ml-4 storyClear"> </v-btn>
               
-        
     </div >
     <QuickViewPopup class="quick-view" v-if="$store.state.quick_view" :mydata="data" @closeQuickView="closeQuickView" />
 
@@ -96,6 +95,7 @@ import QuickViewPopup from './QuickViewPopup.vue';
 import { mapGetters } from 'vuex'
 export default {
   created() {
+   
   },
     methods: {
       
@@ -136,6 +136,13 @@ export default {
       getfav ()
       {
         return this.$store.getters.GET_USER_FAV
+      },
+      myMargin(){
+        let width = screen.width;
+        // console.log(width,"srcrrn");
+        // let test = (width/85).toFixed(1)
+        let xn = 4
+        return ((width-(xn*58+58/2))/xn).toString() + "px"
       }
     },
     mounted() {
@@ -171,7 +178,7 @@ export default {
 .fav-btn {
   display: flex;
   flex-direction: column;
-  margin-left:20px;
+  margin-left:v-bind('myMargin');
   text-align: center;
 
 
@@ -238,7 +245,7 @@ export default {
   box-shadow: none;
   height: 58px;
   width: 58px;
-  margin-left:20px !important
+  margin-left:v-bind('myMargin') !important
 }
 
 .favoriteLabels {
