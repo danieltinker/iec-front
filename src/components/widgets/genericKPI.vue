@@ -8,6 +8,7 @@
                     <v-radio v-for="(category) in params.data_category" :key="category" :label="category" :value="category" color="#935287"></v-radio>
                 </v-radio-group>
             </div>
+            <h1>{{params}}</h1>
             <div class="kpi-carousel">
                 <span>
                     <v-icon @click="BookMarkClick(view_ID,parentsParam,params.template_type,true)" color="#935287" style="font-size: 30px"
@@ -161,10 +162,12 @@ export default {
     },
 
     async created(){
+        console.log(this.params,"widget param")
         if(!this.isDrillDown){
             await this.$myApi(this.params.data_url)
                 .then(response => {
                     this.jsonData = response.data
+                    console.log(this.jsonData,"KPI response DATA")
                     this.errorMSG = ""
                     // do sth ...
                 })
