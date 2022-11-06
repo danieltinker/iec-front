@@ -199,6 +199,7 @@ export default {
         
         //  flag used to render the charts syncronously only after data is ready
         if(this.errorMSG.length === 0){
+            console.log("DONE DONE DONE FETCHING")
             this.doneFetching = true
         }
     }
