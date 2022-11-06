@@ -99,7 +99,7 @@ export default {
       async handler() {
         this.$store.state.selected_cat_id=1
         await axios
-            .get(this.$store.state.serverAdrr+"/shavit-mobile/view/" + this.$store.state.selected_hq_id + "/" + this.$store.state.selected_cat_id, { params: { sid: "xxx" } })
+            .get(this.$store.state.serverAdrr+"/shavit-mobile/views/" + this.$store.state.selected_hq_id + "/" + this.$store.state.selected_cat_id, { params: { sid: "xxx" } })
             .then((response) => {
               this.responseData = response.data;
               this.doneFetching = true;
