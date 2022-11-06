@@ -41,7 +41,7 @@
                     <v-carousel-item v-for="(KPIarr,index) in jsonData[params.selected_category]" :key="index">
                         <div class="KPIcontainer" dir="rtl">
                               <!-- start -->
-                          <div class="clock-main" style="margin-left:10px;margin-right:10px" v-if="params.show_clock">
+                          <div class="clock-main" style="margin-right:10px" v-if="params.show_clock">
                              <v-data-table ref="tttt" id="mytable" style="width:100%"
                                     :headers="headers"
                                     :items="KPIarr"
