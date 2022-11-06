@@ -2,10 +2,10 @@ import { axios } from "./axiosConfig";
 import store from "../store";
 
 
-export const myApi = (endPoint) => {
+export const myApi = (endPoint,isDrill) => {
     return axios({
         method: "get",
-        url: `${store.state.serverAdrr}/shavit-mobile/data${endPoint}`,
+        url: `${store.state.serverAdrr}/shavit-mobile/data?dsname=${endPoint}&isDrill=${isDrill}`,
         timeout: 1000 * 8, // Wait for 8 seconds
         headers: {
             "Content-Type": "application/json"
