@@ -45,8 +45,22 @@ export default {
     },
     created() {
       this.updatelist()
-
+/////////////
+// this.$root.$on("addBookmarkSnackbar",async (text,success) => {
+//         // if(this.snackbar){
+//         //   console.log(this.snackbar,"lkkksakdsak");
+//         //   await new Promise(() => setTimeout(()=>{this.snackbar = false;}, 5000));
+//         // }
+//         console.log("heree");
+//         this.success = success
+//         this.snackbar = true;
+//         this.snackText = text;
+//         setTimeout(() => {
+//             this.snackbar = false;
+//           }, 3000);
+          ///////////////
       this.$root.$on("addBookmarkSnackbar", (text,success) => {
+        this.snackbar = false;
         this.success = success
         this.snackbar = true;
         this.snackText = text;
