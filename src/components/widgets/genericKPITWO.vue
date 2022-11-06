@@ -165,7 +165,7 @@ export default {
 
     async created(){
         if(!this.isDrillDown){
-            await this.$myApi(this.params.data_url,false)
+            await this.$myApi(this.params.data_url)
                 .then(response => {
                     this.jsonData = response.data
                     this.errorMSG = ""
@@ -177,7 +177,7 @@ export default {
                     this.succ_req = false
                 });
                 if(this.succ_req){
-                    await this.$myApi(this.params.drill_down_params.data_url,true)
+                    await this.$myApi(this.params.drill_down_params.data_url)
                     .then(response => {
                         this.drilldownData = response.data
                         this.errorMSG = ""
