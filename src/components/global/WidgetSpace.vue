@@ -142,6 +142,7 @@ export default {
   },
 
   async created() {
+    console.log()
     this.fetch_interval = setInterval(async ()=>{
           console.log("Refreshing Page")
           await axios

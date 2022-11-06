@@ -162,6 +162,7 @@ export default {
     },
 
     async created(){
+        console.log(this.view_ID,"KPI VIEW ID WTF")
         console.log(this.params,"widget param")
         if(!this.isDrillDown){
             await this.$myApi(this.params.data_url)
