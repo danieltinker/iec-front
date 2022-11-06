@@ -190,8 +190,6 @@ export default {
     },
 
     async created(){
-        console.log(this.view_ID,"BAR VIEW ID WTF")
-
         if(!this.isDrillDown){
             await this.$myApi(this.params.data_url)
                 .then(response => {

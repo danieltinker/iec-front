@@ -102,9 +102,6 @@ export default {
             .get(this.$store.state.serverAdrr+"/shavit-mobile/views/" + this.$store.state.selected_hq_id + "/" + this.$store.state.selected_cat_id, { params: { sid: "xxx" } })
             .then((response) => {
               this.responseData = response.data;
-              console.log(this.responseData, "widget Space response Data")
-              console.log(this.responseData[0].VIEW_ID)
-              console.log(this.responseData[0].PARAMETERS)
               this.doneFetching = true;
               this.errorMsg = ""
             })
