@@ -177,6 +177,11 @@ export default {
                     await this.$myApi(this.params.drill_down_params.data_url)
                     .then(response => {
                         this.drilldownData = response.data
+
+                        if(this.data_intersection){
+                            this.static_drill_data = response.data
+                        }
+
                         this.errorMSG = ""
                         if(this.params.data_category == undefined || this.params.selected_category == undefined){
                             console.log("radio btns config failed fix data_category, selected category")
