@@ -57,7 +57,7 @@ export default {
           activeIndex:undefined,
           chartTitle:"test",
           isDrillDown:false,
-          configData:{ "pieInnerText": "<1כללי>", "pieInnerNum": null, "listIds": []},
+          configData:{ "pieInnerText": "כללי", "pieInnerNum": null, "listIds": []},
           ////////////////////
           buttons:[],
           myNewData:[],
