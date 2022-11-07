@@ -152,7 +152,7 @@ export default {
         // toggel drill down from a label click if click_open_drill_enabled = true in the config
         barBoxClick(i){
             this.activeTitle = i
-            console.log(this.drilldownData,"click bar ")
+            console.log(this.static_drill_data,"click bar ")
 
             if(this.params.data_intersection){
                 console.log("label label",this.jsonData[this.params.selected_category][this.carouselActiveIndex][i].label)
@@ -240,9 +240,9 @@ export default {
                     await this.$myApi(this.params.drill_down_params.data_url)
                     .then(response => {
                         this.drilldownData = response.data
-                        console.log(this.drilldownData,"Response drill data ")
                         if(this.data_intersection){
                             this.static_drill_data = response.data
+                            console.log(this.static_drill_data,"Response drill data ")
                         }
                         this.errorMSG = ""
                         // IF STATEMENT handling miss configurations - need to complete
