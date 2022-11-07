@@ -242,7 +242,7 @@ export default {
                         console.log("response data",response.data)
                         this.drilldownData = Object.assign(response.data)
                         console.log("response data",this.drilldownData)
-                        if(this.data_intersection){
+                        if(this.params.data_intersection){
                             this.static_drill_data = Object.assign(response.data)
                             console.log(this.static_drill_data,"Response drill data ")
                         }
