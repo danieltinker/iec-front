@@ -239,9 +239,11 @@ export default {
                 if(this.succ_req){
                     await this.$myApi(this.params.drill_down_params.data_url)
                     .then(response => {
-                        this.drilldownData = JSON.parse(JSON.stringify(response.data));
+                        console.log("response data",response.data)
+                        this.drilldownData = Object.assign(response.data)
+                        console.log("response data",this.drilldownData)
                         if(this.data_intersection){
-                            this.static_drill_data = JSON.parse(JSON.stringify(response.data));
+                            this.static_drill_data = Object.assign(response.data)
                             console.log(this.static_drill_data,"Response drill data ")
                         }
                         this.errorMSG = ""
