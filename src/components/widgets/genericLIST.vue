@@ -173,6 +173,7 @@ export default {
         ThreeDotsNineDots,
         CardPopup,
         genericKPI: () => import('../widgets/genericKPI.vue'),
+        genericLIST: () => import('../widgets/genericLIST.vue'),
         genericPIE: () => import('../widgets/genericPIE.vue')
     },
     methods:{
@@ -227,65 +228,22 @@ export default {
                 .then(response => {
                     this.jsonData = response.data
                     //starttttttttt
-                    this.jsonData = {"*" : [[
-                {
-                    name: "1",
-                    calories: 1,
-                    fat: 6,
-                    carbs: 24,
-                    category: "test1",
-                },
-                {
-                    name: "2",
-                    calories: 237,
-                    fat: 9,
-                    carbs: 37,
-                    category: "test1",
-                },
-                {
-                    name: "dot-#935287",
-                    calories: 262,
-                    fat: 16,
-                    carbs: 23,
-                    category: "a-test2",
-                },
-                {
-                    name: "ggggggggggggggggggg",
-                    calories: 305,
-                    fat: 3.7,
-                    carbs: 67,
-                    category: "a-test2",
-                },
-                {
-                    name: "gggggggggggggggggggggggggg    ",
-                    calories: 1,
-                    fat: 1,
-                    carbs: 1,
-                    category: "test2",
-                },
-                {
-                    name: "6",
-                    calories: 375,
-                    fat: 0,
-                    carbs: 94,
-                    category: "test2",
-                },
-                {
-                    name: "7",
-                    calories: 392,
-                    fat: 0.2,
-                    carbs: 98,
-                    category: "test4",
-                },
-                {
-                    name: "8",
-                    calories: 408,
-                    fat: 3.2,
-                    carbs: 87,
-                    category: "test4",
-                },
-            ]] }
-            //enddddddddddddd
+            //         this.jsonData = {"*" : [[
+            //     {
+            //         name: "1",
+            //         calories: 1,
+            //         fat: 6,
+            //         carbs: 24,
+            //         category: "test1",
+            //     },
+            //     {
+            //         name: "8",
+            //         calories: 408,
+            //         fat: 3.2,
+            //         carbs: 87,
+            //         category: "test4",
+            //     },
+            // ]] }
                     this.errorMSG = ""
                     // do sth ...
                 })

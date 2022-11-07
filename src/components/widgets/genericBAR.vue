@@ -145,6 +145,7 @@ export default {
         ThreeDotsNineDots,
         oneBar,
         genericKPI: () => import('../widgets/genericKPI.vue'),
+        genericLIST: () => import('../widgets/genericLIST.vue'),
         genericPIE: () => import('../widgets/genericPIE.vue')
     },
     methods:{
