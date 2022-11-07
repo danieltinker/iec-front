@@ -156,7 +156,7 @@ export default {
 
             if(this.params.data_intersection){
                 console.log("label label",this.jsonData[this.params.selected_category][this.carouselActiveIndex][i].label)
-                this.drilldownData = this.drilldownData[this.jsonData[this.params.selected_category][this.carouselActiveIndex][i].label]    
+                this.drilldownData = this.static_drill_data[this.jsonData[this.params.selected_category][this.carouselActiveIndex][i].label]    
             }
             if(this.params.click_open_drill_enabled){
                 if(!this.params.expand ||  i != this.clicked_index){
