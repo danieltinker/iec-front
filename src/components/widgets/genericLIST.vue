@@ -155,7 +155,6 @@ export default {
                 headers: undefined,
                 totalGet: undefined,
 
-
                 activeTitle:0,
                 activeIndex:-1,
                 succ_req: true,
@@ -191,7 +190,6 @@ export default {
         kpiBoxClick(i){
             this.activeTitle = i
             if(this.params.data_intersection){
-                this.drilldownData = {}
                 this.drilldownData = this.static_drill_data[this.jsonData[this.params.selected_category][this.carouselActiveIndex][i].label]    
             }
             if(this.params.click_open_drill_enabled){
@@ -256,8 +254,10 @@ export default {
                 if(this.succ_req){
                     await this.$myApi(this.params.drill_down_params.data_url)
                     .then(response => {
-                        console.log(response.data)
-                        this.drilldownData = response.data
+                        this.drilldownData = Object.assign(response.data)
+                        if(this.params.data_intersection){
+                            this.static_drill_data = Object.assign(response.data)
+                        }
                         this.errorMSG = ""
                         if(this.params.data_category == undefined || this.params.selected_category == undefined){
                             console.log("radio btns config failed fix data_category, selected category")

@@ -119,7 +119,6 @@ export default {
         barBoxClick(i){
             this.activeTitle = i
             if(this.params.data_intersection){
-                this.drilldownData = {}
                 this.drilldownData = this.static_drill_data[this.jsonData[this.params.selected_category][this.carouselActiveIndex][i].label]    
             }
             if(this.params.click_open_drill_enabled){
@@ -165,9 +164,9 @@ export default {
                 if(this.succ_req){
                     await this.$myApi(this.params.drill_down_params.data_url)
                     .then(response => {
-                        this.drilldownData = response.data
-                        if(this.data_intersection){
-                            this.static_drill_data = response.data
+                        this.drilldownData = Object.assign(response.data)
+                        if(this.params.data_intersection){
+                            this.static_drill_data = Object.assign(response.data)
                         }
                         this.errorMSG = ""
                         if(this.params.data_category == undefined || this.params.selected_category == undefined){
