@@ -41,7 +41,7 @@ export default {
     view_ID:{type:Number},
   },
   async created() {
-      await this.$myShavitApi("/tikshuv/metric/query/system/remote_users")
+      await this.$myShavitApi("tikshuv/metric/query/system/remote_users")
   .then((response) => {
       if (response.data.success) {
         // get the data
