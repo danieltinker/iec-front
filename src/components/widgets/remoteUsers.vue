@@ -43,13 +43,13 @@ export default {
   async created() {
       await this.$myApi("tikshuv/metric/query/system/remote_users")
   .then((response) => {
-      if (response) {
+      if (response.data.success) {
         // get the data
-        console.log(response.data[0].last_update_timestamp);
-        this.lastUpdateTimestamp = response.data[0].last_update_timestamp;
+        console.log(response.data.data[0].last_update_timestamp);
+        this.lastUpdateTimestamp = response.data.data[0].last_update_timestamp;
 
-      if (response.data[0].metrics_data.length > 0) {
-        this.remoteUsers = response.data[0].metrics_data[0].details.value;
+      if (response.data.data[0].metrics_data.length > 0) {
+        this.remoteUsers = response.data.data[0].metrics_data[0].details.value;
       }
       this.doneFetching = true
       }
