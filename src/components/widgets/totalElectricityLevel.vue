@@ -58,7 +58,7 @@ import OneBar from './genericBAR/oneBar.vue';
         view_ID: { type: Number },
     },
     async created() {
-        await this.$myShavitApi("queryList/iec/reserve_total,total_peak_reserve")
+        await this.$myApi("queryList/iec/reserve_total,total_peak_reserve")
             .then((response) => {
             if (response.data.success) {
                 var prodData = [];
