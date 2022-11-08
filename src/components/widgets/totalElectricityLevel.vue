@@ -60,26 +60,26 @@ import OneBar from './genericBAR/oneBar.vue';
     async created() {
         await this.$myApi("queryList/iec/reserve_total,total_peak_reserve")
             .then((response) => {
-            if (response.data.success) {
+            if (response) {
                 var prodData = [];
-                for (var index in response.data.data[0]) {
+                for (var index in response.data[0]) {
                     var tempObj = {};
-                    if (response.data.data[0][index]["label"] == "זמינות") {
-                        response.data.data[0][index]["label"] = "רזרבה נוכחית";
+                    if (response.data[0][index]["label"] == "זמינות") {
+                        response.data[0][index]["label"] = "רזרבה נוכחית";
                     }
-                    tempObj["label"] = response.data.data[0][index]["label"];
+                    tempObj["label"] = response.data[0][index]["label"];
                     tempObj["max_value"] = 2500;
                     // TotalProdDataData[index]["value"] = 1100
-                    tempObj["value"] = response.data.data[0][index]["value"];
-                    tempObj["description"] = response.data.data[0][index]["description"];
+                    tempObj["value"] = response.data[0][index]["value"];
+                    tempObj["description"] = response.data[0][index]["description"];
                     // console.log(TotalProdDataData[index]["value"])
-                    if (0 <= response.data.data[0][index]["value"] && response.data.data[0][index]["value"] < 100) {
+                    if (0 <= response.data[0][index]["value"] && response.data[0][index]["value"] < 100) {
                         tempObj["color"] = "#FF0100";
                     }
-                    else if (310 <= response.data.data[0][index]["value"] && response.data.data[0][index]["value"] < 600) {
+                    else if (310 <= response.data[0][index]["value"] && response.data[0][index]["value"] < 600) {
                         tempObj["color"] = "#F87302";
                     }
-                    else if (700 <= response.data.data[0][index]["value"] && response.data.data[0][index]["value"] < 1100) {
+                    else if (700 <= response.data[0][index]["value"] && response.data[0][index]["value"] < 1100) {
                         tempObj["color"] = "#FFDB58";
                     }
                     else {

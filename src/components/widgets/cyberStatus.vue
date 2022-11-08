@@ -84,7 +84,7 @@
       },
     },
     async mounted() {
-      await this.$myShavitApi("tikshuv/metric/query/cyber/cyber_alert_status")
+      await this.$myApi("tikshuv/metric/query/cyber/cyber_alert_status")
     .then((response) => {
         if (response.data.success) {
           // get the data
