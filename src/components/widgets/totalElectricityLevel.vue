@@ -3,20 +3,20 @@
   
         <div style="height:400px; " v-if="doneFetching">
                 
-        <v-row id="test" class="mt-2" style="place-content: center; background: #FFFFFF;  color:black;"> 
+        <v-row id="test" class="mt-2" :style="{color:getCurrentTheme.cyber_status.box_color_1}" style="place-content: center; "> 
             <div class="eachBar" v-for="(bar, key) in prodData" :key="key">
                 <div id="100red" style="height:1px">
-                    <span v-if="key==0" style="display: block; z-index: 1; position: relative; top: 206px; color:#FFFFFF; ">XXX</span>
+                    <span v-if="key==0" :style="{color:getCurrentTheme.cyber_status.color_1}" style="display: block; z-index: 1; position: relative; top: 206px; ">XXX</span>
                     <span v-if="key==1" style="display: block; z-index: 1; position: relative; top: 224px; right: 40px; ">100</span>
                     <hr style="display: block; z-index: 1; position: relative; top: 213px; border: 1px solid #FF0100;">
                 </div>
                 <div id="600orange" style="height:1px">
-                    <span v-if="key==0" style="display: block; z-index: 1; position: relative; top: 172px; color:#FFFFFF; ">XXX</span>
+                    <span v-if="key==0" :style="{color:getCurrentTheme.cyber_status.color_1}" style="display: block; z-index: 1; position: relative; top: 172px; ">XXX</span>
                     <span v-if="key==1" style="display: block; z-index: 1; position: relative; top: 191px; right: 40px; ">600</span>
                     <hr style="display: block; z-index: 1; position: relative; top: 177px; border: 1px solid #F87302;">
                 </div>                
                 <div id="1100yellow">
-                    <span v-if="key==0" style="display: block; z-index: 1; position: relative; top: 129px; color:#FFFFFF; ">XXX</span>
+                    <span v-if="key==0" :style="{color:getCurrentTheme.cyber_status.color_1}" style="display: block; z-index: 1; position: relative; top: 129px; ">XXX</span>
                     <span v-if="key==1" style="display: block; z-index: 1; position: relative; top: 153px; right: 46px; ">1,100</span>
                     <hr style="display: block; z-index: 1; position: relative; top: 140px; border: 1px solid #FFDB58;">
                 </div>
@@ -26,7 +26,7 @@
                     <OneBar   :data="bar" :params="params" backgroundColor="rgba(0, 0, 100%, 80%)" cWidth="55px"/>
                     <div style="display:flex; flex-direction:column;">
                         <label style="font-size:20px; font-family: almoni; bottom:0; ">{{bar.label}}</label>
-                        <label style="font-size:20px; font-family: almoni; bottom:0; ">({{bar.description}})</label>
+                        <label style="font-size:20px; font-family: almoni; bottom:0; ">({{updateLabel(bar.description)}})</label>
                     </div>
                 </div>
                 </v-col>
@@ -51,7 +51,7 @@
   </template>
   
   <script>
-import OneBar from './genericBAR/oneBar.vue';
+import OneBar from '../utils/staticCustomOneBar.vue';
   export default {
     props: {
         params: { type: Object, required: false },
@@ -93,6 +93,11 @@ import OneBar from './genericBAR/oneBar.vue';
         })
         .catch((err) => {this.errorMSG = "אין מידע"
   console.log(err)});
+  },
+  methods:{
+    updateLabel(item){
+        return item == "N" ? "MW" : item
+    }
   },
   computed:{
     isErrorMsg(){
