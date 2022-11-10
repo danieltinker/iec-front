@@ -7,7 +7,7 @@
         :width = "$pieSize"
         :height = "$pieSize"
         @clickIndex="myActiveIndex()"
-        @intersection = "$emit('emitHandler')"
+        @intersection = "emitHandler()"
         />
         <div class="btn-container">
             <v-row dir="rtl" style="place-content:right;display: inline-flex;">
