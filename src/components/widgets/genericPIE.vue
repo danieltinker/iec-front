@@ -38,7 +38,7 @@
 
                     <v-carousel-item v-for="(bararr,index) in jsonData[params.selected_category]" :key="index">
                         <div class="PIEcontainer" dir="rtl">
-                              <BaseGenericPie  :chartData="bararr" :isDrill="isDrillDown" :isPrecentage="params.isPrecentage"/>
+                              <BaseGenericPie  :chartData="bararr" :isDrill="isDrillDown" :isPrecentage="params.isPrecentage" @handleIntersection="pieClick(index)"/>
                               
                         </div>
                     </v-carousel-item>
@@ -117,7 +117,8 @@ export default {
 },
     methods:{
         // toggel drill down from a label click if click_open_drill_enabled = true in the config
-        barBoxClick(i){
+        pieClick(i){
+            console.log("please please please please get the index !!!!!!!!!1",i)
             this.activeTitle = i
             if(this.params.data_intersection){
                 this.drilldownData = this.static_drill_data[this.jsonData[this.params.selected_category][this.carouselActiveIndex][i].label]    
