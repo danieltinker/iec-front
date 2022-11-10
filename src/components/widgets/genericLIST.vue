@@ -74,15 +74,15 @@
                                     </template>
                                 
     
-                                   <template v-for="(slot,i) in headers" v-slot:[`item.${slot.text}`]="{ item }">
-                                      <strong  @click="testttt(item[slot.text])" v-if="typeof item[slot.text] == 'string' && item[slot.text].split('-')[0] == 'dot'" :key="i" class="dot" :style="'background-color:' + item[slot.text].split('-')[1]">   </strong>
-                                      <strong  @click="testttt(item[slot.text],$event)" v-else-if="typeof item[slot.text] == 'string'" :key="i+slot">    {{item[slot.text]}}</strong>
-                                      <strong v-else :key="slot+i">{{item[slot.text]}}</strong>
+                                   <template v-for="(slot,i) in headers" v-slot:[`item.${slot.value}`]="{ item }">
+                                      <strong  @click="testttt(item[slot.value])" v-if="typeof item[slot.value] == 'string' && item[slot.value].split('-')[0] == 'dot'" :key="i" class="dot" :style="'background-color:' + item[slot.value].split('-')[1]">   </strong>
+                                      <strong  @click="testttt(item[slot.value],$event)" v-else-if="typeof item[slot.value] == 'string'" :key="i+slot">    {{item[slot.value]}}</strong>
+                                      <strong v-else :key="slot+i">{{item[slot.value]}}</strong>
                                    </template>
                                     <template v-slot:body.append>
                                            <tr>
                                                <td v-for="(item,i) in headers" :key="i" class="list-total" style="height:30px;">
-                                                   <span v-if="totalGet.includes(item.text)" @click="testttt(sumField(item.text).toFixed(1),$event)"> {{ sumField(item.text).toFixed(1)}} </span>
+                                                   <span v-if="totalGet.includes(item.value)" @click="testttt(sumField(item.value).toFixed(1),$event)"> {{ sumField(item.value).toFixed(1)}} </span>
                                                    <span v-else>  </span></td>
                                                
                                            </tr>
@@ -228,14 +228,14 @@ export default {
                     //starttttttttt
             //         this.jsonData = {"*" : [[
             //     {
-            //         name: "1",
+            //         name: "dsadasdasdasdasdasdasdas",
             //         calories: 1,
             //         fat: 6,
             //         carbs: 24,
             //         category: "test1",
             //     },
             //     {
-            //         name: "8",
+            //         name: "8dddddddddddddddddddddddddddd",
             //         calories: 408,
             //         fat: 3.2,
             //         carbs: 87,
@@ -284,6 +284,13 @@ export default {
 </script>
 
 <style scoped>
+
+ #mytable >>> .v-data-table-header {
+      height: 24px !important;
+    }
+    #mytable >>> .v-data-table-header tr th{
+      height: 24px !important;
+    }
 .list-total{
     font-family: almoni-bold !important;
     font-size:20px !important;
@@ -302,6 +309,7 @@ export default {
     padding-right: 5px; */
     /* word-wrap: break-word; */
     text-overflow: ellipsis;
+    height: 40px;
     overflow: hidden; 
     white-space: nowrap;
     transition: height 0.2s cubic-bezier(0.4, 0, 0.6, 1);

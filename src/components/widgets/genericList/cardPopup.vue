@@ -1,26 +1,29 @@
 <template>
     <div class="text-center">
-      <v-dialog v-model="dialog" width="500" style="">
-        <v-card>
-        <v-card-title class="text-h5 grey lighten-2">
-          Privacy Policy
+      <v-dialog v-model="dialog" width="500" style="text-align: right;font-family: almoni;">
+        <v-card style="text-align: right;">
+        <v-card-title class="text-h5 grey lighten-2" style="text-align: right;">
+          <v-icon class="" dir @click="dialog = false" :color="getCurrentTheme.hq_navbar.span_color_first" style="font-size: 20px; justify-content: right;">mdi-close</v-icon>
+          
+
         </v-card-title>
+        
 
         <v-card-text>
          {{myItem}}
         </v-card-text>
 
-        <v-divider></v-divider>
+        <!-- <v-divider></v-divider> -->
 
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn
+          <!-- <v-btn
             color="primary"
             text
             @click="dialog = false"
           >
             I accept
-          </v-btn>
+          </v-btn> -->
         </v-card-actions>
       </v-card>
 
