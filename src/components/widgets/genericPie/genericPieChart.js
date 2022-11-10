@@ -45,6 +45,8 @@ export default {
     },
     methods:{
         onClickLegend(indexClick){
+            console.log(indexClick,"genericPieChartJs clicked")
+            this.$emit('intersection',indexClick)
             var data = this._data._chart.tooltip._data
             var items = Object.values(Object.values(data.datasets)[0]._meta)[0]
             var indexLabelSelected = getSelectedRadius(items.data)  // return index of selcted if none selcted return -1
