@@ -75,7 +75,7 @@
                                 
     
                                    <template v-for="(slot,i) in headers" v-slot:[`item.${slot.value}`]="{ item }">
-                                      <strong  @click="testttt(item[slot.value])" v-if="typeof item[slot.value] == 'string' && item[slot.value].split('-')[0] == 'dot'" :key="i" class="dot" :style="'background-color:' + item[slot.value].split('-')[1]">   </strong>
+                                      <strong  @click="testttt(item[slot.value])" v-if="typeof item[slot.value] == 'string' && item[slot.value].split('*-*')[0] == 'dot'" :key="i" class="dot" :style="'background-color:' + item[slot.value].split('*-*')[1]">   </strong>
                                       <strong  @click="testttt(item[slot.value],$event)" v-else-if="typeof item[slot.value] == 'string'" :key="i+slot">    {{item[slot.value]}}</strong>
                                       <strong v-else :key="slot+i">{{item[slot.value]}}</strong>
                                    </template>
