@@ -37,6 +37,7 @@ export default {
     },
     methods:{
         onClickLegend(indexClick){
+            console.log(indexClick,"genericPieChartJs clicked")
             this.$emit('intersection',indexClick)
             var data = this._data._chart.tooltip._data
             var items = Object.values(Object.values(data.datasets)[0]._meta)[0]

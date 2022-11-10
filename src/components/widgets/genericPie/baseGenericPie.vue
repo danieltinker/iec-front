@@ -7,7 +7,7 @@
         :width = "$pieSize"
         :height = "$pieSize"
         @clickIndex="myActiveIndex()"
-        @intersection = "$emit('handleIntersection',i)"
+        @intersection = "$emit('emitHandler')"
         />
         <div class="btn-container">
             <v-row dir="rtl" style="place-content:right;display: inline-flex;">
@@ -81,6 +81,11 @@ export default {
   
   },
   methods:{
+    emitHandler(index){
+      console.log("emitHnadler",index)
+      this.$emit('handleIntersection',index)
+
+    },
     myActiveIndex(){
       this.activeIndex = this.$refs.dount.getSelected()
     }
