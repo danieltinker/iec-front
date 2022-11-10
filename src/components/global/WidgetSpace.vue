@@ -98,6 +98,7 @@ export default {
     "$store.state.selected_hq_id": {
       async handler() {
         this.$store.state.selected_cat_id=1
+        this.doneFetching=false
         await axios
             .get(this.$store.state.serverAdrr+"/shavit-mobile/views/" + this.$store.state.selected_hq_id + "/" + this.$store.state.selected_cat_id, { params: { sid: "xxx" } })
             .then((response) => {
