@@ -95,6 +95,14 @@ export default {
 
           stacked: false,
           events: {
+            // legendClick:function(event, chartContext, config) {
+            //   chartContext.reactiveSetter(0)
+            //   console.log("th",this.$refs.chart);
+            //   console.log("here1",event.axes.ctx.data.activeIndex);
+            //   console.log("here1",chartContext);
+            //   console.log("here1",config);
+
+            // },
             beforeZoom: function(ctx) {
               // we need to clear the range as we only need it on the iniital load.
               ctx.w.config.xaxis.range = undefined;
@@ -188,6 +196,10 @@ export default {
           },
           show: true,
           showForSingleSeries: true,
+          onItemClick: {
+          toggleDataSeries: true
+      },
+          
           horizontalAlign: "left",
           offsetX: 40,
           fontFamily: "almoni"
@@ -338,6 +350,8 @@ export default {
  
 }
 ::v-deep .apexcharts-legend-series{
+    margin: 0px !important;
+    margin-top: 10px !important;
     text-align: -webkit-center;
     height: 36px;
     min-width: 64px;
@@ -345,7 +359,7 @@ export default {
     background-color: v-bind('getCurrentTheme.baseGenericPie.btn_color');
     padding-right: 8px;
     font-family: almoni;
-    margin: auto !important;
+    /* margin: auto !important; */
     margin-bottom: 10px !important;
     justify-content: right;
     overflow: hidden;
