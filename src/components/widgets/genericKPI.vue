@@ -124,6 +124,7 @@ export default {
     components:{
         ThreeDotsNineDots,
         genericKPI: () => import('../widgets/genericKPI.vue'),
+        genericKPITWO: () => import('../widgets/genericKPITWO.vue'),
         genericPIE: () => import('../widgets/genericPIE.vue')
     },
     methods:{
