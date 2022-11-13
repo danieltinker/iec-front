@@ -90,6 +90,11 @@
                                            </tr>
                                                         
                                     </template>
+
+                                    <template slot="no-data">
+    My no data message
+  </template>
+  
                              </v-data-table>
 
 
@@ -244,9 +249,9 @@ export default {
             //         category: "test4",
             //     },
             // ]] }
-                    if( this.jsonData["*"][0][0].length == 0){
-                        throw 'no data';
-                    }
+                    // if( this.jsonData["*"][0][0].length == 0){
+                    //     throw 'no data';
+                    // }
                     this.errorMSG = ""
                     // do sth ...
                 })

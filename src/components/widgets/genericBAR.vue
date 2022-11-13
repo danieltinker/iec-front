@@ -67,8 +67,9 @@
                  v-for="(btnName,index) in BARarr" :key="index" class="labels">
                     <span
                     class="dot"
+                    style="margin-left:5px"
                     :style="{backgroundColor :  btnName.color ? btnName.color: getColor(btnName,index).color}"></span>    
-                    <span :style="'color:' + getCurrentTheme.baseGenericPie.span_color">
+                    <span :style="'color:' + getCurrentTheme.baseGenericPie.span_color" style="margin-left:5px">
                         {{btnName.label}}
                     </span>
                   </div>    
