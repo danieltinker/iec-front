@@ -1,22 +1,23 @@
 <template>
     <div class="text-center">
-      <v-dialog v-model="dialog" width="500" style="text-align: right;font-family: almoni;">
+      <v-dialog overlay-opacity="0.5" overlay-color="black" v-model="dialog" width="500" style="text-align: right;font-family: almoni;">
         <v-card style="text-align: right;">
-        <v-card-title class="text-h5 grey lighten-2" style="text-align: right;">
-          <v-icon class="" dir @click="dialog = false" :color="getCurrentTheme.hq_navbar.span_color_first" style="font-size: 20px; justify-content: right;">mdi-close</v-icon>
+        <v-card-title class="text-h5 grey lighten-2" style="text-align: right;padding:2px 4px;direction: rtl;height:25px">
+          <!-- <span style="margin-right:20px">מידע</span> -->
+          <v-icon class="" dir @click="dialog = false" :color="getCurrentTheme.hq_navbar.span_color_first" style="font-size: 20px; justify-content: right;position: absolute;left: 2%;">mdi-close</v-icon>
           
 
         </v-card-title>
         
 
-        <v-card-text>
+        <v-card-text style="padding:8px">
          {{myItem}}
         </v-card-text>
 
         <!-- <v-divider></v-divider> -->
 
-        <v-card-actions>
-          <v-spacer></v-spacer>
+        <!-- <v-card-actions>
+          <v-spacer></v-spacer> -->
           <!-- <v-btn
             color="primary"
             text
@@ -24,7 +25,7 @@
           >
             I accept
           </v-btn> -->
-        </v-card-actions>
+        <!-- </v-card-actions> -->
       </v-card>
 
       </v-dialog>

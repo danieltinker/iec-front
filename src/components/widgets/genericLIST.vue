@@ -79,11 +79,13 @@
                                       <strong  @click="testttt(item[slot.value],$event)" v-else-if="typeof item[slot.value] == 'string'" :key="i+slot">    {{item[slot.value]}}</strong>
                                       <strong v-else :key="slot+i">{{item[slot.value]}}</strong>
                                    </template>
-                                    <template v-slot:body.append>
+                                    <template v-slot:body.append v-if="totalGet.length > 0">
                                            <tr>
                                                <td v-for="(item,i) in headers" :key="i" class="list-total" style="height:30px;">
+                                                   <span v-if="i == 0 && !totalGet.includes(item.value)">סה"כ</span>
+                                                   <div v-else>
                                                    <span v-if="totalGet.includes(item.value)" @click="testttt(sumField(item.value).toFixed(1),$event)"> {{ sumField(item.value).toFixed(1)}} </span>
-                                                   <span v-else>  </span></td>
+                                                   <span v-else>  </span></div></td>
                                                
                                            </tr>
                                                         
@@ -288,6 +290,14 @@ export default {
  #mytable >>> .v-data-table-header {
       height: 24px !important;
     }
+
+    ::v-deep .v-data-table > .v-data-table__wrapper > table > tbody > tr > td, .v-data-table > .v-data-table__wrapper > table > tbody > tr > th, .v-data-table > .v-data-table__wrapper > table > thead > tr > td, .v-data-table > .v-data-table__wrapper > table > thead > tr > th, .v-data-table > .v-data-table__wrapper > table > tfoot > tr > td, .v-data-table  {
+    
+    
+    border-radius: 0 0 0 0 !important;
+    box-shadow:0px 0px !important
+
+}
     #mytable >>> .v-data-table-header tr th{
       height: 24px !important;
     }
