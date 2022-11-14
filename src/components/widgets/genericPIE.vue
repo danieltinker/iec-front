@@ -133,7 +133,10 @@ export default {
             this.activeTitle = i
             if(this.params.data_intersection){
                 this.drilldownData = this.static_drill_data[this.jsonData[this.params.selected_category][this.carouselActiveIndex][i].label]    
+                console.log(this.jsonData[this.params.selected_category][this.carouselActiveIndex][i].label,"pie main clock label on click DI")
+                console.log(this.params.static_drill_titles ,"params.static_drill")
                 this.params.static_drill_titles = this.params.static_drill_titles[this.jsonData[this.params.selected_category][this.carouselActiveIndex][i].label] 
+                console.log(this.params.static_drill_titles ,"params.static_drill_after entry")
             }
             if(this.params.click_open_drill_enabled){
                 if(!this.params.expand ||  i != this.clicked_index){
