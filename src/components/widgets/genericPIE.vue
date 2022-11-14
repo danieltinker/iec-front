@@ -16,9 +16,21 @@
                             : "mdi-bookmark-outline"
                     }}</v-icon>
                 </span>
-                <span id="chartsHeaders" >
+                <!-- <span id="chartsHeaders" >
                     {{ params.chart_titles[activeTitle] }}
                 </span>
+                 -->
+                 <span id="chartsHeaders" v-if="!isDrillDown">
+                     {{ params.chart_titles[params.selected_category][activeTitle] }} 
+                 </span>
+
+                 <span id="chartsHeaders" v-if="isDrillDown && !params.data_intersection">
+                     {{ static_drill_titles["*"][params.selected_category][carouselActiveIndex] }} 
+                 </span>
+                 <span id="chartsHeaders" v-if="isDrillDown && params.data_intersection">
+                     {{ static_drill_titles[params.selected_category][carouselActiveIndex] }} 
+                 </span>
+                 
 
                 <v-carousel
                   hide-delimiters
@@ -57,7 +69,8 @@
                 :isDrillDown="true"
                 :view_ID="view_ID"
                 :drillDataProp="drilldownData"
-                :parentsParam="params">
+                :parentsParam="params"
+                :static_drill_titles="params.static_drill_titles">
                 </component>   
             </div>
     </div>  
@@ -86,7 +99,8 @@ export default {
         drillDataProp:{type:Object, default:()=>{}},
         params:{type:Object,required:false},
         view_ID:{type:Number},
-        parentsParam:{type:Object}
+        parentsParam:{type:Object},
+        static_drill_titles:{type:Object}
     },
     watch:{
         drillDataProp(){
@@ -105,7 +119,7 @@ export default {
                 drilldownData:[],
                 jsonData:[],
                 doneFetching:false,
-                static_drill_data:{}
+                static_drill_data:{},
             }
     },
     components:{
@@ -121,6 +135,7 @@ export default {
             this.activeTitle = i
             if(this.params.data_intersection){
                 this.drilldownData = this.static_drill_data[this.jsonData[this.params.selected_category][this.carouselActiveIndex][i].label]    
+                this.params.static_drill_titles = this.params.static_drill_titles[this.jsonData[this.params.selected_category][this.carouselActiveIndex][i].label] 
             }
             if(this.params.click_open_drill_enabled){
                 if(!this.params.expand ||  i != this.clicked_index){
@@ -149,6 +164,7 @@ export default {
     },
 
     async created(){
+        console.log(this.static_drill_titles)
         if(!this.isDrillDown){
             await this.$myApi(this.params.data_url)
                 .then(response => {

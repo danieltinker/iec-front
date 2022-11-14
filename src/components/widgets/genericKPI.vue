@@ -165,6 +165,7 @@ export default {
             await this.$myApi(this.params.data_url)
                 .then(response => {
                     this.jsonData = response.data
+                    chart_titles = this.jsonData['titles']
                     this.errorMSG = ""
                     // do sth ...
                 })
