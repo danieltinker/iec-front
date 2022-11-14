@@ -216,27 +216,26 @@ export default {
 
   methods: {
     tick() {
-      axios
-        .post(
-          "http://20.102.120.232:5080/shavit/metric/queryGroup/dailyLoad?sid=xxx"
+      this.$myApi(
+          "data?dsname=dailyLoad&isDrill=true"
         )
         .then(response => {
-          console.log("Rasrsarsa", response["data"]["data"][0]);
+          console.log("Rasrsarsa", response["data"][0]);
           var tmpSeries = [],
             secTmpSeries = [];
           // console.log(response)
-          for (var val in response["data"]["data"][0]) {
+          for (var val in response["data"][0]) {
             tmpSeries[val] = [];
             tmpSeries[val][0] = Date.parse(
-              response["data"]["data"][0][val].hour
+              response["data"][0][val].hour
             );
-            tmpSeries[val][1] = response["data"]["data"][0][val].forecast;
+            tmpSeries[val][1] = response["data"][0][val].forecast;
 
             secTmpSeries[val] = [];
             secTmpSeries[val][0] = Date.parse(
-              response["data"]["data"][0][val].hour
+              response["data"][0][val].hour
             );
-            secTmpSeries[val][1] = response["data"]["data"][0][val].mw;
+            secTmpSeries[val][1] = response["data"][0][val].mw;
           }
           this.line1values = tmpSeries;
           this.line1name = this.names["forecast"];
