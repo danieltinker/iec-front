@@ -21,6 +21,8 @@
                 </span>
                  -->
                  <span id="chartsHeaders" v-if="!isDrillDown">
+                    {{params.chart_titles}}
+                    {{params.static_drill_titles}}
                      {{ params.chart_titles[params.selected_category][activeTitle] }} 
                  </span>
                  <span id="chartsHeaders" v-if="isDrillDown && !params.data_intersection">
