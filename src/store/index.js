@@ -33,6 +33,8 @@ export default new Vuex.Store({
           "kpi_sec_value": "#828282",
           "main_background":"#424242",
           "drill_background":"#424242",
+          "main_label":"#ffffff",
+          "value_color":"#A8699D",
         },
         "hq_navbar":{
           "span_color_first":"#FFFFFF",
@@ -103,6 +105,7 @@ export default new Vuex.Store({
           "kpi_sec_value": "#828282",
           "main_background":"#EBEBEB",
           "drill_background":"#FFFFFF",
+          "main_label":"#010101",
         },
         "hq_navbar":{
           "span_color_first":"#000000",
