@@ -92,8 +92,8 @@
                                     </template>
 
                                     <template slot="no-data">
-    My no data message
-  </template>
+                                        My no data message
+                                    </template>
   
                              </v-data-table>
 

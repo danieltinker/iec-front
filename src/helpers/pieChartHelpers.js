@@ -94,7 +94,12 @@ export const pluginInnerContentHelper = (thisChart,myTheme) => {
             Object.keys(items).forEach((i)=>{MyOuterRadius.push(items[i]._model.outerRadius)})
             Math.max(...MyOuterRadius) === Math.min(...MyOuterRadius) ? ctx.fillStyle = myTheme :  ctx.fillStyle = chart.data.datasets[0].backgroundColor[MyOuterRadius.indexOf(Math.max(...MyOuterRadius))]
             var text = chart.tooltip._data.datasets[0].pieInnerText
-            var text2 = chart.tooltip._data.datasets[0].pieInnerNum
+            if(data.datasets[0].isNumber){
+                var text2 = chart.tooltip._data.datasets[0].pieInnerNum
+            }
+            else{
+                var text2 = ""
+            }
             let number = data.datasets[0].isPrecentage? 45 : 25
             let heightNum = data.datasets[0].isPrecentage? 0 : 25
             var text24 = precentage(chart.tooltip._data.datasets[0].pieInnerNum)
