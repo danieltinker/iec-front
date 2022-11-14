@@ -3,7 +3,7 @@
     <div>
         <div class="clock-main" style="text-align: center;" v-if="doneFetching">
             <div class="flex-center">
-                <v-radio-group  v-model="params.selected_category" row id="districtRadioGroup" v-if=" params.data_category.length >= 2">
+                <v-radio-group dir="rtl"  v-model="params.selected_category" row id="districtRadioGroup" v-if=" params.data_category.length >= 2">
                     <v-radio v-for="(category) in params.data_category" :key="category" :label="category" :value="category" color="#935287"></v-radio>
                 </v-radio-group>
             </div>
