@@ -4,7 +4,7 @@
 * @param {Object} [innerText] - ineer text show in pie
 * @param {Object} [innerNum] - inner num Total
 */
-export function baseTemplate(myJson,innerText,innerNum,precentage){
+export function baseTemplate(myJson,innerText,innerNum,precentage,isNumber){
     innerNum
     //default colors static Array
     const defaultColors = ["#a8699d","#38ae10","#a8699d","#38ae10","#a8699d","#38ae10"]
@@ -18,6 +18,7 @@ export function baseTemplate(myJson,innerText,innerNum,precentage){
         labels: labels,
         datasets: [
             {
+            isNumber:isNumber,
             isPrecentage:precentage,
             pieInnerText:innerText,
             pieInnerNum:data.reduce((a,b)=> a+b) ,
@@ -94,14 +95,11 @@ export const pluginInnerContentHelper = (thisChart,myTheme) => {
             Object.keys(items).forEach((i)=>{MyOuterRadius.push(items[i]._model.outerRadius)})
             Math.max(...MyOuterRadius) === Math.min(...MyOuterRadius) ? ctx.fillStyle = myTheme :  ctx.fillStyle = chart.data.datasets[0].backgroundColor[MyOuterRadius.indexOf(Math.max(...MyOuterRadius))]
             var text = chart.tooltip._data.datasets[0].pieInnerText
-            console.log(data.datasets[0].isNumber,"is number is number pie chart")
+            console.log(data.datasets[0].isNumber,data.datasets[0].isPrecentage,"is number is number pie chart")
+            var text2 = chart.tooltip._data.datasets[0].pieInnerNum
             if(data.datasets[0].isNumber){
-                var text2 = chart.tooltip._data.datasets[0].pieInnerNum
-            }
-            else{
                 var text2 = ""
             }
-            var text2 = chart.tooltip._data.datasets[0].pieInnerNum
             let number = data.datasets[0].isPrecentage? 45 : 25
             let heightNum = data.datasets[0].isPrecentage? 0 : 25
             var text24 = precentage(chart.tooltip._data.datasets[0].pieInnerNum)
