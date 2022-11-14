@@ -23,7 +23,6 @@
                  <span id="chartsHeaders" v-if="!isDrillDown">
                      {{ params.chart_titles[params.selected_category][activeTitle] }} 
                  </span>
-
                  <span id="chartsHeaders" v-if="isDrillDown && !params.data_intersection">
                      {{ static_drill_titles["*"][params.selected_category][carouselActiveIndex] }} 
                  </span>
@@ -51,7 +50,6 @@
                     <v-carousel-item v-for="(bararr,index) in jsonData[params.selected_category]" :key="index">
                         <div class="PIEcontainer" dir="rtl">
                               <BaseGenericPie  :chartData="bararr" :isDrill="isDrillDown" :isPrecentage="params.isPrecentage" :isNumber="params.isNumber" @handleIntersection="pieClick"/>
-                              
                         </div>
                     </v-carousel-item>
                 </v-carousel>
