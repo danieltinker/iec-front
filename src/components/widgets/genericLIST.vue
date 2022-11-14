@@ -24,10 +24,10 @@
                  </span>
                  <span id="chartsHeaders" v-if="isDrillDown && !params.data_intersection">
                     {{static_drill_titles}}
-                     {{ static_drill_titles["*"][params.selected_category][carouselActiveIndex] }} 
+                     {{ static_drill_titles_prop["*"][params.selected_category][carouselActiveIndex] }} 
                  </span>
                  <span id="chartsHeaders" v-if="isDrillDown && params.data_intersection">
-                     {{ static_drill_titles[params.selected_category][carouselActiveIndex] }} 
+                     {{ static_drill_titles_prop[params.selected_category][carouselActiveIndex] }} 
                  </span>
                  
                 
@@ -129,7 +129,7 @@
             :view_ID="view_ID"
             :drillDataProp="drilldownData"
             :parentsParam="params"
-            :static_drill_titles="params.static_drill_titles">
+            :static_drill_titles_prop="params.static_drill_titles">
             </component>   
         </div>
     </div>
@@ -160,7 +160,7 @@ export default {
         params:{type:Object,required:false},
         view_ID:{type:Number},
         parentsParam:{type:Object},
-        static_drill_titles:{type:Object}
+        static_drill_titles_prop:{type:Object}
     },
     watch:{
         drillDataProp(){
