@@ -19,9 +19,11 @@
                 </span>
 
                 <span id="chartsHeaders" v-if="!isDrillDown">
+                    {{params.chart_titles}}
                      {{ params.chart_titles[params.selected_category][activeTitle] }} 
                  </span>
                  <span id="chartsHeaders" v-if="isDrillDown && !params.data_intersection">
+                    {{static_drill_titles}}
                      {{ static_drill_titles["*"][params.selected_category][carouselActiveIndex] }} 
                  </span>
                  <span id="chartsHeaders" v-if="isDrillDown && params.data_intersection">
