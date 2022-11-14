@@ -129,7 +129,7 @@
             :view_ID="view_ID"
             :drillDataProp="drilldownData"
             :parentsParam="params"
-            :static_drill_titles_prop="params.static_drill_titles">
+            :static_drill_titles_prop="params.static_drill_titles_param">
             </component>   
         </div>
     </div>
