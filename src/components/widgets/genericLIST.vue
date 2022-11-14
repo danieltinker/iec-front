@@ -23,7 +23,7 @@
                      {{ params.chart_titles[params.selected_category][activeTitle] }} 
                  </span>
                  <span id="chartsHeaders" v-if="isDrillDown && !params.data_intersection">
-                    {{static_drill_titles}}
+                    {{static_drill_titles_prop}}
                      {{ static_drill_titles_prop["*"][params.selected_category][carouselActiveIndex] }} 
                  </span>
                  <span id="chartsHeaders" v-if="isDrillDown && params.data_intersection">
@@ -211,9 +211,9 @@ export default {
             if(this.params.data_intersection){
                 this.drilldownData = this.static_drill_data[this.jsonData[this.params.selected_category][this.carouselActiveIndex][i].label]    
                 console.log(this.jsonData[this.params.selected_category][this.carouselActiveIndex][i].label,"pie main clock label on click DI")
-                console.log(this.params.static_drill_titles ,"params.static_drill")
-                this.params.static_drill_titles = this.params.static_drill_titles[this.jsonData[this.params.selected_category][this.carouselActiveIndex][i].label] 
-                console.log(this.params.static_drill_titles ,"params.static_drill_after entry")
+                console.log(this.params.static_drill_titles_param ,"params.static_drill")
+                this.params.static_drill_titles_param = this.params.static_drill_titles_param[this.jsonData[this.params.selected_category][this.carouselActiveIndex][i].label] 
+                console.log(this.params.static_drill_titles_param ,"params.static_drill_after entry")
 
             }
             if(this.params.click_open_drill_enabled){
@@ -243,6 +243,7 @@ export default {
     },
 
     async created(){
+        console.log("my drill title prop_list",this.static_drill_titles_prop)
         this.headers = this.params.headers
         this.totalGet = this.params.totalGet
         if(!this.isDrillDown){

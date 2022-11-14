@@ -38,10 +38,6 @@
                   v-model="carouselActiveIndex"
                   height=auto
                 >
-                <span id="chartsHeaders" >
-                    {{ params.chart_titles[carouselActiveIndex] }}
-                </span>
-
                     <template  v-slot:next="{ on, attr }">
                         <img v-on="on" v-bind="attr" src="../../assets/playRight.svg"/>
                     </template>
@@ -88,7 +84,7 @@
             :view_ID="view_ID"
             :drillDataProp="drilldownData"
             :parentsParam="params"
-            :static_drill_titles_prop="params.static_drill_titles">
+            :static_drill_titles_prop="params.static_drill_titles_param">
             </component>   
         </div>
     </div>
@@ -148,7 +144,7 @@ export default {
             this.activeTitle = i
             if(this.params.data_intersection){
                 this.drilldownData = this.static_drill_data[this.jsonData[this.params.selected_category][this.carouselActiveIndex][i].label]   
-                this.params.static_drill_titles = this.params.static_drill_titles[this.jsonData[this.params.selected_category][this.carouselActiveIndex][i].label] 
+                this.params.static_drill_titles_param = this.params.static_drill_titles_param[this.jsonData[this.params.selected_category][this.carouselActiveIndex][i].label] 
  
             }
             if(this.params.click_open_drill_enabled){

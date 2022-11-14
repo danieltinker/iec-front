@@ -22,7 +22,7 @@
                  -->
                  <span id="chartsHeaders" v-if="!isDrillDown">
                     {{params.chart_titles}}
-                    {{params.static_drill_titles}}
+                    {{params.static_drill_titles_param}}
                      {{ params.chart_titles[params.selected_category][activeTitle] }} 
                  </span>
                  <span id="chartsHeaders" v-if="isDrillDown && !params.data_intersection">
@@ -70,7 +70,7 @@
                 :view_ID="view_ID"
                 :drillDataProp="drilldownData"
                 :parentsParam="params"
-                :static_drill_titles_prop="params.static_drill_titles">
+                :static_drill_titles_prop="params.static_drill_titles_param">
                 </component>   
             </div>
     </div>  
@@ -136,9 +136,9 @@ export default {
             if(this.params.data_intersection){
                 this.drilldownData = this.static_drill_data[this.jsonData[this.params.selected_category][this.carouselActiveIndex][i].label]    
                 console.log(this.jsonData[this.params.selected_category][this.carouselActiveIndex][i].label,"pie main clock label on click DI")
-                console.log(this.params.static_drill_titles ,"params.static_drill")
-                this.params.static_drill_titles = this.params.static_drill_titles[this.jsonData[this.params.selected_category][this.carouselActiveIndex][i].label] 
-                console.log(this.params.static_drill_titles ,"params.static_drill_after entry")
+                console.log(this.params.static_drill_titles_param ,"params.static_drill pie")
+                this.params.static_drill_titles_param = this.params.static_drill_titles_param[this.jsonData[this.params.selected_category][this.carouselActiveIndex][i].label] 
+                console.log(this.params.static_drill_titles_param ,"params.static_drill_after entry pie ")
             }
             if(this.params.click_open_drill_enabled){
                 if(!this.params.expand ||  i != this.clicked_index){
@@ -167,7 +167,7 @@ export default {
     },
 
     async created(){
-        console.log(this.params.static_drill_titles)
+        console.log(this.params.static_drill_titles_param)
         if(!this.isDrillDown){
             await this.$myApi(this.params.data_url)
                 .then(response => {
