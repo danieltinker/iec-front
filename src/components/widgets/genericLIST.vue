@@ -129,7 +129,7 @@
             :view_ID="view_ID"
             :drillDataProp="drilldownData"
             :parentsParam="params"
-            :static_drill_titles_prop="params.static_drill_titles_param">
+            :static_drill_titles_prop="params.static_drill_titles_param_copy">
             </component>   
         </div>
     </div>
@@ -212,7 +212,7 @@ export default {
                 this.drilldownData = this.static_drill_data[this.jsonData[this.params.selected_category][this.carouselActiveIndex][i].label]    
                 console.log(this.jsonData[this.params.selected_category][this.carouselActiveIndex][i].label,"pie main clock label on click DI")
                 console.log(this.params.static_drill_titles_param ,"params.static_drill")
-                this.params.static_drill_titles_param = this.params.static_drill_titles_param[this.jsonData[this.params.selected_category][this.carouselActiveIndex][i].label] 
+                this.params.static_drill_titles_param_copy = this.params.static_drill_titles_param[this.jsonData[this.params.selected_category][this.carouselActiveIndex][i].label] 
                 console.log(this.params.static_drill_titles_param ,"params.static_drill_after entry")
 
             }
