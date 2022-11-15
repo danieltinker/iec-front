@@ -89,7 +89,7 @@
                 </v-carousel>
             </div>
 
-            <div class="clock-drilldown" v-if="params.expand && !isDrillDown && params.drill_down_params">
+            <div class="clock-drilldown" v-if="params.expand && !isDrillDown && params.drill_down_params" :style="{backgroundColor:getCurrentTheme.genericClock.drill_background }">
                 <h1 class="drilldown-title" v-if="params.drill_down_params.headline_config">{{params.drill_down_params.headline_config.title}}</h1>
                 <component 
                 :is="params.drill_down_params.template_type"
