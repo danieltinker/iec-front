@@ -126,7 +126,7 @@
   
   <style scoped>
   h1 {
-    color: #935287;
+    color: #0F2558;
     font-family: almoni-medium;
     font-size: 24px;
     text-align: center;

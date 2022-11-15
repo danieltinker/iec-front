@@ -56,7 +56,7 @@
                 <div style="">
                   <v-btn
                     :ripple="false"
-                    color="#935287"
+                    color="#0F2558"
                     outlined
                     fab
                     class="story"
@@ -102,7 +102,7 @@
                 <div style="">
                   <v-btn
                     :ripple="false"
-                    color="#935287"
+                    color="#0F2558"
                     outlined
                     fab
                     class="story"
@@ -136,7 +136,7 @@
             >
             <v-btn
               class="mb-4 mt-2"
-              color="#935287"
+              color="#0F2558"
               elevation="0"
               rounded
               @click="save"
@@ -276,7 +276,7 @@
       place-content: center;
       font-family: almoni-demibold;
       font-size: 26px;
-      color: #935287;
+      color: #0F2558;
       position: relative;
 
     }

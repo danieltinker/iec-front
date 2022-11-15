@@ -30,7 +30,7 @@
           >
             <v-row
               ><v-btn
-                color="#935287"
+                color="#0F2558"
                 outlined
                 fab
                 class="story"
@@ -72,7 +72,7 @@
             style="font-size: 18px; width: 75%; justify-self: center"
             >צפה במהירות במידע הרלוונטי עבורך על ידי לחיצה על כפתוח "שמירה".</span
           >
-          <v-icon class="mb-3" style="font-size: 30px" color="#935287"
+          <v-icon class="mb-3" style="font-size: 30px" color="#0F2558"
             >mdi-bookmark-outline</v-icon
           >
           <span
@@ -200,6 +200,6 @@
   #headline {
     font-family: almoni-medium;
     font-size: 24px;
-    color: #935287;
+    color: #0F2558;
   }
   </style>

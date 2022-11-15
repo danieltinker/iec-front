@@ -125,7 +125,7 @@ export default new Vuex.Store({
           "background_color":"#FFFFFF"
         },
         "headline":{
-          "title_color":"#935287",
+          "title_color":"#0F2558",
           "background":"#FFFFFF"
         }, // headline style
         "genericClock":{
@@ -154,7 +154,7 @@ export default new Vuex.Store({
           "color_2":"#EBEBEB",
         },
         "list_data":{
-          "main_header":"#935287",
+          "main_header":"#0F2558",
           "sub_title":"#e0dcdc",
           "color_1":"#282828",
           "color_2":"#121212",
@@ -162,7 +162,7 @@ export default new Vuex.Store({
         "remove_dialog":{
           "card_main":"#000000",
           "icon":"#FFFFFF",
-          "button_style":"#935287",
+          "button_style":"#0F2558",
           "button_style_secc":"",
         },
         "global":{} // global style

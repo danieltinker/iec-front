@@ -49,7 +49,7 @@
               <v-col>
                 <v-btn
                   class="mb-4"
-                  color="#935287"
+                  color="#0F2558"
                   elevation="0"
                   @click="remove()"
                   style="

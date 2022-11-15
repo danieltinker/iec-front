@@ -14,7 +14,7 @@
         </h1>
         <div class="grid-item">
           <div style="width:40px">
-          <v-icon @click="BookMarkClick(widget.VIEW_ID,widget.PARAMETERS,widget.TEMPLATE_TYPE,false)" color="#935287" style="font-size: 30px"
+          <v-icon @click="BookMarkClick(widget.VIEW_ID,widget.PARAMETERS,widget.TEMPLATE_TYPE,false)" color="#0F2558" style="font-size: 30px"
             v-if="widget.PARAMETERS.headline_config && widget.PARAMETERS.headline_config.bookmark_enabled">{{
             CheckBookmark(widget.VIEW_ID)
             ? "mdi-bookmark"
@@ -223,7 +223,7 @@ export default {
   text-align: center;
 }
 .headline-title {
-  color: #935287;
+  color: #0F2558;
   font-family: almoni-medium;
   font-size: 22px;
   text-align: center;
