@@ -55,7 +55,7 @@
                                     border : activeIndex == index ? getCurrentTheme.legend_border_color : ' solid black 0px'}"
                                 @click="kpiBoxClick(index)"
                                 >
-                                    <span class="kpi-label">
+                                    <span :style="{color:getCurrentTheme.kpi.main_label}" class="kpi-label">
                                         {{ item.label }}
                                     </span>
                                     <br>
@@ -226,16 +226,16 @@ export default {
 .KPIcontainer{
     display: grid;
     grid-template-columns: auto auto;
-    row-gap: 10px;
-    column-gap: 10px;
+    row-gap: 6px;
+    column-gap: 8px;
     justify-content: center;
-    padding-bottom: 20px;
+    padding-bottom: 8px;
 }
 .kpi-box{
-    padding-top: 4px;
+    padding-top: 0px;
     text-align: center;
     align-items: center;
-    width: 165px;
+    width: 159px;
     height: 80px;
     border-radius: 4px;
 }
@@ -259,7 +259,7 @@ export default {
 .kpi-box span{
     display: inline-block;
     font-size: 16px;
-    font-family: almoni-demibold;
+    font-family: almoni;
     color: #a8699d;
 }
 .kpi-box .kpi-sec-value{
@@ -303,11 +303,13 @@ export default {
   background-color: transparent !important;
   color: transparent !important;
   top: 40% !important;
+  margin-right: 2px;
 }
 .carousel-flex >>> .v-window__prev {
   background-color: transparent !important;
   color: transparent !important;
   top:40% !important;
+  margin-left: 2px;
 }
 .radio-btn{
     display: inline-block !important;;
