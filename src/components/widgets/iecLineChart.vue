@@ -250,6 +250,7 @@ export default {
               data: this.line1values
             }
           ];
+          console.log("serirs",this.series);
           this.chartOptions = {
             ...this.chartOptions,
             ...{
