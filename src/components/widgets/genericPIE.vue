@@ -163,8 +163,9 @@ export default {
     },
 
     async created(){
-        this.params.static_drill_titles_param_copy = this.params.static_drill_titles_param
+        console.log(this.static_drill_titles_prop,"my drill prop check")
         if(!this.isDrillDown){
+            this.params.static_drill_titles_param_copy = this.params.static_drill_titles_param
             await this.$myApi(this.params.data_url)
                 .then(response => {
                     this.jsonData = response.data
