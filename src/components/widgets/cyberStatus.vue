@@ -98,6 +98,7 @@
   },
   computed:{
     isErrorMsg(){
+      //test
             return this.errorMSG.length !== 0;
         }
   },
