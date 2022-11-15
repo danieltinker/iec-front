@@ -10,7 +10,7 @@
             </div>
             <div class="kpi-carousel">
                 <span>
-                    <v-icon @click="BookMarkClick(view_ID,parentsParam,params.template_type,true)" color="#935287" style="font-size: 30px"
+                    <v-icon dir="rtl" @click="BookMarkClick(view_ID,parentsParam,params.template_type,true)" color="#935287" style="font-size: 30px"
                     v-if="isDrillDown && params.headline_config && params.headline_config.bookmark_enabled">{{
                             CheckBookmark(view_ID)
                             ? "mdi-bookmark"
@@ -180,7 +180,19 @@ export default {
             this.clicked_index = i
         },
         getWidth(item){
-            let test = 100/Object.keys(item).length + "%"
+            let MyWidth = 0
+            let obj_arr = Object.keys(item)
+            console.log(obj_arr);
+            if(obj_arr.includes("secondary_value")){
+                MyWidth++
+            }
+            if(obj_arr.includes("label")){
+                MyWidth++
+            } 
+            if(obj_arr.includes("value")){
+                MyWidth++
+            } 
+            let test = 100/MyWidth + "%"
             return test+" "+test+" "+test
         }
     },

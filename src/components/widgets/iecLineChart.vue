@@ -220,22 +220,22 @@ export default {
           "data?dsname=dailyLoad&isDrill=true"
         )
         .then(response => {
-          console.log("Rasrsarsa", response["data"]);
+          console.log("Rasrsarsa", response["data"]["data"][0]);
           var tmpSeries = [],
             secTmpSeries = [];
           // console.log(response)
-          for (var val in response["data"]) {
+          for (var val in response["data"]["data"][0]) {
             tmpSeries[val] = [];
-            tmpSeries[val] = Date.parse(
-              response["data"][0][val].hour
+            tmpSeries[val][0] = Date.parse(
+              response["data"]["data"][0][val].hour
             );
-            tmpSeries[val][1] = response["data"][val].forecast;
+            tmpSeries[val][1] = response["data"]["data"][0][val].forecast;
 
             secTmpSeries[val] = [];
-            secTmpSeries[val] = Date.parse(
-              response["data"][val].hour
+            secTmpSeries[val][0] = Date.parse(
+              response["data"]["data"][0][val].hour
             );
-            secTmpSeries[val][1] = response["data"][val].mw;
+            secTmpSeries[val][1] = response["data"]["data"][0][val].mw;
           }
           this.line1values = tmpSeries;
           this.line1name = this.names["forecast"];

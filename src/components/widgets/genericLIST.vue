@@ -10,7 +10,7 @@
             </div>
             <div class="kpi-carousel">
                 <span>
-                    <v-icon @click="BookMarkClick(view_ID,parentsParam,params.template_type,true)" color="#935287" style="font-size: 30px"
+                    <v-icon dir="rtl" @click="BookMarkClick(view_ID,parentsParam,params.template_type,true)" color="#935287" style="font-size: 30px"
                     v-if="isDrillDown && params.headline_config && params.headline_config.bookmark_enabled">{{
                             CheckBookmark(view_ID)
                             ? "mdi-bookmark"
