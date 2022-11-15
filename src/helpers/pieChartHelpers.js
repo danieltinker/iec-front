@@ -88,7 +88,7 @@ export const pluginInnerContentHelper = (thisChart,myTheme) => {
             
             var ctx = chart.chart.ctx;
             ctx.restore();
-            ctx.font = "24px" + " almoni-medium";
+            ctx.font = "28px" + " almoni-medium";
             ctx.textBaseline = "middle";
             ctx.textAlign = "center"
 
@@ -105,7 +105,7 @@ export const pluginInnerContentHelper = (thisChart,myTheme) => {
             var text24 = precentage(chart.tooltip._data.datasets[0].pieInnerNum)
             ctx.fillText(text, chart.width / 2, chart.height / 2 - number,200);
             ctx.fillStyle = myTheme
-            ctx.font = "32px" + " almoni-medium"
+            ctx.font = "26px" + " almoni-medium"
             ctx.fillText(text2, chart.width / 2, chart.height / 2 + heightNum,200);
             if(data.datasets[0].isPrecentage){ctx.fillText(text24, chart.width / 2, chart.height / 2 + number,200);}
             ctx.save();
