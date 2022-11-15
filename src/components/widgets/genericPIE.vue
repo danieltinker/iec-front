@@ -271,8 +271,10 @@ export default {
 }
 
 .drilldown-title{
-    color:#606060;
+    color:v-bind('getCurrentTheme.drill_title_color');
+    font-size: 24px;
     text-align: center;
+    font-family: almoni;
 }
 
 .bar-box span{

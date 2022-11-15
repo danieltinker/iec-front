@@ -258,8 +258,10 @@ align-items: center;
 }
 
 .drilldown-title{
-  color:#606060;
-  text-align: center;
+    color:v-bind('getCurrentTheme.drill_title_color');
+    font-size: 24px;
+    text-align: center;
+    font-family: almoni;
 }
 
 .kpi-box span{

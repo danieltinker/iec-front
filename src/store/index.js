@@ -22,6 +22,7 @@ export default new Vuex.Store({
     themeDetails:{
       "darkTheme":{
         "theme":"darkTheme",
+        "drill_title_color":"#ffffff",
         "app_background":"#121212",
         "app_color":"#FFFFFF",
         "solid_selected_border":"solid purple 4px",
@@ -98,6 +99,7 @@ export default new Vuex.Store({
         "app_color":"#000000",
         "theme":"lightTheme",
         "solid_selected_border":"solid black 2px",
+        "drill_title_color":"#010101",
         "generic_title_color" : "#606060",
         "legend_border_color" : "solid black 1px",
         "kpi":{
