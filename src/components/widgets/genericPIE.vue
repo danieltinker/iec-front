@@ -162,7 +162,9 @@ export default {
             return this.errorMSG.length !== 0;
         }
     },
-
+    beforeCreate(){
+        this.params.static_drill_titles_param_copy = this.params.static_drill_titles_param
+    },
     async created(){
         console.log(this.static_drill_titles_prop,"my drill prop check")
         if(!this.isDrillDown){
