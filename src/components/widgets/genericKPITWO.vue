@@ -200,61 +200,61 @@ export default {
             await this.$myApi(this.params.data_url)
                 .then(response => {
                     this.jsonData = response.data
-                    this.jsonData = {
-  "*": [
-    [
-      {
-        "label": "dsadasdasdas dsds",
-        "value": "699dasds73rddddddddddddddddddddddema",
+//                     this.jsonData = {
+//   "*": [
+//     [
+//       {
+//         "label": "dsadasdasdas dsds",
+//         "value": "699dasds73rddddddddddddddddddddddema",
        
-      },
-      {
-        "label": "carusela hopa",
-        "value": "535",
+//       },
+//       {
+//         "label": "carusela hopa",
+//         "value": "535",
         
-      },
-      {
-        "label": "caru sela",
-        "value": "684",
+//       },
+//       {
+//         "label": "caru sela",
+//         "value": "684",
         
-      }
-    ],
-    [
-      {
-        "label": "sela caddddddddddddddddru",
-        "value": "709/5dssssssssssssssssssssssss7",
-        "secondary_value": "73rddddddddddddddddddddddem"
-      },
-      {
-        "label": "sela",
-        "value": "822M",
-        "secondary_value": "352min"
-      },
-      {
-        "label": "caru",
-        "value": "971sec",
-        "secondary_value": "942%"
-      }
-    ],
-    [
-      {
-        "label": "css caru",
-        "value": "420%",
-        "secondary_value": "437px"
-      },
-      {
-        "label": "josef",
-        "value": "800/290",
-        "secondary_value": "533oz"
-      },
-      {
-        "label": "kupi",
-        "value": "826kw",
-        "secondary_value": "497g"
-      }
-    ]
-  ]
-}
+//       }
+//     ],
+//     [
+//       {
+//         "label": "sela caddddddddddddddddru",
+//         "value": "709/5dssssssssssssssssssssssss7",
+//         "secondary_value": "73rddddddddddddddddddddddem"
+//       },
+//       {
+//         "label": "sela",
+//         "value": "822M",
+//         "secondary_value": "352min"
+//       },
+//       {
+//         "label": "caru",
+//         "value": "971sec",
+//         "secondary_value": "942%"
+//       }
+//     ],
+//     [
+//       {
+//         "label": "css caru",
+//         "value": "420%",
+//         "secondary_value": "437px"
+//       },
+//       {
+//         "label": "josef",
+//         "value": "800/290",
+//         "secondary_value": "533oz"
+//       },
+//       {
+//         "label": "kupi",
+//         "value": "826kw",
+//         "secondary_value": "497g"
+//       }
+//     ]
+//   ]
+// }
                     this.errorMSG = ""
                     // do sth ...
                 })
