@@ -9,14 +9,6 @@
                 </v-radio-group>
             </div>
             <div class="kpi-carousel">
-                <span>
-                    <v-icon dir="rtl" @click="BookMarkClick(view_ID,parentsParam,params.template_type,true)" color="#935287" style="font-size: 30px"
-                    v-if="isDrillDown && params.headline_config && params.headline_config.bookmark_enabled">{{
-                            CheckBookmark(view_ID)
-                            ? "mdi-bookmark"
-                            : "mdi-bookmark-outline"
-                    }}</v-icon>
-                </span>
 
                 <span id="chartsHeaders" v-if="!isDrillDown">
                      {{ params.chart_titles[params.selected_category][carouselActiveIndex] }} 
@@ -27,6 +19,15 @@
                  <span id="chartsHeaders" v-if="isDrillDown && params.data_intersection">
                      {{ static_drill_titles_prop[params.selected_category][carouselActiveIndex] }} 
                  </span>
+
+                 <span>
+                    <v-icon dir="rtl" @click="BookMarkClick(view_ID,parentsParam,params.template_type,true)" color="#935287" style="font-size: 30px"
+                    v-if="isDrillDown && params.headline_config && params.headline_config.bookmark_enabled">{{
+                            CheckBookmark(view_ID)
+                            ? "mdi-bookmark"
+                            : "mdi-bookmark-outline"
+                    }}</v-icon>
+                </span>
                  
                 
                 <v-carousel
