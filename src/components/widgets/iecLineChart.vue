@@ -224,18 +224,14 @@ export default {
           var tmpSeries = [],
             secTmpSeries = [];
           // console.log(response)
-          for (var val in response["data"]["data"][0]) {
-            tmpSeries[val] = [];
-            tmpSeries[val][0] = Date.parse(
-              response["data"]["data"][0][val].hour
-            );
-            tmpSeries[val][1] = response["data"]["data"][0][val].forecast;
+          for(var val in response['data']['data'][0]){
+                        tmpSeries[val]=[]
+                        tmpSeries[val][0]=Date.parse(response['data']['data'][0][val].hour)
+                        tmpSeries[val][1]=response['data']['data'][0][val].forecast
 
-            secTmpSeries[val] = [];
-            secTmpSeries[val][0] = Date.parse(
-              response["data"]["data"][0][val].hour
-            );
-            secTmpSeries[val][1] = response["data"]["data"][0][val].mw;
+                        secTmpSeries[val]=[]
+                        secTmpSeries[val][0]=Date.parse(response['data']['data'][0][val].hour)
+                        secTmpSeries[val][1]=response['data']['data'][0][val].mw
           }
           this.line1values = tmpSeries;
           this.line1name = this.names["forecast"];
