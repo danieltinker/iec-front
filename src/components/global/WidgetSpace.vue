@@ -114,7 +114,6 @@ export default {
             });
 
  
-        // console.log(" GET /mobile/views/{hq_id}/{category_id}?sessoinid=xxx .");
       },
     },
     //user selected category
@@ -142,7 +141,6 @@ export default {
   },
 
   async created() {
-    console.log()
     this.fetch_interval = setInterval(async ()=>{
           console.log("Refreshing Page")
           await axios
@@ -166,10 +164,7 @@ export default {
     if (this.quickViewPopup.length > 0 && this.errorMsg.length === 0) {
       this.doneFetching = true
     }
-    //  get hqs By sid
-    //  listen to store HQ,Category from user DATA RAN AND TOMMY PLEASE FINISH 
-    //  fetch the server response GET /mobile/views/{hq_id}/{category_id}?sessoinid=xxx .
-    //function to get last user favorite list
+
     this.GetUserFav();
   },
 

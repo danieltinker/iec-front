@@ -11,7 +11,6 @@
 
 
                  <span id="chartsHeaders" v-if="!isDrillDown">
-                    {{params.static_drill_titles_param_copy}}
                      {{ params.chart_titles[params.selected_category][carouselActiveIndex] }} 
                  </span>
                  <span id="chartsHeaders" v-if="isDrillDown && !params.data_intersection">
@@ -163,26 +162,23 @@ export default {
             return this.errorMSG.length !== 0;
         }
     },
-    beforeCreate(){
-        this.params.static_drill_titles_param_copy = this.params.static_drill_titles_param
-    },
+
     async created(){
-        console.log(this.static_drill_titles_prop,"my drill prop check")
         if(!this.isDrillDown){
-            this.params.static_drill_titles_param_copy = this.params.static_drill_titles_param
             await this.$myApi(this.params.data_url)
-                .then(response => {
-                    this.jsonData = response.data
-                    this.errorMSG = ""
-                    // do sth ...
-                })
-                .catch(error => {
-                    console.log(error);
-                    console.log(error,"Main Clock Data GET request FAIL, PLEASE Check Backend")
-                    this.errorMSG =  "אין מידע"
-                    this.succ_req = false
-                });
-                if(this.succ_req){
+            .then(response => {
+                this.jsonData = response.data
+                this.errorMSG = ""
+                // do sth ...
+            })
+            .catch(error => {
+                console.log(error);
+                console.log(error,"Main Clock Data GET request FAIL, PLEASE Check Backend")
+                this.errorMSG =  "אין מידע"
+                this.succ_req = false
+            });
+            if(this.succ_req){
+                    this.params.static_drill_titles_param_copy = this.params.static_drill_titles_param
                     await this.$myApi(this.params.drill_down_params.data_url)
                     .then(response => {
                         this.drilldownData = Object.assign(response.data)

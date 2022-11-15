@@ -45,6 +45,9 @@ export default {
     },
     created() {
       this.updatelist()
+
+
+      
 /////////////
 // this.$root.$on("addBookmarkSnackbar",async (text,success) => {
 //         // if(this.snackbar){

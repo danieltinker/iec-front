@@ -275,6 +275,7 @@ export default {
                     this.succ_req = false
                 });
                 if(this.succ_req){
+                    this.params.static_drill_titles_param_copy = this.params.static_drill_titles_param
                     await this.$myApi(this.params.drill_down_params.data_url)
                     .then(response => {
                         this.drilldownData = Object.assign(response.data)
