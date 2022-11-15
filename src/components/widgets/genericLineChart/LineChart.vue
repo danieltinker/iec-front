@@ -1,6 +1,10 @@
 <template>
     <div>
-      <apexchart v-if="showData" width="500" type="line" :options="option" :series="serie"></apexchart>
+      <apexchart v-if="showData" 
+      width="90%" type="line" 
+      :options="option"
+       :series="serie"
+       style="overflow-y: hidden; margin-right: 7px;dir:ltr"></apexchart>
     </div>
 </template>
 
