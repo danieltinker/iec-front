@@ -7,7 +7,7 @@
                     <v-radio v-for="(category) in params.data_category" :key="category" :label="category" :value="category" color="#935287"></v-radio>
                 </v-radio-group>
             </div>
-            <div class="bar-carousel">
+            <div class="pie-carousel">
                 <span>
                     <v-icon @click="BookMarkClick(view_ID,parentsParam,params.template_type,true)" color="#935287" style="font-size: 30px"
                     v-if="isDrillDown && params.headline_config && params.headline_config.bookmark_enabled">{{
@@ -16,10 +16,8 @@
                             : "mdi-bookmark-outline"
                     }}</v-icon>
                 </span>
-                <!-- <span id="chartsHeaders" >
-                    {{ params.chart_titles[activeTitle] }}
-                </span>
-                 -->
+
+
                  <span id="chartsHeaders" v-if="!isDrillDown">
                      {{ params.chart_titles[params.selected_category][carouselActiveIndex] }} 
                  </span>
@@ -165,8 +163,9 @@ export default {
     },
 
     async created(){
-        console.log(this.params.static_drill_titles_param)
+        console.log(this.static_drill_titles_prop,"my drill prop check")
         if(!this.isDrillDown){
+            this.params.static_drill_titles_param_copy = this.params.static_drill_titles_param
             await this.$myApi(this.params.data_url)
                 .then(response => {
                     this.jsonData = response.data
