@@ -58,13 +58,13 @@
 
              <div class="grid-container" :style="{'grid-template-columns': getWidth(item)}">
   <div class="grid-item">
-    <span style="display:block;word-wrap: break-word" :style="{color: getCurrentTheme.kpi.main_label}">{{ item.label }} </span>
+    <span style="display:block;word-wrap: break-word;text-align-last: right;" :style="{color: getCurrentTheme.kpi.main_label}">{{ item.label }} </span>
   </div>
   <div class="grid-item">
-    <span style="display:block;word-wrap: break-word" :style="{color: getCurrentTheme.kpi.value_color}"> {{ item.value }}   </span>
+    <span style="display:block;word-wrap: break-word;text-align-last: right;" :style="{color: getCurrentTheme.kpi.value_color}"> {{ item.value }}   </span>
   </div>
   <div class="grid-item">
-    <span style="display:block;word-wrap: break-word" :style="{color: getCurrentTheme.kpi.kpi_sec_value}">    {{item.secondary_value}} </span></div>  
+    <span style="display:block;word-wrap: break-word;text-align-last: right;" :style="{color: getCurrentTheme.kpi.kpi_sec_value}">    {{item.secondary_value}} </span></div>  
 </div>                  
         <!-- <div :style="{width:getWidth(item),color:getCurrentTheme.kpi.main_label}"  style="width:1010px;word-wrap: break-word;padding-right:6%;text-align: -webkit-right;" class="kpi-label">
                                         <span style="display:block" :style="{color: getCurrentTheme.kpi.main_label}">{{ item.label }} </span>
@@ -212,61 +212,61 @@ export default {
             await this.$myApi(this.params.data_url)
                 .then(response => {
                     this.jsonData = response.data
-//                     this.jsonData = {
-//   "*": [
-//     [
-//       {
-//         "label": "dsadasdasdas dsds",
-//         "value": "699dasds73rddddddddddddddddddddddema",
+                    this.jsonData = {
+  "*": [
+    [
+      {
+        "label": "dsadasdasdas dsds",
+        "value": "699dasds73rddddddddddddddddddddddema",
        
-//       },
-//       {
-//         "label": "carusela hopa",
-//         "value": "535",
+      },
+      {
+        "label": "carusela hopa",
+        "value": "535",
         
-//       },
-//       {
-//         "label": "caru sela",
-//         "value": "684",
+      },
+      {
+        "label": "caru sela",
+        "value": "684",
         
-//       }
-//     ],
-//     [
-//       {
-//         "label": "sela caddddddddddddddddru",
-//         "value": "709/5dssssssssssssssssssssssss7",
-//         "secondary_value": "73rddddddddddddddddddddddem"
-//       },
-//       {
-//         "label": "sela",
-//         "value": "822M",
-//         "secondary_value": "352min"
-//       },
-//       {
-//         "label": "caru",
-//         "value": "971sec",
-//         "secondary_value": "942%"
-//       }
-//     ],
-//     [
-//       {
-//         "label": "css caru",
-//         "value": "420%",
-//         "secondary_value": "437px"
-//       },
-//       {
-//         "label": "josef",
-//         "value": "800/290",
-//         "secondary_value": "533oz"
-//       },
-//       {
-//         "label": "kupi",
-//         "value": "826kw",
-//         "secondary_value": "497g"
-//       }
-//     ]
-//   ]
-// }
+      }
+    ],
+    [
+      {
+        "label": "sela caddddddddddddddddru",
+        "value": "709/5dssssssssssssssssssssssss7",
+        "secondary_value": "73rddddddddddddddddddddddem"
+      },
+      {
+        "label": "sela",
+        "value": "822M",
+        "secondary_value": "352min"
+      },
+      {
+        "label": "caru",
+        "value": "971sec",
+        "secondary_value": "942%"
+      }
+    ],
+    [
+      {
+        "label": "css caru",
+        "value": "420%",
+        "secondary_value": "437px"
+      },
+      {
+        "label": "josef",
+        "value": "800/290",
+        "secondary_value": "533oz"
+      },
+      {
+        "label": "kupi",
+        "value": "826kw",
+        "secondary_value": "497g"
+      }
+    ]
+  ]
+}
                     this.errorMSG = ""
                     // do sth ...
                 })
@@ -413,5 +413,9 @@ export default {
   /* grid-template-columns: 30% 30% 30%; */
   padding-right:4px;
   padding-left:4px;
+  
+}
+.grid-item{
+    /* justify-self: center; */
 }
 </style>
