@@ -256,12 +256,12 @@ export default {
 .v-progress-circular{
     padding:40px;
 }
-.kpi-box span{
+/* .kpi-box span{
     display: inline-block;
     font-size: 16px;
     font-family: almoni;
     color: #a8699d;
-}
+} */
 .kpi-box .kpi-sec-value{
     color:#606060
 }

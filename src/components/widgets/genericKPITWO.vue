@@ -51,22 +51,40 @@
                                 class="kpi-box" 
                                 v-for="(item,index) in KPIarr" :key="index"
                                 :style="{backgroundColor: isDrillDown? getCurrentTheme.kpi.drill_background :getCurrentTheme.kpi.main_background, 
-                                    border: activeIndex==index ? getCurrentTheme.solid_selected_border : 'solid black 0px'}"
+                                    border: activeIndex==index ? getCurrentTheme.legend_border_color : ' solid black 0px'}"
                                 @click="kpiBoxClick(index)"
                                 >
 
-                                   <span class="kpi-label">
-                                        {{ item.label }} 
-                                    </span>
-                                    <span class="kpi-value">
-                                        {{ item.value }}   
-                                    </span>
+
+             <div class="grid-container" :style="{'grid-template-columns': getWidth(item)}">
+  <div class="grid-item">
+    <span style="display:block;word-wrap: break-word" :style="{color: getCurrentTheme.kpi.main_label}">{{ item.label }} </span>
+  </div>
+  <div class="grid-item">
+    <span style="display:block;word-wrap: break-word" :style="{color: getCurrentTheme.kpi.value_color}"> {{ item.value }}   </span>
+  </div>
+  <div class="grid-item">
+    <span style="display:block;word-wrap: break-word" :style="{color: getCurrentTheme.kpi.kpi_sec_value}">    {{item.secondary_value}} </span></div>  
+</div>                  
+        <!-- <div :style="{width:getWidth(item),color:getCurrentTheme.kpi.main_label}"  style="width:1010px;word-wrap: break-word;padding-right:6%;text-align: -webkit-right;" class="kpi-label">
+                                        <span style="display:block" :style="{color: getCurrentTheme.kpi.main_label}">{{ item.label }} </span>
+                                    
+        </div> -->
+        <!-- <div :style="{width:getWidth(item)}" style="word-wrap: break-word;padding-left:2%;padding-right:2%" class="kpi-label">
+            <span style="display:block" :style="{color: getCurrentTheme.kpi.value_color}"> {{ item.value }}   </span>
+                                 
+        </div> -->
+        <!-- <v-col v-if="item.secondary_value" :style="{width:getWidth(item)}" style="word-wrap: break-word;padding-left:2%" class="kpi-label">
+           
+            <span style="display:block" :style="{color: getCurrentTheme.kpi.kpi_sec_value}">    {{item.secondary_value}} </span>
+                                   
+
+        </v-col> -->
+    
+                
+                                    
                                   
-                                    <br>
-                                    <br>
-                                    <span class="kpi-value-sec" :style="{color: getCurrentTheme.kpi.kpi_sec_value}">
-                                        {{item.secondary_value}}
-                                    </span>
+                                    
                                 </div>
                         </div>
                     </v-carousel-item>
@@ -160,6 +178,10 @@ export default {
                 }
             }
             this.clicked_index = i
+        },
+        getWidth(item){
+            let test = 100/Object.keys(item).length + "%"
+            return test+" "+test+" "+test
         }
     },
     computed:{
@@ -170,7 +192,7 @@ export default {
         },
         isErrorMsg(){
             return this.errorMSG.length !== 0;
-        }
+        },
     },
 
     async created(){
@@ -178,6 +200,61 @@ export default {
             await this.$myApi(this.params.data_url)
                 .then(response => {
                     this.jsonData = response.data
+//                     this.jsonData = {
+//   "*": [
+//     [
+//       {
+//         "label": "dsadasdasdas dsds",
+//         "value": "699dasds73rddddddddddddddddddddddema",
+       
+//       },
+//       {
+//         "label": "carusela hopa",
+//         "value": "535",
+        
+//       },
+//       {
+//         "label": "caru sela",
+//         "value": "684",
+        
+//       }
+//     ],
+//     [
+//       {
+//         "label": "sela caddddddddddddddddru",
+//         "value": "709/5dssssssssssssssssssssssss7",
+//         "secondary_value": "73rddddddddddddddddddddddem"
+//       },
+//       {
+//         "label": "sela",
+//         "value": "822M",
+//         "secondary_value": "352min"
+//       },
+//       {
+//         "label": "caru",
+//         "value": "971sec",
+//         "secondary_value": "942%"
+//       }
+//     ],
+//     [
+//       {
+//         "label": "css caru",
+//         "value": "420%",
+//         "secondary_value": "437px"
+//       },
+//       {
+//         "label": "josef",
+//         "value": "800/290",
+//         "secondary_value": "533oz"
+//       },
+//       {
+//         "label": "kupi",
+//         "value": "826kw",
+//         "secondary_value": "497g"
+//       }
+//     ]
+//   ]
+// }
                     this.errorMSG = ""
                     // do sth ...
                 })
@@ -235,14 +312,19 @@ export default {
     padding-top: 4px;
     margin-top: 5px;
     text-align: center;
-    align-items: center;
+    /* align-items: center; */
     width: 304px;
-    height: 42px;
+    height: auto;
     border-radius: 4px;
+    font-size: 18px;
+    font-family: almoni-demibold;
 }
 .kpi-label{
-    padding-right: 8px;
-    width: 200px;
+    /* padding-right: 8px;
+    width: 200px; */
+    
+    padding-top: 0px;
+    padding-bottom: 0px;
 }
 .kpi-value{
     width: 60px;
@@ -310,5 +392,11 @@ export default {
 }
 .radio-btn{
     display: inline-block !important;;
+}
+.grid-container {
+    width: 306px;
+  display: grid;
+  /* grid-template-columns: 30% 30% 30%; */
+  padding: 10px;
 }
 </style>
