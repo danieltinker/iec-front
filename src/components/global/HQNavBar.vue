@@ -123,7 +123,7 @@
       drawer: false,
       group: null,
       hqs: [],
-      title:'מטה מנכ"ל'
+      title:'מנכ"ל'
     }),
   
     watch: {
