@@ -114,7 +114,6 @@ export default {
             });
 
  
-        // console.log(" GET /mobile/views/{hq_id}/{category_id}?sessoinid=xxx .");
       },
     },
     //user selected category
@@ -142,6 +141,20 @@ export default {
   },
 
   async created() {
+
+    console.log("Fetch First")
+          await axios
+            .get(this.$store.state.serverAdrr+"/shavit-mobile/views/" + this.$store.state.selected_hq_id + "/" + this.$store.state.selected_cat_id, { params: { sid: "xxx" } })
+            .then((response) => {
+              this.responseData = response.data;
+              this.doneFetching = true;
+              this.errorMsg = ""
+            })
+            .catch((error) => {
+              this.errorMsg = "תצוגת דף לא זמינה"
+              console.log(error);
+            });
+
     console.log()
     this.fetch_interval = setInterval(async ()=>{
           console.log("Refreshing Page")
@@ -166,10 +179,7 @@ export default {
     if (this.quickViewPopup.length > 0 && this.errorMsg.length === 0) {
       this.doneFetching = true
     }
-    //  get hqs By sid
-    //  listen to store HQ,Category from user DATA RAN AND TOMMY PLEASE FINISH 
-    //  fetch the server response GET /mobile/views/{hq_id}/{category_id}?sessoinid=xxx .
-    //function to get last user favorite list
+
     this.GetUserFav();
   },
 
