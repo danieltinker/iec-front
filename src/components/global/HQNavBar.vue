@@ -13,7 +13,7 @@
         <v-list nav dense>
           <v-list-item-group v-model="group">
             <v-list-item v-for="item in hqs" :key="item.HQ_ID" @click="setHQ(item)">
-              <v-list-item-title style="font-size: 18px; font-family: almoni; color: #935287">{{item.LABEL}}</v-list-item-title>
+              <v-list-item-title style="font-size: 18px; font-family: almoni; color: #0F2558">{{item.LABEL}}</v-list-item-title>
             </v-list-item>
           </v-list-item-group>
         </v-list>
@@ -54,7 +54,7 @@
               <span
                 :style="
                   theme == false
-                    ? 'color: #935287; font-family:almoni; font-size: 16px;'
+                    ? 'color: #0F2558; font-family:almoni; font-size: 16px;'
                     : 'color:' +
                     getCurrentTheme.hq_navbar.span_color_third +
                       ' ; font-family:almoni; font-size: 16px;'
@@ -78,7 +78,7 @@
               <span
                 :style="
                   theme == true
-                    ? 'color: #935287; font-family:almoni; font-size: 16px;'
+                    ? 'color: #0F2558; font-family:almoni; font-size: 16px;'
                     : 'color:' +
                     getCurrentTheme.hq_navbar.span_color_third +
                       ' ; font-family:almoni; font-size: 16px;'
@@ -157,7 +157,7 @@
   position: absolute;
   top: 10px;
   left: 18px;
-  color: #935287;
+  color: #0F2558;
   display: flex;
   align-self: center;
 }

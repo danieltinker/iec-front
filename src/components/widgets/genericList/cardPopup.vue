@@ -51,7 +51,7 @@
       place-content: center;
       font-family: almoni-demibold;
       font-size: 26px;
-      color: #935287;
+      color: #0F2558;
       position: relative;
 
     }

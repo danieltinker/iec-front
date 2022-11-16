@@ -4,7 +4,7 @@
         <div class="clock-main" style="text-align: center;" v-if="doneFetching">
             <div class="flex-center">
                 <v-radio-group dir="rtl" v-model="params.selected_category" row id="districtRadioGroup" v-if=" params.data_category.length >= 2">
-                    <v-radio v-for="(category) in params.data_category" :key="category" :label="category" :value="category" color="#935287"></v-radio>
+                    <v-radio v-for="(category) in params.data_category" :key="category" :label="category" :value="category" color="#0F2558"></v-radio>
                 </v-radio-group>
             </div>
             <div class="pie-carousel">
@@ -21,7 +21,7 @@
                  </span>
 
                  <span>
-                    <v-icon dir="rtl" @click="BookMarkClick(view_ID,parentsParam,params.template_type,true)" color="#935287" style="font-size: 30px"
+                    <v-icon dir="rtl" @click="BookMarkClick(view_ID,parentsParam,params.template_type,true)" color="#0F2558" style="font-size: 30px"
                     v-if="isDrillDown && params.headline_config && params.headline_config.bookmark_enabled">{{
                             CheckBookmark(view_ID)
                             ? "mdi-bookmark"
@@ -76,7 +76,7 @@
         <div class="loader" v-if="!isErrorMsg">
             <v-progress-circular
             indeterminate
-            color="purple"
+            color="#0F2558"
             ></v-progress-circular>
         </div>
         <h1 v-else>  {{errorMSG}} </h1>

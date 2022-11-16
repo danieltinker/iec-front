@@ -2,7 +2,7 @@
     <div dir="rtl" class="mb-2 container">
     <div>
       <div v-if="GET_USER_FAV.length == 0">
-        <v-btn color="#935287" outlined fab class="ml-4 storyClear" @click="openQuickView('plus')"><img src="../../assets/FavBar/plus.svg" /></v-btn>
+        <v-btn color="#0F2558" outlined fab class="ml-4 storyClear" @click="openQuickView('plus')"><img src="../../assets/FavBar/plus.svg" /></v-btn>
 
 
 <!-- {{GET_USER_FAV}} -->
@@ -10,7 +10,7 @@
         <div v-else class="fav-btn" v-for="item in GET_USER_FAV" :key="item.VIEW_ID">
           <v-btn 
           
-                color="#935287"
+                color="#0F2558"
                 outlined
                 fab
                 class="ml-4 story"
@@ -31,7 +31,7 @@
 
 
 
-        <v-btn v-for="index in 6 - GET_USER_FAV.length" :key="index" color="#935287" outlined fab class="ml-4 storyClear"> </v-btn>
+        <v-btn v-for="index in 6 - GET_USER_FAV.length" :key="index" color="#0F2558" outlined fab class="ml-4 storyClear"> </v-btn>
               
     </div >
     <QuickViewPopup class="quick-view" v-if="$store.state.quick_view" :mydata="data" @closeQuickView="closeQuickView" />
@@ -55,7 +55,7 @@
           style="font-size: 18px; width: 75%; justify-self: center"
           >צפה במהירות במידע הרלוונטי עבורך על ידי לחיצה על כפתוח "שמירה".</span
         >
-        <v-icon class="mb-3" style="font-size: 30px" color="#935287"
+        <v-icon class="mb-3" style="font-size: 30px" color="#0F2558"
           >mdi-bookmark-outline</v-icon
         >
         <span
@@ -277,6 +277,6 @@ export default {
 #headline {
   font-family: almoni-medium;
   font-size: 24px;
-  color: #935287;
+  color: #0F2558;
 }
 </style>

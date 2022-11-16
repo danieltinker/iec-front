@@ -1,6 +1,6 @@
 <template>
   <div style="margin-left:10px">
-    <label v-if="params.displayUpper" :style="'color : '+getCurrentTheme.one_bar.label_color">
+    <label v-if="params.displayUpper" :style="'color : '+getCurrentTheme.one_bar.label_color" style="font-family: almoni;font-size:16px">
         {{upperLabel}}
     </label>
     <div
@@ -26,7 +26,7 @@
         &emsp;
       </div>
     </div>
-    <label v-if="params.displayLower" :style="'color : '+getCurrentTheme.one_bar.label_color">{{lowerLabel}}</label>
+    <label v-if="params.displayLower" :style="'color : '+getCurrentTheme.one_bar.label_color" style="font-family: almoni;font-size:16px">{{lowerLabel}}</label>
   </div>
 
 </template>
