@@ -60,7 +60,7 @@
                                         {{ item.label }}
                                     </span>
                                     <br>
-                                    <span class="kpi-value">
+                                    <span class="kpi-value" :style="{color:getCurrentTheme.kpi.value_color}">
                                         {{ item.value }} 
                                     </span>
                                     <br>
