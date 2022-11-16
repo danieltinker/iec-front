@@ -206,37 +206,6 @@ export default {
             await this.$myApi(this.params.data_url)
                 .then(response => {
                     this.jsonData = response.data
-                    //#########
-//                     this.jsonData = {
-//   "*": [
-//     [
-//       {
-//         "label": "חתיכות",
-//         "value": 4,
-//         "max_value" : 44,
-//       },
-//       {
-//         "label": "אלמוג זה טקסט ארוך",
-//         "value": 4,
-//         "max_value" : 22,
-//       },
-//       {
-//         "label": "אלמוג א",
-//         "value": 4,
-//         "max_value" : 11,
-//       },{
-//         "label": "רן הגבר",
-//         "value": 4,
-//         "max_value" : 11,
-//       },{
-//         "label": "רן חשמלים",
-//         "value": 4,
-//         "max_value" : 11,
-//       },
-//     ]
-//   ]
-// }
-//#############
                     this.errorMSG = ""
                     // do sth ...
                 })

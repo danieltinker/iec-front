@@ -123,6 +123,7 @@ export default {
       
       async handler() {
         this.$store.state.selected_cat_id=1
+        this.doneFetching=false
         await axios
             .get(this.$store.state.serverAdrr+"/shavit-mobile/views/" + this.$store.state.selected_hq_id + "/" + this.$store.state.selected_cat_id, { params: { sid: "xxx" } })
             .then((response) => {
@@ -143,6 +144,7 @@ export default {
   async created() {
     this.fetch_interval = setInterval(async ()=>{
           console.log("Refreshing Page")
+          this.doneFetching=false
           await axios
             .get(this.$store.state.serverAdrr+"/shavit-mobile/views/" + this.$store.state.selected_hq_id + "/" + this.$store.state.selected_cat_id, { params: { sid: "xxx" } })
             .then((response) => {
