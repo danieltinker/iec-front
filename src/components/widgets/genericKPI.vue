@@ -280,6 +280,7 @@ export default {
 }
 
 .drilldown-title{
+    padding-top: 16px;
     color:v-bind('getCurrentTheme.drill_title_color');
     font-size: 24px;
     text-align: center;
