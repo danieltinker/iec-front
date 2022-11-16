@@ -21,7 +21,7 @@
         <!-- myTheme -->
 
         <v-row dir="rtl" class="" style="padding: 12px; text-align: center; align-content: baseline;">
-        <v-col cols="5" style="align-self: center"
+        <!-- <v-col cols="5" style="align-self: center"
           ><span
             :style="
               'font-size: 18px; font-family: almoni;color: ' +
@@ -30,8 +30,8 @@
             >תצוגת מסך</span
           ></v-col
         >
-        <v-col cols="7" style="">
-          <label class="switch">
+        <v-col cols="7" style=""> -->
+          <!-- <label class="switch">
             <input type="checkbox" v-model="theme" />
             <span
               class="slider round"
@@ -86,7 +86,7 @@
                 >כהה</span
               >
             </div>
-          </label>
+          </label> -->
         </v-col>
       </v-row>
 

@@ -324,9 +324,9 @@ export default {
       height: 24px !important;
     }
 .list-total{
-    font-family: almoni-bold !important;
-    font-size:20px !important;
-    background-color: rgba(128,128,128,0.24);
+    font-family: almoni-medium !important;
+    font-size:16px !important;
+    background-color: #E9EDF6;
     padding: 0px !important;
 
 }
@@ -340,6 +340,7 @@ export default {
     /* padding: 0 0px;
     padding-right: 5px; */
     /* word-wrap: break-word; */
+    background-color: "#F7F7F9";
     text-overflow: ellipsis;
     height: 40px;
     overflow: hidden; 
