@@ -108,7 +108,7 @@ export default new Vuex.Store({
           "main_background":"#EBEBEB",
           "drill_background":"#FFFFFF",
           "main_label":"#010101",
-          "value_color":"#A8699D",
+          "value_color":"#0F2558",
         },
         "hq_navbar":{
           "span_color_first":"#000000",
