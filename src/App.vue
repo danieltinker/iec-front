@@ -31,6 +31,7 @@ import { mapActions } from 'vuex';
 import MaxFavoritePopup from './components/global/maxFavoritePopup.vue';
 import RemoveBookmark from './components/global/removeBookmark.vue';
 import BookmarkSnackbar from './components/global/bookmarkSnackbar.vue';
+import axios from 'axios';
 export default {
     name: "App",
     data: () => ({
