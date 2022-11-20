@@ -87,7 +87,7 @@
               >
             </div>
           </label> -->
-        </v-col>
+        <!-- </v-col> -->
       </v-row>
 
 
@@ -107,6 +107,7 @@
     },
     async created() {
       //set switch button true/false by theme
+      //fixed yolan code = this.theme = this.$store.state.prefTheme == "darkTheme"
       this.$store.state.prefTheme == "darkTheme" ? this.theme = true : this.theme = false
       //get hqs By sid
       await axios
