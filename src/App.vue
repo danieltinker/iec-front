@@ -1,5 +1,5 @@
 <template >
-  <v-app :style="{'background-color':getCurrentTheme.app_background,'color':getCurrentTheme.app_color}">
+  <v-app :style="{'background-color':getCurrentTheme.app_background,'color':getCurrentTheme.app_color}" v-if="valid_sid">
     <!-- APP PAGE -->
     <v-main class="app">
       <!-- navigation bar + Theme Selector toggle + Log out BTN -->
@@ -31,23 +31,48 @@ import { mapActions } from 'vuex';
 import MaxFavoritePopup from './components/global/maxFavoritePopup.vue';
 import RemoveBookmark from './components/global/removeBookmark.vue';
 import BookmarkSnackbar from './components/global/bookmarkSnackbar.vue';
+import axios from 'axios';
 export default {
     name: "App",
     data: () => ({
       snackbar:false,
       success:false,
-      snackText:""
+      snackText:"",
+      valid_sid:false
       }),
     components: { WidgetSpace, HQNavBar, CategoryBar, UserFavorites, MaxFavoritePopup, RemoveBookmark, BookmarkSnackbar },
     mounted(){
       this.$store.state.selected_hq_id = 100
       this.$store.state.selected_cat_id = 101      
     },
-    created() {
+    async created() {
       this.updatelist()
+      console.log(this.$store.state.isAuthenticated,"my is Auth")
+      if(!this.$store.state.isAuthenticated){
+        console.log("reroute to ADFS_MOBILE")
+        window.location.href = "https://shavit-t.net.iec.co.il/adfs_mobile";
+          // reroute to adfs_mobile
+      }
+      else{
+        await axios
+          .get(this.$store.state.serverAdrr+"/shavit-mobile/hq", 
+          {params: { sid: this.$store.state.currUser.sessionId }}
+          )
+          .then(response => {
+            console.log("400 - test request for sid ")
+            this.valid_sid = true
+            console.log(window.localStorage.getItem("user_id"), " my user id00000000")
+            console.log(this.$store.state.currUser.user_id, " my user id00000000")
+            // this.$store.state.currUser.sessionId = localStorage["sessionid"]
+            // this.hqs = response.data;
+          })
+          .catch((error) => {
+            console.log("session ID isnt Valid")
+            console.log(error);
+          });
+      }
 
 
-      
 /////////////
 // this.$root.$on("addBookmarkSnackbar",async (text,success) => {
 //         // if(this.snackbar){

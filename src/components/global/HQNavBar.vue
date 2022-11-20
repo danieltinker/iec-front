@@ -87,7 +87,7 @@
               >
             </div>
           </label> -->
-        </v-col>
+        <!-- </v-col> -->
       </v-row>
 
 
@@ -107,11 +107,12 @@
     },
     async created() {
       //set switch button true/false by theme
+      //yolan :C :C code = this.theme = this.$store.state.prefTheme == "darkTheme"
       this.$store.state.prefTheme == "darkTheme" ? this.theme = true : this.theme = false
       //get hqs By sid
       await axios
         .get(this.$store.state.serverAdrr+"/shavit-mobile/hq", 
-        {params: { sid: "xxx" }}
+        {params: { sid: this.$store.state.currUser.sessionId }}
         )
         .then(response => {this.hqs = response.data;})
         .catch((error) => {

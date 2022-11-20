@@ -8,7 +8,7 @@ export default new Vuex.Store({
     removeBookmarkDialog:false,
     fetching: false,
     selected_hq_id:600,
-    selected_cat_id:8,
+    selected_cat_id:1,
     selected_view_id: 100,
     selected_view_param: {}, //saved clicked bookmark view parameters
     custom_bookmark_data: {}, //save custom bookmark data want to save
@@ -17,7 +17,8 @@ export default new Vuex.Store({
     serverAdrr: process.env.NODE_ENV === 'development' ? "http://20.102.120.232:5080" : "",
     quick_view: false,
     user_favorites: [],
-    currUser: {"name":"yosef", "sessionId": "xxx","user_id": 999},
+    isAuthenticated: window.localStorage.getItem("sessionid") ? true : false,
+    currUser: {"name":"yosef", "sessionId": window.localStorage.getItem("sessionid"),"user_id": window.localStorage.getItem("user_id")},
     prefTheme:"lightTheme",
     themeDetails:{
       "darkTheme":{

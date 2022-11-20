@@ -25,13 +25,31 @@
         this.$store.state.selected_cat_id = category;
       }
     },
+    async created(){
+      console.log("create cat bar")
+      await axios
+            .get(this.$store.state.serverAdrr+"/shavit-mobile"+
+              `/${this.$store.state.selected_hq_id}/categories`,
+              { params: { sid: this.$store.state.currUser.sessionId } }
+            )
+            .then(response => {
+              this.categories = response.data;
+              //SET default category
+              this.$store.state.selected_cat_id = this.categories[0].CATEGORY_ID;
+              this.active = 0
+            })
+            .catch(error => {
+              console.log(error);
+            });
+    }
+    ,
     watch: {
       "$store.state.selected_hq_id": {
         async handler() {
           await axios
             .get(this.$store.state.serverAdrr+"/shavit-mobile"+
               `/${this.$store.state.selected_hq_id}/categories`,
-              { params: { sid: "xxx" } }
+              { params: { sid: this.$store.state.currUser.sessionId } }
             )
             .then(response => {
               this.categories = response.data;

@@ -102,7 +102,7 @@ export default {
         this.$store.state.selected_cat_id=1
         this.doneFetching=false
         await axios
-            .get(this.$store.state.serverAdrr+"/shavit-mobile/views/" + this.$store.state.selected_hq_id + "/" + this.$store.state.selected_cat_id, { params: { sid: "xxx" } })
+            .get(this.$store.state.serverAdrr+"/shavit-mobile/views/" + this.$store.state.selected_hq_id + "/" + this.$store.state.selected_cat_id, { params: { sid: this.$store.state.currUser.sessionId } })
             .then((response) => {
               this.responseData = response.data;
               this.doneFetching = true;
@@ -125,7 +125,7 @@ export default {
         this.$store.state.selected_cat_id=1
         this.doneFetching=false
         await axios
-            .get(this.$store.state.serverAdrr+"/shavit-mobile/views/" + this.$store.state.selected_hq_id + "/" + this.$store.state.selected_cat_id, { params: { sid: "xxx" } })
+            .get(this.$store.state.serverAdrr+"/shavit-mobile/views/" + this.$store.state.selected_hq_id + "/" + this.$store.state.selected_cat_id, { params: { sid: this.$store.state.currUser.sessionId } })
             .then((response) => {
               this.responseData = response.data;
               this.doneFetching = true;
@@ -142,11 +142,27 @@ export default {
   },
 
   async created() {
+    console.log("create widget space")
+    this.doneFetching=false
+    await axios
+      .get(this.$store.state.serverAdrr+"/shavit-mobile/views/" + this.$store.state.selected_hq_id + "/" + this.$store.state.selected_cat_id, { params: { sid: this.$store.state.currUser.sessionId } })
+      .then((response) => {
+        this.responseData = response.data;
+        this.doneFetching = true;
+        this.errorMsg = ""
+      })
+      .catch((error) => {
+        this.errorMsg = "תצוגת דף לא זמינה"
+        console.log(error);
+      });
+
+
+    console.log("setting interval for views")
     this.fetch_interval = setInterval(async ()=>{
           console.log("Refreshing Page")
           this.doneFetching=false
           await axios
-            .get(this.$store.state.serverAdrr+"/shavit-mobile/views/" + this.$store.state.selected_hq_id + "/" + this.$store.state.selected_cat_id, { params: { sid: "xxx" } })
+            .get(this.$store.state.serverAdrr+"/shavit-mobile/views/" + this.$store.state.selected_hq_id + "/" + this.$store.state.selected_cat_id, { params: { sid: this.$store.state.currUser.sessionId } })
             .then((response) => {
               this.responseData = response.data;
               this.doneFetching = true;
