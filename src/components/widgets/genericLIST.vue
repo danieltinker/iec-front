@@ -101,7 +101,7 @@
                                     </template>
 
                                     <template slot="no-data">
-                                        My no data message
+                                        {{params.no_data ? params.no_data : "אין מידע"}}
                                     </template>
   
                              </v-data-table>
