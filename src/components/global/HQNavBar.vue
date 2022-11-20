@@ -111,7 +111,7 @@
       //get hqs By sid
       await axios
         .get(this.$store.state.serverAdrr+"/shavit-mobile/hq", 
-        {params: { sid: "xxx" }}
+        {params: { sid: this.$store.state.currUser.sessionId }}
         )
         .then(response => {this.hqs = response.data;})
         .catch((error) => {
