@@ -61,6 +61,8 @@ export default {
           .then(response => {
             console.log("400 - test request for sid ")
             this.valid_sid = true
+            console.log(window.localStorage.getItem("user_id"), " my user id00000000")
+            console.log(this.$store.state.currUser.user_id, " my user id00000000")
             // this.$store.state.currUser.sessionId = localStorage["sessionid"]
             // this.hqs = response.data;
           })

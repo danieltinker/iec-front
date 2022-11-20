@@ -18,7 +18,7 @@ export default new Vuex.Store({
     quick_view: false,
     user_favorites: [],
     isAuthenticated: window.localStorage.getItem("sessionid") ? true : false,
-    currUser: {"name":"yosef", "sessionId": window.localStorage.getItem("sessionid"),"user_id": 999},
+    currUser: {"name":"yosef", "sessionId": window.localStorage.getItem("sessionid"),"user_id": window.localStorage.getItem("user_id")},
     prefTheme:"lightTheme",
     themeDetails:{
       "darkTheme":{
