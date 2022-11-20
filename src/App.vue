@@ -50,7 +50,7 @@ export default {
       console.log(this.$store.state.isAuthenticated,"my is Auth")
       if(!this.$store.state.isAuthenticated){
         console.log("reroute to ADFS_MOBILE")
-        window.location.href = "https://shavit-t.net.iec.co.il/mobile_adfs";
+        window.location.href = "https://shavit-t.net.iec.co.il/adfs_mobile";
           // reroute to adfs_mobile
       }
       else{
