@@ -9,5 +9,9 @@ module.exports = defineConfig({
   lintOnSave:false,
   transpileDependencies: [
     'vuetify'
-  ]
+  ],
+
+  publicPath:"/mobile/"
+
+
 })
