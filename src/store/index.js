@@ -17,8 +17,8 @@ export default new Vuex.Store({
     serverAdrr: process.env.NODE_ENV === 'development' ? "http://20.102.120.232:5080" : "",
     quick_view: false,
     user_favorites: [],
-    isAuthenticated: JSON.parse(window.localStorage.getItem("sessionid")) ? true : false,
-    currUser: {"name":"yosef", "sessionId": JSON.parse(window.localStorage.getItem("sessionid")),"user_id": 999},
+    isAuthenticated: window.localStorage.getItem("sessionid") ? true : false,
+    currUser: {"name":"yosef", "sessionId": window.localStorage.getItem("sessionid"),"user_id": 999},
     prefTheme:"lightTheme",
     themeDetails:{
       "darkTheme":{
