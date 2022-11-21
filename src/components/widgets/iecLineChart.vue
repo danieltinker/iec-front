@@ -97,11 +97,6 @@ export default {
           events: {
             // legendClick:function(event, chartContext, config) {
             //   chartContext.reactiveSetter(0)
-            //   console.log("th",this.$refs.chart);
-            //   console.log("here1",event.axes.ctx.data.activeIndex);
-            //   console.log("here1",chartContext);
-            //   console.log("here1",config);
-
             // },
             beforeZoom: function(ctx) {
               // we need to clear the range as we only need it on the iniital load.

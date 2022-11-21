@@ -87,7 +87,6 @@
       await this.$myApi("tikshuv/metric/query/cyber/cyber_alert_status")
     .then((response) => {
         if (response.data.success) {
-          // get the data
           this.cyberStatusData = response.data.data[0]["metrics_data"];
           this.lastUpdateTime = response.data.data[0]["last_update_timestamp"];
           this.isData = true;

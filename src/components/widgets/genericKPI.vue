@@ -103,7 +103,6 @@
 <script>
 import ThreeDotsNineDots from '../utils/ThreeDotsNineDots.vue'
 export default {
-    // name:"basicKPI",
     props:{
         isDrillDown:{type:Boolean},
         drillDataProp:{type:Object, default:()=>{}},
@@ -179,7 +178,6 @@ export default {
                 .then(response => {
                     this.jsonData = response.data
                     this.errorMSG = ""
-                    // do sth ...
                 })
                 .catch(error => {
                     console.log(error,"Main Clock Data GET request FAIL, PLEASE Check Backend")
@@ -199,7 +197,6 @@ export default {
                             console.log("radio btns config failed fix data_category, selected category")
                             this.errorMSG = "אין מידע"
                         }
-                        // do sth ...
                     })
                     .catch(error => {
                         console.log(error,"drill DATA FETCH ERROR");
@@ -211,7 +208,7 @@ export default {
             this.jsonData = this.drillDataProp
         }
         
-        //  flag used to render the charts syncronously only after data is ready
+        // doneFetching flag render the charts syncronously after data is ready
         if(this.errorMSG.length === 0){
             this.doneFetching = true
         }

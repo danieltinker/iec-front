@@ -59,12 +59,11 @@ export default {
           {params: { sid: this.$store.state.currUser.sessionId }}
           )
           .then(response => {
-            console.log("400 - test request for sid ")
             this.valid_sid = true
-            console.log(window.localStorage.getItem("user_id"), " my user id00000000")
-            console.log(this.$store.state.currUser.user_id, " my user id00000000")
-            // this.$store.state.currUser.sessionId = localStorage["sessionid"]
-            // this.hqs = response.data;
+
+            console.log("400 - test request for sid ")
+            console.log(window.localStorage.getItem("user_id"), " my user id")
+            console.log(this.$store.state.currUser.user_id, " my user id")
           })
           .catch((error) => {
             console.log("session ID isnt Valid")

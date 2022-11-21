@@ -169,7 +169,6 @@ export default {
             .then(response => {
                 this.jsonData = response.data
                 this.errorMSG = ""
-                // do sth ...
             })
             .catch(error => {
                 console.log(error);
@@ -190,7 +189,6 @@ export default {
                             console.log("radio btns config failed fix data_category, selected category")
                             this.errorMSG = "אין מידע"
                         }
-                        // do sth ...
                     })
                     .catch(error => {
                         console.log(error,"drill DATA FETCH ERROR");

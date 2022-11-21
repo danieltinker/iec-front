@@ -119,8 +119,6 @@ export default {
     //user selected category
     "$store.state.selected_cat_id": {
       // fetch the widgets views from the DB
-
-      
       async handler() {
         this.$store.state.selected_cat_id=1
         this.doneFetching=false
@@ -208,7 +206,6 @@ export default {
     GetUserFav: function () {
       this.SET_FAV_LIST()
     },
-    //Get user favorites
   },
 };
 </script>

@@ -60,7 +60,6 @@ export default {
           chartTitle:"test",
           isDrillDown:false,
           configData:{ "pieInnerText": "כללי", "pieInnerNum": null, "listIds": []},
-          ////////////////////
           buttons:[],
           myNewData:[],
           chartOptions:{}

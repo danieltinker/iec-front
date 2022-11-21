@@ -121,7 +121,6 @@
 <script>
 import ThreeDotsNineDots from '../utils/ThreeDotsNineDots.vue'
 export default {
-    // name:"basicKPI",
     props:{
         isDrillDown:{type:Boolean},
         drillDataProp:{type:Object, default:()=>{}},
@@ -212,63 +211,7 @@ export default {
             await this.$myApi(this.params.data_url)
                 .then(response => {
                     this.jsonData = response.data
-//                     this.jsonData = {
-//   "*": [
-//     [
-//       {
-//         "label": "dsadasdasdas dsds",
-//         "value": "699dasds73rddddddddddddddddddddddema",
-       
-//       },
-//       {
-//         "label": "carusela hopa",
-//         "value": "535",
-        
-//       },
-//       {
-//         "label": "caru sela",
-//         "value": "684",
-        
-//       }
-//     ],
-//     [
-//       {
-//         "label": "sela caddddddddddddddddru",
-//         "value": "709/5dssssssssssssssssssssssss7",
-//         "secondary_value": "73rddddddddddddddddddddddem"
-//       },
-//       {
-//         "label": "sela",
-//         "value": "822M",
-//         "secondary_value": "352min"
-//       },
-//       {
-//         "label": "caru",
-//         "value": "971sec",
-//         "secondary_value": "942%"
-//       }
-//     ],
-//     [
-//       {
-//         "label": "css caru",
-//         "value": "420%",
-//         "secondary_value": "437px"
-//       },
-//       {
-//         "label": "josef",
-//         "value": "800/290",
-//         "secondary_value": "533oz"
-//       },
-//       {
-//         "label": "kupi",
-//         "value": "826kw",
-//         "secondary_value": "497g"
-//       }
-//     ]
-//   ]
-// }
                     this.errorMSG = ""
-                    // do sth ...
                 })
                 .catch(error => {
                     console.log(error,"Main Clock Data GET request FAIL, PLEASE Check Backend")
@@ -288,7 +231,6 @@ export default {
                             console.log("radio btns config failed fix data_category, selected category")
                             this.errorMSG = "אין מידע"
                         }
-                        // do sth ...
                     })
                     .catch(error => {
                         console.log(error,"drill DATA FETCH ERROR");
@@ -300,7 +242,7 @@ export default {
             this.jsonData = this.drillDataProp
         }
         
-        //  flag used to render the charts syncronously only after data is ready
+        // doneFetching flag render the charts syncronously after data is ready
         if(this.errorMSG.length === 0){
             this.doneFetching = true
         }
