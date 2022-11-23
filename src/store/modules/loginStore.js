@@ -11,29 +11,32 @@ const state = {
 const actions = {
     async ACT_LOGIN({ commit }, input) {
         console.log("try a login fetchhshiadhsaodhasoid NO ROUTE!?@!?@?")
-        const result = await axios.post(this.$store.state.serverAdrr+"/shavit-mobile/login", input)
-        if (!result.data.success) {
+        const result = await axios.post(this.state.serverAdrr+"/shavit-mobile/login", input)
+        console.log("first req",result)
+        if (!result.status) {
+            console.log("fail auth", result.data.success)
             // commit("SET_SNACKBAR", {showSnackbar: true, 
             //                         success: result.data.success,
             //                         message: result.data.message})
         } else {
+                    console.log("make hq req", this.state.serverAdrr)    
                    await axios
-                    .get(this.$store.state.serverAdrr+"/shavit-mobile/hq", 
-                    {params: { sid: this.$store.state.currUser.sessionId }}
+                    .get(this.state.serverAdrr+"/shavit-mobile/hq", 
+                    {params: { sid: result.data}}
                     )
                     .then(response => {
                         this.valid_sid = true
 
                         console.log("400 - test request for sid ")
-                        console.log(window.localStorage.getItem("user_id"), " my user id")
-                        console.log(this.$store.state.currUser.user_id, " my user id")
+                        // console.log(window.localStorage.getItem("user_id"), " my user id")
+                        console.log(this.state.currUser.user_id, " my user id")
                     })
                     .catch((error) => {
                         console.log("session ID isnt Valid")
                         console.log(error);
                     });
 
-            commit("SET_LOGGED_IN", result.data.data[0])
+            commit("SET_LOGGED_IN", result.data)
         }
 
         return result.data.success;
@@ -45,10 +48,12 @@ const actions = {
 
 const mutations = {
     SET_LOGGED_IN(state, userData) {
+        console.log("set auth to true")
         state.isAuthenticated = true
-        userData["userHqName"] = state.hqDict[userData.hq].title
-        state.currUserData = userData
-        localStorage.setItem('currUserData', JSON.stringify(userData))
+        // state.isAuthenticated = true
+        // userData["userHqName"] = state.hqDict[userData.hq].title
+        // state.currUserData = userData
+        // localStorage.setItem('currUserData', JSON.stringify(userData))
 
     },
     SET_LOGOUT(state) {

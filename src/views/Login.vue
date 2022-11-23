@@ -14,7 +14,7 @@
         </div>
 
         <v-text-field
-          color="#935287"
+          color="#0F2558"
           class="text"
           reverse
           dense
@@ -34,7 +34,7 @@
           >
         </div>
         <v-text-field
-          color="#935287"
+          color="#0F2558"
           class="text"
           reverse
           dense
@@ -56,12 +56,12 @@
           elevation="0"
           width="100%"
           class="text mt-3"
-          color="#935287"
+          color="#0F2558"
           style="color: #ffffff; font-family: almoni-bold"
           @click="processLogin"
           >כניסה
         </v-btn>
-        <div class="my-3 separator">או</div>
+        <!-- <div class="my-3 separator">או</div>
         <v-btn
           rounded
           outlined
@@ -78,7 +78,7 @@
             border-color: #935287;
           "
           >כניסה מהירה
-        </v-btn>
+        </v-btn> -->
       </v-form>
     </div>
   </div>
@@ -109,13 +109,12 @@ export default {
   methods: {
     ...mapActions({ login: "ACT_LOGIN" }),
     async processLogin() {
-        console.log("log in with username:",this.userName,"and password", this.password)
-    //const loginInput = { username: this.userName, password: this.password };
-    //const loginResult = await this.login(loginInput);
-      const FAKEloginResult = true
-      console.log("login Result FAKE:", FAKEloginResult)
-      
-      if (FAKEloginResult) {
+        // console.log("log in with username:",this.userName,"and password", this.password)
+        const loginInput = { username: this.userName, password: this.password };
+      const loginResult = await this.login(loginInput);
+    //   console.log(loginResult,"REAL REAL REAL LOGIN RES")
+      console.log("check login store", this.$store.state.loginStore.isAuthenticated)
+      if ( this.$store.state.loginStore.isAuthenticated) {
         console.log("my hq FAKE", this.$store.state.currUser.hq)
         // try to login success have sid -> need to get into the store currUser: {userID, HQ, name, } 
         // BUILD CURR USER DATA 
