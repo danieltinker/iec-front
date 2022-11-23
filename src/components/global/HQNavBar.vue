@@ -10,6 +10,30 @@
       </v-app-bar>
       <v-navigation-drawer :color="getCurrentTheme.hq_navbar.navigation_drawer" v-model="drawer" app right clipped hide-overlay dir="rtl">
         <v-icon class="my-2" dir @click="drawer = !drawer" :color="getCurrentTheme.hq_navbar.span_color_first" style="font-size: 30px; justify-content: right;">mdi-close</v-icon>
+        
+        <div
+        class="pa-3"
+        :style="
+          'background-color: ' + getCurrentTheme.hq_navbar.user_background + '; font-size:15px;'
+        "
+      >
+        <span
+          :style="
+            'font-family: almoni; display: flex; text-align: right; color: ' +
+            getCurrentTheme.hq_navbar.toolbar_title
+          "
+          dir="rtl"
+          >שם משתמש: {{$store.state.currUser.name}}</span
+        >
+        <span
+          :style="
+            'font-family: almoni; display: flex; text-align: right; color: ' +
+            getCurrentTheme.hq_navbar.toolbar_title
+          "
+          dir="rtl"
+          >מטה: {{$store.state.currUser.hq_label}} </span
+        >
+      </div>
         <v-list nav dense>
           <v-list-item-group v-model="group">
             <v-list-item v-for="item in hqs" :key="item.HQ_ID" @click="setHQ(item)">
@@ -21,7 +45,7 @@
         <!-- myTheme -->
 
         <v-row dir="rtl" class="" style="padding: 12px; text-align: center; align-content: baseline;">
-        <!-- <v-col cols="5" style="align-self: center"
+        <v-col cols="5" style="align-self: center"
           ><span
             :style="
               'font-size: 18px; font-family: almoni;color: ' +
@@ -30,8 +54,8 @@
             >תצוגת מסך</span
           ></v-col
         >
-        <v-col cols="7" style=""> -->
-          <!-- <label class="switch">
+        <v-col cols="7" style="">
+          <label class="switch">
             <input type="checkbox" v-model="theme" />
             <span
               class="slider round"
@@ -86,8 +110,8 @@
                 >כהה</span
               >
             </div>
-          </label> -->
-        <!-- </v-col> -->
+          </label>
+        </v-col>
       </v-row>
 
 
@@ -131,9 +155,26 @@
       group() {
         this.drawer = false;
       },
-      theme(){
+      async theme(){
         // change store theme by user
         this.theme ? this.$store.state.prefTheme = "darkTheme" : this.$store.state.prefTheme = "lightTheme"
+        let currentTheme = this.theme ? "darkTheme" : "lightTheme"
+        if(this.theme){
+          console.log("dark");
+        } else {
+          console.log("light");
+        }
+
+        // update DB user theme
+        await this.$myShavitApi(`user/themes/${this.$store.state.currUser.name}/${currentTheme}`)
+                    .then(response => {
+                      console.log(response);
+                    })
+                    .catch(error => {
+                        console.log(error,"user theme update failed");
+                    });
+        
+
       }
     }
   };

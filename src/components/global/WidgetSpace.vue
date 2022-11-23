@@ -60,6 +60,7 @@ import genericGraph from "../widgets/genericGraph.vue"
 import cyberStatus from "../widgets/cyberStatus.vue"
 import iecLineChart from "../widgets/iecLineChart.vue"
 import remoteUsers from "../widgets/remoteUsers.vue"
+import genericBoxKpi from "../widgets/genericBoxKpi.vue"
 import genericLIST from "../widgets/genericLIST.vue"
 import totalElectricityLevel from "../widgets/totalElectricityLevel"
 import axios from "axios";
@@ -78,7 +79,8 @@ export default {
     remoteUsers,
     genericLIST,
     totalElectricityLevel,
-    iecLineChart
+    iecLineChart,
+    genericBoxKpi
 },
   props: {
     quickViewPopup: {

@@ -14,11 +14,14 @@ export default new Vuex.Store({
     custom_bookmark_data: {}, //save custom bookmark data want to save
     max_favorite_popup:false, // open favorite popup
     //serverAdrr: 'http://20.102.120.232:5080',
-    serverAdrr: process.env.NODE_ENV === 'development' ? "http://20.102.120.232:5080" : "",
+    
+    //serverAdrr: process.env.NODE_ENV === 'development' ? "http://20.102.120.232:5080" : "",
+    serverAdrr: process.env.NODE_ENV === 'development' ? "http://20.102.120.232:8080" : "",
     quick_view: false,
     user_favorites: [],
     isAuthenticated: window.localStorage.getItem("sessionid") ? true : false,
-    currUser: {"name":"yosef", "sessionId": window.localStorage.getItem("sessionid"),"user_id": window.localStorage.getItem("user_id")},
+    //currUser: {"name":"yosef", "sessionId": window.localStorage.getItem("sessionid"),"user_id": window.localStorage.getItem("user_id")},
+    currUser: {"name":"yosef","hq_label":"dsadasdas", "sessionId": "xxx","user_id":"999"},
     prefTheme:"lightTheme",
     themeDetails:{
       "darkTheme":{
@@ -45,7 +48,8 @@ export default new Vuex.Store({
           "app_bar":"#121212",
           "bar_icon":"#FFFFFF",
           "toolbar_title":"#FFFFFF",
-          "navigation_drawer":"#282828"
+          "navigation_drawer":"#282828",
+          "user_background":"#424242"
         },
         "category_bar":{
           "btn_chip":"#424242",
@@ -118,7 +122,8 @@ export default new Vuex.Store({
           "app_bar":"#EBEBEB",
           "bar_icon":"#000000",
           "toolbar_title":"#000000",
-          "navigation_drawer":"#FFFFFF"
+          "navigation_drawer":"#FFFFFF",
+          "user_background":"#F4F4F4"
         },
         "category_bar":{
           "btn_chip":"#EBEBEB",

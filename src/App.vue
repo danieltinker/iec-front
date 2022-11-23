@@ -47,29 +47,30 @@ export default {
     },
     async created() {
       this.updatelist()
+      this.valid_sid = true
       console.log(this.$store.state.isAuthenticated,"my is Auth")
-      if(!this.$store.state.isAuthenticated){
-        console.log("reroute to ADFS_MOBILE")
-        window.location.href = "https://shavit-t.net.iec.co.il/adfs_mobile";
-          // reroute to adfs_mobile
-      }
-      else{
-        await axios
-          .get(this.$store.state.serverAdrr+"/shavit-mobile/hq", 
-          {params: { sid: this.$store.state.currUser.sessionId }}
-          )
-          .then(response => {
-            this.valid_sid = true
+      // if(!this.$store.state.isAuthenticated){
+      //   console.log("reroute to ADFS_MOBILE")
+      //   window.location.href = "https://shavit-t.net.iec.co.il/adfs_mobile";
+      //     // reroute to adfs_mobile
+      // }
+      // else{
+      //   await axios
+      //     .get(this.$store.state.serverAdrr+"/shavit-mobile/hq", 
+      //     {params: { sid: this.$store.state.currUser.sessionId }}
+      //     )
+      //     .then(response => {
+      //       this.valid_sid = true
 
-            console.log("400 - test request for sid ")
-            console.log(window.localStorage.getItem("user_id"), " my user id")
-            console.log(this.$store.state.currUser.user_id, " my user id")
-          })
-          .catch((error) => {
-            console.log("session ID isnt Valid")
-            console.log(error);
-          });
-      }
+      //       console.log("400 - test request for sid ")
+      //       console.log(window.localStorage.getItem("user_id"), " my user id")
+      //       console.log(this.$store.state.currUser.user_id, " my user id")
+      //     })
+      //     .catch((error) => {
+      //       console.log("session ID isnt Valid")
+      //       console.log(error);
+      //     });
+      // }
 
 
 /////////////
