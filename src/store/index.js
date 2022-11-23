@@ -14,7 +14,7 @@ export default new Vuex.Store({
     custom_bookmark_data: {}, //save custom bookmark data want to save
     max_favorite_popup:false, // open favorite popup
     //serverAdrr: 'http://20.102.120.232:5080',
-    serverAdrr: process.env.NODE_ENV === 'development' ? "http://20.102.120.232:5080" : "",
+    serverAdrr: process.env.NODE_ENV === 'development' ? "http://20.102.120.232:8080" : "",
     quick_view: false,
     user_favorites: [],
     isAuthenticated: window.localStorage.getItem("sessionid") ? true : false,
