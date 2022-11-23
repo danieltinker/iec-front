@@ -62,8 +62,8 @@ export default {
             this.valid_sid = true
 
             console.log("400 - test request for sid ")
-            console.log(window.localStorage.getItem("user_id"), " my user id")
-            console.log(this.$store.state.currUser.user_id, " my user id")
+            console.log(window.localStorage.getItem("user_id"), " local storage user id")
+            console.log(this.$store.state.currUser.user_id, " store user id")
           })
           .catch((error) => {
             console.log("session ID isnt Valid")

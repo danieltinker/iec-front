@@ -18,7 +18,9 @@ export default new Vuex.Store({
     quick_view: false,
     user_favorites: [],
     isAuthenticated: window.localStorage.getItem("sessionid") ? true : false,
-    currUser: {"name":"yosef", "sessionId": window.localStorage.getItem("sessionid"),"user_id": window.localStorage.getItem("user_id")},
+    // make curr user init to default and set this data from the home view on created.
+    // currUser: {"name":"yosef", "sessionId": window.localStorage.getItem("sessionid"),"user_id": window.localStorage.getItem("user_id")},
+    currUser: {"name":"yosef", "sessionId":"xxx","user_id": "u78lq"},
     prefTheme:"lightTheme",
     themeDetails:{
       "darkTheme":{
