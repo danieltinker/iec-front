@@ -142,6 +142,7 @@ export default {
   async created() {
     console.log("create widget space")
     this.doneFetching=false
+    console.log(this.$store.state.selected_hq_id,"widget selcet")
     await axios
       .get(this.$store.state.serverAdrr+"/shavit-mobile/views/" + this.$store.state.selected_hq_id + "/" + this.$store.state.selected_cat_id, { params: { sid: this.$store.state.currUser.sessionId } })
       .then((response) => {

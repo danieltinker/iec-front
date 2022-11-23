@@ -114,7 +114,14 @@
         .get(this.$store.state.serverAdrr+"/shavit-mobile/hq", 
         {params: { sid: this.$store.state.currUser.sessionId }}
         )
-        .then(response => {this.hqs = response.data;})
+        .then(response => {
+          this.hqs = response.data;
+          response.data.forEach( obj => {
+              if (obj["HQ_ID"] == this.$store.state.currUser.hq){
+                  this.title = obj["LABEL"]
+              }
+          } )               
+        })
         .catch((error) => {
           console.log(error);
         });
@@ -124,7 +131,8 @@
       drawer: false,
       group: null,
       hqs: [],
-      title:'מנכ"ל'
+      //get title from HQs
+      title:""
     }),
   
     watch: {

@@ -109,14 +109,18 @@ export default {
   methods: {
     ...mapActions({ login: "ACT_LOGIN" }),
     async processLogin() {
-        console.log("try to log in with username:",this.userName,"and password", this.password)
-      const loginInput = { username: this.userName, password: this.password };
-      const loginResult = await this.login(loginInput);
-      console.log("login Result:", loginResult)
-      console.log("my hq this.$store.state.loginStore.currUserData.hq")
-      if (loginResult) {
-        // !! IMPORTANT !!make sure we have the hq of the user on freaking data
-        var userHQ = this.$store.state.loginStore.currUserData.hq;
+        console.log("log in with username:",this.userName,"and password", this.password)
+    //const loginInput = { username: this.userName, password: this.password };
+    //const loginResult = await this.login(loginInput);
+      const FAKEloginResult = true
+      console.log("login Result FAKE:", FAKEloginResult)
+      console.log("my hq FAKE", this.$store.state.currUser.hq)
+
+      if (FAKEloginResult) {
+        // try to login success have sid -> need to get into the store currUser: {userID, HQ, name, } 
+        // BUILD CURR USER DATA 
+        // var userHQ = this.$store.state.loginStore.currUserData.hq;
+        var userHQ = this.$store.state.currUser.hq
         if (userHQ == 100) this.$store.state.selected_hq_id = 100;
         else if (userHQ == 777) this.$store.state.selected_hq_id = 200;
         else if (200 <= userHQ && userHQ <= 299) this.$store.state.selected_hq_id = 300;
@@ -127,15 +131,17 @@ export default {
         else if (900 <= userHQ && userHQ <= 999) this.$store.state.selected_hq_id = 900;
         else this.$router.push("/login");
       } else {
-        this.rules.userNameRules = true;
+        this.$router.push("/login");
       }
+      // REACH ONLY IF THE userHQ IS GOOD and login WAS SUCCESSFUL.
+      this.$router.push("/");
     },
   },
-  created() {
-    if (this.isAuthenticated) {
-      this.$router.push("home");
-    }
-  },
+//   created() {
+//     if (this.isAuthenticated) {
+//       this.$router.push("home");
+//     }
+//   },
 };
 </script>
 

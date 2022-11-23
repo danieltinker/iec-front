@@ -1,6 +1,6 @@
 <template >
       <!-- APP PAGE -->
-      <div>
+      <div  v-if="valid_sid">
         <!-- navigation bar + Theme Selector toggle + Log out BTN -->
         <HQNavBar/> 
         <!-- FAVORITES HORIZONTAL "instagram" SCROLL -->
@@ -21,14 +21,14 @@
   </template>
   
   <script>
-  import WidgetSpace from './components/global/WidgetSpace.vue';
-  import HQNavBar from './components/global/HQNavBar.vue';
-  import CategoryBar from './components/global/CategoryBar.vue';
-  import UserFavorites from './components/global/UserFavorites.vue';
+  import WidgetSpace from '../components/global/WidgetSpace.vue';
+  import HQNavBar from '../components/global/HQNavBar.vue';
+  import CategoryBar from '../components/global/CategoryBar.vue';
+  import UserFavorites from '../components/global/UserFavorites.vue';
   import { mapActions } from 'vuex';
-  import MaxFavoritePopup from './components/global/maxFavoritePopup.vue';
-  import RemoveBookmark from './components/global/removeBookmark.vue';
-  import BookmarkSnackbar from './components/global/bookmarkSnackbar.vue';
+  import MaxFavoritePopup from '../components/global/maxFavoritePopup.vue';
+  import RemoveBookmark from '../components/global/removeBookmark.vue';
+  import BookmarkSnackbar from '../components/global/bookmarkSnackbar.vue';
   import axios from 'axios';
   export default {
       name: "App",
@@ -40,40 +40,16 @@
         }),
       components: { WidgetSpace, HQNavBar, CategoryBar, UserFavorites, MaxFavoritePopup, RemoveBookmark, BookmarkSnackbar },
       mounted(){
-        this.$store.state.selected_hq_id = 100
-        this.$store.state.selected_cat_id = 101      
+        // this.$store.state.selected_hq_id = 100
+        // this.$store.state.selected_cat_id = 101      
       },
       async created() {
         this.updatelist()
-  
-        // undo this when deploy
+        
+        // make if authenticate 
         this.valid_sid = true
-  
-        // console.log(this.$store.state.isAuthenticated,"my is Auth")
-        // if(!this.$store.state.isAuthenticated){
-        //   console.log("reroute to ADFS_MOBILE")
-        //   window.location.href = "https://shavit-t.net.iec.co.il/adfs_mobile";
-        //     // reroute to adfs_mobile
-        // }
-        // else{
-        //   await axios
-        //     .get(this.$store.state.serverAdrr+"/shavit-mobile/hq", 
-        //     {params: { sid: this.$store.state.currUser.sessionId }}
-        //     )
-        //     .then(response => {
-        //       this.valid_sid = true
-  
-        //       console.log("400 - test request for sid ")
-        //       console.log(window.localStorage.getItem("user_id"), " my user id")
-        //       console.log(this.$store.state.currUser.user_id, " my user id")
-        //     })
-        //     .catch((error) => {
-        //       window.location.href = "https://shavit-t.net.iec.co.il/adfs_mobile";
-        //       console.log("session ID isnt Valid")
-        //       console.log(error);
-        //     });
-        // }
-  
+
+        
         this.$root.$on("addBookmarkSnackbar", (text,success) => {
           this.snackbar = false;
           this.success = success

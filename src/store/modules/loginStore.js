@@ -10,8 +10,8 @@ const state = {
 
 const actions = {
     async ACT_LOGIN({ commit }, input) {
+        console.log("try a login fetchhshiadhsaodhasoid NO ROUTE!?@!?@?")
         const result = await axios.post(this.$store.state.serverAdrr+"/shavit-mobile/login", input)
-        console.log("login route result:", result)
         if (!result.data.success) {
             // commit("SET_SNACKBAR", {showSnackbar: true, 
             //                         success: result.data.success,
@@ -22,9 +22,8 @@ const actions = {
                     {params: { sid: this.$store.state.currUser.sessionId }}
                     )
                     .then(response => {
-                        // put the sid from this session in store.
-                        // put the flag for valid_sid in store.
                         this.valid_sid = true
+
                         console.log("400 - test request for sid ")
                         console.log(window.localStorage.getItem("user_id"), " my user id")
                         console.log(this.$store.state.currUser.user_id, " my user id")
