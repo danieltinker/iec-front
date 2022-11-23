@@ -3,7 +3,7 @@ import axios from "axios";
 const state = {
     loginUrl: "/shavit/system/login",
     hqsQueryUrl: "/shavit/system/hq/query",
-    isAuthenticated: JSON.parse(window.localStorage.getItem("currUserData")) ? true : false,
+    isAuthenticated: JSON.parse(window.localStorage.getItem("sessionid")) ? true : false,
     currUserData: JSON.parse(window.localStorage.getItem("currUserData")) || {},
     hqDict: {},
 }
