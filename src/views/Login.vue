@@ -114,9 +114,9 @@ export default {
     //const loginResult = await this.login(loginInput);
       const FAKEloginResult = true
       console.log("login Result FAKE:", FAKEloginResult)
-      console.log("my hq FAKE", this.$store.state.currUser.hq)
-
+      
       if (FAKEloginResult) {
+        console.log("my hq FAKE", this.$store.state.currUser.hq)
         // try to login success have sid -> need to get into the store currUser: {userID, HQ, name, } 
         // BUILD CURR USER DATA 
         // var userHQ = this.$store.state.loginStore.currUserData.hq;
