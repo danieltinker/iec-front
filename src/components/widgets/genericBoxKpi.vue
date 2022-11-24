@@ -71,14 +71,20 @@
               :key="index"
             >
               <div class="KPIcontainer" dir="rtl">
+
+                <div v-for="(btnName,index) in KPIarr" :key="index">
                 
-                <div class="statusBox">
-                  <h1 style="font-family: almoni-ultralight; font-size: 22px">{{ remoteUsers }}</h1>
+                <div v-if="btnName.selected" class="statusBox" :style="{'background-color' :btnName.color }">
+                  <h1 style="font-family: almoni; font-size: 22px">{{btnName.label}}</h1>
+                </div>
+                 <span v-if="btnName.selected" style="font-family: almoni;">{{btnName.cause}} </span>
                 </div>
 
-                <v-row dir="rtl" style="place-content:center;display: inline-flex;" v-if="!params.data_intersection && !params.click_open_drill_enabled">
+                <div class="btn-container">
+
+                <v-row v-if="params.show_label" dir="rtl" style="place-content:right;display: inline-flex;padding-right: 4%;">
                 <div
-                 v-for="(btnName,index) in my_lables_arr" :key="index" class="labels">
+                 v-for="(btnName,index) in KPIarr" :key="index" class="labels">
                     <span
                     class="dot"
                     style="margin-left:5px"
@@ -88,6 +94,8 @@
                     </span>
                   </div>    
             </v-row>
+
+          </div>
 
               </div>
             </v-carousel-item>
@@ -141,7 +149,10 @@ export default {
   },
   data() {
     return {
-      my_lables_arr:[{"label":"test"},{"label":"test"}],
+      show_label:true,
+      box_color:"#000000",
+      selected_label:"תקלה",
+      my_lables_arr:[],
       activeTitle: 0,
       activeIndex: -1,
       succ_req: true,
@@ -212,6 +223,27 @@ export default {
       await this.$myApi(this.params.data_url)
         .then(response => {
           this.jsonData = response.data;
+          //this.jsonData = [{"label":"רן","color":"#000000"},{"label":"הגבר"},{"label":"הגבר"},{"label":"הגבר"},{"label":"הגבר"},{"label":"הגבר"},{"label":"הגבר"},{"label":"הגבר"}],
+//           this.jsonData = {
+//   "*": [
+//     [
+//       {
+//         "label": "label1",
+//         "color":"red",
+//         "selected":true,
+//         "cuse":"DSdasdasd"
+//       },
+//       {
+//         "label": "label2",
+//         "color":"blue",
+//       },
+//       {
+//         "label": "label3",
+//         "color":"green"
+//       }
+//     ]
+//   ]
+// }
           this.errorMSG = "";
         })
         .catch(error => {
@@ -259,7 +291,12 @@ export default {
 </script>
 
 <style scoped>
+.btn-container{
+        margin-top:50px;
+        margin-left:4%;
+        margin-right:4%;
 
+    }
 
 .labels{
         font-size:16px;
@@ -281,12 +318,12 @@ export default {
     /* margin-left: 5px; */
 }
 .statusBox {
-  background-color: #ff9900;
   text-align: center;
   line-height: 50px;
   margin: auto;
   width: 50%;
-  /* margin-top: 44px; */
+  margin-top: 44px;
+  margin-bottom: 28px;
   width: 180px;
   height: 50px;
 }
@@ -296,12 +333,12 @@ export default {
   align-items: center;
 }
 .KPIcontainer {
-  display: grid;
+  /* display: grid;
   grid-template-columns: auto auto;
   row-gap: 6px;
   column-gap: 8px;
   justify-content: center;
-  padding-bottom: 8px;
+  padding-bottom: 8px; */
 }
 .kpi-box {
   padding-top: 0px;

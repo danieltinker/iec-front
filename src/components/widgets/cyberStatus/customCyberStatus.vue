@@ -77,7 +77,7 @@
   
   
     color: #323232;
-    margin-top: 61px;
+    margin-top: 25px;
     text-align: right;
   }
   .details p {
@@ -99,7 +99,7 @@
     line-height: 50px;
     margin: auto;
     width: 50%;
-    margin-top: 44px;
+    margin-top: 20px;
     width: 180px;
     height: 50px;
   }

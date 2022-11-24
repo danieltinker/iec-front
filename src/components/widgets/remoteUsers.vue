@@ -90,7 +90,7 @@ export default {
   top: 30%;
 }
 .updateDate {
-  height: 300px;
+  height: 200px;
   margin-top: 16px;
   font-family: almoni-light;
   font-size: 16px;
@@ -104,7 +104,7 @@ export default {
   line-height: 50px;
   margin: auto;
   width: 50%;
-  margin-top: 44px;
+  margin-top: 8px;
   width: 180px;
   height: 50px;
 }
