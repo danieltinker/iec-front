@@ -33,7 +33,7 @@ export default {
     async created() {
       console.log("APP CREATED")
       this.updatelist()
-      
+  
       // console.log(this.$store.state.isAuthenticated,"my is Auth")
       if(localStorage.getItem('sessionid') !== null){
             // check if its a valid sid.
