@@ -140,13 +140,7 @@ export default {
       this.$router.push("/");
       }
     },
-  },
-  created() {
-    console.log("heyheyheyheyheyh")
-    // if (this.isAuthenticated) {
-    //   this.$router.push("home");
-    // }
-  },
+  }
 };
 </script>
 
