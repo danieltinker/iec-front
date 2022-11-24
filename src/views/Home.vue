@@ -51,6 +51,7 @@
         this.valid_sid = true
         }
         else{
+          console.log("route to login from HOME !!!1")
           this.$router.push("/login");
         }
         
