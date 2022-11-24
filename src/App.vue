@@ -55,7 +55,8 @@ export default {
                     })
                     .catch((error) => {
                         this.$store.state.loginStore.isAuthenticated = false
-                        console.log("session ID isnt Valid, REROUTE ADFS")
+                        console.log("session ID isnt Valid, REROUTE ADFS remove this sid from localstroage")
+                        localStorage.removeItem("sessionid")
                         this.$router.push("/login");
                         // window.location.href = "https://shavit-t.net.iec.co.il/adfs_mobile";
                         console.log(error);
