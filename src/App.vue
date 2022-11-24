@@ -65,7 +65,7 @@ export default {
 
         // GOT GOOD SID - will come back to / (home) and be autenticated (tru router)
         // GOT BAD SID - adfs reroute to login.
-          this.$router.push("/login");
+          // this.$router.push("/login");
       }
       else{
           console.log("APP AUTH")
