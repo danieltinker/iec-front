@@ -8,7 +8,7 @@ export default new Vuex.Store({
   state: {
     removeBookmarkDialog:false,
     fetching: false,
-    selected_hq_id:100,
+    selected_hq_id:0,
     selected_cat_id:1,
     selected_view_id: 100,
     selected_view_param: {}, //saved clicked bookmark view parameters
@@ -18,7 +18,7 @@ export default new Vuex.Store({
     serverAdrr: process.env.NODE_ENV === 'development' ? "http://20.102.120.232:8080" : "",
     quick_view: false,
     user_favorites: [],
-    isAuthenticated: window.localStorage.getItem("sessionid") ? true : false,
+    // isAuthenticated: window.localStorage.getItem("sessionid") ? true : false,
     // make curr user init to default and set this data from the home view on created.
     // currUser: {"name":"yosef", "sessionId": window.localStorage.getItem("sessionid"),"user_id": window.localStorage.getItem("user_id")},
     currUser: {"name":"yosef", "sessionId":"xxx","user_id": "u78lq","hq": 600},

@@ -45,10 +45,14 @@
       },
       async created() {
         this.updatelist()
-        
-        // make if authenticate 
+        console.log("WELCOME TO HOME PAGE",this.$store.state.loginStore.userInfo.user_id)
+        console.log("WELCOME TO HOME PAGE",this.$store.state.loginStore.userInfo.sid)
+        if(this.$store.state.loginStore.isAuthenticated){
         this.valid_sid = true
-
+        }
+        else{
+          this.$router.push("/login");
+        }
         
         this.$root.$on("addBookmarkSnackbar", (text,success) => {
           this.snackbar = false;

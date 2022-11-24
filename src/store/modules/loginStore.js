@@ -3,40 +3,38 @@ import axios from "axios";
 const state = {
     loginUrl: "/shavit/system/login",
     hqsQueryUrl: "/shavit/system/hq/query",
-    isAuthenticated: JSON.parse(window.localStorage.getItem("sessionid")) ? true : false,
+    isAuthenticated:false,
+    userInfo:{sid:"axaxax", user_id:"zxc"},
     currUserData: JSON.parse(window.localStorage.getItem("currUserData")) || {},
     hqDict: {},
 }
-
+//window.localStorage.getItem("sessionid")
 const actions = {
-    async ACT_LOGIN({ commit }, input) {
-        console.log("try a login fetchhshiadhsaodhasoid NO ROUTE!?@!?@?")
+    async ACT_LOGIN({rootState, commit }, input) {
         const result = await axios.post(this.state.serverAdrr+"/shavit-mobile/login", input)
-        console.log("first req",result)
         if (!result.status) {
-            console.log("fail auth", result.data.success)
-            // commit("SET_SNACKBAR", {showSnackbar: true, 
-            //                         success: result.data.success,
-            //                         message: result.data.message})
-        } else {
-                    console.log("make hq req", this.state.serverAdrr)    
+            console.log("fail login request", result.data.success)
+        } else { 
                    await axios
                     .get(this.state.serverAdrr+"/shavit-mobile/hq", 
-                    {params: { sid: result.data}}
+                    {params: { sid: result.data.sid}}
                     )
                     .then(response => {
-                        this.valid_sid = true
+                        rootState.loginStore.isAuthenticated = true
+                        rootState.loginStore.userInfo.sid = result.data.sid
+                        rootState.loginStore.userInfo.user_id = result.data.userid
+                        console.log("200 - test request for sid USER INFO: ",rootState.loginStore.userInfo)
 
-                        console.log("400 - test request for sid ")
-                        // console.log(window.localStorage.getItem("user_id"), " my user id")
-                        console.log(this.state.currUser.user_id, " my user id")
+                        // store.commit("SET_LOGGED_IN", result.data)
+                        // commit("SET_LOGGED_IN", result.data)
+
                     })
                     .catch((error) => {
+                        rootState.loginStore.isAuthenticated = false
                         console.log("session ID isnt Valid")
                         console.log(error);
                     });
 
-            commit("SET_LOGGED_IN", result.data)
         }
 
         return result.data.success;
@@ -48,13 +46,8 @@ const actions = {
 
 const mutations = {
     SET_LOGGED_IN(state, userData) {
-        console.log("set auth to true")
+        console.log("set auth to true and user data to store",state,userData)
         state.isAuthenticated = true
-        // state.isAuthenticated = true
-        // userData["userHqName"] = state.hqDict[userData.hq].title
-        // state.currUserData = userData
-        // localStorage.setItem('currUserData', JSON.stringify(userData))
-
     },
     SET_LOGOUT(state) {
         state.isAuthenticated = false
