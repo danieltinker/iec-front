@@ -4,7 +4,7 @@ const state = {
     loginUrl: "/shavit/system/login",
     hqsQueryUrl: "/shavit/system/hq/query",
     isAuthenticated:false,
-    userInfo:{sid:"", user_id:""},
+    userInfo:{sid:"", user_id:"",prefTheme:"lightTheme",main_hq:"100"},
     hqDict: {},
     // currUserData: JSON.parse(window.localStorage.getItem("currUserData")) || {},
 }

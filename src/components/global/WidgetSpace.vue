@@ -102,7 +102,7 @@ export default {
         this.$store.state.selected_cat_id=1
         this.doneFetching=false
         await axios
-            .get(this.$store.state.serverAdrr+"/shavit-mobile/views/" + this.$store.state.selected_hq_id + "/" + this.$store.state.selected_cat_id, { params: { sid: this.$store.state.currUser.sessionId } })
+            .get(this.$store.state.serverAdrr+"/shavit-mobile/views/" + this.$store.state.selected_hq_id + "/" + this.$store.state.selected_cat_id, { params: { sid: this.$store.state.loginStore.userInfo.sid } })
             .then((response) => {
               this.responseData = response.data;
               this.doneFetching = true;
@@ -123,7 +123,7 @@ export default {
         this.$store.state.selected_cat_id=1
         this.doneFetching=false
         await axios
-            .get(this.$store.state.serverAdrr+"/shavit-mobile/views/" + this.$store.state.selected_hq_id + "/" + this.$store.state.selected_cat_id, { params: { sid: this.$store.state.currUser.sessionId } })
+            .get(this.$store.state.serverAdrr+"/shavit-mobile/views/" + this.$store.state.selected_hq_id + "/" + this.$store.state.selected_cat_id, { params: { sid: this.$store.state.loginStore.userInfo.sid } })
             .then((response) => {
               this.responseData = response.data;
               this.doneFetching = true;
@@ -144,7 +144,7 @@ export default {
     this.doneFetching=false
     console.log(this.$store.state.selected_hq_id,"widget selcet")
     await axios
-      .get(this.$store.state.serverAdrr+"/shavit-mobile/views/" + this.$store.state.selected_hq_id + "/" + this.$store.state.selected_cat_id, { params: { sid: this.$store.state.currUser.sessionId } })
+      .get(this.$store.state.serverAdrr+"/shavit-mobile/views/" + this.$store.state.selected_hq_id + "/" + this.$store.state.selected_cat_id, { params: { sid: this.$store.state.loginStore.userInfo.sid } })
       .then((response) => {
         this.responseData = response.data;
         this.doneFetching = true;
@@ -161,7 +161,7 @@ export default {
           console.log("Refreshing Page")
           this.doneFetching=false
           await axios
-            .get(this.$store.state.serverAdrr+"/shavit-mobile/views/" + this.$store.state.selected_hq_id + "/" + this.$store.state.selected_cat_id, { params: { sid: this.$store.state.currUser.sessionId } })
+            .get(this.$store.state.serverAdrr+"/shavit-mobile/views/" + this.$store.state.selected_hq_id + "/" + this.$store.state.selected_cat_id, { params: { sid: this.$store.state.loginStore.userInfo.sid } })
             .then((response) => {
               this.responseData = response.data;
               this.doneFetching = true;

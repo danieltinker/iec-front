@@ -48,10 +48,10 @@
         console.log("WELCOME TO HOME PAGE",this.$store.state.loginStore.userInfo.user_id)
         console.log("WELCOME TO HOME PAGE",this.$store.state.loginStore.userInfo.sid)
         if(this.$store.state.loginStore.isAuthenticated){
-        this.valid_sid = true
+              this.valid_sid = true
         }
         else{
-          console.log("route to login from HOME !!!1")
+          console.log("route to login from HOME !")
           this.$router.push("/login");
         }
         
