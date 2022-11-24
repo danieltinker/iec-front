@@ -51,7 +51,7 @@ export default {
                         console.log("STORE MODE:", this.$store.state.loginStore)
                     })
                     .catch((error) => {
-                      this.$store.state.loginStore.isAuthenticated = false
+                        this.$store.state.loginStore.isAuthenticated = false
                         console.log("session ID isnt Valid, REROUTE ADFS")
                         this.$router.push("/login");
                         window.location.href = "https://shavit-t.net.iec.co.il/adfs_mobile";
