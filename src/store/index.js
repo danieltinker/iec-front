@@ -14,14 +14,13 @@ export default new Vuex.Store({
     custom_bookmark_data: {}, //save custom bookmark data want to save
     max_favorite_popup:false, // open favorite popup
     //serverAdrr: 'http://20.102.120.232:5080',
-    
-    //serverAdrr: process.env.NODE_ENV === 'development' ? "http://20.102.120.232:5080" : "",
     serverAdrr: process.env.NODE_ENV === 'development' ? "http://20.102.120.232:8080" : "",
     quick_view: false,
     user_favorites: [],
     isAuthenticated: window.localStorage.getItem("sessionid") ? true : false,
-    //currUser: {"name":"yosef", "sessionId": window.localStorage.getItem("sessionid"),"user_id": window.localStorage.getItem("user_id")},
-    currUser: {"name":"yosef","hq_label":"dsadasdas", "sessionId": "xxx","user_id":"999"},
+    // make curr user init to default and set this data from the home view on created.
+    // currUser: {"name":"yosef", "sessionId": window.localStorage.getItem("sessionid"),"user_id": window.localStorage.getItem("user_id")},
+    currUser: {"name":"yosef", "sessionId":"xxx","user_id": "u78lq"},
     prefTheme:"lightTheme",
     themeDetails:{
       "darkTheme":{

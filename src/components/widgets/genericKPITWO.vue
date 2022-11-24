@@ -181,7 +181,6 @@ export default {
         getWidth(item){
             let MyWidth = 0
             let obj_arr = Object.keys(item)
-            console.log(obj_arr);
             if(obj_arr.includes("secondary_value")){
                 MyWidth++
             }
