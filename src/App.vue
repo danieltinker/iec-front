@@ -53,6 +53,7 @@ export default {
                     .catch((error) => {
                         rootState.loginStore.isAuthenticated = false
                         console.log("session ID isnt Valid, REROUTE ADFS")
+                        this.$router.push("/login");
                         window.location.href = "https://shavit-t.net.iec.co.il/adfs_mobile";
                         console.log(error);
                     });
@@ -60,7 +61,7 @@ export default {
       }
       if(!this.$store.state.loginStore.isAuthenticated){
         // console.log("reroute to ADFS_MOBILE")
-        // window.location.href = "https://shavit-t.net.iec.co.il/adfs_mobile";
+        window.location.href = "https://shavit-t.net.iec.co.il/adfs_mobile";
 
         // GOT GOOD SID - will come back to / (home) and be autenticated (tru router)
         // GOT BAD SID - adfs reroute to login.
