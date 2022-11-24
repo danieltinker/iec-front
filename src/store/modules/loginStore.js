@@ -4,9 +4,9 @@ const state = {
     loginUrl: "/shavit/system/login",
     hqsQueryUrl: "/shavit/system/hq/query",
     isAuthenticated:false,
-    userInfo:{sid:"axaxax", user_id:"zxc"},
-    currUserData: JSON.parse(window.localStorage.getItem("currUserData")) || {},
+    userInfo:{sid:"", user_id:""},
     hqDict: {},
+    // currUserData: JSON.parse(window.localStorage.getItem("currUserData")) || {},
 }
 //window.localStorage.getItem("sessionid")
 const actions = {
