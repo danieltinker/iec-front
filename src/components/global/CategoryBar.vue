@@ -6,7 +6,7 @@
             @click="setCategory(index,category.CATEGORY_ID)"
             :style="
                   active == index
-                    ? 'color: #FFFFFF; background-color:#0F2558'
+                    ? 'color: #FFFFFF; background-color:' + getCurrentTheme.global_theme_color
                     : 'color: ' + getCurrentTheme.category_bar.btn_color + ';'
                 "
           >{{ category.LABEL }}</v-btn>

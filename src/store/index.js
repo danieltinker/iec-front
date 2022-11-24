@@ -28,6 +28,7 @@ export default new Vuex.Store({
         "drill_title_color":"#ffffff",
         "app_background":"#121212",
         "app_color":"#FFFFFF",
+        "global_theme_color": "green",
         "solid_selected_border":"solid purple 4px",
         "kpi_sec_value": "#828282",
         "generic_title_color" : "#FFFFFF",
@@ -104,6 +105,7 @@ export default new Vuex.Store({
         "theme":"lightTheme",
         "solid_selected_border":"solid black 2px",
         "drill_title_color":"#010101",
+        "global_theme_color": "#0F2558",
         "generic_title_color" : "#606060",
         "legend_border_color" : "solid black 1px",
         "kpi":{

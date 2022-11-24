@@ -2,7 +2,7 @@
     <div dir="rtl" class="mb-2 container">
     <div>
       <div v-if="GET_USER_FAV.length == 0">
-        <v-btn color="#0F2558" outlined fab class="ml-4 storyClear" @click="openQuickView('plus')"><img src="../../assets/FavBar/plus.svg" /></v-btn>
+        <v-btn outlined fab class="ml-4 storyClear" :style="{color:getCurrentTheme.global_theme_color}" @click="openQuickView('plus')"><img :src="getCurrentTheme.theme == 'lightTheme' ? require('../../assets/FavBar/plus.svg'):require('../../assets/FavBar/plus-dark.svg')" /></v-btn>
 
 
 <!-- {{GET_USER_FAV}} -->
@@ -10,7 +10,7 @@
         <div v-else class="fav-btn" v-for="item in GET_USER_FAV" :key="item.VIEW_ID">
           <v-btn 
           
-                color="#0F2558"
+                :style="{color:getCurrentTheme.global_theme_color}"
                 outlined
                 fab
                 class="ml-4 story"
@@ -31,7 +31,7 @@
 
 
 
-        <v-btn v-for="index in 6 - GET_USER_FAV.length" :key="index" color="#0F2558" outlined fab class="ml-4 storyClear"> </v-btn>
+        <v-btn v-for="index in 6 - GET_USER_FAV.length" :key="index" :style="{color:getCurrentTheme.global_theme_color}" outlined fab class="ml-4 storyClear"> </v-btn>
               
     </div >
     <QuickViewPopup class="quick-view" v-if="$store.state.quick_view" :mydata="data" @closeQuickView="closeQuickView" />
@@ -39,7 +39,7 @@
 
     <vue-bottom-sheet ref="addFavoriteGuide">
       <div id="sheetContent" style="">
-        <span id="headline" class="" style="">מבט מהיר</span>
+        <span id="headline" class="" :style="{color:getCurrentTheme.global_theme_color}" style="">מבט מהיר</span>
         <img
           v-if="getCurrentTheme.theme == 'lightTheme'"
           src="../../assets/menusPhotos/QuickViewPopup/FavBarStructure-lightTheme.svg"
@@ -55,7 +55,7 @@
           style="font-size: 18px; width: 75%; justify-self: center"
           >צפה במהירות במידע הרלוונטי עבורך על ידי לחיצה על כפתוח "שמירה".</span
         >
-        <v-icon class="mb-3" style="font-size: 30px" color="#0F2558"
+        <v-icon class="mb-3" style="font-size: 30px" :style="{color:getCurrentTheme.global_theme_color}"
           >mdi-bookmark-outline</v-icon
         >
         <span

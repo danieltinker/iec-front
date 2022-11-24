@@ -14,7 +14,7 @@
         </h1>
         <div class="grid-item">
           <div style="width:40px">
-          <v-icon @click="BookMarkClick(widget.VIEW_ID,widget.PARAMETERS,widget.TEMPLATE_TYPE,false)" color="#0F2558" style="font-size: 30px"
+          <v-icon @click="BookMarkClick(widget.VIEW_ID,widget.PARAMETERS,widget.TEMPLATE_TYPE,false)" :style="{color:getCurrentTheme.global_theme_color}" style="font-size: 30px"
             v-if="widget.PARAMETERS.headline_config && widget.PARAMETERS.headline_config.bookmark_enabled">{{
             CheckBookmark(widget.VIEW_ID)
             ? "mdi-bookmark"

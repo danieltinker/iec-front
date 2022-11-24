@@ -23,7 +23,7 @@
         <div class="loader" v-if="!isErrorMsg">
             <v-progress-circular
             indeterminate
-            color="#0F2558"
+            :style="{color:getCurrentTheme.global_theme_color}"
             ></v-progress-circular>
         </div>
         <h1 style="font-family: almoni-bold;font-size:23px" v-else>  {{errorMSG}} </h1>

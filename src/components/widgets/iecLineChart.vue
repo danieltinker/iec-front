@@ -20,7 +20,7 @@
 
     <div class="loader" v-else>
       <div class="loader" v-if="!isErrorMsg">
-        <v-progress-circular indeterminate color="#0F2558"></v-progress-circular>
+        <v-progress-circular indeterminate :style="{color:getCurrentTheme.global_theme_color}"></v-progress-circular>
       </div>
       <h1 v-else>{{errorMSG}}</h1>
     </div>
