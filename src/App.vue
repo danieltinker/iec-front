@@ -40,7 +40,7 @@ export default {
             console.log("check if sid in storage is good /hq")
 
             await axios
-                    .get(this.state.serverAdrr+"/shavit-mobile/hq", 
+                    .get(this.$store.state.serverAdrr+"/shavit-mobile/hq", 
                     {params: { sid: localStorage.getItem('sessionid')}}
                     )
                     .then(response => {
