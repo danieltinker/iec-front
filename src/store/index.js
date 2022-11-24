@@ -28,7 +28,7 @@ export default new Vuex.Store({
         "drill_title_color":"#ffffff",
         "app_background":"#121212",
         "app_color":"#FFFFFF",
-        "global_theme_color": "green",
+        "global_theme_color": "#234BA6",
         "solid_selected_border":"solid purple 4px",
         "kpi_sec_value": "#828282",
         "generic_title_color" : "#FFFFFF",
