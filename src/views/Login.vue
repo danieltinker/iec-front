@@ -109,16 +109,12 @@ export default {
   methods: {
     ...mapActions({ login: "ACT_LOGIN" }),
     async processLogin() {
-    // console.log("log in with username:",this.userName,"and password", this.password)
+      console.log("log in with username:",this.userName,"and password", this.password)
         const loginInput = { username: this.userName, password: this.password };
       const loginResult = await this.login(loginInput);
-    //   console.log(loginResult,"REAL REAL REAL LOGIN RES")
       console.log("check login store", this.$store.state.loginStore.isAuthenticated)
       if (this.$store.state.loginStore.isAuthenticated) {
         console.log("my hq FAKE", this.$store.state.currUser.hq)
-        // try to login success have sid -> need to get into the store currUser: {userID, HQ, name, } 
-        // BUILD CURR USER DATA 
-        // var userHQ = this.$store.state.loginStore.currUserData.hq;
         var userHQ = this.$store.state.currUser.hq
         if (userHQ == 100) this.$store.state.selected_hq_id = 100;
         else if (userHQ == 777) this.$store.state.selected_hq_id = 200;
