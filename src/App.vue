@@ -8,15 +8,15 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+import axios from 'axios';
+import BookmarkSnackbar from './components/global/bookmarkSnackbar.vue';
 import WidgetSpace from './components/global/WidgetSpace.vue';
 import HQNavBar from './components/global/HQNavBar.vue';
 import CategoryBar from './components/global/CategoryBar.vue';
 import UserFavorites from './components/global/UserFavorites.vue';
-import { mapActions } from 'vuex';
 import MaxFavoritePopup from './components/global/maxFavoritePopup.vue';
 import RemoveBookmark from './components/global/removeBookmark.vue';
-import BookmarkSnackbar from './components/global/bookmarkSnackbar.vue';
-import axios from 'axios';
 export default {
     name: "App",
     data: () => ({
@@ -35,31 +35,40 @@ export default {
       this.updatelist()
       
       // console.log(this.$store.state.isAuthenticated,"my is Auth")
-      if(!this.$store.state.isAuthenticated){
+      if(localStorage.getItem('sessionid') !== null){
+            // check if its a valid sid.
+            console.log("have a sessionid in storage. if valid Auth=true")
+
+            await axios
+                    .get(this.state.serverAdrr+"/shavit-mobile/hq", 
+                    {params: { sid: localStorage.getItem('sessionid')}}
+                    )
+                    .then(response => {
+                        this.$store.state.loginStore.isAuthenticated = true
+                        this.$store.state.loginStore.userInfo.sid =  window.localStorage.getItem("sessionid") 
+                        this.$store.state.loginStore.userInfo.user_id =  window.localStorage.getItem("user_id") 
+                        console.log("200 - test request for sid")
+                        console.log("STORE MODE:", this.$store.state.loginStore)
+                    })
+                    .catch((error) => {
+                        rootState.loginStore.isAuthenticated = false
+                        console.log("session ID isnt Valid, REROUTE ADFS")
+                        window.location.href = "https://shavit-t.net.iec.co.il/adfs_mobile";
+                        console.log(error);
+                    });
+
+      }
+      if(!this.$store.state.loginStore.isAuthenticated){
         // console.log("reroute to ADFS_MOBILE")
         // window.location.href = "https://shavit-t.net.iec.co.il/adfs_mobile";
 
         // GOT GOOD SID - will come back to / (home) and be autenticated (tru router)
-        // GOT BAD SID - adfs reroute to login .
+        // GOT BAD SID - adfs reroute to login.
           this.$router.push("/login");
-
       }
       else{
+          console.log("APP AUTH")
           this.$router.push("/");
-            //   await axios
-            //     .get(this.$store.state.serverAdrr+"/shavit-mobile/hq", 
-            //     {params: { sid: this.$store.state.currUser.sessionId }}
-            //     )
-            //     .then(response => {
-            //       console.log("400 - test request for sid ")
-            //       console.log(window.localStorage.getItem("user_id"), " my user id")
-            //       console.log(this.$store.state.currUser.user_id, " my user id")
-            //     })
-            //     .catch((error) => {
-              //       console.log(error);
-              //       console.log("HQ TEST FETCH FAILED REROUTE TO /adfs_mobile")
-            //       window.location.href = "https://shavit-t.net.iec.co.il/adfs_mobile";
-            //     });
       }
 
       this.$root.$on("addBookmarkSnackbar", (text,success) => {
@@ -70,7 +79,6 @@ export default {
         setTimeout(() => {
             this.snackbar = false;
           }, 3000);
-        
       });
     },
     watch: {
