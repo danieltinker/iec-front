@@ -37,7 +37,7 @@ export default {
       // console.log(this.$store.state.isAuthenticated,"my is Auth")
       if(localStorage.getItem('sessionid') !== null){
             // check if its a valid sid.
-            console.log("have a sessionid in storage. if valid Auth=true")
+            console.log("check if sid in storage is good /hq")
 
             await axios
                     .get(this.state.serverAdrr+"/shavit-mobile/hq", 
