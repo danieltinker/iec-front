@@ -64,7 +64,7 @@ export default {
 
       }
       if(!this.$store.state.loginStore.isAuthenticated){
-        // console.log("reroute to ADFS_MOBILE")
+        console.log("reroute FROM APP to ADFS_MOBILE")
         window.location.href = "https://shavit-t.net.iec.co.il/adfs_mobile";
 
         // GOT GOOD SID - will come back to / (home) and be autenticated (tru router)
