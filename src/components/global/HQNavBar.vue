@@ -166,7 +166,7 @@
         }
 
         // update DB user theme
-        await this.$myShavitApi(`user/themes/${this.$store.state.currUser.name}/${currentTheme}`)
+        await this.$myShavitApi(`user/themes/${currentTheme}`)
                     .then(response => {
                       console.log(response);
                     })
