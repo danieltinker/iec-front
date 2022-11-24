@@ -137,15 +137,16 @@ export default {
       // REACH ONLY IF THE userHQ IS GOOD and login WAS SUCCESSFUL.
       if (this.$store.state.loginStore.isAuthenticated) {
       console.log("route to HOME")
-      this.$router.push("");
+      this.$router.push("/");
       }
     },
   },
-//   created() {
-//     if (this.isAuthenticated) {
-//       this.$router.push("home");
-//     }
-//   },
+  created() {
+    console.log("heyheyheyheyheyh")
+    // if (this.isAuthenticated) {
+    //   this.$router.push("home");
+    // }
+  },
 };
 </script>
 

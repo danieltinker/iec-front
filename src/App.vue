@@ -63,9 +63,13 @@ export default {
                     });
 
       }
+      else{
+        this.$router.push("/login");
+        this.renderApp = true
+      }
       if(!this.$store.state.loginStore.isAuthenticated){
         console.log("reroute FROM APP to ADFS_MOBILE")
-        window.location.href = "https://shavit-t.net.iec.co.il/adfs_mobile";
+        // window.location.href = "https://shavit-t.net.iec.co.il/adfs_mobile";
 
         // GOT GOOD SID - will come back to / (home) and be autenticated (tru router)
         // GOT BAD SID - adfs reroute to login.
@@ -73,7 +77,7 @@ export default {
       }
       else{
           console.log("APP AUTH")
-          this.$router.push("");
+          this.$router.push("/");
       }
 
       this.$root.$on("addBookmarkSnackbar", (text,success) => {
