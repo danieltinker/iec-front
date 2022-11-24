@@ -1,7 +1,7 @@
 <template >
   <v-app :style="{'background-color':getCurrentTheme.app_background,'color':getCurrentTheme.app_color}">
     <!-- APP PAGE -->
-    <v-main class="app">
+    <v-main class="app" v-if="renderApp">
       <router-view/>
     </v-main>
   </v-app>
@@ -23,7 +23,9 @@ export default {
       snackbar:false,
       success:false,
       snackText:"",
-      valid_sid:false
+      valid_sid:false,
+      renderApp:false
+
       }),
     components: { WidgetSpace, HQNavBar, CategoryBar, UserFavorites, MaxFavoritePopup, RemoveBookmark, BookmarkSnackbar },
     mounted(){
@@ -49,12 +51,13 @@ export default {
                         this.$store.state.loginStore.userInfo.user_id =  window.localStorage.getItem("user_id") 
                         console.log("200 - test request for sid")
                         console.log("STORE MODE:", this.$store.state.loginStore)
+                        this.renderApp = true
                     })
                     .catch((error) => {
                         this.$store.state.loginStore.isAuthenticated = false
                         console.log("session ID isnt Valid, REROUTE ADFS")
                         this.$router.push("/login");
-                        window.location.href = "https://shavit-t.net.iec.co.il/adfs_mobile";
+                        // window.location.href = "https://shavit-t.net.iec.co.il/adfs_mobile";
                         console.log(error);
                     });
 
@@ -69,7 +72,7 @@ export default {
       }
       else{
           console.log("APP AUTH")
-          this.$router.push("/");
+          this.$router.push("");
       }
 
       this.$root.$on("addBookmarkSnackbar", (text,success) => {
