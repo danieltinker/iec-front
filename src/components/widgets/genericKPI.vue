@@ -56,11 +56,11 @@
                                     border : activeIndex == index ? getCurrentTheme.legend_border_color : ' solid black 0px'}"
                                 @click="kpiBoxClick(index)"
                                 >
-                                    <span :style="{color:getCurrentTheme.kpi.main_label}" class="kpi-label">
+                                    <span :style="{color:getCurrentTheme.kpi.main_label}" style=" font-family: almoni-bold" class="kpi-label">
                                         {{ item.label }}
                                     </span>
                                     <br>
-                                    <span class="kpi-value" :style="{color:getCurrentTheme.kpi.value_color}">
+                                    <span class="kpi-value" style=" font-family: almoni-medium" :style="{color:getCurrentTheme.kpi.value_color}">
                                         {{ item.value }} 
                                     </span>
                                     <br>

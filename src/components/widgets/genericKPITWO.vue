@@ -58,10 +58,11 @@
 
              <div class="grid-container" :style="{'grid-template-columns': getWidth(item)}">
   <div class="grid-item">
-    <span style="display:block;word-wrap: break-word;text-align-last: right;" :style="{color: getCurrentTheme.kpi.main_label}">{{ item.label }} </span>
+    <span style="display:block;word-wrap: break-word;text-align-last: right;font-family: almoni-bold" :style="{color: getCurrentTheme.kpi.main_label}">{{ item.label }} </span>
   </div>
   <div class="grid-item">
-    <span style="display:block;word-wrap: break-word;text-align-last: right;" :style="{color: getCurrentTheme.kpi.value_color}"> {{ item.value }}   </span>
+    <strong v-if="typeof item.value == 'string' && item.value.split('*-*')[0] == 'dot'" class="dot" :style="'background-color:' + item.value.split('*-*')[1]"></strong>
+    <span v-else style="display:block;word-wrap: break-word;text-align-last: right;font-family: almoni-medium" :style="{color: getCurrentTheme.kpi.value_color}"> {{ item.value }}   </span>
   </div>
   <div class="grid-item">
     <span style="display:block;word-wrap: break-word;text-align-last: right;" :style="{color: getCurrentTheme.kpi.kpi_sec_value}">    {{item.secondary_value}} </span></div>  

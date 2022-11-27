@@ -19,7 +19,7 @@
       >
         <span
           :style="
-            'font-family: almoni; display: flex; text-align: right; color: ' +
+            'font-size:18px;font-family: almoni; display: flex; text-align: right; color: ' +
             getCurrentTheme.hq_navbar.toolbar_title
           "
           dir="rtl"
@@ -27,7 +27,7 @@
         >
         <span
           :style="
-            'font-family: almoni; display: flex; text-align: right; color: ' +
+            'font-size:18px;font-family: almoni; display: flex; text-align: right; color: ' +
             getCurrentTheme.hq_navbar.toolbar_title
           "
           dir="rtl"
@@ -37,7 +37,7 @@
         <v-list nav dense>
           <v-list-item-group v-model="group">
             <v-list-item v-for="item in hqs" :key="item.HQ_ID" @click="setHQ(item)">
-              <v-list-item-title :style="{color:getCurrentTheme.global_theme_color}" style="font-size: 18px; font-family: almoni">{{item.LABEL}}</v-list-item-title>
+              <v-list-item-title :style="{color:getCurrentTheme.global_theme_color}" style="font-size: 18px; font-family: almoni-medium">{{item.LABEL}}</v-list-item-title>
             </v-list-item>
           </v-list-item-group>
         </v-list>
