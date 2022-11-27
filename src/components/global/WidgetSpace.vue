@@ -101,7 +101,7 @@ export default {
     // user selected devision
     "$store.state.selected_hq_id": {
       async handler() {
-        this.$store.state.selected_cat_id=1
+        //this.$store.state.selected_cat_id=1
         this.doneFetching=false
         await axios
             .get(this.$store.state.serverAdrr+"/shavit-mobile/views/" + this.$store.state.selected_hq_id + "/" + this.$store.state.selected_cat_id, { params: { sid: this.$store.state.currUser.sessionId } })
@@ -122,10 +122,32 @@ export default {
     "$store.state.selected_cat_id": {
       // fetch the widgets views from the DB
       async handler() {
-        this.$store.state.selected_cat_id=1
+        //this.$store.state.selected_cat_id=1
         this.doneFetching=false
         await axios
             .get(this.$store.state.serverAdrr+"/shavit-mobile/views/" + this.$store.state.selected_hq_id + "/" + this.$store.state.selected_cat_id, { params: { sid: this.$store.state.currUser.sessionId } })
+            .then((response) => {
+              this.responseData = response.data;
+              this.doneFetching = true;
+              this.errorMsg = ""
+            })
+            .catch((error) => {
+              this.errorMsg = "תצוגת דף לא זמינה"
+              console.log(error);
+            });
+
+ 
+      },
+    },
+
+    //user selected category
+    "$store.state.selected_sub_cat_id": {
+      // fetch the widgets views from the DB
+      async handler() {
+        //this.$store.state.selected_cat_id=1
+        this.doneFetching=false
+        await axios
+            .get(this.$store.state.serverAdrr+"/shavit-mobile/views/" + this.$store.state.selected_sub_cat_id + "/" + this.$store.state.selected_sub_cat_id, { params: { sid: this.$store.state.currUser.sessionId } })
             .then((response) => {
               this.responseData = response.data;
               this.doneFetching = true;

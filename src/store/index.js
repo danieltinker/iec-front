@@ -5,6 +5,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    selected_sub_cat_id:1,
     removeBookmarkDialog:false,
     fetching: false,
     selected_hq_id:600,

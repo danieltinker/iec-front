@@ -8,6 +8,7 @@
       <UserFavorites/>
       <!-- CATEGORIES BAR HORIZONTAL SCROLL -->
       <CategoryBar/>
+      <SubCategory style="margin-top:8px" v-if="$store.state.selected_hq_id == 400 && $store.state.selected_cat_id == 1 " :selected_hq="$store.state.selected_hq_id"/>
       <!-- WIDGETS SPACE (CLOCKS) VERTICAL SCROLL  -->
       <WidgetSpace :class="{removeDisplay: this.$store.state.quick_view}" />
       <!-- {{$store.state.selected_view_param}} -->
@@ -32,6 +33,7 @@ import MaxFavoritePopup from './components/global/maxFavoritePopup.vue';
 import RemoveBookmark from './components/global/removeBookmark.vue';
 import BookmarkSnackbar from './components/global/bookmarkSnackbar.vue';
 import axios from 'axios';
+import SubCategory from './components/global/subCategory.vue';
 export default {
     name: "App",
     data: () => ({
@@ -40,36 +42,37 @@ export default {
       snackText:"",
       valid_sid:false
       }),
-    components: { WidgetSpace, HQNavBar, CategoryBar, UserFavorites, MaxFavoritePopup, RemoveBookmark, BookmarkSnackbar },
+    components: { WidgetSpace, HQNavBar, CategoryBar, UserFavorites, MaxFavoritePopup, RemoveBookmark, BookmarkSnackbar, SubCategory },
     mounted(){
       this.$store.state.selected_hq_id = 100
       this.$store.state.selected_cat_id = 101      
     },
     async created() {
       this.updatelist()
-      console.log(this.$store.state.isAuthenticated,"my is Auth")
-      if(!this.$store.state.isAuthenticated){
-        console.log("reroute to ADFS_MOBILE")
-        window.location.href = "https://shavit-t.net.iec.co.il/adfs_mobile";
-          // reroute to adfs_mobile
-      }
-      else{
-        await axios
-          .get(this.$store.state.serverAdrr+"/shavit-mobile/hq", 
-          {params: { sid: this.$store.state.currUser.sessionId }}
-          )
-          .then(response => {
-            this.valid_sid = true
+      this.valid_sid = true
+      // console.log(this.$store.state.isAuthenticated,"my is Auth")
+      // if(!this.$store.state.isAuthenticated){
+      //   console.log("reroute to ADFS_MOBILE")
+      //   window.location.href = "https://shavit-t.net.iec.co.il/adfs_mobile";
+      //     // reroute to adfs_mobile
+      // }
+      // else{
+      //   await axios
+      //     .get(this.$store.state.serverAdrr+"/shavit-mobile/hq", 
+      //     {params: { sid: this.$store.state.currUser.sessionId }}
+      //     )
+      //     .then(response => {
+      //       this.valid_sid = true
 
-            console.log("400 - test request for sid ")
-            console.log(window.localStorage.getItem("user_id"), " local storage user id")
-            console.log(this.$store.state.currUser.user_id, " store user id")
-          })
-          .catch((error) => {
-            console.log("session ID isnt Valid")
-            console.log(error);
-          });
-      }
+      //       console.log("400 - test request for sid ")
+      //       console.log(window.localStorage.getItem("user_id"), " local storage user id")
+      //       console.log(this.$store.state.currUser.user_id, " store user id")
+      //     })
+      //     .catch((error) => {
+      //       console.log("session ID isnt Valid")
+      //       console.log(error);
+      //     });
+      // }
 
 
 /////////////
