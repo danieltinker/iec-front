@@ -59,14 +59,18 @@ export default {
                         this.$store.state.loginStore.isAuthenticated = false
                         console.log("session ID isnt Valid, REROUTE ADFS remove this sid from localstroage")
                         localStorage.removeItem("sessionid")
-                        this.$router.push("/login");
-                        // window.location.href = "https://shavit-t.net.iec.co.il/adfs_mobile";
+                        if(this.$store.state.isAzureEnv){
+                          this.$router.push("/mobile_login");
+                        }
+                        else{
+                          window.location.href = "https://shavit-t.net.iec.co.il/adfs_mobile";
+                        }
                         console.log(error);
                     });
 
       }
       else{
-        this.$router.push("/login");
+        this.$router.push("/mobile_login");
         this.renderApp = true
       }
       if(!this.$store.state.loginStore.isAuthenticated){
