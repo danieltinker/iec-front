@@ -39,21 +39,7 @@ export default {
       console.log(this.$router.currentRoute.path,"current path")
       console.log(this.$router.currentRoute.path.includes("mobile_login"),"current path includes mobile_login")
       
-      if(!this.$store.state.loginStore.isAuthenticated){
-        console.log("reroute FROM APP to ADFS_MOBILE")
-        if(!this.$store.state.isAzureEnv){
-          window.location.href = "https://shavit-t.net.iec.co.il/adfs_mobile";
-        }
-        else{
-          this.$router.push("/mobile_login");
-        }
-      }
-      else{
-          console.log("APP AUTH")
-          this.$router.push("/");
-      }
-
-
+     
       if(localStorage.getItem('sessionid') !== null){
             console.log("check if sid in storage is good /hq")
             await axios
@@ -93,6 +79,22 @@ export default {
         }
         this.renderApp = true
       }
+
+      if(!this.$store.state.loginStore.isAuthenticated){
+        console.log("reroute FROM APP to ADFS_MOBILE")
+        if(!this.$store.state.isAzureEnv){
+          window.location.href = "https://shavit-t.net.iec.co.il/adfs_mobile";
+        }
+        else{
+          this.$router.push("/mobile_login");
+        }
+      }
+      else{
+          console.log("APP AUTH")
+          this.$router.push("/");
+      }
+
+
 
       this.$root.$on("addBookmarkSnackbar", (text,success) => {
         this.snackbar = false;
