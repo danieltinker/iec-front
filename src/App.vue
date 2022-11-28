@@ -35,12 +35,27 @@ export default {
     async created() {
       console.log("APP CREATED")
       this.updatelist()
-  
       // console.log(this.$store.state.isAuthenticated,"my is Auth")
-      if(localStorage.getItem('sessionid') !== null){
-            // check if its a valid sid.
-            console.log("check if sid in storage is good /hq")
+      console.log(this.$router.currentRoute.path,"current path")
+      console.log(this.$router.currentRoute.path.includes("mobile_login"),"current path includes mobile_login")
+      
+      if(!this.$store.state.loginStore.isAuthenticated){
+        console.log("reroute FROM APP to ADFS_MOBILE")
+        if(!this.$store.state.isAzureEnv){
+          window.location.href = "https://shavit-t.net.iec.co.il/adfs_mobile";
+        }
+        else{
+          this.$router.push("/mobile_login");
+        }
+      }
+      else{
+          console.log("APP AUTH")
+          this.$router.push("/");
+      }
 
+
+      if(localStorage.getItem('sessionid') !== null){
+            console.log("check if sid in storage is good /hq")
             await axios
                     .get(this.$store.state.serverAdrr+"/shavit-mobile/hq", 
                     {params: {user_id:window.localStorage.getItem("user_id"), sid: localStorage.getItem('sessionid')}}
@@ -51,8 +66,7 @@ export default {
                         this.$store.state.loginStore.userInfo.user_id =  window.localStorage.getItem("user_id") 
                         this.$store.state.loginStore.userInfo.main_hq =  window.localStorage.getItem("main_hq") 
                         this.$store.state.selected_hq_id = this.$store.state.loginStore.userInfo.main_hq
-                        console.log("200 - test request for sid")
-                        console.log("STORE MODE:", this.$store.state.loginStore)
+                        console.log("200 - request w sid for hq STORE MODE:", this.$store.state.loginStore)
                         this.renderApp = true
                     })
                     .catch((error) => {
@@ -63,31 +77,16 @@ export default {
                           this.$router.push("/mobile_login");
                         }
                         else{
-                          window.location.href = "/adfs_mobile";
+                          window.location.href = "https://shavit-t.net.iec.co.il/adfs_mobile";
                         }
                         console.log(error);
                     });
 
       }
       else{
-        // this.$router.push("/mobile_login");
-        window.location.href = "/adfs_mobile";
+        // window.location.href = "https://shavit-t.net.iec.co.il/adfs_mobile";
+        this.$router.push("/mobile_login");
         this.renderApp = true
-      }
-      if(!this.$store.state.loginStore.isAuthenticated){
-        console.log("reroute FROM APP to ADFS_MOBILE")
-
-        if(!this.$store.state.isAzureEnv){
-          window.location.href = "/adfs_mobile";
-        }
-
-        // GOT GOOD SID - will come back to / (home) and be autenticated (tru router)
-        // GOT BAD SID - adfs reroute to login.
-          // this.$router.push("/login");
-      }
-      else{
-          console.log("APP AUTH")
-          this.$router.push("/");
       }
 
       this.$root.$on("addBookmarkSnackbar", (text,success) => {

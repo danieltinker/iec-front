@@ -110,7 +110,7 @@ export default {
     ...mapActions({ login: "ACT_LOGIN" }),
     async processLogin() {
       console.log("log in with username:",this.userName,"and password", this.password)
-        const loginInput = { username: this.userName, password: this.password };
+      const loginInput = { username: this.userName, password: this.password };
       const loginResult = await this.login(loginInput);
       console.log("check login store", this.$store.state.loginStore.isAuthenticated)
       if (this.$store.state.loginStore.isAuthenticated) {
@@ -124,7 +124,7 @@ export default {
         else if (600 <= userHQ && userHQ <= 699) this.$store.state.selected_hq_id = 600;
         else if (800 <= userHQ && userHQ <= 899) this.$store.state.selected_hq_id = 800;
         else if (900 <= userHQ && userHQ <= 999) this.$store.state.selected_hq_id = 900;
-        else this.$router.push("/login");
+        else this.$router.push("/mobile_login");
       } else {
         console.log("LOGIN FAILED !! PLEASE TRY AGAIN")
         this.userName = ""
