@@ -11,7 +11,7 @@ export const myApi = (endPoint) => {
             "Content-Type": "application/json"
         },
         params: {
-            sid: store.state.currUser.sessionId
+            sid: store.state.loginStore.userInfo.sid
         }
         })
 }
@@ -25,7 +25,7 @@ export const myShavitApiV1 = (endPoint) => {
             "Content-Type": "application/json"
         },
         params: {
-            sid: store.state.currUser.sessionId
+            sid: store.state.loginStore.userInfo.sid
         }
         })
 }

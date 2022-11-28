@@ -11,7 +11,8 @@ export default {
   getUserFav() {
     return ShavitMobileFavReq.get(`${store.state.currUser.user_id}`, {
       params: {
-        sid: store.state.currUser.sessionId,
+        
+        sid: store.state.loginStore.userInfo.sid,
       },
     });
   },
@@ -29,7 +30,7 @@ export default {
     };
     return ShavitMobileFavReq.post("add", final_fav_setttings, {
       params: {
-        sid: store.state.currUser.sessionId,
+        sid: store.state.loginStore.userInfo.sid,
       },
     });
   },
@@ -39,7 +40,7 @@ export default {
       `${store.state.currUser.user_id}/${store.state.selected_view_id}`,
       {
         params: {
-          sid: store.state.currUser.sessionId,
+          sid: store.state.loginStore.userInfo.sid,
         },
       }
     );
