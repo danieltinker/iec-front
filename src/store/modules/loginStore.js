@@ -4,7 +4,7 @@ const state = {
     loginUrl: "/shavit/system/login",
     hqsQueryUrl: "/shavit/system/hq/query",
     isAuthenticated:false,
-    userInfo:{sid:"", user_id:"",prefTheme:"lightTheme",main_hq:"100"},
+    userInfo:{sid:"", user_id:"",prefTheme:"lightTheme",main_hq:"100",roles:[]},
     hqDict: {},
     // currUserData: JSON.parse(window.localStorage.getItem("currUserData")) || {},
 }
@@ -26,10 +26,6 @@ const actions = {
                         localStorage.setItem("sessionid",result.data.userid) 
                         localStorage.setItem("user_id",result.data.sid) 
                         console.log("200 - test request for sid USER INFO: ",rootState.loginStore.userInfo)
-
-                        // store.commit("SET_LOGGED_IN", result.data)
-                        // commit("SET_LOGGED_IN", result.data)
-
                     })
                     .catch((error) => {
                         rootState.loginStore.isAuthenticated = false

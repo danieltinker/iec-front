@@ -114,8 +114,8 @@ export default {
       const loginResult = await this.login(loginInput);
       console.log("check login store", this.$store.state.loginStore.isAuthenticated)
       if (this.$store.state.loginStore.isAuthenticated) {
-        console.log("my hq FAKE", this.$store.state.currUser.hq)
-        var userHQ = this.$store.state.currUser.hq
+        console.log("my hq ", this.$store.state.loginStore.userInfo.main_hq)
+        var userHQ = this.$store.state.loginStore.userInfo.main_hq
         if (userHQ == 100) this.$store.state.selected_hq_id = 100;
         else if (userHQ == 777) this.$store.state.selected_hq_id = 200;
         else if (200 <= userHQ && userHQ <= 299) this.$store.state.selected_hq_id = 300;
