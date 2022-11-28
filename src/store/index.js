@@ -10,7 +10,7 @@ export default new Vuex.Store({
     fetching: false,
     selected_hq_id:100,
     selected_cat_id:1,
-    appTitle:"daniel",
+    appTitle:"",
     selected_view_id: 100,
     selected_view_param: {}, //saved clicked bookmark view parameters
     custom_bookmark_data: {}, //save custom bookmark data want to save
