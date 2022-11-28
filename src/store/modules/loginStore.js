@@ -16,8 +16,7 @@ const actions = {
             console.log("fail login request", result.data.success)
         } else { 
                    await axios
-                    .get(this.state.serverAdrr+"/shavit-mobile/hq", 
-                    {params: { sid: result.data.sid}}
+                    .get(this.state.serverAdrr+"/shavit-mobile/test"
                     )
                     .then(response => {
                         rootState.loginStore.isAuthenticated = true
