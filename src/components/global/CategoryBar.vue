@@ -30,7 +30,7 @@
       await axios
             .get(this.$store.state.serverAdrr+"/shavit-mobile"+
               `/${this.$store.state.selected_hq_id}/categories`,
-              { params: { sid: this.$store.state.currUser.sessionId } }
+              { params: { sid: this.$store.state.loginStore.userInfo.sid } }
             )
             .then(response => {
               this.categories = response.data;
@@ -49,7 +49,7 @@
           await axios
             .get(this.$store.state.serverAdrr+"/shavit-mobile"+
               `/${this.$store.state.selected_hq_id}/categories`,
-              { params: { sid: this.$store.state.currUser.sessionId } }
+              { params: { sid: this.$store.state.loginStore.userInfo.sid } }
             )
             .then(response => {
               this.categories = response.data;

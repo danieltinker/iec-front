@@ -1,26 +1,29 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import FavoriteAxios from '../components/utils/FavoriteAxios'
+import loginStore from "./modules/loginStore";
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
     removeBookmarkDialog:false,
     fetching: false,
-    selected_hq_id:600,
+    selected_hq_id:100,
     selected_cat_id:1,
+    appTitle:"",
     selected_view_id: 100,
     selected_view_param: {}, //saved clicked bookmark view parameters
     custom_bookmark_data: {}, //save custom bookmark data want to save
     max_favorite_popup:false, // open favorite popup
     //serverAdrr: 'http://20.102.120.232:5080',
     serverAdrr: process.env.NODE_ENV === 'development' ? "http://20.102.120.232:8080" : "",
+    isAzureEnv: process.env.NODE_ENV === 'development' ? true : false,
     quick_view: false,
     user_favorites: [],
-    isAuthenticated: window.localStorage.getItem("sessionid") ? true : false,
+    // isAuthenticated: window.localStorage.getItem("sessionid") ? true : false,
     // make curr user init to default and set this data from the home view on created.
     // currUser: {"name":"yosef", "sessionId": window.localStorage.getItem("sessionid"),"user_id": window.localStorage.getItem("user_id")},
-    currUser: {"name":"yosef", "sessionId":"xxx","user_id": "u78lq"},
+    currUser: {"name":"yosef", "sessionId":"xxx","user_id": "u78lq","hq": 400},
     prefTheme:"lightTheme",
     themeDetails:{
       "darkTheme":{
@@ -230,5 +233,6 @@ export default new Vuex.Store({
     }
   },
   modules: {
+    loginStore,
   }
 })
