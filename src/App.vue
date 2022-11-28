@@ -49,6 +49,10 @@ export default {
                         this.$store.state.loginStore.isAuthenticated = true
                         this.$store.state.loginStore.userInfo.sid =  window.localStorage.getItem("sessionid") 
                         this.$store.state.loginStore.userInfo.user_id =  window.localStorage.getItem("user_id") 
+                        this.$store.state.loginStore.userInfo.main_hq =  window.localStorage.getItem("main_hq") 
+                        this.$store.state.loginStore.userInfo.roles =  window.localStorage.getItem("roles") 
+
+                        console.log(this.$store.state.loginStore.userInfo.roles)
                         console.log("200 - test request for sid")
                         console.log("STORE MODE:", this.$store.state.loginStore)
                         this.renderApp = true
@@ -69,7 +73,10 @@ export default {
       }
       if(!this.$store.state.loginStore.isAuthenticated){
         console.log("reroute FROM APP to ADFS_MOBILE")
-        window.location.href = "https://shavit-t.net.iec.co.il/adfs_mobile";
+
+        if(!this.$store.state.isAzureEnv){
+          window.location.href = "https://shavit-t.net.iec.co.il/adfs_mobile";
+        }
 
         // GOT GOOD SID - will come back to / (home) and be autenticated (tru router)
         // GOT BAD SID - adfs reroute to login.
