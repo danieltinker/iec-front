@@ -43,7 +43,7 @@ export default {
 
             await axios
                     .get(this.$store.state.serverAdrr+"/shavit-mobile/hq", 
-                    {params: { sid: localStorage.getItem('sessionid')}}
+                    {params: {user_id:window.localStorage.getItem("user_id"), sid: localStorage.getItem('sessionid')}}
                     )
                     .then(response => {
                         this.$store.state.loginStore.isAuthenticated = true
@@ -52,7 +52,7 @@ export default {
                         this.$store.state.loginStore.userInfo.main_hq =  window.localStorage.getItem("main_hq") 
                         this.$store.state.loginStore.userInfo.roles =  window.localStorage.getItem("roles") 
 
-                        console.log(this.$store.state.loginStore.userInfo.roles)
+                        console.log(JSON.parse(this.$store.state.loginStore.userInfo.roles))
                         console.log("200 - test request for sid")
                         console.log("STORE MODE:", this.$store.state.loginStore)
                         this.renderApp = true
