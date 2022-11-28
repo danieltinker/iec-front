@@ -50,7 +50,7 @@ export default {
                         this.$store.state.loginStore.userInfo.sid =  window.localStorage.getItem("sessionid") 
                         this.$store.state.loginStore.userInfo.user_id =  window.localStorage.getItem("user_id") 
                         this.$store.state.loginStore.userInfo.main_hq =  window.localStorage.getItem("main_hq") 
-
+                        this.$store.state.selected_hq_id = this.$store.state.loginStore.userInfo.main_hq
                         console.log("200 - test request for sid")
                         console.log("STORE MODE:", this.$store.state.loginStore)
                         this.renderApp = true
