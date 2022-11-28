@@ -9,7 +9,7 @@
                     ? 'color: #FFFFFF; background-color:' + getCurrentTheme.global_theme_color
                     : 'color: ' + getCurrentTheme.category_bar.btn_color + ';'
                 "
-          >{{ category.LABEL }}</v-btn>
+          >{{ category.CATEGORY_NAME }}</v-btn>
         </div>
       </div>
     </div>
@@ -34,8 +34,10 @@
               { params: { sid: this.$store.state.currUser.sessionId } }
             )
             .then(response => {
-                console.log(response.data,"Ddddddddddddddddddd");
-              this.categories = response.data;
+                console.log(typeof(Object.assign(response.data)),"Ddddddddddddddddddd");
+              
+              this.categories = Object.assign(response.data["*"])
+              console.log(this.categories["*"])
               //SET default category
               //this.$store.state.selected_cat_id = this.categories[0].CATEGORY_ID;
               this.active = 0
