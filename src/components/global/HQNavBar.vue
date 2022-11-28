@@ -5,7 +5,7 @@
         <v-app-bar-nav-icon :color="getCurrentTheme.hq_navbar.bar_icon" style="margin-right: -10px;" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
         <v-toolbar-title :style="'margin-right: 15px; font-family: almoni; font-size: 27px; color:' +
         getCurrentTheme.hq_navbar.toolbar_title">
-          {{title}}
+          {{getAppTitle}}
         </v-toolbar-title>
       </v-app-bar>
       <v-navigation-drawer :color="getCurrentTheme.hq_navbar.navigation_drawer" v-model="drawer" app right clipped hide-overlay dir="rtl">
@@ -101,9 +101,13 @@
     methods:{
       setHQ(item){
         this.$store.state.selected_hq_id = item.HQ_ID
-        this.title=item.LABEL
+        this.$store.state.appTitle = item.LABEL
       }
-  
+    },
+    computed:{
+      getAppTitle(){
+        return this.$store.state.appTitle
+      }
     },
     async created() {
       //set switch button true/false by theme
@@ -116,9 +120,10 @@
         )
         .then(response => {
           this.hqs = response.data;
+          console.log(response.data[0]["ROLES"],"ROLES ARRAY 1@?!@?!@?!@?!@?@?")
           response.data.forEach( obj => {
               if (obj["HQ_ID"] == this.$store.state.currUser.hq){
-                  this.title = obj["LABEL"]
+                  this.$store.state.appTitle = obj["LABEL"]
               }
           } )               
         })
@@ -131,8 +136,7 @@
       drawer: false,
       group: null,
       hqs: [],
-      //get title from HQs
-      title:""
+
     }),
   
     watch: {
