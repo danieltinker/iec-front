@@ -23,6 +23,8 @@ const actions = {
                         rootState.loginStore.isAuthenticated = true
                         rootState.loginStore.userInfo.sid = result.data.sid
                         rootState.loginStore.userInfo.user_id = result.data.userid
+
+                        // setItem main_hq and pref theme from the login route result
                         localStorage.setItem("sessionid",result.data.userid) 
                         localStorage.setItem("user_id",result.data.sid) 
                         console.log("200 - test request for sid USER INFO: ",rootState.loginStore.userInfo)
