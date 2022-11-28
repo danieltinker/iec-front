@@ -63,21 +63,22 @@ export default {
                           this.$router.push("/mobile_login");
                         }
                         else{
-                          window.location.href = "https://shavit-t.net.iec.co.il/adfs_mobile";
+                          window.location.href = "/adfs_mobile";
                         }
                         console.log(error);
                     });
 
       }
       else{
-        this.$router.push("/mobile_login");
+        // this.$router.push("/mobile_login");
+        window.location.href = "/adfs_mobile";
         this.renderApp = true
       }
       if(!this.$store.state.loginStore.isAuthenticated){
         console.log("reroute FROM APP to ADFS_MOBILE")
 
         if(!this.$store.state.isAzureEnv){
-          window.location.href = "https://shavit-t.net.iec.co.il/adfs_mobile";
+          window.location.href = "/adfs_mobile";
         }
 
         // GOT GOOD SID - will come back to / (home) and be autenticated (tru router)
