@@ -85,7 +85,12 @@ export default {
       }
       else{
         // window.location.href = "https://shavit-t.net.iec.co.il/adfs_mobile";
-        this.$router.push("/mobile_login");
+        if(!this.$store.state.isAzureEnv){
+          window.location.href = "https://shavit-t.net.iec.co.il/adfs_mobile";
+        }
+        else{
+          this.$router.push("/mobile_login");
+        }
         this.renderApp = true
       }
 

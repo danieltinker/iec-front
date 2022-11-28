@@ -52,7 +52,7 @@
         }
         else{
           console.log("route to login from HOME !")
-          this.$router.push("/login");
+          // this.$router.push("/login");
         }
         
         this.$root.$on("addBookmarkSnackbar", (text,success) => {
