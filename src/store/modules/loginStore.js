@@ -23,7 +23,10 @@ const actions = {
                         rootState.loginStore.userInfo.sid = result.data.sid
                         rootState.loginStore.userInfo.user_id = result.data.userid
                         rootState.loginStore.userInfo.main_hq = result.data.main_hq
+                        rootState.prefTheme = result.data.prefTheme
                         // setItem main_hq and pref theme from the login route result
+
+                        localStorage.setItem("prefTheme",result.data.prefTheme) 
                         localStorage.setItem("sessionid",result.data.userid) 
                         localStorage.setItem("user_id",result.data.sid) 
                         localStorage.setItem("main_hq",result.data.main_hq) 
