@@ -75,7 +75,7 @@
                 <div v-for="(btnName,index) in KPIarr" :key="index">
                 
                 <div v-if="btnName.selected" class="statusBox" :style="{'background-color' :btnName.color }">
-                  <h1 style="font-family: almoni; font-size: 28px;color:white">{{btnName.label}}</h1>
+                  <h1 style="font-family: almoni; font-size: 18px;color:white">{{btnName.label}}</h1>
                 </div>
                  <span v-if="btnName.selected" style="font-family: almoni;">{{btnName.cause}} </span>
                 </div>
