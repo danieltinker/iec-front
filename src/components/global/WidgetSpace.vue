@@ -101,7 +101,7 @@ export default {
     // user selected devision
     "$store.state.selected_hq_id": {
       async handler() {
-        this.$store.state.selected_cat_id=1
+        //this.$store.state.selected_cat_id=1
         this.doneFetching=false
         await axios
             .get(this.$store.state.serverAdrr+"/shavit-mobile/views/" + this.$store.state.selected_hq_id + "/" + this.$store.state.selected_cat_id, { params: { sid: this.$store.state.loginStore.userInfo.sid } })
@@ -122,7 +122,7 @@ export default {
     "$store.state.selected_cat_id": {
       // fetch the widgets views from the DB
       async handler() {
-        this.$store.state.selected_cat_id=1
+        //this.$store.state.selected_cat_id=1
         this.doneFetching=false
         await axios
             .get(this.$store.state.serverAdrr+"/shavit-mobile/views/" + this.$store.state.selected_hq_id + "/" + this.$store.state.selected_cat_id, { params: { sid: this.$store.state.loginStore.userInfo.sid } })
