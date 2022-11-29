@@ -144,8 +144,6 @@
         )
         .then(response => {
           this.hqs = response.data;
-
-          console.log(response.data[0]["ROLES"],"ROLES ARRAY 1@?!@?!@?!@?!@?@?")
           response.data.forEach( obj => {
               if (obj["HQ_ID"] == this.$store.state.loginStore.userInfo.main_hq){
                   this.$store.state.appTitle = obj["LABEL"]
