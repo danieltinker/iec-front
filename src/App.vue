@@ -92,7 +92,7 @@ export default {
       }
       else{
           console.log("APP AUTH")
-          this.$router.push("/");
+          this.$router.push("");
       }
 
 
