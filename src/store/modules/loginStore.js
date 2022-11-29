@@ -4,7 +4,7 @@ const state = {
     loginUrl: "/shavit/system/login",
     hqsQueryUrl: "/shavit/system/hq/query",
     isAuthenticated:false,
-    userInfo:{sid:"", user_id:"",prefTheme:"lightTheme",main_hq:"100",roles:[]},
+    userInfo:{sid:"", user_id:"",prefTheme:"lightTheme",main_hq:"100",hebrew_name:"default",hq_name:"default"},
     hqDict: {},
     // currUserData: JSON.parse(window.localStorage.getItem("currUserData")) || {},
 }
@@ -23,9 +23,13 @@ const actions = {
                         rootState.loginStore.userInfo.sid = result.data.sid
                         rootState.loginStore.userInfo.user_id = result.data.userid
                         rootState.loginStore.userInfo.main_hq = result.data.main_hq
+                        rootState.loginStore.userInfo.main_hq = result.data.hebrew_name
+                        rootState.loginStore.userInfo.main_hq = result.data.hq_name
                         rootState.prefTheme = result.data.prefTheme
                         // setItem main_hq and pref theme from the login route result
 
+                        localStorage.setItem("hebrew_name",result.data.hebrew_name) 
+                        localStorage.setItem("hq_name",result.data.hq_name) 
                         localStorage.setItem("prefTheme",result.data.prefTheme) 
                         localStorage.setItem("sessionid",result.data.userid) 
                         localStorage.setItem("user_id",result.data.sid) 

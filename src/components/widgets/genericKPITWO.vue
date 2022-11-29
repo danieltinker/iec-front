@@ -28,7 +28,6 @@
                     }}</v-icon>
                 </span>
                  
-             
                 <v-carousel
                   hide-delimiters
                   :show-arrows="showArrows"
@@ -51,46 +50,26 @@
                                 class="kpi-box" 
                                 v-for="(item,index) in KPIarr" :key="index"
                                 :style="{backgroundColor: isDrillDown? getCurrentTheme.kpi.drill_background :getCurrentTheme.kpi.main_background, 
-                                    border: activeIndex==index ? getCurrentTheme.legend_border_color : ' solid black 0px'}"
+                                border: activeIndex==index ? getCurrentTheme.legend_border_color : ' solid black 0px'}"
                                 @click="kpiBoxClick(index)"
                                 >
 
-
-             <div class="grid-container" :style="{'grid-template-columns': getWidth(item)}">
-  <div class="grid-item">
-    <span style="display:block;word-wrap: break-word;text-align-last: right;font-family: almoni-bold" :style="{color: getCurrentTheme.kpi.main_label}">{{ item.label }} </span>
-  </div>
-  <div class="grid-item">
-    <strong v-if="typeof item.value == 'string' && item.value.split('*-*')[0] == 'dot'" class="dot" :style="'background-color:' + item.value.split('*-*')[1]"></strong>
-    <span v-else style="display:block;word-wrap: break-word;text-align-last: right;font-family: almoni-medium" :style="{color: getCurrentTheme.kpi.value_color}"> {{ item.value }}   </span>
-  </div>
-  <div class="grid-item">
-    <span style="display:block;word-wrap: break-word;text-align-last: right;" :style="{color: getCurrentTheme.kpi.kpi_sec_value}">    {{item.secondary_value}} </span></div>  
-</div>                  
-        <!-- <div :style="{width:getWidth(item),color:getCurrentTheme.kpi.main_label}"  style="width:1010px;word-wrap: break-word;padding-right:6%;text-align: -webkit-right;" class="kpi-label">
-                                        <span style="display:block" :style="{color: getCurrentTheme.kpi.main_label}">{{ item.label }} </span>
-                                    
-        </div> -->
-        <!-- <div :style="{width:getWidth(item)}" style="word-wrap: break-word;padding-left:2%;padding-right:2%" class="kpi-label">
-            <span style="display:block" :style="{color: getCurrentTheme.kpi.value_color}"> {{ item.value }}   </span>
-                                 
-        </div> -->
-        <!-- <v-col v-if="item.secondary_value" :style="{width:getWidth(item)}" style="word-wrap: break-word;padding-left:2%" class="kpi-label">
-           
-            <span style="display:block" :style="{color: getCurrentTheme.kpi.kpi_sec_value}">    {{item.secondary_value}} </span>
-                                   
-
-        </v-col> -->
-    
-                
-                                    
-                                  
-                                    
+                    <div class="grid-container" :style="{'grid-template-columns': getWidth(item)}">
+                                <div class="grid-item">
+                                    <span style="display:block;word-wrap: break-word;text-align-last: right;font-family: almoni-bold" :style="{color: getCurrentTheme.kpi.main_label}">{{ item.label }} </span>
+                                </div>
+                                <div class="grid-item">
+                                    <strong v-if="typeof item.value == 'string' && item.value.split('*-*')[0] == 'dot'" class="dot" :style="'background-color:' + item.value.split('*-*')[1]"></strong>
+                                    <span v-else style="display:block;word-wrap: break-word;text-align-last: right;font-family: almoni-medium" :style="{color: getCurrentTheme.kpi.value_color}"> {{ item.value }}   </span>
+                                </div>
+                                <div class="grid-item">
+                                    <span style="display:block;word-wrap: break-word;text-align-last: right;" :style="{color: getCurrentTheme.kpi.kpi_sec_value}">    {{item.secondary_value}} </span></div>  
+                                </div>                  
                                 </div>
                         </div>
                     </v-carousel-item>
                 </v-carousel>
-            </div>
+</div>
         </div>  
         <div class="clock-drilldown"
          v-if="params.expand && !isDrillDown && params.drill_down_params"
