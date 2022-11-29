@@ -11,5 +11,5 @@ module.exports = defineConfig({
     'vuetify'
   ],
 
-  publicPath:"/mobile"
+  publicPath:"/mobile/"
 })
