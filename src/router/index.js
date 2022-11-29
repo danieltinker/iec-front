@@ -10,8 +10,8 @@ const routes = [
     component: () => import('../views/Home.vue')
   },
   {
-    path: '/',
-    name: 'Home-slash',
+    path: '*',
+    name: 'HomeHome',
     component: () => import('../views/Home.vue')
   },
   {
