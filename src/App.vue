@@ -34,12 +34,12 @@ export default {
     },
     async created() {
       console.log("APP CREATED")
-      this.updatelist()
-      // console.log(this.$store.state.isAuthenticated,"my is Auth")
       console.log(this.$router.currentRoute.path,"current path")
       console.log(this.$router.currentRoute.path.includes("mobile_login"),"current path includes mobile_login")
       
-     
+      //this command should happend inside HOME PAGE !
+      this.updatelist()
+
       if(localStorage.getItem('sessionid') !== null){
             console.log("check if sid in storage is good /hq")
             await axios
