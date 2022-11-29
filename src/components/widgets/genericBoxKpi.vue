@@ -82,7 +82,7 @@
 
                 <div class="btn-container">
 
-                <v-row v-if="params.show_label" dir="rtl" style="place-content:right;display: inline-flex;padding-right: 4%;">
+                <v-row v-if="params.show_label" dir="rtl" style="place-content:center;display: inline-flex;padding-right: 4%;">
                 <div
                  v-for="(btnName,index) in KPIarr" :key="index" class="labels">
                     <span
