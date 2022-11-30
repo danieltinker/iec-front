@@ -171,9 +171,9 @@
         this.theme ? this.$store.state.prefTheme = "darkTheme" : this.$store.state.prefTheme = "lightTheme"
         let currentTheme = this.theme ? "darkTheme" : "lightTheme"
         if(this.theme){
-          console.log("dark");
+          console.log("App Theme Mode: Dark");
         } else {
-          console.log("light");
+          console.log("App Theme Mode: Light");
         }
 
         // update DB user theme
