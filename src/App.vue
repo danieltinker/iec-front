@@ -51,7 +51,12 @@ export default {
                         this.$store.state.selected_hq_id = this.$store.state.loginStore.userInfo.main_hq
                         console.log("200 - request w sid for hq LoginStore:", this.$store.state.loginStore)
                         console.log("APP AUTHENTICATE rerouting APP -> HomePage")
-                        this.$router.push("/");
+                        if(this.$router.currentRoute.path=="/"){
+                          console.log("already in / no need route")
+                        }
+                        else{
+                          this.$router.push("/");
+                        }
                     })
                     .catch((error) => {
                         console.log(error);

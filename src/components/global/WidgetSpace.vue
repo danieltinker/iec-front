@@ -158,7 +158,7 @@ export default {
       });
 
 
-    console.log("setting interval for views")
+    console.log("setInterval /views")
     this.fetch_interval = setInterval(async ()=>{
           console.log("Refreshing Page")
           this.doneFetching=false
