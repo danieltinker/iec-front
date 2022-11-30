@@ -4,7 +4,7 @@ const state = {
     loginUrl: "/shavit/system/login",
     hqsQueryUrl: "/shavit/system/hq/query",
     isAuthenticated:false,
-    userInfo:{sid:"", user_id:"",prefTheme:"lightTheme",main_hq:"100",hebrew_name:"default",hq_name:"default"},
+    userInfo:{sid:"", user_id:"",prefTheme:"lightTheme",main_hq:"100",hebrew_name:"",hq_name:""},
     hqDict: {},
     // currUserData: JSON.parse(window.localStorage.getItem("currUserData")) || {},
 }
@@ -14,34 +14,36 @@ const actions = {
         const result = await axios.post(this.state.serverAdrr+"/shavit-mobile/login", input)
         if (!result.status) {
             console.log("fail login request", result.data.success)
-        } else { 
-                   await axios
-                    .get(this.state.serverAdrr+"/shavit-mobile/test"
-                    )
-                    .then(response => {
-                        rootState.loginStore.isAuthenticated = true
-                        rootState.loginStore.userInfo.sid = result.data.sid
-                        rootState.loginStore.userInfo.user_id = result.data.userid
-                        rootState.loginStore.userInfo.main_hq = result.data.main_hq
-                        rootState.loginStore.userInfo.main_hq = result.data.hebrew_name
-                        rootState.loginStore.userInfo.main_hq = result.data.hq_name
-                        rootState.prefTheme = result.data.prefTheme
-                        // setItem main_hq and pref theme from the login route result
+        } 
+        else { 
+            await axios
+            .get(this.state.serverAdrr+"/shavit-mobile/test"
+            )
+            .then(response => {
+                console.log("Login store: setting local storage, isAuthenticated & userInfo")
+                localStorage.setItem("hebrew_name",result.data.hebrew_name) 
+                localStorage.setItem("hq_name",result.data.hq_name) 
+                localStorage.setItem("prefTheme",result.data.prefTheme) 
+                localStorage.setItem("sessionid",result.data.userid) 
+                localStorage.setItem("user_id",result.data.sid) 
+                localStorage.setItem("main_hq",result.data.main_hq) 
 
-                        localStorage.setItem("hebrew_name",result.data.hebrew_name) 
-                        localStorage.setItem("hq_name",result.data.hq_name) 
-                        localStorage.setItem("prefTheme",result.data.prefTheme) 
-                        localStorage.setItem("sessionid",result.data.userid) 
-                        localStorage.setItem("user_id",result.data.sid) 
-                        localStorage.setItem("main_hq",result.data.main_hq) 
-                        console.log("200 - test request for sid USER INFO: ",rootState.loginStore.userInfo)
-                        // this.$router.push("");
-                    })
-                    .catch((error) => {
-                        rootState.loginStore.isAuthenticated = false
-                        console.log("session ID isnt Valid")
-                        console.log(error);
-                    });
+
+                rootState.loginStore.userInfo.sid = result.data.sid
+                rootState.loginStore.userInfo.user_id = result.data.userid
+                rootState.loginStore.userInfo.main_hq = result.data.main_hq
+                rootState.loginStore.userInfo.hebrew_name = result.data.hebrew_name
+                rootState.loginStore.userInfo.hq_name = result.data.hq_name
+                rootState.prefTheme = result.data.prefTheme
+                console.log("200 - SUCCESSFUL LOGIN + HQ requests loginStore.UserInfo: ",rootState.loginStore.userInfo)
+                rootState.loginStore.isAuthenticated = true
+                // this.$router.push("");
+            })
+            .catch((error) => {
+                rootState.loginStore.isAuthenticated = false
+                console.log("session ID isnt Valid")
+                console.log(error);
+            });
 
         }
 

@@ -101,6 +101,12 @@ export default {
       validForm: true,
     };
   },
+  created(){
+    console.log(this.$router.currentRoute.path,"current path")
+    if(this.$router.currentRoute.path.includes("login")){
+      console.log("true")
+    }
+  },
   computed: {
     ...mapState({
       isAuthenticated: (state) => state.loginStore.isAuthenticated,
@@ -112,7 +118,6 @@ export default {
       console.log("log in with username:",this.userName,"and password", this.password)
       const loginInput = { username: this.userName, password: this.password };
       const loginResult = await this.login(loginInput);
-      console.log("check login store", this.$store.state.loginStore.isAuthenticated)
       if (this.$store.state.loginStore.isAuthenticated) {
         console.log("my hq ", this.$store.state.loginStore.userInfo.main_hq)
         var userHQ = this.$store.state.loginStore.userInfo.main_hq
@@ -133,7 +138,7 @@ export default {
       // REACH ONLY IF THE userHQ IS GOOD and login WAS SUCCESSFUL.
       if (this.$store.state.loginStore.isAuthenticated) {
       console.log("route to HOME")
-      this.$router.push("");
+      this.$router.push("/");
       }
     },
   }

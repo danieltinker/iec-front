@@ -45,8 +45,8 @@
       },
       async created() {
         this.updatelist()
-        console.log("WELCOME TO HOME PAGE",this.$store.state.loginStore.userInfo.user_id)
-        console.log("WELCOME TO HOME PAGE",this.$store.state.loginStore.userInfo.sid)
+        console.log("WELCOME TO HOME PAGE")
+        console.log("User Info: ",this.$store.state.loginStore.userInfo)
         if(this.$store.state.loginStore.isAuthenticated){
               this.valid_sid = true
         }

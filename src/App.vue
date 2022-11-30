@@ -34,14 +34,11 @@ export default {
     },
     async created() {
       console.log("APP CREATED")
-      console.log(this.$router.currentRoute.path,"current path")
-      console.log(this.$router.currentRoute.path.includes("mobile_login"),"current path includes mobile_login")
-      
-      //this command should happend inside HOME PAGE !
-      this.updatelist()
+      // console.log(this.$router.currentRoute.path,"current path")
+      // console.log(this.$router.currentRoute.path.includes("mobile_login"),"current path includes mobile_login")
 
-      if(localStorage.getItem('sessionid') !== null){
-            console.log("check if sid in storage is good /hq")
+      if(localStorage.getItem('sessionid') !== null && localStorage.getItem('user_id') !== null){
+            console.log("validating SID /hq")
             await axios
                     .get(this.$store.state.serverAdrr+"/shavit-mobile/hq", 
                     {params: {user_id:window.localStorage.getItem("user_id"), sid: localStorage.getItem('sessionid')}}
@@ -52,37 +49,28 @@ export default {
                         this.$store.state.loginStore.userInfo.user_id =  window.localStorage.getItem("user_id") 
                         this.$store.state.loginStore.userInfo.main_hq =  window.localStorage.getItem("main_hq")
                         this.$store.state.prefTheme = window.localStorage.getItem("prefTheme") 
+                        this.$store.state.hebrew_name = window.localStorage.getItem("hebrew_name") 
+                        this.$store.state.hq_name = window.localStorage.getItem("hq_name") 
                         this.$store.state.selected_hq_id = this.$store.state.loginStore.userInfo.main_hq
-                        console.log("200 - request w sid for hq STORE MODE:", this.$store.state.loginStore)
-                        this.renderApp = true
+                        console.log("200 - request w sid for hq LoginStore:", this.$store.state.loginStore)
+                        console.log("APP AUTHENTICATE rerouting APP -> HomePage")
+                        this.$router.push("/");
                     })
                     .catch((error) => {
+                        console.log(error);
+                        console.log("test request Failed, REROUTE to ADFS/mobile_login")
                         this.$store.state.loginStore.isAuthenticated = false
-                        console.log("session ID isnt Valid, REROUTE ADFS remove this sid from localstroage")
-                        localStorage.removeItem("sessionid")
                         if(this.$store.state.isAzureEnv){
                           this.$router.push("/mobile_login");
                         }
                         else{
                           window.location.href = "https://shavit-t.net.iec.co.il/adfs_mobile";
                         }
-                        console.log(error);
                     });
 
       }
-      else{
-        // window.location.href = "https://shavit-t.net.iec.co.il/adfs_mobile";
-        if(!this.$store.state.isAzureEnv){
-          window.location.href = "https://shavit-t.net.iec.co.il/adfs_mobile";
-        }
-        else{
-          this.$router.push("/mobile_login");
-        }
-        this.renderApp = true
-      }
-
       if(!this.$store.state.loginStore.isAuthenticated){
-        console.log("reroute FROM APP to ADFS_MOBILE")
+        console.log("No Autentication rerouting APP --> ADFS_MOBILE/login page")
         if(!this.$store.state.isAzureEnv){
           window.location.href = "https://shavit-t.net.iec.co.il/adfs_mobile";
         }
@@ -90,12 +78,8 @@ export default {
           this.$router.push("/mobile_login");
         }
       }
-      else{
-          console.log("APP AUTH")
-          this.$router.push("");
-      }
 
-
+      this.renderApp = true
 
       this.$root.$on("addBookmarkSnackbar", (text,success) => {
         this.snackbar = false;
@@ -106,21 +90,13 @@ export default {
             this.snackbar = false;
           }, 3000);
       });
-    },
-    watch: {
-    },
-    methods: {
-      ...mapActions(["SET_FAV_LIST"]),
-      updatelist ()
-      {
-        //Get all user favorite list
-        this.SET_FAV_LIST()
-      }
+
+
     },
     computed:{
       getCurrentTheme(){
         return this.$store.getters.currentTheme
-    }
+      }
     }
 };
 </script>
