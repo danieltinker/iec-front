@@ -29,14 +29,11 @@ export default {
       }),
     components: { WidgetSpace, HQNavBar, CategoryBar, UserFavorites, MaxFavoritePopup, RemoveBookmark, BookmarkSnackbar },
     mounted(){
-      console.log("APP MOUNTED")
+      // console.log("APP MOUNTED")
       // this.$store.state.selected_hq_id = 100
     },
     async created() {
       console.log("APP CREATED")
-      // console.log(this.$router.currentRoute.path,"current path")
-      // console.log(this.$router.currentRoute.path.includes("mobile_login"),"current path includes mobile_login")
-
       if(localStorage.getItem('sessionid') !== null && localStorage.getItem('user_id') !== null){
             console.log("validating SID /hq")
             await axios
@@ -69,8 +66,8 @@ export default {
                     });
 
       }
-      if(!this.$store.state.loginStore.isAuthenticated){
-        console.log("No Autentication rerouting APP --> ADFS_MOBILE/login page")
+      else{
+        console.log("No local storage go fetch rerouting APP --> ADFS_MOBILE/login page")
         if(!this.$store.state.isAzureEnv){
           window.location.href = "https://shavit-t.net.iec.co.il/adfs_mobile";
         }

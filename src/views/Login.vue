@@ -102,9 +102,9 @@ export default {
     };
   },
   created(){
-    console.log(this.$router.currentRoute.path,"current path")
+    console.log("CURRENT ROUTE PATH:",this.$router.currentRoute.path)
     if(this.$router.currentRoute.path.includes("login")){
-      console.log("true")
+      console.log("Hold in login page")
     }
   },
   computed: {

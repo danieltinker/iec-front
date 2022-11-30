@@ -35,9 +35,10 @@ const actions = {
                 rootState.loginStore.userInfo.hebrew_name = result.data.hebrew_name
                 rootState.loginStore.userInfo.hq_name = result.data.hq_name
                 rootState.prefTheme = result.data.prefTheme
-                console.log("200 - SUCCESSFUL LOGIN + HQ requests loginStore.UserInfo: ",rootState.loginStore.userInfo)
                 rootState.loginStore.isAuthenticated = true
-                // this.$router.push("");
+                this.$router.push("/");
+                
+                console.log("200 - SUCCESSFUL LOGIN + HQ requests loginStore.UserInfo: ",rootState.loginStore.userInfo)
             })
             .catch((error) => {
                 rootState.loginStore.isAuthenticated = false
