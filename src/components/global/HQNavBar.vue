@@ -144,8 +144,6 @@
         )
         .then(response => {
           this.hqs = response.data;
-
-          console.log(response.data[0]["ROLES"],"ROLES ARRAY 1@?!@?!@?!@?!@?@?")
           response.data.forEach( obj => {
               if (obj["HQ_ID"] == this.$store.state.loginStore.userInfo.main_hq){
                   this.$store.state.appTitle = obj["LABEL"]
@@ -173,9 +171,9 @@
         this.theme ? this.$store.state.prefTheme = "darkTheme" : this.$store.state.prefTheme = "lightTheme"
         let currentTheme = this.theme ? "darkTheme" : "lightTheme"
         if(this.theme){
-          console.log("dark");
+          console.log("App Theme Mode: Dark");
         } else {
-          console.log("light");
+          console.log("App Theme Mode: Light");
         }
 
         // update DB user theme
@@ -186,8 +184,6 @@
                     .catch(error => {
                         console.log(error,"user theme update failed");
                     });
-        
-
       }
     }
   };

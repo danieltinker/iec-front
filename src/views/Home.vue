@@ -39,20 +39,16 @@
         valid_sid:false
         }),
       components: { WidgetSpace, HQNavBar, CategoryBar, UserFavorites, MaxFavoritePopup, RemoveBookmark, BookmarkSnackbar },
-      mounted(){
-        // this.$store.state.selected_hq_id = 100
-        // this.$store.state.selected_cat_id = 101      
-      },
       async created() {
-        this.updatelist()
-        console.log("WELCOME TO HOME PAGE",this.$store.state.loginStore.userInfo.user_id)
-        console.log("WELCOME TO HOME PAGE",this.$store.state.loginStore.userInfo.sid)
+        console.log("WELCOME TO HOME PAGE")
         if(this.$store.state.loginStore.isAuthenticated){
-              this.valid_sid = true
+            console.log("User Info: ",this.$store.state.loginStore.userInfo)
+            this.updatelist()
+            this.valid_sid = true
         }
         else{
-          console.log("route to login from HOME !")
-          // this.$router.push("/login");
+            console.log("route to login from HOME !")
+            // this.$router.push("/login");
         }
         
         this.$root.$on("addBookmarkSnackbar", (text,success) => {
