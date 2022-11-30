@@ -184,8 +184,6 @@
                     .catch(error => {
                         console.log(error,"user theme update failed");
                     });
-        
-
       }
     }
   };
