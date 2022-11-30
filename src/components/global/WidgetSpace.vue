@@ -10,7 +10,7 @@
           </div>
         </div>
         <h1 :style="'color:' + getCurrentTheme.headline.title_color" class="headline-title grid-item" v-if="widget.PARAMETERS.headline_config">
-          {{ widget.PARAMETERS.headline_config.title }} 
+          {{ widget.PARAMETERS.headline_config.title }} {{widget.VIEW_ID}}
         </h1>
         <div class="grid-item">
           <div style="width:40px">
