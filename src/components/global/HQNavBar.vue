@@ -6,7 +6,6 @@
         <v-toolbar-title :style="'margin-right: 15px; font-family: almoni; font-size: 27px; color:' +
         getCurrentTheme.hq_navbar.toolbar_title">
           {{getAppTitle}}
-          {{$store.state.loginStore.userInfo.hebrew_name}}
         </v-toolbar-title>
       </v-app-bar>
       <v-navigation-drawer :color="getCurrentTheme.hq_navbar.navigation_drawer" v-model="drawer" app right clipped hide-overlay dir="rtl">
