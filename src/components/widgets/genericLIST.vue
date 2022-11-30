@@ -113,6 +113,13 @@
 
                               <!-- end -->
                         </div>
+
+                        <div class="updateDate">
+        <p v-if="botton_text">
+          <strong>נכון לתאריך:</strong>
+          {{botton_text}}
+        </p>
+      </div>
                     </v-carousel-item>
                 </v-carousel>
             </div>
@@ -169,6 +176,7 @@ export default {
             return{
                 cardData:'',
                 colortest: "green",
+                botton_text:null,
                 headers: undefined,
                 totalGet: undefined,
 
@@ -243,6 +251,11 @@ export default {
         if(!this.isDrillDown){
             await this.$myApi(this.params.data_url)
                 .then(response => {
+                    if(response.data.hasOwnProperty('tools')){
+                        if(response.data["tools"].hasOwnProperty('bottom_text'))
+                            this.botton_text = response.data["tools"]["bottom_text"]
+                    delete response.data["tools"];
+                    }
                     this.jsonData = response.data
                     //starttttttttt
             //         this.jsonData = {"*" : [[
@@ -276,6 +289,12 @@ export default {
                     this.params.static_drill_titles_param_copy = this.params.static_drill_titles_param
                     await this.$myApi(this.params.drill_down_params.data_url)
                     .then(response => {
+                        if(response.data.hasOwnProperty('tools')){
+                        if(response.data["tools"].hasOwnProperty('bottom_text'))
+                            this.botton_text = response.data["tools"]["bottom_text"]
+                        delete response.data["tools"];
+                        }
+
                         this.drilldownData = Object.assign(response.data)
                         if(this.params.data_intersection){
                             this.static_drill_data = Object.assign(response.data)
@@ -305,6 +324,11 @@ export default {
 </script>
 
 <style scoped>
+.updateDate {
+  font-family: almoni-light;
+  font-size: 16px;
+  text-align: center;
+}
 
  #mytable >>> .v-data-table-header {
       height: 24px !important;
