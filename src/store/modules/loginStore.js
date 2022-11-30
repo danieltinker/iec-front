@@ -36,7 +36,6 @@ const actions = {
                 rootState.loginStore.userInfo.hq_name = result.data.hq_name
                 rootState.prefTheme = result.data.prefTheme
                 rootState.loginStore.isAuthenticated = true
-                this.$router.push("/");
                 
                 console.log("200 - SUCCESSFUL LOGIN + HQ requests loginStore.UserInfo: ",rootState.loginStore.userInfo)
             })
