@@ -80,7 +80,7 @@ export default {
           this.$router.push("/mobile_login");
         }
       }
-
+      console.log("Render App")
       this.renderApp = true
 
       this.$root.$on("addBookmarkSnackbar", (text,success) => {
