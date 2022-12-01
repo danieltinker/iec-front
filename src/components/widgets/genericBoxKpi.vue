@@ -75,7 +75,7 @@
                 <div v-for="(btnName,index) in KPIarr" :key="index">
                 
                 <div v-if="btnName.selected" class="statusBox" :style="{'background-color' :btnName.color }">
-                  <h1 style="font-family: almoni; font-size: 18px;color:white">{{btnName.label}}</h1>
+                  <h1 style="font-family: almoni-medium; font-size: 28px;color:white">{{btnName.label}}</h1>
                 </div>
                  <span v-if="btnName.selected" style="font-family: almoni;">{{btnName.cause}} </span>
                 </div>
@@ -126,7 +126,7 @@
       <div class="loader" v-if="!isErrorMsg">
         <v-progress-circular indeterminate :style="{color:getCurrentTheme.global_theme_color}"></v-progress-circular>
       </div>
-      <h1 v-else>{{errorMSG}}</h1>
+      <h1 v-else style="font-family: almoni;font-size:20px">  {{errorMSG}} </h1>
     </div>
   </div>
 </template>
@@ -291,6 +291,15 @@ export default {
 </script>
 
 <style scoped>
+
+::v-deep .v-input--selection-controls .v-radio > .v-label {
+    color: v-bind('getCurrentTheme.drill_title_color');
+}
+
+::v-deep .v-input--radio-group.v-input--radio-group--row .v-radio{
+    margin-right: 0px !important;
+}
+
 .btn-container{
         margin-top:50px;
         margin-left:4%;
@@ -375,8 +384,8 @@ export default {
   color: #606060;
 }
 #chartsHeaders {
-  font-family: almoni;
-  font-size: 16px;
+  font-family: almoni-medium;
+  font-size: 18px;
   color: v-bind("getCurrentTheme.generic_title_color");
   /* margin-bottom: 18px; */
 }

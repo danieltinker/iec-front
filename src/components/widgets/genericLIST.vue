@@ -2,7 +2,7 @@
 <template>
     <div>
         <div v-if="doneFetching">
-        <div class="clock-main" style="text-align: center;" v-if="params.show_clock">
+        <div class="clock-main" style="text-align: center;margin-top:12px" v-if="params.show_clock">
             <div class="flex-center">
                 <v-radio-group dir="rtl" v-model="params.selected_category" row id="districtRadioGroup" v-if=" params.data_category.length >= 2">
                     <v-radio v-for="(category) in params.data_category" :key="category" :label="category" :value="category" color="#0F2558"></v-radio>
@@ -101,7 +101,7 @@
                                     </template>
 
                                     <template slot="no-data">
-                                        {{params.no_data ? params.no_data : "אין מידע"}}
+                                        {{params.no_data ? params.no_data : "אין פריטים להצגה"}}
                                     </template>
   
                              </v-data-table>
@@ -114,12 +114,10 @@
                               <!-- end -->
                         </div>
 
-                        <div class="updateDate">
-        <p v-if="botton_text">
-          <strong>נכון לתאריך:</strong>
-          {{botton_text}}
-        </p>
-      </div>
+                        
+        <div v-if="params.bottom_text" class="updateDate">
+            <p>{{params.bottom_text.substring(0,5) == '$meta' ? meta_data[params.bottom_text.substring(6)] : params.bottom_text}}</p>
+        </div>
                     </v-carousel-item>
                 </v-carousel>
             </div>
@@ -146,7 +144,7 @@
             :style="{color:getCurrentTheme.global_theme_color}"
             ></v-progress-circular>
         </div>
-        <h1 v-else>  {{errorMSG}} </h1>
+        <h1 v-else style="font-family: almoni;font-size:20px">  {{errorMSG}} </h1>
     </div>  
 
 
@@ -176,7 +174,7 @@ export default {
             return{
                 cardData:'',
                 colortest: "green",
-                botton_text:null,
+                meta_data:null,
                 headers: undefined,
                 totalGet: undefined,
 
@@ -251,10 +249,9 @@ export default {
         if(!this.isDrillDown){
             await this.$myApi(this.params.data_url)
                 .then(response => {
-                    if(response.data.hasOwnProperty('tools')){
-                        if(response.data["tools"].hasOwnProperty('bottom_text'))
-                            this.botton_text = response.data["tools"]["bottom_text"]
-                    delete response.data["tools"];
+                    if(Object.prototype.hasOwnProperty.call(response.data, 'meta')){
+                            this.meta_data = response.data["meta"]
+                    delete response.data["meta"];
                     }
                     this.jsonData = response.data
                     //starttttttttt
@@ -289,10 +286,9 @@ export default {
                     this.params.static_drill_titles_param_copy = this.params.static_drill_titles_param
                     await this.$myApi(this.params.drill_down_params.data_url)
                     .then(response => {
-                        if(response.data.hasOwnProperty('tools')){
-                        if(response.data["tools"].hasOwnProperty('bottom_text'))
-                            this.botton_text = response.data["tools"]["bottom_text"]
-                        delete response.data["tools"];
+                        if(Object.prototype.hasOwnProperty.call(response.data, 'meta')){
+                            this.meta_data = response.data["meta"]
+                        delete response.data["meta"];
                         }
 
                         this.drilldownData = Object.assign(response.data)
@@ -324,10 +320,18 @@ export default {
 </script>
 
 <style scoped>
+
+::v-deep .v-input--selection-controls .v-radio > .v-label {
+    color: v-bind('getCurrentTheme.drill_title_color');
+}
+::v-deep .v-input--radio-group.v-input--radio-group--row .v-radio{
+    margin-right: 0px !important;
+}
 .updateDate {
-  font-family: almoni-light;
+  font-family: almoni-medium;
   font-size: 16px;
   text-align: center;
+  color:v-bind('getCurrentTheme.list_data.font_color')
 }
 
  #mytable >>> .v-data-table-header {
@@ -343,6 +347,8 @@ export default {
 }
     #mytable >>> .v-data-table-header tr th{
       height: 24px !important;
+      padding-left: 0px;
+    padding-right: 8px;
     }
 .list-total{
     font-family: almoni-medium !important;
@@ -370,16 +376,18 @@ export default {
 }
 
 ::v-deep .v-data-table > .v-data-table__wrapper > table > tbody > tr > td, .v-data-table > .v-data-table__wrapper > table > tbody > tr > th, .v-data-table > .v-data-table__wrapper > table > thead > tr > td, .v-data-table > .v-data-table__wrapper > table > thead > tr > th, .v-data-table > .v-data-table__wrapper > table > tfoot > tr > td, .v-data-table > .v-data-table__wrapper > table > tfoot > tr {
-    font-size: 16px;
+    font-size: 14px;
     font-family: almoni-light;
-    color:#606060
+    color:v-bind('getCurrentTheme.list_data.font_color');
+    padding-left: 0px;
+    padding-right: 8px;
 
 }
 
 
 
 ::v-deep .theme--light.v-data-table > .v-data-table__wrapper > table > tbody > tr:not(:last-child) > td:not(.v-data-table__mobile-row), .theme--light.v-data-table > .v-data-table__wrapper > table > tbody > tr:not(:last-child) > th:not(.v-data-table__mobile-row) {
-    border-bottom: 4px solid white;
+    border-bottom: 4px solid v-bind('getCurrentTheme.list_data.border_color');
 }
 /* #mytable tbody td {
     font-size: 20px !important;
@@ -394,12 +402,12 @@ export default {
 } */
 #mytable{
     /* pointer-events: none; */
-    background-color: #F9F9F9;
+    background-color: v-bind('getCurrentTheme.list_data.background_color');
 }
 
 
 ::v-deep .v-data-table-header {
-  background-color:  v-bind('getCurrentTheme.list_data.main_header');
+  background-color:  v-bind('getCurrentTheme.global_theme_color');
   font-family: almoni;
   font-size:222px !important;
   height: 4px !important;
@@ -477,8 +485,8 @@ export default {
     color:#606060
 }
 #chartsHeaders {
-    font-family: almoni;
-    font-size: 16px;
+    font-family: almoni-medium;
+    font-size: 18px;
     color: v-bind('getCurrentTheme.generic_title_color');
     /* margin-bottom: 18px; */
 }

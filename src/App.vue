@@ -142,7 +142,7 @@ body {
 }
 @font-face {
   font-family: almoni-light;
-  src: url(./assets/fonts/Heebo-Light.ttf);
+  src: url(./assets/fonts/Heebo-Regular.ttf);
 }
 @font-face {
   font-family: almoni-medium;

@@ -42,7 +42,7 @@ export default new Vuex.Store({
           "main_background":"#424242",
           "drill_background":"#424242",
           "main_label":"#ffffff",
-          "value_color":"#A8699D",
+          "value_color":"#234BA6",
         },
         "hq_navbar":{
           "span_color_first":"#FFFFFF",
@@ -93,6 +93,9 @@ export default new Vuex.Store({
           "sub_title":"#FFFFFF",
           "color_1":"#282828",
           "color_2":"#121212",
+          "background_color":"#424242",
+          "font_color":"#ffffff",
+          "border_color":"#282828"
         },
         "remove_dialog":{
           "card_main":"#FFFFFF",
@@ -109,7 +112,7 @@ export default new Vuex.Store({
         "solid_selected_border":"solid black 2px",
         "drill_title_color":"#010101",
         "global_theme_color": "#0F2558",
-        "generic_title_color" : "#606060",
+        "generic_title_color" : "#2D2D2D",
         "legend_border_color" : "solid black 1px",
         "kpi":{
           "kpi_value_color":"#000000",
@@ -168,6 +171,9 @@ export default new Vuex.Store({
           "sub_title":"#e0dcdc",
           "color_1":"#282828",
           "color_2":"#121212",
+          "background_color":"#F9F9F9",
+          "font_color":"#606060",
+          "border_color":"#FFFFFF"
         },
         "remove_dialog":{
           "card_main":"#000000",

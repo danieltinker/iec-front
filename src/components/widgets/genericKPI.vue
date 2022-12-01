@@ -51,6 +51,7 @@
                         <div class="KPIcontainer" dir="rtl">
                                 <div 
                                 class="kpi-box" 
+                                style="padding-right:5px;padding-left:5px"
                                 v-for="(item,index) in KPIarr" :key="index"
                                 :style="{backgroundColor: isDrillDown? getCurrentTheme.kpi.drill_background :getCurrentTheme.kpi.main_background, 
                                     border : activeIndex == index ? getCurrentTheme.legend_border_color : ' solid black 0px'}"
@@ -95,7 +96,7 @@
             :style="{color:getCurrentTheme.global_theme_color}"
             ></v-progress-circular>
         </div>
-        <h1 v-else>  {{errorMSG}} </h1>
+        <h1 v-else style="font-family: almoni;font-size:20px">  {{errorMSG}} </h1>
     </div>  
 </div>
 </template>
@@ -217,6 +218,15 @@ export default {
 </script>
 
 <style scoped>
+
+::v-deep .v-input--selection-controls .v-radio > .v-label {
+    color: v-bind('getCurrentTheme.drill_title_color');
+}
+
+::v-deep .v-input--radio-group.v-input--radio-group--row .v-radio{
+    margin-right: 0px !important;
+}
+
 .flex-center {
   display: flex;
   flex-direction: column;
@@ -265,8 +275,8 @@ export default {
     color:#606060
 }
 #chartsHeaders {
-    font-family: almoni;
-    font-size: 16px;
+    font-family: almoni-medium;
+    font-size: 18px;
     color: v-bind('getCurrentTheme.generic_title_color');
     /* margin-bottom: 18px; */
 }

@@ -43,7 +43,7 @@
             :style="{color:getCurrentTheme.global_theme_color}"
             ></v-progress-circular>
         </div>
-        <h1 v-else>  {{errorMSG}} </h1>
+        <h1 v-else style="font-family: almoni;font-size:20px">  {{errorMSG}} </h1>
     </div>  
 
 
