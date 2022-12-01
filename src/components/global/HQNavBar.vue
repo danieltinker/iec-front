@@ -170,6 +170,7 @@
         // change store theme by user
         this.theme ? this.$store.state.prefTheme = "darkTheme" : this.$store.state.prefTheme = "lightTheme"
         let currentTheme = this.theme ? "darkTheme" : "lightTheme"
+        localStorage.setItem("prefTheme",currentTheme) 
         if(this.theme){
           console.log("App Theme Mode: Dark");
         } else {
