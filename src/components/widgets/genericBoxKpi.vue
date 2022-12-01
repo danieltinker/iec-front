@@ -77,7 +77,7 @@
                 <div v-if="btnName.selected" class="statusBox" :style="{'background-color' :btnName.color }">
                   <h1 style="font-family: almoni-medium; font-size: 28px;color:white">{{btnName.label}}</h1>
                 </div>
-                 <span v-if="btnName.selected" style="font-family: almoni;">{{btnName.cause}} </span>
+                 <span v-if="btnName.selected" style="font-family: almoni;" :style="'color:' + getCurrentTheme.baseGenericPie.span_color">{{btnName.cause}} </span>
                 </div>
 
                 <div class="btn-container">
