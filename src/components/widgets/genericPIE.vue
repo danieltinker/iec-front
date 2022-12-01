@@ -2,7 +2,7 @@
 <template>
     <div>
         <div v-if="doneFetching">
-        <div class="clock-main" style="text-align: center;" v-if="params.show_clock">
+            <div class="clock-main" style="text-align: center;" v-if="params.show_clock">
             <div class="flex-center">
                 <v-radio-group dir="rtl" v-model="params.selected_category" row id="districtRadioGroup" v-if=" params.data_category.length >= 2">
                     <v-radio v-for="(category) in params.data_category" :key="category" :label="category" :value="category" color="#0F2558"></v-radio>
@@ -53,11 +53,11 @@
                         </div>
                     </v-carousel-item>
                 </v-carousel>
-
-
             </div>
 
-            <div class="clock-drilldown"
+    </div>  
+    
+    <div class="clock-drilldown"
              v-if="params.expand && !isDrillDown && params.drill_down_params"
              :style="{backgroundColor:getCurrentTheme.genericClock.drill_background }">
                 <h1 class="drilldown-title" v-if="params.drill_down_params.headline_config">{{params.drill_down_params.headline_config.title}}</h1>
@@ -71,7 +71,6 @@
                 :static_drill_titles_prop="params.static_drill_titles_param_copy">
                 </component>   
             </div>
-    </div>  
 </div>
     <div class="loader" v-else>
         <div class="loader" v-if="!isErrorMsg">
@@ -201,6 +200,10 @@ export default {
             this.jsonData = this.drillDataProp
         }
 
+        console.log("error msg:",this.errorMSG.length )
+        console.log("DATA",this.jsonData)
+        console.log("DRILL DATA",this.drilldownData)
+        console.log("params",this.params)
         //  flag used to render the charts syncronously only after data is ready
         if(this.errorMSG.length === 0){
             this.doneFetching = true
