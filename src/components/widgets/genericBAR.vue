@@ -271,6 +271,8 @@ export default {
 }
 
     .btn-span{
+        text-align: -webkit-right;
+        margin-right:4px;
         text-overflow: ellipsis;
         overflow: hidden; 
         width: 68px; 

@@ -214,6 +214,14 @@ export default {
 
 <style scoped>
 
+
+::v-deep .v-btn:not(.v-btn--round).v-size--default {
+    padding: 0 10px;
+}
+::v-deep .btn-span {
+    text-align: -webkit-right;
+    margin-right:4px;
+}
 ::v-deep .v-input--selection-controls .v-radio > .v-label {
     color: v-bind('getCurrentTheme.drill_title_color');
 }
