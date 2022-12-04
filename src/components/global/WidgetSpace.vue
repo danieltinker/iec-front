@@ -14,7 +14,7 @@
         </h1>
         <div class="grid-item">
           <div style="width:40px">
-          <v-icon @click="BookMarkClick(widget.VIEW_ID,widget.PARAMETERS,widget.TEMPLATE_TYPE,false)" :style="{color:getCurrentTheme.global_theme_color}" style="font-size: 30px"
+          <v-icon @click="BookMarkClick(widget.VIEW_ID,widget.PARAMETERS,widget.TEMPLATE_TYPE,false,getIndex('component' + widget.VIEW_ID))" :style="{color:getCurrentTheme.global_theme_color}" style="font-size: 30px"
             v-if="widget.PARAMETERS.headline_config && widget.PARAMETERS.headline_config.bookmark_enabled">{{
             CheckBookmark(widget.VIEW_ID)
             ? "mdi-bookmark"
@@ -23,7 +23,7 @@
           </div>
         </div>
       </div>
-      <component :is="widget.TEMPLATE_TYPE" :params="widget.PARAMETERS" :isDrillDown="false" :view_ID="widget.VIEW_ID">
+      <component :is="widget.TEMPLATE_TYPE" :params="widget.PARAMETERS" :isDrillDown="false" :view_ID="widget.VIEW_ID" :ref="'component' + widget.VIEW_ID">
       </component>
     </div>
   </div>
@@ -205,6 +205,11 @@ export default {
 
   methods:
   {
+    getIndex(view_id){
+      console.log(this.$refs[view_id][0]["carouselActiveIndex"]);
+      return this.$refs.view_id
+
+  },
     //Get user favorites
     GetUserFav: function () {
       this.SET_FAV_LIST()

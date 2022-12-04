@@ -356,9 +356,9 @@ export default {
     padding-right: 8px;
     }
 .list-total{
-    font-family: almoni-medium !important;
+    font-family: almoni-bold !important;
     font-size:16px !important;
-    background-color: #E9EDF6;
+    background-color: v-bind('getCurrentTheme.list_data.total_color');
     padding: 0px !important;
 
 }

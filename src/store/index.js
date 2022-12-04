@@ -96,7 +96,8 @@ export default new Vuex.Store({
           "color_2":"#121212",
           "background_color":"#424242",
           "font_color":"#ffffff",
-          "border_color":"#282828"
+          "border_color":"#282828",
+          "total_color":"#1f1e1e"
         },
         "remove_dialog":{
           "card_main":"#FFFFFF",
@@ -175,7 +176,8 @@ export default new Vuex.Store({
           "color_2":"#121212",
           "background_color":"#F9F9F9",
           "font_color":"#606060",
-          "border_color":"#FFFFFF"
+          "border_color":"#FFFFFF",
+          "total_color":"#c7c9c9"
         },
         "remove_dialog":{
           "card_main":"#000000",
