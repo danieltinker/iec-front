@@ -54,19 +54,24 @@ Vue.mixin({
       return false
     },
 
-    BookMarkClick(viewID,parameters,templateType, isDrillDown) {
+    BookMarkClick(viewID,parameters,templateType, isDrillDown,activeIndex) {
       let view_id = viewID
+      console.log("saving index!@?@!#?", activeIndex)
       //save curr widget params for bookmark
       this.$store.state.selected_view_param = Object.assign({},parameters)
       this.$store.state.selected_view_param["TEMPLATE_TYPE"] = templateType
+
       if(isDrillDown){
+        this.$store.state.selected_view_param["drill_down_params"]["carouselActiveIndex"] = activeIndex
         this.$store.state.selected_view_param["show_clock"] = false
       }
       else{
+        this.$store.state.selected_view_param["carouselActiveIndex"] = activeIndex
+        this.$store.state.selected_view_param["show_clock"] = true
+
         if(this.$store.state.selected_view_param["data_intersection"]==true){
           this.$store.state.selected_view_param["expand"] = false
         }
-        this.$store.state.selected_view_param["show_clock"] = true
       }
       ///Maybe to save custom things to custom_bookmark_data in store
       this.$store.state.selected_view_id = view_id;
