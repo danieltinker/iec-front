@@ -206,8 +206,7 @@ export default {
   methods:
   {
     getIndex(view_id){
-      console.log(this.$refs[view_id][0]["carouselActiveIndex"]);
-      return this.$refs.view_id
+      return this.$refs[view_id][0]["carouselActiveIndex"]
 
   },
     //Get user favorites
