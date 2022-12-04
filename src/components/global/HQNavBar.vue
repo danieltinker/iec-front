@@ -191,7 +191,7 @@
   </script>
   
   <style scoped>
-    ::v-deep .v-navigation-drawer--is-mobile:not(.v-navigation-drawer--close),
+    :deep()  .v-navigation-drawer--is-mobile:not(.v-navigation-drawer--close),
 .v-navigation-drawer--temporary:not(.v-navigation-drawer--close) {
   width: 85% !important;
 }

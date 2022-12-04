@@ -197,5 +197,5 @@ h1 {
   margin-left: 0.75em;
 }
 
-/* .v-form >>> .theme--light.v-btn.v-btn--disabled.v-btn--has-bg{background-color:#e0e0e0 !important; opacity:0.9;} */
+/* .v-form :deep()  .theme--light.v-btn.v-btn--disabled.v-btn--has-bg{background-color:#e0e0e0 !important; opacity:0.9;} */
 </style>

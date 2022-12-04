@@ -139,30 +139,30 @@
   .test {
     height: 550px;
   }
-  .arrows >>> .v-window__next {
+  .arrows :deep()  .v-window__next {
     background-color: transparent !important;
     color: transparent !important;
     top: 58% !important;
   }
-  .arrows >>> .v-window__prev {
+  .arrows :deep()  .v-window__prev {
     background-color: transparent !important;
     color: transparent !important;
     top: 58% !important;
   }
-  .arrows >>> .v-icon__svg {
+  .arrows :deep()  .v-icon__svg {
     display: none !important;
   }
   
-  /* .pie-carousel >>> .carousel-flex .v-carousel__controls__item.v-btn {
+  /* .pie-carousel :deep()  .carousel-flex .v-carousel__controls__item.v-btn {
     color: lightgrey !important;
   }
   
-  .pie-carousel >>> .carousel-flex .v-carousel__controls__item.v-btn.v-btn--active {
+  .pie-carousel :deep()  .carousel-flex .v-carousel__controls__item.v-btn.v-btn--active {
     color: #f67200 !important;
   } */
   
   .arrows
-    >>> .carousel-flex
+    :deep()  .carousel-flex
     .v-carousel__controls__item.v-btn.v-btn--active:before {
     opacity: 0;
   }
@@ -189,7 +189,7 @@
     opacity: 0 !important;
   }
   
-  .bookmaerkBtn >>> .v-ripple__container {
+  .bookmaerkBtn :deep()  .v-ripple__container {
     opacity: 0 !important;
   }
   </style>

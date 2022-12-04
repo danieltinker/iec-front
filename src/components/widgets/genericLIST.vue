@@ -325,11 +325,11 @@ export default {
     color: v-bind('getCurrentTheme.global_radio');
 }
 
-::v-deep .v-input--selection-controls .v-radio > .v-label {
+:deep()  .v-input--selection-controls .v-radio > .v-label {
     color: v-bind('getCurrentTheme.drill_title_color');
     margin-right: 6px;
 }
-::v-deep .v-input--radio-group.v-input--radio-group--row .v-radio{
+:deep()  .v-input--radio-group.v-input--radio-group--row .v-radio{
     margin-right: 0px !important;
 }
 .updateDate {
@@ -339,18 +339,18 @@ export default {
   color:v-bind('getCurrentTheme.list_data.font_color')
 }
 
- #mytable >>> .v-data-table-header {
+ #mytable :deep()  .v-data-table-header {
       height: 24px !important;
     }
 
-    ::v-deep .v-data-table > .v-data-table__wrapper > table > tbody > tr > td, .v-data-table > .v-data-table__wrapper > table > tbody > tr > th, .v-data-table > .v-data-table__wrapper > table > thead > tr > td, .v-data-table > .v-data-table__wrapper > table > thead > tr > th, .v-data-table > .v-data-table__wrapper > table > tfoot > tr > td, .v-data-table  {
+    :deep()  .v-data-table > .v-data-table__wrapper > table > tbody > tr > td, .v-data-table > .v-data-table__wrapper > table > tbody > tr > th, .v-data-table > .v-data-table__wrapper > table > thead > tr > td, .v-data-table > .v-data-table__wrapper > table > thead > tr > th, .v-data-table > .v-data-table__wrapper > table > tfoot > tr > td, .v-data-table  {
     
     
     border-radius: 0 0 0 0 !important;
     box-shadow:0px 0px !important
 
 }
-    #mytable >>> .v-data-table-header tr th{
+    #mytable :deep()  .v-data-table-header tr th{
       height: 24px !important;
       padding-left: 0px;
     padding-right: 8px;
@@ -362,13 +362,13 @@ export default {
     padding: 0px !important;
 
 }
-::v-deep .v-data-table > .v-data-table__wrapper > table {
+:deep()  .v-data-table > .v-data-table__wrapper > table {
     table-layout: fixed;
   width: 100% !important;  
     border-spacing: 0;
 }
 
-::v-deep .v-data-table > .v-data-table__wrapper > table > tbody > tr > td, .v-data-table > .v-data-table__wrapper > table > tbody > tr > th, .v-data-table > .v-data-table__wrapper > table > thead > tr > td, .v-data-table > .v-data-table__wrapper > table > thead > tr > th, .v-data-table > .v-data-table__wrapper > table > tfoot > tr > td, .v-data-table > .v-data-table__wrapper > table > tfoot > tr > th {
+:deep()  .v-data-table > .v-data-table__wrapper > table > tbody > tr > td, .v-data-table > .v-data-table__wrapper > table > tbody > tr > th, .v-data-table > .v-data-table__wrapper > table > thead > tr > td, .v-data-table > .v-data-table__wrapper > table > thead > tr > th, .v-data-table > .v-data-table__wrapper > table > tfoot > tr > td, .v-data-table > .v-data-table__wrapper > table > tfoot > tr > th {
     /* padding: 0 0px;
     padding-right: 5px; */
     /* word-wrap: break-word; */
@@ -380,7 +380,7 @@ export default {
     transition: height 0.2s cubic-bezier(0.4, 0, 0.6, 1);
 }
 
-::v-deep .v-data-table > .v-data-table__wrapper > table > tbody > tr > td, .v-data-table > .v-data-table__wrapper > table > tbody > tr > th, .v-data-table > .v-data-table__wrapper > table > thead > tr > td, .v-data-table > .v-data-table__wrapper > table > thead > tr > th, .v-data-table > .v-data-table__wrapper > table > tfoot > tr > td, .v-data-table > .v-data-table__wrapper > table > tfoot > tr {
+:deep()  .v-data-table > .v-data-table__wrapper > table > tbody > tr > td, .v-data-table > .v-data-table__wrapper > table > tbody > tr > th, .v-data-table > .v-data-table__wrapper > table > thead > tr > td, .v-data-table > .v-data-table__wrapper > table > thead > tr > th, .v-data-table > .v-data-table__wrapper > table > tfoot > tr > td, .v-data-table > .v-data-table__wrapper > table > tfoot > tr {
     font-size: 14px;
     font-family: almoni-light;
     color:v-bind('getCurrentTheme.list_data.font_color');
@@ -391,14 +391,14 @@ export default {
 
 
 
-::v-deep .theme--light.v-data-table > .v-data-table__wrapper > table > tbody > tr:not(:last-child) > td:not(.v-data-table__mobile-row), .theme--light.v-data-table > .v-data-table__wrapper > table > tbody > tr:not(:last-child) > th:not(.v-data-table__mobile-row) {
+:deep()  .theme--light.v-data-table > .v-data-table__wrapper > table > tbody > tr:not(:last-child) > td:not(.v-data-table__mobile-row), .theme--light.v-data-table > .v-data-table__wrapper > table > tbody > tr:not(:last-child) > th:not(.v-data-table__mobile-row) {
     border-bottom: 4px solid v-bind('getCurrentTheme.list_data.border_color');
 }
 /* #mytable tbody td {
     font-size: 20px !important;
 } */
 
-.v-data-table::v-deep th {
+.v-data-table:deep()  th {
   font-size: 15px !important;
   color:white !important
 }
@@ -411,25 +411,25 @@ export default {
 }
 
 
-::v-deep .v-data-table-header {
+:deep()  .v-data-table-header {
   background-color:  v-bind('getCurrentTheme.global_theme_color');
   font-family: almoni;
   font-size:222px !important;
   height: 4px !important;
 }
-#mytable >>> tr:hover {
+#mytable :deep()  tr:hover {
     background: inherit !important;
 }
 
-#mytable >>> th:hover {
+#mytable :deep()  th:hover {
     background: inherit !important;
 }
 
-::v-deep .v-icon{
+:deep()  .v-icon{
     display: none;
 }
 
-::v-deep .ma-0{
+:deep()  .ma-0{
     display: none;
 }
 
@@ -526,12 +526,12 @@ export default {
   flex-direction: column;
 }
 
-.carousel-flex >>> .v-window__next {
+.carousel-flex :deep()  .v-window__next {
   background-color: transparent !important;
   color: transparent !important;
   top: 40% !important;
 }
-.carousel-flex >>> .v-window__prev {
+.carousel-flex :deep()  .v-window__prev {
   background-color: transparent !important;
   color: transparent !important;
   top:40% !important;

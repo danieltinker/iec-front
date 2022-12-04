@@ -139,7 +139,7 @@
     opacity: 0 !important;
   }
   
-  .bookmaerkBtn >>> .v-ripple__container {
+  .bookmaerkBtn :deep()  .v-ripple__container {
     opacity: 0 !important;
   }
   </style>

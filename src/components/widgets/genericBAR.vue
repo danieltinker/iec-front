@@ -251,12 +251,12 @@ export default {
 :deep() .v-input--selection-controls__input .v-icon {
     color: v-bind('getCurrentTheme.global_radio');
 }
-::v-deep .v-input--selection-controls .v-radio > .v-label {
+:deep()  .v-input--selection-controls .v-radio > .v-label {
     color: v-bind('getCurrentTheme.drill_title_color');
     margin-right: 6px;
 }
 
-::v-deep .v-input--radio-group.v-input--radio-group--row .v-radio{
+:deep()  .v-input--radio-group.v-input--radio-group--row .v-radio{
     margin-right: 0px !important;
 }
     .labels{
@@ -272,7 +272,7 @@ export default {
         margin-right:4%;
 
     }
-    ::v-deep .v-btn:not(.v-btn--round).v-size--default {
+    :deep()  .v-btn:not(.v-btn--round).v-size--default {
     padding-right: 8px;
 }
 
@@ -350,12 +350,12 @@ export default {
   flex-direction: column;
 }
 
-.carousel-flex >>> .v-window__next {
+.carousel-flex :deep()  .v-window__next {
   background-color: transparent !important;
   color: transparent !important;
   top: 40% !important;
 }
-.carousel-flex >>> .v-window__prev {
+.carousel-flex :deep()  .v-window__prev {
   background-color: transparent !important;
   color: transparent !important;
   top:40% !important;

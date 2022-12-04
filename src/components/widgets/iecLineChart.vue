@@ -293,54 +293,54 @@ export default {
   height: 20px;
 }
 
-::v-deep .apexcharts-zoomin-icon,
-::v-deep .apexcharts-zoomout-icon,
-::v-deep .apexcharts-zoom-icon,
-::v-deep .apexcharts-pan-icon {
+:deep()  .apexcharts-zoomin-icon,
+:deep()  .apexcharts-zoomout-icon,
+:deep()  .apexcharts-zoom-icon,
+:deep()  .apexcharts-pan-icon {
   margin-bottom: 15px;
 }
 
-::v-deep .apexcharts-legend-series:nth-child(1) {
+:deep()  .apexcharts-legend-series:nth-child(1) {
   margin-left: -10px !important;
 }
-::v-deep .apexcharts-legend-series:nth-child(2) {
+:deep()  .apexcharts-legend-series:nth-child(2) {
   margin-right: 32px !important;
 }
-::v-deep .apexcharts-legend-text {
+:deep()  .apexcharts-legend-text {
   margin-right: 5px !important;
   place-content: end !important;
   color: v-bind('getCurrentTheme.cyber_status.box_color_1') !important;
 }
-::v-deep .apexcharts-legend {
+:deep()  .apexcharts-legend {
   /* margin-right:-15px!important ; */
   inset: auto -10px -4px 60px !important;
   place-content: start !important;
   direction: rtl !important;
 }
 
-::v-deep .apexcharts-tooltip {
+:deep()  .apexcharts-tooltip {
     color: #000000;
   }
 
-::v-deep .apexcharts-canvas{
+:deep()  .apexcharts-canvas{
   margin: auto;
 }
 
 
 
-::v-deep .apexcharts-legend-text{
+:deep()  .apexcharts-legend-text{
   top: 5.5px !important;
   
   padding-left: 130px !important;
   padding-top: 10px;
   padding-bottom: 10px;
 }
-::v-deep .apexcharts-legend-marker{
+:deep()  .apexcharts-legend-marker{
   top: 8px !important;
   padding-right: 10px !important;
  
 }
-::v-deep .apexcharts-legend-series{
+:deep()  .apexcharts-legend-series{
     margin: 0px !important;
     margin-top: 10px !important;
     text-align: -webkit-center;

@@ -156,7 +156,7 @@ export default {
 </script>
 
 <style scoped>
-::v-deep .v-application {
+:deep()  .v-application {
     font-family: "Roboto", sans-serif;
     line-height: 1.4 !important;
 }
@@ -262,7 +262,7 @@ export default {
   margin-top: 2rem;
 }
 
-::v-deep .bottom-sheet__card.fx-default {
+:deep()  .bottom-sheet__card.fx-default {
   height: max-content !important;
 }
 
