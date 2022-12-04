@@ -155,7 +155,8 @@ export default {
         oneBar,
         genericKPI: () => import('../widgets/genericKPI.vue'),
         genericLIST: () => import('../widgets/genericLIST.vue'),
-        genericPIE: () => import('../widgets/genericPIE.vue')
+        genericPIE: () => import('../widgets/genericPIE.vue'),
+        genericGraph: () => import('../widgets/genericGraph.vue')
     },
     methods:{
         // toggel drill down from a label click if click_open_drill_enabled = true in the config
