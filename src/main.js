@@ -7,7 +7,7 @@ import FavoriteAxios from "./components/utils/FavoriteAxios";
 import VueBottomSheet from "@webzlodimir/vue-bottom-sheet";
 import { mapActions, mapGetters } from "vuex";
 
-import {myApi,myShavitApiV1} from "./services/myAxiosRequests";
+import {myApi,myShavitApiV1,tickTest} from "./services/myAxiosRequests";
 import VueApexCharts from 'vue-apexcharts'
 
 Vue.use(VueApexCharts)
@@ -18,6 +18,7 @@ Vue.config.productionTip = false;
 Vue.prototype.$pieSize = 285;
 Vue.prototype.$myApi = myApi
 Vue.prototype.$myShavitApi = myShavitApiV1
+Vue.prototype.$tickTest = tickTest
 // function booktest(p) {return {data: function(){return{test: true}}}}
 Vue.mixin({
   methods:{

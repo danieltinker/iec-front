@@ -158,22 +158,22 @@ export default {
       });
 
 
-    console.log("setInterval /views")
-    this.fetch_interval = setInterval(async ()=>{
-          console.log("Refreshing Page")
-          this.doneFetching=false
-          await axios
-            .get(this.$store.state.serverAdrr+"/shavit-mobile/views/" + this.$store.state.selected_hq_id + "/" + this.$store.state.selected_cat_id, { params: { sid: this.$store.state.loginStore.userInfo.sid } })
-            .then((response) => {
-              this.responseData = response.data;
-              this.doneFetching = true;
-              this.errorMsg = ""
-            })
-            .catch((error) => {
-              this.errorMsg = "תצוגת דף לא זמינה"
-              console.log(error);
-            });
-        },120000)
+    // console.log("setInterval /views")
+    // this.fetch_interval = setInterval(async ()=>{
+    //       console.log("Refreshing Page")
+    //       this.doneFetching=false
+    //       await axios
+    //         .get(this.$store.state.serverAdrr+"/shavit-mobile/views/" + this.$store.state.selected_hq_id + "/" + this.$store.state.selected_cat_id, { params: { sid: this.$store.state.loginStore.userInfo.sid } })
+    //         .then((response) => {
+    //           this.responseData = response.data;
+    //           this.doneFetching = true;
+    //           this.errorMsg = ""
+    //         })
+    //         .catch((error) => {
+    //           this.errorMsg = "תצוגת דף לא זמינה"
+    //           console.log(error);
+    //         });
+    //     },120000)
 
     this.$on('bookmark-drill', (viewID,params,templateType,isDrillDown)=>{
             console.log("widget lets make the save",viewID,params,templateType,isDrillDown)
