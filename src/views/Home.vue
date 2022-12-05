@@ -8,7 +8,8 @@
         <!-- CATEGORIES BAR HORIZONTAL SCROLL -->
         <CategoryBar/>
         <!-- WIDGETS SPACE (CLOCKS) VERTICAL SCROLL  -->
-        <WidgetSpace :class="{removeDisplay: this.$store.state.quick_view}" />
+        <WidgetSpace/>
+        <!-- <WidgetSpace v-if="!this.$store.state.quick_view" /> -->
         <!-- {{$store.state.selected_view_param}} -->
         <MaxFavoritePopup v-if="$store.state.max_favorite_popup"/>
         
