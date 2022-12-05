@@ -31,6 +31,7 @@ export const myShavitApiV1 = (endPoint) => {
 }
 
 
-export const tickTest = (mythis) => {
-    setTimeout(mythis.fetchData, 5000);
+export const tick = (time) => {
+    console.log(time);
+    setTimeout(this.fetchData, 5000);
 }
