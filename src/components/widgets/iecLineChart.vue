@@ -61,6 +61,7 @@ export default {
 
   data() {
     return {
+      myTimeout:undefined,
       doneFetching: false,
       errorMSG: "",
       show: false,
