@@ -204,10 +204,7 @@ export default {
             this.jsonData = this.drillDataProp
         }
 
-        console.log("error msg:",this.errorMSG.length )
-        console.log("DATA",this.jsonData)
-        console.log("DRILL DATA",this.drilldownData)
-        console.log("params",this.params)
+        
         //  flag used to render the charts syncronously only after data is ready
         if(this.errorMSG.length === 0){
             this.doneFetching = true

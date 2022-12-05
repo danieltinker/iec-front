@@ -28,8 +28,15 @@ export default{
          }
     },
     created(){
-            this.option.xaxis.range =  14511464
-            this.option.xaxis.type = 'datetime',
+            const ts = Date.now()
+            let ts_arr = []
+            this.serie[0].data.forEach(couple =>{
+                ts_arr.push(couple[0])
+            })
+            this.option.xaxis.range =  100000
+            this.option.xaxis.tickAmount = 10
+            this.option.xaxis.type = 'datetime'
+            this.option.xaxis.categories = ts_arr
             this.option.xaxis.labels ={formatter: (value,timestamp) =>{
                     const dateTimeFormat = new Intl.DateTimeFormat('en', {  month: 'numeric', day: 'numeric', hour: 'numeric', minute:'numeric', hour12: false })             
                     var [{ value: month },,{ value: day },,{value: hour},,{value:minute}] = dateTimeFormat .formatToParts(new Date( timestamp  )) 
@@ -38,8 +45,7 @@ export default{
                     //return new Date(timestamp) // The formatter function overrides format property
                     }
                 }
-        this.option.xaxis.categories = ['1','2','3','4','5']
-        console.log(this.option.xaxis.axisBorder.color )
+        // this.option.xaxis.categories = ts_arr
         // this.option.xaxis.axisBorder.color = "black"
         this.showData = true
     }

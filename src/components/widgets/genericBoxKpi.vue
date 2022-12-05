@@ -37,7 +37,7 @@
           <span>
             <v-icon
               dir="rtl"
-              @click="BookMarkClick(view_ID,parentsParam,params.template_type,true)"
+              @click="BookMarkClick(view_ID,parentsParam,params.template_type,true,carouselActiveIndex)"
               color="#0F2558"
               style="font-size: 30px"
               v-if="isDrillDown && params.headline_config && params.headline_config.bookmark_enabled"
@@ -219,6 +219,11 @@ export default {
   },
 
   async created() {
+    if(this.params.carouselActiveIndex){
+            console.log("have A CAROUSEL INDEX FROM QUICK VIEW PARAMS!!!")
+            this.carouselActiveIndex = this.params.carouselActiveIndex
+        }
+
     if (!this.isDrillDown) {
       await this.$myApi(this.params.data_url)
         .then(response => {
