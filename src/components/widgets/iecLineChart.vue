@@ -215,7 +215,6 @@ export default {
           "data?dsname=dailyLoad&isDrill=true"
         )
         .then(response => {
-          console.log("Rasrsarsa", response["data"]["data"][0]);
           var tmpSeries = [],
             secTmpSeries = [];
           // console.log(response)
