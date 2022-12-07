@@ -12,11 +12,6 @@
 
 export default{
     props:{
-        isDrillDown:{type:Boolean},
-        drillDataProp:{type:Object, default:()=>{}},
-        params:{type:Object,required:false},
-        view_ID:{type:Number},
-        parentsParam:{type:Object},
         series:{type:Array},
         options:{type:Object}
     },
