@@ -126,7 +126,8 @@
                     {{ params.drill_down_params.headline_config.title }}</h1>
                 <component :is="params.drill_down_params.template_type" :params=params.drill_down_params
                     :isDrillDown="true" :view_ID="view_ID" :drillDataProp="drilldownData" :parentsParam="params"
-                    :static_drill_titles_prop="params.static_drill_titles_param_copy">
+                    :static_drill_titles_prop="params.static_drill_titles_param_copy"
+                    :drill_carousel_index = "main_to_drill_carousel_index">
                 </component>
             </div>
         </div>
@@ -154,7 +155,8 @@ export default {
         params: { type: Object, required: false },
         view_ID: { type: Number },
         parentsParam: { type: Object },
-        static_drill_titles_prop: { type: Object }
+        static_drill_titles_prop: { type: Object },
+        drill_carousel_index:{type:Number}
     },
     watch: {
         drillDataProp() {
@@ -169,7 +171,7 @@ export default {
             headers: undefined,
             totalGet: undefined,
             myTimeout:undefined,
-
+            main_to_drill_carousel_index:undefined,
             activeTitle: 0,
             activeIndex: -1,
             succ_req: true,
@@ -247,6 +249,10 @@ export default {
                             this.drilldownData = Object.assign(response.data)
                             if (this.params.data_intersection) {
                                 this.static_drill_data = Object.assign(response.data)
+                                if(this.params.data_intersection && this.params.expand){{
+                                    this.drilldownData = this.static_drill_data[this.jsonData[this.params.selected_category][this.carouselActiveIndex][this.activeTitle].label]
+                                    this.params.static_drill_titles_param_copy = this.params.static_drill_titles_param[this.jsonData[this.params.selected_category][this.carouselActiveIndex][this.activeTitle].label]
+                                }}
                             }
                             this.errorMSG = ""
                             if (this.params.data_category == undefined || this.params.selected_category == undefined) {
@@ -316,9 +322,13 @@ export default {
         }
     },
     created(){
+        this.$on("myIndex", (i)=>{
+                this.main_to_drill_carousel_index = i
+        })
         this.fetchData()
     },
     beforeDestroy() {
+        this.$parent.$emit("myIndex",this.carouselActiveIndex)
         clearTimeout(this.myTimeout)
     },
 }

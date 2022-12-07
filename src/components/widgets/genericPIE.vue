@@ -222,6 +222,7 @@ export default {
         }
     },
     created(){
+        
         if(this.isDrillDown){
             this.carouselActiveIndex = this.drill_carousel_index
         }
