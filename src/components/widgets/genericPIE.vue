@@ -199,7 +199,7 @@ export default {
         // toggel drill down from a label click if click_open_drill_enabled = true in the config
         pieClick(i) {
             this.activeTitle = i
-            if (this.params.data_intersection) {
+            if (this.params.data_intersection && this.params.click_open_drill_enabled) {
                 this.drilldownData = this.static_drill_data[this.jsonData[this.params.selected_category][this.carouselActiveIndex][i].label]
                 console.log(this.jsonData[this.params.selected_category][this.carouselActiveIndex][i].label, "pie main clock label on click DI")
                 console.log(this.params.static_drill_titles_param, "params.static_drill pie")
