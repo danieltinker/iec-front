@@ -11,9 +11,8 @@
                     </v-radio-group>
                 </div>
                 <div class="pie-carousel">
-                    <h1 v-if="params.timelower">{{meta_data}}</h1>
-                    <h1 v-if= " !isDrillDown">{{meta_data}}</h1>
-                    <h1 v-if= " isDrillDown">{{drilldown_meta}}</h1>
+                    <!-- <h1 v-if= " !isDrillDown">{{meta_data}}</h1>
+                    <h1 v-if= " isDrillDown">{{drilldown_meta}}</h1> -->
                     
                     <span id="chartsHeaders" v-if="!isDrillDown">
                         {{ params.chart_titles[params.selected_category][carouselActiveIndex] }}
@@ -24,7 +23,6 @@
                     <span id="chartsHeaders" v-if="isDrillDown && params.data_intersection">
                         {{ static_drill_titles_prop[params.selected_category][carouselActiveIndex] }}
                     </span>
-                    
                     <span>
                         <v-icon dir="rtl"
                         @click="BookMarkClick(view_ID, parentsParam, params.template_type, true, carouselActiveIndex)"
@@ -97,27 +95,23 @@ export default {
         drilldown_meta:{type:Object},
         drill_carousel_index:{type:Number}
     },
-    watch: {
-        drillDataProp() {
-            this.jsonData = this.drillDataProp
-        }
-    },
+
     data() {
         return {
-            main_to_drill_carousel_index:undefined,
+            doneFetching: false,
+            hasMainDataRecieved:false,
+
+            main_to_drill_carousel_index:0,
             myTimeout:undefined,
             activeTitle: 0,
             activeIndex: -1,
-            succ_req: true,
             clicked_index: undefined,
             errorMSG: "",
-            carouselActiveIndex: 2,
+            carouselActiveIndex: 0,
             drilldownData: [],
             jsonData: [],
-            doneFetching: false,
             static_drill_data: {},
-            meta_data:{},
-            test:"daniel"
+            meta_data:{}
         }
     },
     components: {
@@ -128,42 +122,67 @@ export default {
         BaseGenericPie
     },
     methods: {
-        async fetchData() {
-            this.doneFetching = false
-            if (this.params.carouselActiveIndex) {
-                console.log("have A CAROUSEL INDEX FROM QUICK VIEW PARAMS!!!")
+        async fetchClock() {
+            this.doneFetching = false // show LOADER
+            this.LoadDrillCarouselIndex()
+            this.LoadQuickViewCarouselIndex()
+            if(!this.isDrillDown){
+                await this.fetchMainData()
+                if(this.hasMainDataRecieved){
+                    await this.fetchDrillData()
+                }
+            }
+            else if(this.drillDataProp != undefined){
+                this.jsonData = this.drillDataProp
+            }
+            if(!this.hasErrorMsg()){
+                this.doneFetching = true // show CLOCK
+            }
+            this.tick(this.params.sample_rate)
+        },
+
+        LoadDrillCarouselIndex(){
+            if(this.isDrillDown){ 
+                this.carouselActiveIndex = this.drill_carousel_index
+            }
+        },
+        LoadQuickViewCarouselIndex(){
+            if (this.params.carouselActiveIndex) { 
                 this.carouselActiveIndex = this.params.carouselActiveIndex
             }
-            
-            if (!this.isDrillDown) {
-                await this.$myApi(this.params.data_url)
+        },
+        async fetchMainData(){
+            await this.$myApi(this.params.data_url)
                     .then(response => {
                         this.jsonData = response.data
                         this.errorMSG = ""
+                        this.hasMainDataRecieved = true
+
                         if (Object.prototype.hasOwnProperty.call(response.data, 'meta')) {
-                            console.log("found some META DATA *_* ^_^ 0.0 -_-", response.data["meta"])
                             this.meta_data = response.data["meta"]
                             delete response.data["meta"];
                         }
                     })
                     .catch(error => {
-                        console.log(error);
-                        console.log(error, "Main Clock Data GET request FAIL, PLEASE Check Backend")
+                        console.log(error, "Main Clock Data GET request FAIL, PLEASE Check BackEnd & Db")
                         this.errorMSG = "אין מידע"
-                        this.succ_req = false
+                        this.hasMainDataRecieved = true
                     });
-                if (this.succ_req && this.params.drill_down_params) {
-                    this.params.static_drill_titles_param_copy = this.params.static_drill_titles_param
+        },
+        async fetchDrillData(){
+            this.params.static_drill_titles_param_copy = this.params.static_drill_titles_param
                     await this.$myApi(this.params.drill_down_params.data_url)
                         .then(response => {
                             this.drilldownData = Object.assign(response.data)
+
                             if (this.params.data_intersection) {
                                 this.static_drill_data = Object.assign(response.data)
-                                if(this.params.data_intersection && this.params.expand){{
+                                if(this.params.data_intersection && this.params.expand){{ // reload clock state OnTick
                                     this.drilldownData = this.static_drill_data[this.jsonData[this.params.selected_category][this.carouselActiveIndex][this.activeTitle].label]
                                     this.params.static_drill_titles_param_copy = this.params.static_drill_titles_param[this.jsonData[this.params.selected_category][this.carouselActiveIndex][this.activeTitle].label]
                                 }}
                             }
+
                             this.errorMSG = ""
                             if (this.params.data_category == undefined || this.params.selected_category == undefined) {
                                 console.log("radio btns config failed fix data_category, selected category")
@@ -174,35 +193,25 @@ export default {
                             console.log(error, "drill DATA FETCH ERROR");
                             this.errorMSG = "אין מידע"
                         });
-                }
-            }
-            else {
-                this.jsonData = this.drillDataProp
-            }
-
-            
-
-
-            //  flag used to render the charts syncronously only after data is ready
+        },
+        hasErrorMsg(){
             if (this.errorMSG.length === 0) {
-                this.doneFetching = true
+                return false
             }
-            this.tick(this.params.sample_rate)
+            return true
         },
         tick(time){
-            setTimeout(this.fetchData, time || 120000);
+            setTimeout(this.fetchClock, time || 120000);
         },
+
         // toggel drill down from a label click if click_open_drill_enabled = true in the config
         pieClick(i) {
-            this.activeTitle = i
-            if (this.params.data_intersection && this.params.click_open_drill_enabled) {
+            if (this.params.data_intersection && this.params.click_open_drill_enabled) { // load intersection data 
+                this.activeTitle = i
                 this.drilldownData = this.static_drill_data[this.jsonData[this.params.selected_category][this.carouselActiveIndex][i].label]
-                console.log(this.jsonData[this.params.selected_category][this.carouselActiveIndex][i].label, "pie main clock label on click DI")
-                console.log(this.params.static_drill_titles_param, "params.static_drill pie")
                 this.params.static_drill_titles_param_copy = this.params.static_drill_titles_param[this.jsonData[this.params.selected_category][this.carouselActiveIndex][i].label]
-                console.log(this.params.static_drill_titles_param, "params.static_drill_after entry pie ")
             }
-            if (this.params.click_open_drill_enabled) {
+            if (this.params.click_open_drill_enabled) { // expand drill handler
                 if (!this.params.expand || i != this.clicked_index) {
                     // eslint-disable-next-line
                     this.params.expand = true
@@ -213,24 +222,30 @@ export default {
                     this.params.expand = false
                     this.activeIndex = -1
                 }
+                this.clicked_index = i
             }
-            this.clicked_index = i
         }
     },
+
     created(){
-        
-        if(this.isDrillDown){
-            this.carouselActiveIndex = this.drill_carousel_index
-        }
+ 
         this.$on("myIndex", (i)=>{
                 this.main_to_drill_carousel_index = i
         })
-        this.fetchData()
+        this.fetchClock()
     },
+    
     beforeDestroy() {
         this.$parent.$emit("myIndex",this.carouselActiveIndex)
         clearTimeout(this.myTimeout)
     },
+
+    watch: {
+        drillDataProp() {
+            this.jsonData = this.drillDataProp
+        }
+    },
+
     computed: {
         // hide the Carousel prev next btns if only one chart is avaliable.
         showArrows() {
