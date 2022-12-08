@@ -128,10 +128,6 @@ export default {
         BaseGenericPie
     },
     methods: {
-        meta_data_fetch(...args){
-
-        },
-
         async fetchData() {
             this.doneFetching = false
             if (this.params.carouselActiveIndex) {
