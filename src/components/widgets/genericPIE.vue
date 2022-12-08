@@ -166,7 +166,7 @@ export default {
                     .catch(error => {
                         console.log(error, "Main Clock Data GET request FAIL, PLEASE Check BackEnd & Db")
                         this.errorMSG = "אין מידע"
-                        this.hasMainDataRecieved = true
+                        this.hasMainDataRecieved = false
                     });
         },
         async fetchDrillData(){
