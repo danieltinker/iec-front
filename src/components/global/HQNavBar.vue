@@ -114,6 +114,39 @@
         </v-col>
       </v-row>
 
+      
+      <!-- logout -->
+
+      
+      <div
+        class="mb-10"
+        style="
+          text-align: center;
+          position: flex;
+          margin-top: 20px;
+          bottom: 0;
+          width: 100%;
+        "
+      >
+        <v-btn
+          outlined
+          :color="getCurrentTheme.hq_navbar.logout_btn"
+          style="
+            font-family: almoni-medium;
+            font-size: 20px;
+            width: 121px;
+            height: 37px;
+            margin-top: auto;
+          "
+          elevation="0"
+          rounded
+          @click="logoutDialog = true"
+          >התנתק/י</v-btn
+        >
+      </div>
+
+      <!-- logout -->
+
 
       </v-navigation-drawer>
     </div>

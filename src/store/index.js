@@ -33,6 +33,7 @@ export default new Vuex.Store({
         "app_background":"#121212",
         "app_color":"#FFFFFF",
         "global_radio":"#B8B8B8",
+        "global_selected_radio":"#15A0EB",
         "global_theme_color": "#15A0EB",
         "solid_selected_border":"solid purple 4px",
         "kpi_sec_value": "#828282",
@@ -54,7 +55,8 @@ export default new Vuex.Store({
           "bar_icon":"#FFFFFF",
           "toolbar_title":"#FFFFFF",
           "navigation_drawer":"#282828",
-          "user_background":"#424242"
+          "user_background":"#424242",
+          "logout_btn":"#FFFFFF"
         },
         "category_bar":{
           "btn_chip":"#424242",
@@ -105,6 +107,7 @@ export default new Vuex.Store({
           "icon":"#282828",
           "button_style":"#E4E4E4",
           "button_style_secc":"",
+          "button_style_selected":"#15A0EB"
         },
         "global":{} // global style
       },
@@ -116,6 +119,7 @@ export default new Vuex.Store({
         "drill_title_color":"#010101",
         "global_theme_color": "#0F2558",
         "global_radio":"#606060",
+        "global_selected_radio":"#0F2558",
         "generic_title_color" : "#2D2D2D",
         "legend_border_color" : "solid black 1px",
         "kpi":{
@@ -134,7 +138,8 @@ export default new Vuex.Store({
           "bar_icon":"#000000",
           "toolbar_title":"#000000",
           "navigation_drawer":"#FFFFFF",
-          "user_background":"#F4F4F4"
+          "user_background":"#F4F4F4",
+          "logout_btn":"#0F2558"
         },
         "category_bar":{
           "btn_chip":"#EBEBEB",
@@ -185,6 +190,7 @@ export default new Vuex.Store({
           "icon":"#FFFFFF",
           "button_style":"#0F2558",
           "button_style_secc":"",
+          "button_style_selected":"#0F2558"
         },
         "global":{} // global style
       }

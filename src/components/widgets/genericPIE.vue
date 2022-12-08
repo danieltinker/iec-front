@@ -7,7 +7,7 @@
                     <v-radio-group dir="rtl" v-model="params.selected_category" row id="districtRadioGroup"
                         v-if="params.data_category.length >= 2">
                         <v-radio v-for="(category) in params.data_category" :key="category" :label="category"
-                            :value="category" color="#0F2558"></v-radio>
+                            :value="category" :color="getCurrentTheme.global_selected_radio"></v-radio>
                     </v-radio-group>
                 </div>
                 <div class="pie-carousel">
@@ -249,6 +249,11 @@ export default {
 </script>
 
 <style scoped>
+
+
+:deep() .v-input--selection-controls__ripple {
+    height: 0px;
+}
 :deep() .v-input--selection-controls__input .v-icon {
     color: v-bind('getCurrentTheme.global_radio');
 }
