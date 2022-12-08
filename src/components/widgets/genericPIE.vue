@@ -11,23 +11,24 @@
                     </v-radio-group>
                 </div>
                 <div class="pie-carousel">
-                    <!-- <h1 v-if= " !isDrillDown">{{meta_data}}</h1>
-                    <h1 v-if= " isDrillDown">{{drilldown_meta}}</h1> -->
-                    
-                    <span id="chartsHeaders" v-if="!isDrillDown">
+                    <!-- <h1 v-if= " !isDrillDownProp">{{meta_data}}</h1>
+                    <h1 v-if= " isDrillDownProp">{{drilldown_meta}}</h1> -->
+
+                    <!-- <Chart-Title params, carousel active index, is drill,static drill titles prop></Chart-Title> -->
+                    <span id="chartsHeaders" v-if="!isDrillDownProp">
                         {{ params.chart_titles[params.selected_category][carouselActiveIndex] }}
                     </span>
-                    <span id="chartsHeaders" v-if="isDrillDown && !params.data_intersection">
+                    <span id="chartsHeaders" v-if="isDrillDownProp && !params.data_intersection">
                         {{ static_drill_titles_prop["*"][params.selected_category][carouselActiveIndex] }}
                     </span>
-                    <span id="chartsHeaders" v-if="isDrillDown && params.data_intersection">
+                    <span id="chartsHeaders" v-if="isDrillDownProp && params.data_intersection">
                         {{ static_drill_titles_prop[params.selected_category][carouselActiveIndex] }}
                     </span>
                     <span>
                         <v-icon dir="rtl"
                         @click="BookMarkClick(view_ID, parentsParam, params.template_type, true, carouselActiveIndex)"
                         color="#0F2558" style="font-size: 30px"
-                        v-if="isDrillDown && params.headline_config && params.headline_config.bookmark_enabled">{{
+                        v-if="isDrillDownProp && params.headline_config && params.headline_config.bookmark_enabled">{{
                             CheckBookmark(view_ID)
                             ? "mdi-bookmark"
                             : "mdi-bookmark-outline"
@@ -47,7 +48,7 @@
                     
                     <v-carousel-item v-for="(bararr, index) in jsonData[params.selected_category]" :key="index">
                         <div class="PIEcontainer" dir="rtl">
-                            <BaseGenericPie :chartData="bararr" :isDrill="isDrillDown"
+                            <BaseGenericPie :chartData="bararr" :isDrill="isDrillDownProp"
                                     :isPrecentage="params.isPrecentage" :isNumber="params.isNumber"
                                     @handleIntersection="pieClick" />
                             </div>
@@ -56,15 +57,15 @@
                 </div>
             </div>
 
-            <div class="clock-drilldown" v-if="params.expand && !isDrillDown && params.drill_down_params"
+            <div class="clock-drilldown" v-if="params.expand && !isDrillDownProp && params.drill_down_params"
                 :style="{ backgroundColor: getCurrentTheme.genericClock.drill_background }">
                 <h1 class="drilldown-title" v-if="params.drill_down_params.headline_config">
                     {{ params.drill_down_params.headline_config.title }}</h1>
                 <component :is="params.drill_down_params.template_type" :params=params.drill_down_params
-                    :isDrillDown="true" :view_ID="view_ID" :drillDataProp="drilldownData" :parentsParam="params"
+                    :isDrillDownProp="true" :view_ID="view_ID" :drillDataProp="drilldownData" :parentsParam="params"
                     :static_drill_titles_prop="params.static_drill_titles_param_copy"
                     :drilldown_meta= "meta_data"
-                    :drill_carousel_index = "main_to_drill_carousel_index">
+                    :drillCarouselIndexProp = "drillCarouselIndex">
                 </component>
             </div>
         </div>
@@ -86,14 +87,14 @@ import BaseGenericPie from './genericPie/baseGenericPie.vue'
 export default {
     // name:"basicKPI",
     props: {
-        isDrillDown: { type: Boolean },
+        isDrillDownProp: { type: Boolean },
         drillDataProp: { type: Object, default: () => { } },
         params: { type: Object, required: false },
         view_ID: { type: Number },
         parentsParam: { type: Object },
         static_drill_titles_prop: { type: Object },
         drilldown_meta:{type:Object},
-        drill_carousel_index:{type:Number}
+        drillCarouselIndexProp:{type:Number}
     },
 
     data() {
@@ -101,16 +102,18 @@ export default {
             doneFetching: false,
             hasMainDataRecieved:false,
 
-            main_to_drill_carousel_index:0,
-            myTimeout:undefined,
-            activeTitle: 0,
+            drillCarouselIndex:0,
+            tickCycleTime:undefined,
+
+            activeLabelIndex: 0,
             activeIndex: -1,
-            clicked_index: undefined,
+            selectedIndex: undefined,
+
             errorMSG: "",
             carouselActiveIndex: 0,
             drilldownData: [],
             jsonData: [],
-            static_drill_data: {},
+            intersectionDrillData: {},
             meta_data:{}
         }
     },
@@ -126,7 +129,7 @@ export default {
             this.doneFetching = false // show LOADER
             this.LoadDrillCarouselIndex()
             this.LoadQuickViewCarouselIndex()
-            if(!this.isDrillDown){
+            if(!this.isDrillDownProp){
                 await this.fetchMainData()
                 if(this.hasMainDataRecieved){
                     await this.fetchDrillData()
@@ -142,8 +145,8 @@ export default {
         },
 
         LoadDrillCarouselIndex(){
-            if(this.isDrillDown){ 
-                this.carouselActiveIndex = this.drill_carousel_index
+            if(this.isDrillDownProp){ 
+                this.carouselActiveIndex = this.drillCarouselIndexProp
             }
         },
         LoadQuickViewCarouselIndex(){
@@ -176,11 +179,8 @@ export default {
                             this.drilldownData = Object.assign(response.data)
 
                             if (this.params.data_intersection) {
-                                this.static_drill_data = Object.assign(response.data)
-                                if(this.params.data_intersection && this.params.expand){{ // reload clock state OnTick
-                                    this.drilldownData = this.static_drill_data[this.jsonData[this.params.selected_category][this.carouselActiveIndex][this.activeTitle].label]
-                                    this.params.static_drill_titles_param_copy = this.params.static_drill_titles_param[this.jsonData[this.params.selected_category][this.carouselActiveIndex][this.activeTitle].label]
-                                }}
+                                this.intersectionDrillData = Object.assign(response.data)
+                                this.reloadDrillDataOnTick()
                             }
 
                             this.errorMSG = ""
@@ -194,6 +194,12 @@ export default {
                             this.errorMSG = "אין מידע"
                         });
         },
+        reloadDrillDataOnTick(){
+            if(this.params.data_intersection && this.params.expand){ 
+                this.drilldownData = this.intersectionDrillData[this.jsonData[this.params.selected_category][this.carouselActiveIndex][this.activeLabelIndex].label]
+                this.params.static_drill_titles_param_copy = this.params.static_drill_titles_param[this.jsonData[this.params.selected_category][this.carouselActiveIndex][this.activeLabelIndex].label]
+            }
+        },
         hasErrorMsg(){
             if (this.errorMSG.length === 0) {
                 return false
@@ -201,18 +207,18 @@ export default {
             return true
         },
         tick(time){
-            setTimeout(this.fetchClock, time || 120000);
+            this.tickCycleTime = setTimeout(this.fetchData, time || this.$store.state.default_smpale_rate);
         },
 
         // toggel drill down from a label click if click_open_drill_enabled = true in the config
         pieClick(i) {
             if (this.params.data_intersection && this.params.click_open_drill_enabled) { // load intersection data 
-                this.activeTitle = i
-                this.drilldownData = this.static_drill_data[this.jsonData[this.params.selected_category][this.carouselActiveIndex][i].label]
+                this.activeLabelIndex = i
+                this.drilldownData = this.intersectionDrillData[this.jsonData[this.params.selected_category][this.carouselActiveIndex][i].label]
                 this.params.static_drill_titles_param_copy = this.params.static_drill_titles_param[this.jsonData[this.params.selected_category][this.carouselActiveIndex][i].label]
             }
             if (this.params.click_open_drill_enabled) { // expand drill handler
-                if (!this.params.expand || i != this.clicked_index) {
+                if (!this.params.expand || i != this.selectedIndex) {
                     // eslint-disable-next-line
                     this.params.expand = true
                     this.activeIndex = i
@@ -222,7 +228,7 @@ export default {
                     this.params.expand = false
                     this.activeIndex = -1
                 }
-                this.clicked_index = i
+                this.selectedIndex = i
             }
         }
     },
@@ -230,14 +236,14 @@ export default {
     created(){
  
         this.$on("myIndex", (i)=>{
-                this.main_to_drill_carousel_index = i
+                this.drillCarouselIndex = i
         })
         this.fetchClock()
     },
     
     beforeDestroy() {
         this.$parent.$emit("myIndex",this.carouselActiveIndex)
-        clearTimeout(this.myTimeout)
+        clearTimeout(this.tickCycleTime)
     },
 
     watch: {
