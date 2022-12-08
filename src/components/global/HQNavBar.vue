@@ -140,12 +140,14 @@
           "
           elevation="0"
           rounded
-          @click="logoutDialog = true"
+          @click="$store.state.is_logout_dialog = true"
           >התנתק/י</v-btn
         >
       </div>
 
       <!-- logout -->
+
+      <Logout_dialog v-if="$store.state.is_logout_dialog" />
 
 
       </v-navigation-drawer>
@@ -154,73 +156,71 @@
   
     <script>
   import axios from "axios";
+import Logout_dialog from "./logout_dialog.vue";
   export default {
-    methods:{
-      setHQ(item){
-        this.$store.state.selected_hq_id = item.HQ_ID
-        this.$store.state.appTitle = item.LABEL
-      }
+    methods: {
+        setHQ(item) {
+            this.$store.state.selected_hq_id = item.HQ_ID;
+            this.$store.state.appTitle = item.LABEL;
+        }
     },
-    computed:{
-      getAppTitle(){
-        return this.$store.state.appTitle
-      }
+    computed: {
+        getAppTitle() {
+            return this.$store.state.appTitle;
+        }
     },
     async created() {
-      //set switch button true/false by theme
-      //yolan :C :C code = this.theme = this.$store.state.prefTheme == "darkTheme"
-      this.$store.state.prefTheme == "darkTheme" ? this.theme = true : this.theme = false
-      //get hqs By sid
-      await axios
-        .get(this.$store.state.serverAdrr+"/shavit-mobile/hq", 
-        {params: {user_id:this.$store.state.loginStore.userInfo.user_id, sid: this.$store.state.loginStore.userInfo.sid }}
-        )
-        .then(response => {
-          this.hqs = response.data;
-          response.data.forEach( obj => {
-              if (obj["HQ_ID"] == this.$store.state.loginStore.userInfo.main_hq){
-                  this.$store.state.appTitle = obj["LABEL"]
-              }
-          } )               
+        //set switch button true/false by theme
+        //yolan :C :C code = this.theme = this.$store.state.prefTheme == "darkTheme"
+        this.$store.state.prefTheme == "darkTheme" ? this.theme = true : this.theme = false;
+        //get hqs By sid
+        await axios
+            .get(this.$store.state.serverAdrr + "/shavit-mobile/hq", { params: { user_id: this.$store.state.loginStore.userInfo.user_id, sid: this.$store.state.loginStore.userInfo.sid } })
+            .then(response => {
+            this.hqs = response.data;
+            response.data.forEach(obj => {
+                if (obj["HQ_ID"] == this.$store.state.loginStore.userInfo.main_hq) {
+                    this.$store.state.appTitle = obj["LABEL"];
+                }
+            });
         })
-        .catch((error) => {
-          console.log(error);
+            .catch((error) => {
+            console.log(error);
         });
     },
     data: () => ({
-      theme:false,
-      drawer: false,
-      group: null,
-      hqs: [],
-
+        theme: false,
+        drawer: false,
+        group: null,
+        hqs: [],
     }),
-  
     watch: {
-      group() {
-        this.drawer = false;
-      },
-      async theme(){
-        // change store theme by user
-        this.theme ? this.$store.state.prefTheme = "darkTheme" : this.$store.state.prefTheme = "lightTheme"
-        let currentTheme = this.theme ? "darkTheme" : "lightTheme"
-        localStorage.setItem("prefTheme",currentTheme) 
-        if(this.theme){
-          console.log("App Theme Mode: Dark");
-        } else {
-          console.log("App Theme Mode: Light");
+        group() {
+            this.drawer = false;
+        },
+        async theme() {
+            // change store theme by user
+            this.theme ? this.$store.state.prefTheme = "darkTheme" : this.$store.state.prefTheme = "lightTheme";
+            let currentTheme = this.theme ? "darkTheme" : "lightTheme";
+            localStorage.setItem("prefTheme", currentTheme);
+            if (this.theme) {
+                console.log("App Theme Mode: Dark");
+            }
+            else {
+                console.log("App Theme Mode: Light");
+            }
+            // update DB user theme
+            await this.$myShavitApi(`user/themes/${currentTheme}`)
+                .then(response => {
+                console.log(response);
+            })
+                .catch(error => {
+                console.log(error, "user theme update failed");
+            });
         }
-
-        // update DB user theme
-        await this.$myShavitApi(`user/themes/${currentTheme}`)
-                    .then(response => {
-                      console.log(response);
-                    })
-                    .catch(error => {
-                        console.log(error,"user theme update failed");
-                    });
-      }
-    }
-  };
+    },
+    components: { Logout_dialog }
+};
   </script>
   
   <style scoped>

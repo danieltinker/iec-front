@@ -21,6 +21,7 @@ export default new Vuex.Store({
     quick_view: false,
     default_smpale_rate:120000,
     user_favorites: [],
+    is_logout_dialog:false,
     // isAuthenticated: window.localStorage.getItem("sessionid") ? true : false,
     // make curr user init to default and set this data from the home view on created.
     // currUser: {"name":"yosef", "sessionId": window.localStorage.getItem("sessionid"),"user_id": window.localStorage.getItem("user_id")},
@@ -109,6 +110,11 @@ export default new Vuex.Store({
           "button_style_secc":"",
           "button_style_selected":"#15A0EB"
         },
+        "logout_dialog" : {
+          "main_card":"#282828",
+          "card_btn_title":"#FFFFFF",
+          "btn_color":"#E4E4E4"
+        },
         "global":{} // global style
       },
       "lightTheme":{
@@ -191,6 +197,11 @@ export default new Vuex.Store({
           "button_style":"#0F2558",
           "button_style_secc":"",
           "button_style_selected":"#0F2558"
+        },
+        "logout_dialog" : {
+          "main_card":"#FFFFFF",
+          "card_btn_title":"#000000",
+          "btn_color":"#0F2558"
         },
         "global":{} // global style
       }
