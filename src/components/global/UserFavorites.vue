@@ -119,7 +119,7 @@ export default {
         },
         getImg(img) {
             try {
-                return require(`@/assets/FavBar/${img}.svg`);
+                return this.getCurrentTheme.theme == "darkTheme" ? require(`@/assets/FavBar/${img}_dark.svg`) : require(`@/assets/FavBar/${img}.svg`);
             }
             catch (e) {
                 //defaultImage

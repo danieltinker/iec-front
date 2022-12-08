@@ -48,8 +48,9 @@
 
                 <div v-for="(btnName, index) in KPIarr" :key="index">
 
-                  <div v-if="btnName.selected" class="statusBox" :style="{ 'background-color': btnName.color }">
-                    <h1 style="font-family: almoni-medium; font-size: 28px;color:white">{{ btnName.label }}</h1>
+                  <div v-if="btnName.selected" class="statusBoxV2" :style="{ 'background-color': btnName.color }">
+                    <img v-if="btnName.icon" :src="require(`@/assets/comp_items/${btnName.icon}.svg`)" style="max-width:100%;max-height:100%;float: right;margin-left:8px" />
+                    <h1 style="font-family: almoni-medium; font-size: 28px;color:white;text-align: right;">{{ btnName.label }}</h1>
                   </div>
                   <span v-if="btnName.selected" style="font-family: almoni;"
                     :style="'color:' + getCurrentTheme.baseGenericPie.span_color">{{ btnName.cause }} </span>
@@ -321,7 +322,7 @@ export default {
   /* margin-left: 5px; */
 }
 
-.statusBox {
+.statusBoxV2 {
   text-align: center;
   line-height: 50px;
   margin: auto;
@@ -330,6 +331,7 @@ export default {
   margin-bottom: 28px;
   width: 180px;
   height: 50px;
+  border-radius: 200px;
 }
 
 .flex-center {
