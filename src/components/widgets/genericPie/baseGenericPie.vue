@@ -56,6 +56,7 @@ export default {
   },
   data(){
         return{
+          TemplateData:undefined,
           activeIndex:undefined,
           chartTitle:"test",
           isDrillDown:false,

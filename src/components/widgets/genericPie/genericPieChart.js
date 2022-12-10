@@ -13,6 +13,7 @@ export default {
     },
     watch: {
         data() {
+            console.log("dataupdate");
             this.renderChart(this.data, this.newOptions)
         },
         "$store.state.prefTheme": {
