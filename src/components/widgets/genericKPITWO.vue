@@ -57,7 +57,7 @@ export default {
 </script>
 
 <style scoped>
-:deep() .v-input--selection-controls__ripple {
+/* :deep() .v-input--selection-controls__ripple {
     height: 0px;
 }
 
@@ -72,7 +72,7 @@ export default {
 
 :deep() .v-input--radio-group.v-input--radio-group--row .v-radio {
     margin-right: 0px !important;
-}
+} */
 
 .flex-center {
     display: flex;
@@ -115,7 +115,7 @@ export default {
 .kpi-value-sec {
     width: 60px
 }
-
+/* 
 .loader {
     height: 400px;
     width: 100%;
@@ -127,7 +127,7 @@ export default {
 
 .v-progress-circular {
     padding: 40px;
-}
+} */
 
 .kpi-box span {
     display: flex;
@@ -140,11 +140,11 @@ export default {
     color: #606060
 }
 
-#chartsHeaders {
+/* #chartsHeaders {
     font-family: almoni-medium;
     font-size: 18px;
     color: v-bind('getCurrentTheme.generic_title_color');
-    /* margin-bottom: 18px; */
+    margin-bottom: 18px;
 }
 
 
@@ -186,7 +186,7 @@ export default {
 .radio-btn {
     display: inline-block !important;
     ;
-}
+} */
 
 .grid-container {
     width: 306px;
@@ -197,7 +197,4 @@ export default {
 
 }
 
-.grid-item {
-    /* justify-self: center; */
-}
 </style>

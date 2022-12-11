@@ -63,7 +63,7 @@ export default {
 </script>
 
 <style scoped>
-:deep() .v-input--selection-controls__input .v-icon {
+/* :deep() .v-input--selection-controls__input .v-icon {
   color: v-bind('getCurrentTheme.global_radio');
 }
 
@@ -74,7 +74,7 @@ export default {
 
 :deep() .v-input--radio-group.v-input--radio-group--row .v-radio {
   margin-right: 0px !important;
-}
+} */
 
 .btn-container {
   margin-top: 50px;
@@ -115,21 +115,13 @@ export default {
   border-radius: 200px;
 }
 
-.flex-center {
+/* .flex-center {
   display: flex;
   flex-direction: column;
   align-items: center;
-}
+} */
 
-.KPIcontainer {
-  /* display: grid;
-  grid-template-columns: auto auto;
-  row-gap: 6px;
-  column-gap: 8px;
-  justify-content: center;
-  padding-bottom: 8px; */
-}
-
+/* 
 .kpi-box {
   padding-top: 0px;
   text-align: center;
@@ -137,7 +129,7 @@ export default {
   width: 159px;
   height: 80px;
   border-radius: 4px;
-}
+} */
 
 /* .kpi-box span:first-child{
     font-family: almoni;
@@ -145,7 +137,7 @@ export default {
     line-height: 30px;
 } */
 
-.loader {
+/* .loader {
   height: 400px;
   width: 100%;
   display: flex;
@@ -156,7 +148,7 @@ export default {
 
 .v-progress-circular {
   padding: 40px;
-}
+} */
 
 /* .kpi-box span{
     display: inline-block;
@@ -164,7 +156,7 @@ export default {
     font-family: almoni;
     color: #a8699d;
 } */
-.kpi-box .kpi-sec-value {
+/* .kpi-box .kpi-sec-value {
   color: #606060;
 }
 
@@ -172,10 +164,10 @@ export default {
   font-family: almoni-medium;
   font-size: 18px;
   color: v-bind("getCurrentTheme.generic_title_color");
-  /* margin-bottom: 18px; */
-}
+  margin-bottom: 18px;
+} */
 
-.clock-drilldown {
+/* .clock-drilldown {
   background-color: #e5e5e5;
   padding-bottom: 20px;
 }
@@ -221,5 +213,5 @@ export default {
 
 .radio-btn {
   display: inline-block !important;
-}
+} */
 </style>

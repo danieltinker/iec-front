@@ -72,7 +72,7 @@ export default {
 </script>
 
 <style scoped>
-:deep() .v-input--selection-controls__ripple {
+/* :deep() .v-input--selection-controls__ripple {
     height: 0px;
 }
 
@@ -91,7 +91,7 @@ export default {
 
 :deep() .v-input--radio-group.v-input--radio-group--row .v-radio {
     margin-right: 0px !important;
-}
+} */
 
 .labels {
     font-size: 16px;
@@ -129,15 +129,15 @@ export default {
     overflow: hidden;
     border-radius: 6px;
     width: 102px !important;
+    box-shadow: 0px 0px !important;
     /* text-align: -webkit-right;
          */
-    box-shadow: 0px 0px !important;
 }
 
 .main-btn::before {
     display: none;
 }
-
+/* 
 .flex-center {
     display: flex;
     flex-direction: column;
@@ -162,7 +162,7 @@ export default {
     font-family: almoni-medium;
     font-size: 18px;
     color: v-bind('getCurrentTheme.generic_title_color');
-    /* margin-bottom: 18px; */
+    margin-bottom: 18px;
 }
 
 .clock-drilldown {
@@ -204,7 +204,7 @@ export default {
 .radio-btn {
     display: inline-block !important;
     ;
-}
+} */
 
 .dot {
     align-self: center;

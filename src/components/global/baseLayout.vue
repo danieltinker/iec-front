@@ -183,7 +183,7 @@ export default {
         },
         // toggel drill down from a label click if click_open_drill_enabled = true in the config
         BoxClick(i) {
-            console.log("hree");
+            console.log("box click");
             this.activeTitle = i
             if (this.params.data_intersection) {
                 this.drilldownData = this.static_drill_data[this.jsonData[this.params.selected_category][this.carouselActiveIndex][i].label]

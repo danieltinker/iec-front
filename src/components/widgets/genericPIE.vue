@@ -30,7 +30,7 @@ export default {
 </script>
 
 <style scoped>
-:deep() .v-input--selection-controls__ripple {
+/* :deep() .v-input--selection-controls__ripple {
     height: 0px;
 }
 
@@ -60,8 +60,8 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
+} */
+/* 
 .barcontainer {
     display: grid;
     grid-template-columns: auto auto;
@@ -69,23 +69,23 @@ export default {
     column-gap: 10px;
     justify-content: center;
     padding-bottom: 20px;
-}
+} */
 
-.bar-box {
+/* .bar-box {
     padding-top: 4px;
     text-align: center;
     align-items: center;
     width: 165px;
     height: 80px;
     border-radius: 4px;
-}
+} */
 
 /* .kpi-box span:first-child{
     font-family: almoni;
     font-size: 20px;
     line-height: 30px;
 } */
-
+/* 
 .loader {
     height: 400px;
     width: 100%;
@@ -97,9 +97,9 @@ export default {
 
 .v-progress-circular {
     padding: 40px;
-}
+} */
 
-.bar-box span {
+/* .bar-box span {
     display: inline-block;
     font-size: 16px;
     font-family: almoni-demibold;
@@ -108,13 +108,13 @@ export default {
 
 .bar-box .bar-sec-value {
     color: #606060
-}
-
+} */
+/* 
 #chartsHeaders {
     font-family: almoni-medium;
     font-size: 18px;
     color: v-bind('getCurrentTheme.generic_title_color');
-    /* margin-bottom: 18px; */
+    margin-bottom: 18px;
 }
 
 .clock-drilldown {
@@ -128,20 +128,16 @@ export default {
     font-size: 24px;
     text-align: center;
     font-family: almoni;
-}
+} */
 
-.bar-box span {
+/* .bar-box span {
     display: inline-block;
     font-size: 18px;
     font-family: almoni-demibold;
     color: #a8699d;
-}
+} */
 
-.clock-drilldown {
-    background-color: #E5E5E5;
-    padding-bottom: 20px;
-}
-
+/* 
 .carousel-flex {
     display: flex;
     flex-direction: column;
@@ -157,10 +153,10 @@ export default {
     background-color: transparent !important;
     color: transparent !important;
     top: 40% !important;
-}
+} */
 
-.radio-btn {
+/* .radio-btn {
     display: inline-block !important;
     ;
-}
+} */
 </style>
