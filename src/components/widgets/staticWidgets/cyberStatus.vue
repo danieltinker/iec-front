@@ -17,10 +17,10 @@
           <v-carousel :continuous="false" hide-delimiters :show-arrows="true" class="carousel-flex" ref="pieCarousel"
             v-model="carouselActiveIndex">
             <template v-if="showArrows" v-slot:next="{ on, attr }">
-              <img v-on="on" v-bind="attr" src="../../assets/playRight.svg" />
+              <img v-on="on" v-bind="attr" src="../../../assets/playRight.svg" />
             </template>
             <template v-if="showArrows" v-slot:prev="{ on, attr }">
-              <img v-on="on" v-bind="attr" src="../../assets/playLeft.svg" />
+              <img v-on="on" v-bind="attr" src="../../../assets/playLeft.svg" />
             </template>
             <v-carousel-item :cycle="false" v-for="(cyberStatusData, index) in cyberStatusData
             .slice(1)
@@ -44,7 +44,7 @@
   
   
 <script>
-import customCyberStatus from "./cyberStatus/customCyberStatus.vue";
+import customCyberStatus from "../cyberStatus/customCyberStatus.vue";
 export default {
   props: {
     params: { type: Object, required: false },

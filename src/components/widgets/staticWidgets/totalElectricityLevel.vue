@@ -63,7 +63,7 @@
 </template>
   
 <script>
-import OneBar from '../utils/staticCustomOneBar.vue';
+import OneBar from '../../utils/staticCustomOneBar.vue';
 export default {
     props: {
         params: { type: Object, required: false },

@@ -59,12 +59,12 @@ import genericPIE from "../widgets/genericPIE.vue";
 import genericBAR from "../widgets/genericBAR.vue";
 import genericKPITWO from "../widgets/genericKPITWO.vue"
 import genericGraph from "../widgets/genericGraph.vue"
-import cyberStatus from "../widgets/cyberStatus.vue"
-import iecLineChart from "../widgets/iecLineChart.vue"
-import remoteUsers from "../widgets/remoteUsers.vue"
+import cyberStatus from "../widgets/staticWidgets/cyberStatus.vue"
+import iecLineChart from "../widgets/staticWidgets/iecLineChart.vue"
+import remoteUsers from "../widgets/staticWidgets/remoteUsers.vue"
 import genericBoxKpi from "../widgets/genericBoxKpi.vue"
 import genericLIST from "../widgets/genericLIST.vue"
-import totalElectricityLevel from "../widgets/totalElectricityLevel"
+import totalElectricityLevel from "../widgets/staticWidgets/totalElectricityLevel"
 import axios from "axios";
 import { mapGetters } from "vuex";
 import MaxFavoritePopup from "./maxFavoritePopup.vue";
