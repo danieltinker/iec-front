@@ -30,8 +30,8 @@ export default{
             })
             this.option.chart.zoom.enabled = false
             this.option.chart.toolbar.show = false
-            this.option.xaxis[0].axisBorder.show = true
-            this.option.yaxis[0].axisBorder.show = true
+            // this.option.xaxis[0].axisBorder.show = true
+            // this.option.yaxis[0].axisBorder.show = true
             this.option.xaxis.range =  100000
             this.option.xaxis.tickAmount = 10
             this.option.xaxis.type = 'datetime'
