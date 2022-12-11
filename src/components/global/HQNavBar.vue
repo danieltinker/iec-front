@@ -166,7 +166,7 @@ import Logout_dialog from "./logout_dialog.vue";
     },
     computed: {
       hq_name_normal(){
-        return $store.state.loginStore.userInfo.hq_name.replace("&#34;",'"')
+        return this.$store.state.loginStore.userInfo.hq_name
       },
         getAppTitle() {
             return this.$store.state.appTitle;
