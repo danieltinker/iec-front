@@ -129,8 +129,6 @@ export default {
 
         async fetchClock() {
             this.doneFetching = false // show LOADER
-            console.log("START")
-    
             this.LoadDrillCarouselIndex()
             this.LoadQuickViewCarouselIndex()
             if(!this.isDrillDown){
@@ -161,7 +159,6 @@ export default {
         async fetchMainData(){
             await this.$myApi(this.params.data_url)
                     .then(response => {
-                        
                         this.jsonData = response.data
                         this.errorMSG = ""
                         this.hasMainDataRecieved = true
@@ -172,19 +169,15 @@ export default {
                         }
                     })
                     .catch(error => {
-                        console.log("START2")
-
                         console.log(error, "Main Clock Data GET request FAIL, PLEASE Check BackEnd & Db")
                         this.errorMSG = "אין מידע"
                         this.hasMainDataRecieved = false
                     });
         },
         async fetchDrillData(){
-            console.log("START1",this.params)
             this.params.static_drill_titles_param_copy = this.params.static_drill_titles_param
                     await this.$myApi(this.params.drill_down_params.data_url)
                         .then(response => {
-                            console.log("wtf?")
                             this.drilldownData = Object.assign(response.data)
 
                             if (this.params.data_intersection) {
@@ -200,8 +193,6 @@ export default {
 
                         })
                         .catch(error => {
-                            console.log("START2",this.params)
-
                             console.log(error, "drill DATA FETCH ERROR");
                             this.errorMSG = "אין מידע"
                         });
