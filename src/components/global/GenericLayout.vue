@@ -10,18 +10,8 @@
                             :value="category" :color="getCurrentTheme.global_selected_radio"></v-radio>
                     </v-radio-group>
                 </div>
-                <div class="kpi-carousel">
-
-                    <span id="chartsHeaders" v-if="!isDrillDown">
-                        {{ params.chart_titles[params.selected_category][carouselActiveIndex] }}
-                    </span>
-                    <span id="chartsHeaders" v-if="isDrillDown && !params.data_intersection">
-                        {{ static_drill_titles_prop["*"][params.selected_category][carouselActiveIndex] }}
-                    </span>
-                    <span id="chartsHeaders" v-if="isDrillDown && params.data_intersection">
-                        {{ static_drill_titles_prop[params.selected_category][carouselActiveIndex] }}
-                    </span>
-
+                <div class="clock-carousel">
+                    <ChartTitles :isDrillDown="isDrillDown" :params="params" :carouselActiveIndex="carouselActiveIndex" :static_drill_titles_prop="static_drill_titles_prop"></ChartTitles>
                     <span>
                         <v-icon dir="rtl"
                             @click="BookMarkClick(view_ID, parentsParam, params.template_type, true, carouselActiveIndex)"
@@ -42,15 +32,13 @@
                             <img v-on="on" v-bind="attr" src="../../assets/playLeft.svg" />
                         </template>
 
-                        <v-carousel-item v-for="(KPIarr, index) in jsonData[params.selected_category]" :key="index">
-                            <div dir="rtl">
-                                <!-- generic clocks start -->
+                        <v-carousel-item v-for="(DataArray, index) in jsonData[params.selected_category]" :key="index">
+                            <div class="generic-clock" dir="rtl">
                                 <component @BoxClick="BoxClick"
                                  :props_object={isDrillDown:isDrillDown,activeIndex:activeIndex,params:params,jsonData:jsonData} 
                                  :is="stepComponent" 
-                                 :activeData="KPIarr">
+                                 :activeData="DataArray">
                                 </component>
-                                <!-- generic clocks endd -->
                             </div>
                         </v-carousel-item>
                     </v-carousel>
@@ -60,14 +48,14 @@
                 :style="{ backgroundColor: getCurrentTheme.genericClock.drill_background }">
                 <h1 class="drilldown-title" v-if="params.drill_down_params.headline_config">
                     {{ params.drill_down_params.headline_config.title }}</h1>
-                <component :is="'baseLayout'" :params=params.drill_down_params
+                <component :is="'GenericLayout'" :params=params.drill_down_params
                     :isDrillDown="true" :view_ID="view_ID" :drillDataProp="drilldownData" :parentsParam="params"
                     :static_drill_titles_prop="params.static_drill_titles_param_copy"
                     :drillCarouselIndexProp="drillCarouselIndex">
                 </component>
             </div>
         </div>
-        <div class="loader" v-else>
+        <div class="data-status-pod" v-else>
             <div class="loader" v-if="!isErrorMsg">
                 <v-progress-circular indeterminate :style="{ color: getCurrentTheme.global_theme_color }">
                 </v-progress-circular>
@@ -78,7 +66,9 @@
 </template>
 
 <script>
+
 import ThreeDotsNineDots from '../utils/ThreeDotsNineDots.vue'
+import ChartTitles from '../utils/ChartTitles.vue'
 export default {
     props: {
         isDrillDown: { type: Boolean },
@@ -115,13 +105,8 @@ export default {
     },
     components: {
         ThreeDotsNineDots,
-        // genericKPI: () => import('../widgets/genericKPI.vue'),
-        // genericKPITWO: () => import('../widgets/genericKPITWO.vue'),
-        // genericPIE: () => import('../widgets/genericPIE.vue'),
-        // genericBAR: () => import('../widgets/genericBAR.vue'),
-        // genericLIST: () => import('../widgets/genericLIST.vue'),
-        // genericBoxKpi: () => import('../widgets/genericBoxKpi.vue'),
-        baseLayout: () => import('../global/baseLayout.vue')
+        ChartTitles,
+        GenericLayout: () => import('../global/GenericLayout.vue')
     },
     methods: {
 
@@ -207,19 +192,21 @@ export default {
             }
             return true
         },
-
         tick(time){
             this.tickCycleTime = setTimeout(this.fetchData, time || this.$store.state.default_smpale_rate);
         },
-        // toggel drill down from a label click if click_open_drill_enabled = true in the config
         BoxClick(i) {
-            console.log("box click");
+            this.loadIntersectionData(i)
+            this.expandDrillHandler(i)
+        },
+        loadIntersectionData(i){
             if (this.params.data_intersection) {
                 this.activeLabelIndex = i
                 this.drilldownData = this.intersectionDrillData[this.jsonData[this.params.selected_category][this.carouselActiveIndex][i].label]
                 this.params.static_drill_titles_param_copy = this.params.static_drill_titles_param[this.jsonData[this.params.selected_category][this.carouselActiveIndex][i].label]
-
             }
+        },
+        expandDrillHandler(i){
             if (this.params.click_open_drill_enabled) {
                 if (!this.params.expand || i != this.selectedIndex) {
                     // eslint-disable-next-line
@@ -247,13 +234,11 @@ export default {
     },
     computed: {
         stepComponent() {
-                // let data = this.active_template_type;
                 return () => import(`../widgets/${this.active_template_type}`);
             },
         active_template_type() {
             return this.isDrillDown ? this.params.template_type : this.template_type
         },
-        // hide the Carousel prev next btns if only one chart is avaliable.
         showArrows() {
             if (this.jsonData[this.params.selected_category].length > 1) return true;
             else return false
@@ -316,6 +301,15 @@ export default {
 
 .loader {
     height: 400px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+}
+
+.data-status-pod {
+    height: 100px;
     width: 100%;
     display: flex;
     justify-content: center;

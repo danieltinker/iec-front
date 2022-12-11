@@ -23,10 +23,10 @@
           </div>
         </div>
       </div>
-      <component v-if="widget.STATIC" :is="widget.TEMPLATE_TYPE" :params="widget.PARAMETERS" :isDrillDown="false" :view_ID="widget.VIEW_ID" :ref="'component' + widget.VIEW_ID">
+      <component v-if="JSON.parse(widget.STATIC)" :is="widget.TEMPLATE_TYPE" :params="widget.PARAMETERS" :isDrillDown="false" :view_ID="widget.VIEW_ID" :ref="'component' + widget.VIEW_ID">
       </component>
-      <baseLayout v-else :template_type="widget.TEMPLATE_TYPE" :params="widget.PARAMETERS" :isDrillDown="false" :view_ID="widget.VIEW_ID" :ref="'component' + widget.VIEW_ID">
-      </baseLayout>
+      <GenericLayout v-else :template_type="widget.TEMPLATE_TYPE" :params="widget.PARAMETERS" :isDrillDown="false" :view_ID="widget.VIEW_ID" :ref="'component' + widget.VIEW_ID">
+      </GenericLayout>
     </div>
   </div>
 
@@ -68,7 +68,7 @@ import totalElectricityLevel from "../widgets/totalElectricityLevel"
 import axios from "axios";
 import { mapGetters } from "vuex";
 import MaxFavoritePopup from "./maxFavoritePopup.vue";
-import BaseLayout from "./baseLayout.vue";
+import GenericLayout from "./GenericLayout.vue";
 export default {
   components: {
     ThreeDotsNineDots,
@@ -84,7 +84,7 @@ export default {
     totalElectricityLevel,
     iecLineChart,
     genericBoxKpi,
-    BaseLayout
+    GenericLayout
 },
   props: {
     quickViewPopup: {

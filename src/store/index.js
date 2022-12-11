@@ -19,7 +19,7 @@ export default new Vuex.Store({
     serverAdrr: process.env.NODE_ENV === 'development' ? "http://20.102.120.232:8080" : "",
     isAzureEnv: process.env.NODE_ENV === 'development' ? true : false,
     quick_view: false,
-    default_smpale_rate:120000,
+    default_sample_rate:120000,
     user_favorites: [],
     is_logout_dialog:false,
     // isAuthenticated: window.localStorage.getItem("sessionid") ? true : false,
