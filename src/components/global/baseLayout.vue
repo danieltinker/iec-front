@@ -25,12 +25,10 @@
                     <span>
                         <v-icon dir="rtl"
                             @click="BookMarkClick(view_ID, parentsParam, params.template_type, true, carouselActiveIndex)"
-                            color="#0F2558" style="font-size: 30px"
-                            v-if="isDrillDown && params.headline_config && params.headline_config.bookmark_enabled">{{
-                                    CheckBookmark(view_ID)
-                                        ? "mdi-bookmark"
-                                        : "mdi-bookmark-outline"
-                            }}</v-icon>
+                            style="font-size: 30px"
+                            :style="{color:getCurrentTheme.global_theme_color}"
+                            v-if="isDrillDown && params.headline_config && params.headline_config.bookmark_enabled">
+                            {{CheckBookmark(view_ID)? "mdi-bookmark": "mdi-bookmark-outline"}}</v-icon>
                     </span>
 
 
@@ -47,10 +45,10 @@
                         <v-carousel-item v-for="(KPIarr, index) in jsonData[params.selected_category]" :key="index">
                             <div dir="rtl">
                                 <!-- generic clocks start -->
-                                <component @BoxClick="BoxClick" :props_object={isDrillDown:isDrillDown,activeIndex:activeIndex,params:params,jsonData:jsonData} :is="stepComponent" :activeData="KPIarr">
-
-                                    <!-- <component :is="widget.TEMPLATE_TYPE" :params="widget.PARAMETERS" :isDrillDown="false"
-                                    :view_ID="widget.VIEW_ID" :ref="'component' + widget.VIEW_ID"> -->
+                                <component @BoxClick="BoxClick"
+                                 :props_object={isDrillDown:isDrillDown,activeIndex:activeIndex,params:params,jsonData:jsonData} 
+                                 :is="stepComponent" 
+                                 :activeData="KPIarr">
                                 </component>
                                 <!-- generic clocks endd -->
                             </div>
