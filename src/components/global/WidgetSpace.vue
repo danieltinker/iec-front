@@ -23,8 +23,7 @@
           </div>
         </div>
       </div>
-      <component :is="widget.TEMPLATE_TYPE" :params="widget.PARAMETERS" :isDrillDown="false" :view_ID="widget.VIEW_ID" :ref="'component' + widget.VIEW_ID">
-      </component>
+     <genericLayout :wigetTemplate="widget.TEMPLATE_TYPE" :params="widget.PARAMETERS" :isDrillDown="false" :view_ID="widget.VIEW_ID" :ref="'component' + widget.VIEW_ID"/>
     </div>
   </div>
 
@@ -62,12 +61,14 @@ import iecLineChart from "../widgets/iecLineChart.vue"
 import remoteUsers from "../widgets/remoteUsers.vue"
 import genericBoxKpi from "../widgets/genericBoxKpi.vue"
 import genericLIST from "../widgets/genericLIST.vue"
+import genericLayout from "../global/genericLayout.vue"
 import totalElectricityLevel from "../widgets/totalElectricityLevel"
 import axios from "axios";
 import { mapGetters } from "vuex";
 import MaxFavoritePopup from "./maxFavoritePopup.vue";
 export default {
   components: {
+    genericLayout,
     ThreeDotsNineDots,
     genericKPI,
     genericPIE,
