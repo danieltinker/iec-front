@@ -4,7 +4,7 @@
         <v-row dir="rtl" style="margin-top:10px;margin-bottom: 20px; place-content: center">
             <oneBar v-for="(item, index) in activeData" :isSelectedIndex="props_object.activeIndex === index"
                 :isSelected="props_object.activeIndex != -1" :key="index" v-on:click.native="$emit('BoxClick',index)" :params="props_object.params"
-                :data="item.color ? item.max_value ? item : getTotal(props_object.activeData, item) : item.max_value ? getColor(item, index) : getColor(getTotal(activeData, item), index)" />
+                :data="item.color ? item.max_value ? item : getTotal(activeData, item) : item.max_value ? getColor(item, index) : getColor(getTotal(activeData, item), index)" />
         </v-row>
 
         <div class="btn-container">
