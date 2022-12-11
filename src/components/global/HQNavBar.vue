@@ -31,7 +31,7 @@
             getCurrentTheme.hq_navbar.toolbar_title
           "
           dir="rtl"
-          >מטה: {{$store.state.loginStore.userInfo.hq_name}} </span
+          >מטה: {{hq_name_normal}} </span
         >
       </div>
         <v-list nav dense>
@@ -165,6 +165,9 @@ import Logout_dialog from "./logout_dialog.vue";
         }
     },
     computed: {
+      hq_name_normal(){
+        return $store.state.loginStore.userInfo.hq_name.replace("&#34;",'"')
+      },
         getAppTitle() {
             return this.$store.state.appTitle;
         }
