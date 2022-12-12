@@ -33,13 +33,13 @@ export default {
     computed:{},
     methods: {
         processLogout() {
-            localStorage.clear()
-            // localStorage.removeItem('user_id');
-            // localStorage.removeItem('sessionid');
-            // localStorage.removeItem('hebrew_name');
-            // localStorage.removeItem('hq_name');
-            // localStorage.removeItem('main_hq');
-            // localStorage.removeItem('prefTheme');
+            // localStorage.clear()
+            localStorage.removeItem('user_id');
+            localStorage.removeItem('sessionid');
+            localStorage.removeItem('hebrew_name');
+            localStorage.removeItem('hq_name');
+            localStorage.removeItem('main_hq');
+            localStorage.removeItem('prefTheme');
             this.$router.push("mobile_login");
             this.$store.state.is_logout_dialog = false
         }
