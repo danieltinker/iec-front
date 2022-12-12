@@ -127,27 +127,6 @@ export default {
     color: v-bind('getCurrentTheme.drill_title_color');
 }
 
-/* :deep() .v-data-footer .v-icon {
-    color:white !important
-} */
-
-/* :deep() .v-input--selection-controls__ripple {
-    height: 0px;
-}
-
-:deep() .v-input--selection-controls__input .v-icon {
-    color: v-bind('getCurrentTheme.global_radio');
-}
-
-:deep() .v-input--selection-controls .v-radio>.v-label {
-    color: v-bind('getCurrentTheme.drill_title_color');
-    margin-right: 6px;
-}
-
-:deep() .v-input--radio-group.v-input--radio-group--row .v-radio {
-    margin-right: 0px !important;
-} */
-
 .updateDate {
     font-family: almoni-medium;
     font-size: 16px;
@@ -222,8 +201,6 @@ export default {
 
 }
 
-
-
 :deep() .theme--light.v-data-table>.v-data-table__wrapper>table>tbody>tr:not(:last-child)>td:not(.v-data-table__mobile-row),
 .theme--light.v-data-table>.v-data-table__wrapper>table>tbody>tr:not(:last-child)>th:not(.v-data-table__mobile-row) {
     border-bottom: 4px solid v-bind('getCurrentTheme.list_data.border_color');
@@ -241,6 +218,7 @@ export default {
 /* .mytable tbody tr:hover > .sorting_1 {
   background-color: #ffa;
 } */
+
 #mytable {
     /* pointer-events: none; */
     background-color: v-bind('getCurrentTheme.list_data.background_color');
@@ -295,6 +273,35 @@ export default {
     padding-bottom: 20px;
 }
 
+#chartsHeaders {
+    font-family: almoni-medium;
+    font-size: 18px;
+    color: v-bind('getCurrentTheme.generic_title_color');
+    /* margin-bottom: 18px; */
+}
+
+
+/* :deep() .v-data-footer .v-icon {
+    color:white !important
+} */
+
+/* :deep() .v-input--selection-controls__ripple {
+    height: 0px;
+}
+
+:deep() .v-input--selection-controls__input .v-icon {
+    color: v-bind('getCurrentTheme.global_radio');
+}
+
+:deep() .v-input--selection-controls .v-radio>.v-label {
+    color: v-bind('getCurrentTheme.drill_title_color');
+    margin-right: 6px;
+}
+
+:deep() .v-input--radio-group.v-input--radio-group--row .v-radio {
+    margin-right: 0px !important;
+} */
+
 /* .kpi-box {
     padding-top: 4px;
     text-align: center;
@@ -334,12 +341,7 @@ export default {
     color: #606060
 } */
 
-#chartsHeaders {
-    font-family: almoni-medium;
-    font-size: 18px;
-    color: v-bind('getCurrentTheme.generic_title_color');
-    /* margin-bottom: 18px; */
-}
+
 
 /* .clock-drilldown {
     background-color: #E5E5E5;

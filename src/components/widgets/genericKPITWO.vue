@@ -57,22 +57,6 @@ export default {
 </script>
 
 <style scoped>
-/* :deep() .v-input--selection-controls__ripple {
-    height: 0px;
-}
-
-:deep() .v-input--selection-controls__input .v-icon {
-    color: v-bind('getCurrentTheme.global_radio');
-}
-
-:deep() .v-input--selection-controls .v-radio>.v-label {
-    color: v-bind('getCurrentTheme.drill_title_color');
-    margin-right: 6px;
-}
-
-:deep() .v-input--radio-group.v-input--radio-group--row .v-radio {
-    margin-right: 0px !important;
-} */
 
 .flex-center {
     display: flex;
@@ -101,9 +85,6 @@ export default {
 }
 
 .kpi-label {
-    /* padding-right: 8px;
-    width: 200px; */
-
     padding-top: 0px;
     padding-bottom: 0px;
 }
@@ -115,20 +96,6 @@ export default {
 .kpi-value-sec {
     width: 60px
 }
-/* 
-.loader {
-    height: 400px;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    align-self: center;
-}
-
-.v-progress-circular {
-    padding: 40px;
-} */
-
 .kpi-box span {
     display: flex;
     font-size: 16px;
@@ -139,55 +106,6 @@ export default {
 .kpi-box .kpi-sec-value {
     color: #606060
 }
-
-/* #chartsHeaders {
-    font-family: almoni-medium;
-    font-size: 18px;
-    color: v-bind('getCurrentTheme.generic_title_color');
-    margin-bottom: 18px;
-}
-
-
-.drilldown-title {
-    padding-top: 16px;
-    color: v-bind('getCurrentTheme.drill_title_color');
-    font-size: 24px;
-    text-align: center;
-    font-family: almoni;
-}
-
-
-.clock-drilldown {
-    background-color: #E5E5E5;
-    padding-bottom: 20px;
-}
-
-.carousel-flex {
-    display: flex;
-    flex-direction: column;
-}
-
-.carousel-flex :deep() .v-window__next {
-    background-color: transparent !important;
-    color: transparent !important;
-    top: 40% !important;
-    margin: 0px !important;
-
-}
-
-.carousel-flex :deep() .v-window__prev {
-    background-color: transparent !important;
-    color: transparent !important;
-    top: 40% !important;
-    margin: 0px !important;
-
-}
-
-.radio-btn {
-    display: inline-block !important;
-    ;
-} */
-
 .grid-container {
     width: 306px;
     display: grid;

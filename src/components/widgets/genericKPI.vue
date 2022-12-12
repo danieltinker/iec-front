@@ -54,21 +54,12 @@ export default {
 .kpi-box .kpi-sec-value {
     color: #606060
 }
-
-
 .kpi-box span {
     display: inline-block;
     font-size: 18px;
     font-family: almoni;
     color: #a8699d;
 }
-
-
-
-
-
-
-
 
 
 /* :deep() .v-input--selection-controls__ripple {
@@ -120,10 +111,6 @@ export default {
     color: #a8699d;
 } */
 
-
-
-
-
 /* 
 #chartsHeaders {
     font-family: almoni-medium;
@@ -139,12 +126,6 @@ export default {
     text-align: center;
     font-family: almoni;
 } */
-
-
-
-
-
-
 
 /* .clock-drilldown {
     background-color: #E5E5E5;

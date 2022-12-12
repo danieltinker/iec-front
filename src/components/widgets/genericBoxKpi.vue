@@ -63,18 +63,6 @@ export default {
 </script>
 
 <style scoped>
-/* :deep() .v-input--selection-controls__input .v-icon {
-  color: v-bind('getCurrentTheme.global_radio');
-}
-
-:deep() .v-input--selection-controls .v-radio>.v-label {
-  color: v-bind('getCurrentTheme.drill_title_color');
-  margin-right: 6px;
-}
-
-:deep() .v-input--radio-group.v-input--radio-group--row .v-radio {
-  margin-right: 0px !important;
-} */
 
 .btn-container {
   margin-top: 50px;
@@ -100,7 +88,6 @@ export default {
   margin: 2%;
   margin-right: 0;
   direction: rtl;
-  /* margin-left: 5px; */
 }
 
 .statusBoxV2 {
@@ -114,6 +101,26 @@ export default {
   height: 50px;
   border-radius: 200px;
 }
+
+
+
+
+
+
+
+/* :deep() .v-input--selection-controls__input .v-icon {
+  color: v-bind('getCurrentTheme.global_radio');
+}
+
+:deep() .v-input--selection-controls .v-radio>.v-label {
+  color: v-bind('getCurrentTheme.drill_title_color');
+  margin-right: 6px;
+}
+
+:deep() .v-input--radio-group.v-input--radio-group--row .v-radio {
+  margin-right: 0px !important;
+} */
+
 
 /* .flex-center {
   display: flex;
