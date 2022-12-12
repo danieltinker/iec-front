@@ -35,7 +35,7 @@
                         <v-carousel-item v-for="(DataArray, index) in jsonData[params.selected_category]" :key="index">
                             <div class="generic-clock" dir="rtl">
                                 <component @BoxClick="BoxClick"
-                                 :props_object={isDrillDown:isDrillDown,activeIndex:activeIndex,params:params,jsonData:jsonData} 
+                                 :props_object={isDrillDown:isDrillDown,activeIndex:activeIndex,params:params,jsonData:jsonData,meta_data:meta_data} 
                                  :is="stepComponent" 
                                  :activeData="DataArray">
                                 </component>

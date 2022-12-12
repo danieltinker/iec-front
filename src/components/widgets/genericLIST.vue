@@ -71,9 +71,9 @@
         </div>
 
 
-        <div v-if="props_object.params.bottom_text" class="updateDate">
+        <div v-if="props_object.params.bottom_text" dir="ltr" class="updateDate">
             <p>{{ props_object.params.bottom_text.substring(0, 5) == '$meta' ?
-                    meta_data[props_object.params.bottom_text.substring(6)] : props_object.params.bottom_text
+                props_object.meta_data[props_object.params.bottom_text.substring(6)] : props_object.params.bottom_text
             }}</p>
         </div>
 
