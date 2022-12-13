@@ -32,8 +32,28 @@
 
                 </template>
 
+                <template v-slot:item="{item, index}">
+                    <tr>
+                        <td v-for="(header, i) in headers" :key="i">
+                            
+                            <strong @click="overScrollWidth(index,item[header.value])"
+                        v-if="typeof item[header.value] == 'string' && item[header.value].split('*-*')[0] == 'dot'" :key="i"
+                        class="dot" :style="'background-color:' + item[header.value].split('*-*')[1]">
+                    </strong>
+                    <strong @click="overScrollWidth(index,item[header.value], $event)"
+                        v-else-if="typeof item[header.value] == 'string'" :key="i + header">
+                        {{ item[header.value] }}</strong>
+                    <strong v-else :key="header + i">{{ item[header.value] }}</strong>
+                                 
+                                  
+                            
+                            
+                            </td>
+                    </tr>
+                </template>
 
-                <template v-for="(slot, i) in headers" v-slot:[`item.${slot.value}`]="{ item }">
+
+                <!-- <template v-for="(slot, i) in headers" v-slot:[`item.${slot.value}`]="{ item }">
                     <strong @click="overScrollWidth(item[slot.value])"
                         v-if="typeof item[slot.value] == 'string' && item[slot.value].split('*-*')[0] == 'dot'" :key="i"
                         class="dot" :style="'background-color:' + item[slot.value].split('*-*')[1]">
@@ -42,14 +62,14 @@
                         v-else-if="typeof item[slot.value] == 'string'" :key="i + slot">
                         {{ item[slot.value] }}</strong>
                     <strong v-else :key="slot + i">{{ item[slot.value] }}</strong>
-                </template>
+                </template> -->
                 <template v-slot:body.append v-if="totalGet.length > 0">
                     <tr>
                         <td v-for="(item, i) in headers" :key="i" class="list-total" style="height:30px;">
                             <span v-if="i == 0 && !totalGet.includes(item.value)">סה"כ</span>
                             <div v-else>
                                 <span v-if="totalGet.includes(item.value)"
-                                    @click="overScrollWidth(sumField(item.value).toFixed(1), $event)"> {{
+                                    @click="overScrollWidth(i,sumField(item.value).toFixed(1), $event)"> {{
                                             sumField(item.value).toFixed(1)
                                     }} </span>
                                 <span v-else> </span>
@@ -100,7 +120,8 @@ export default {
         CardPopup,
     },
     methods: {
-        overScrollWidth(item, e) {
+        overScrollWidth(index,item, e) {
+            console.log("Test",index,item);
             if (e.path[1].offsetWidth < e.path[1].scrollWidth) {
                 this.$refs.cardPop.dialog = true
                 this.cardData = item
