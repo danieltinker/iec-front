@@ -2,15 +2,15 @@
     <div class="text-center">
       <v-dialog overlay-opacity="0.5" overlay-color="black" v-model="dialog" width="500" style="text-align: right;font-family: almoni;">
         <v-card style="text-align: right;">
-        <v-card-title class="text-h5 grey lighten-2" style="text-align: right;padding:2px 4px;direction: rtl;height:25px">
+        <v-card-title class="text-h5 lighten-2" :style="{'background-color':getCurrentTheme.global_theme_color}" style="text-align: right;padding:2px 4px;direction: rtl;height:25px">
           <!-- <span style="margin-right:20px">מידע</span> -->
-          <v-icon class="" dir @click="dialog = false" :color="getCurrentTheme.hq_navbar.span_color_first" style="font-size: 20px; justify-content: right;position: absolute;left: 2%;">mdi-close</v-icon>
+          <v-icon class="" dir @click="dialog = false" color="white" style="font-size: 20px; justify-content: right;position: absolute;left: 2%;">mdi-close</v-icon>
           
 
         </v-card-title>
         
 
-        <v-card-text style="padding:8px">
+        <v-card-text style="padding:8px;font-family: almoni-demibold;padding-left:6%;padding-right:6%;" dir="rtl">
          {{myItem}}
         </v-card-text>
 
