@@ -36,11 +36,16 @@
                     <tr>
                         <td v-for="(header, i) in headers" :key="i">
                             
-                            <strong @click="overScrollWidth(index,item[header.value])"
+                            <!-- <strong @click="overScrollWidth(index,item[header.value])"
                         v-if="typeof item[header.value] == 'string' && item[header.value].split('*-*')[0] == 'dot'" :key="i"
                         class="dot" :style="'background-color:' + item[header.value].split('*-*')[1]">
-                    </strong>
-                    <strong @click="overScrollWidth(index,item[header.value], $event)"
+                    </strong> -->
+                    <strong v-if="object_condition_color(item[header.value])"
+                    @click="overScrollWidth(header,index,item[header.value], $event)" 
+                    class="dot" :style="'background-color:' + item[header.value]['color']"></strong>
+
+
+                    <strong @click="overScrollWidth(header,index,item[header.value], $event)"
                         v-else-if="typeof item[header.value] == 'string'" :key="i + header">
                         {{ item[header.value] }}</strong>
                     <strong v-else :key="header + i">{{ item[header.value] }}</strong>
@@ -69,7 +74,7 @@
                             <span v-if="i == 0 && !totalGet.includes(item.value)">סה"כ</span>
                             <div v-else>
                                 <span v-if="totalGet.includes(item.value)"
-                                    @click="overScrollWidth(i,sumField(item.value).toFixed(1), $event)"> {{
+                                    @click="overScrollWidth(item,i,sumField(item.value).toFixed(1), $event)"> {{
                                             sumField(item.value).toFixed(1)
                                     }} </span>
                                 <span v-else> </span>
@@ -114,23 +119,33 @@ export default {
             meta_data: null,
             headers: undefined,
             totalGet: undefined,
+            isIntersection:["status"]
         }
     },
     components: {
         CardPopup,
     },
     methods: {
-        overScrollWidth(index,item, e) {
-            console.log("Test",index,item);
-            if (e.path[1].offsetWidth < e.path[1].scrollWidth) {
+        overScrollWidth(header,index,item, e) {
+            console.log("index : ",index," | item : ",item," | object : ",header," | e : ",e);
+            if(this.isIntersection.includes(header.value)){
+                this.$emit('BoxClick',index)
+            }
+            else{
+                if (e.path[1].offsetWidth < e.path[1].scrollWidth) {
                 this.$refs.cardPop.dialog = true
                 this.cardData = item
+            }
             }
         },
         sumField(key) {
             // sum data in give key (property)
             return this.props_object.jsonData[this.props_object.params.selected_category][0].reduce((a, b) => a + (b[key] || 0), 0);
         },
+        object_condition_color(item){
+            return item ? typeof item == 'object' && Object.prototype.hasOwnProperty.call(item, 'color') : false
+        }
+        
     },
     computed: {},
     created() {
