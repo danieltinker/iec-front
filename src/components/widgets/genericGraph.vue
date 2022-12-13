@@ -1,7 +1,7 @@
 <!-- eslint-disable -->
 <template>
     <div>
-        <LineChart :series="activeData" :options="props_object.params.options" />
+        <LineChart style="text-align: -webkit-center;" :series="activeData" :options="props_object.params.options" />
     </div>
 </template>
 
