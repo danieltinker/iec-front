@@ -32,6 +32,10 @@
 
                 </template>
 
+                <template v-slot:[`footer.page-text`]="items" dir="rtl"> 
+  {{ items.pageStart }} - {{ items.pageStop }} &nbsp;מ&nbsp;-&nbsp; {{ items.itemsLength }}
+</template>
+
                 <template v-slot:item="{item, index}">
                     <tr>
                         <td v-for="(header, i) in headers" :key="i">
@@ -40,7 +44,10 @@
                         v-if="typeof item[header.value] == 'string' && item[header.value].split('*-*')[0] == 'dot'" :key="i"
                         class="dot" :style="'background-color:' + item[header.value].split('*-*')[1]">
                     </strong> -->
-                    <strong v-if="object_condition_color(item[header.value])"
+                    <v-icon v-if="object_condition_icons(item[header.value])" class="my-2" dir @click="drawer = !drawer" :color="getCurrentTheme.hq_navbar.span_color_first" style="font-size: 30px; justify-content: right;">{{item[header.value]['icon']}}</v-icon>
+
+
+                    <strong v-else-if="object_condition_color(item[header.value])"
                     @click="overScrollWidth(header,index,item[header.value], $event)" 
                     class="dot" :style="'background-color:' + item[header.value]['color']"></strong>
 
@@ -119,7 +126,7 @@ export default {
             meta_data: null,
             headers: undefined,
             totalGet: undefined,
-            isIntersection:["status"]
+            isIntersection:[]
         }
     },
     components: {
@@ -144,6 +151,9 @@ export default {
         },
         object_condition_color(item){
             return item ? typeof item == 'object' && Object.prototype.hasOwnProperty.call(item, 'color') : false
+        },
+        object_condition_icons(item){
+        return item ? typeof item == 'object' && Object.prototype.hasOwnProperty.call(item, 'icon') : false
         }
         
     },
