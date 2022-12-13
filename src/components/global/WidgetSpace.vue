@@ -5,7 +5,7 @@
         <div class="grid-item">
           <div style="width:40px">
           <ThreeDotsNineDots class="grid-item" :isExpand="widget.PARAMETERS.expand"
-            @switch-expand="widget.PARAMETERS.expand = !widget.PARAMETERS.expand"
+            @switch-expand="widget.PARAMETERS.expand = !widget.PARAMETERS.expand;widget.PARAMETERS.expand? scrollWin(0, 150):scrollWin(0, 0)"
             v-if="widget.PARAMETERS.headline_config && widget.PARAMETERS.headline_config.three_dots_enabled" />
           </div>
         </div>
@@ -217,6 +217,9 @@ export default {
     GetUserFav: function () {
       this.SET_FAV_LIST()
     },
+    scrollWin(x, y) {
+    window.scrollBy(x, y);
+    }
   },
 };
 </script>
