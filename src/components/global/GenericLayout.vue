@@ -17,7 +17,7 @@
                             @click="BookMarkClick(view_ID, parentsParam, params.template_type, true, carouselActiveIndex)"
                             style="font-size: 30px"
                             :style="{color:getCurrentTheme.global_theme_color}"
-                            v-if="isDrillDown && params.headline_config && params.headline_config.bookmark_enabled">
+                            v-if="isDrillDown && params.headline_config && params.headline_config.bookmark_enabled && view_ID!=134">
                             {{CheckBookmark(view_ID)? "mdi-bookmark": "mdi-bookmark-outline"}}</v-icon>
                     </span>
 
@@ -109,26 +109,23 @@ export default {
         GenericLayout: () => import('../global/GenericLayout.vue')
     },
     methods: {
-
         async fetchClock() {
-            this.doneFetching = false // show LOADER
+            this.doneFetching = false // SHOW LOADER
             this.LoadDrillCarouselIndex()
             this.LoadQuickViewCarouselIndex()
-            if(!this.isDrillDown){
+            if(this.isDrillDown){ this.LoadDrillData() }
+            else{
                 await this.fetchMainData()
-                if(this.hasMainDataRecieved && this.params.drill_down_params){
-                    await this.fetchDrillData()
-                }
+                if(this.hasMainDataRecieved && this.params.drill_down_params){ await this.fetchDrillData() }
             }
-            else if(this.drillDataProp != undefined){
+            if(!this.hasErrorMsg()){this.doneFetching = true} // SHOW CLOCK
+            this.tick(this.params.sample_rate) // SET REFRESH TIME
+        },
+        LoadDrillData(){
+            if(this.drillDataProp != undefined){
                 this.jsonData = this.drillDataProp
             }
-            if(!this.hasErrorMsg()){
-                this.doneFetching = true // show CLOCK
-            }
-            this.tick(this.params.sample_rate)
         },
-        
         LoadDrillCarouselIndex(){
             if(this.isDrillDown){ 
                 this.carouselActiveIndex = this.drillCarouselIndexProp
@@ -162,12 +159,10 @@ export default {
                     await this.$myApi(this.params.drill_down_params.data_url)
                         .then(response => {
                             this.drilldownData = Object.assign(response.data)
-
                             if (this.params.data_intersection) {
                                 this.intersectionDrillData = Object.assign(response.data)
                                 this.reloadDrillDataOnTick()
                             }
-
                             this.errorMSG = ""
                             if (this.params.data_category == undefined || this.params.selected_category == undefined) {
                                 console.log("radio btns config failed fix data_category, selected category")
@@ -247,7 +242,6 @@ export default {
             return this.errorMSG.length !== 0;
         }
     },
-
 }
 </script>
 
@@ -293,12 +287,6 @@ export default {
     border-radius: 4px;
 }
 
-/* .kpi-box span:first-child{
-    font-family: almoni;
-    font-size: 20px;
-    line-height: 30px;
-} */
-
 .loader {
     height: 400px;
     width: 100%;
@@ -321,23 +309,6 @@ export default {
     padding: 40px;
 }
 
-/* .kpi-box span{
-    display: inline-block;
-    font-size: 16px;
-    font-family: almoni;
-    color: #a8699d;
-} */
-.kpi-box .kpi-sec-value {
-    color: #606060
-}
-
-#chartsHeaders {
-    font-family: almoni-medium;
-    font-size: 18px;
-    color: v-bind('getCurrentTheme.generic_title_color');
-    /* margin-bottom: 18px; */
-}
-
 .clock-drilldown {
     background-color: #E5E5E5;
     padding-bottom: 20px;
@@ -349,13 +320,6 @@ export default {
     font-size: 24px;
     text-align: center;
     font-family: almoni;
-}
-
-.kpi-box span {
-    display: inline-block;
-    font-size: 18px;
-    font-family: almoni;
-    color: #a8699d;
 }
 
 .clock-drilldown {
