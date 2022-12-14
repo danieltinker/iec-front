@@ -122,8 +122,6 @@ export default {
               this.errorMsg = "תצוגת דף לא זמינה"
               console.log(error);
             });
-
- 
       },
     },
     //user selected category
@@ -143,8 +141,6 @@ export default {
               this.errorMsg = "תצוגת דף לא זמינה"
               console.log(error);
             });
-
- 
       },
     },
   },
