@@ -119,12 +119,7 @@ export default {
                 if(this.hasMainDataRecieved && this.params.drill_down_params){ await this.fetchDrillData() }
             }
             if(!this.hasErrorMsg()){this.doneFetching = true} // SHOW CLOCK
-            if(this.params.sample_rate){
-                this.tick(this.params.sample_rate)
-            }
-            else{
-                this.tick(this.$store.state.default_sample_rate)
-            }
+            this.tick(this.params.sample_rate)
         },
         LoadDrillData(){
             if(this.drillDataProp != undefined){
@@ -193,7 +188,12 @@ export default {
             return true
         },
         tick(time){
-            this.tickCycleTime = setTimeout(this.fetchClock, time );
+            if(time){
+                this.tickCycleTime = setTimeout(this.fetchClock, time );
+            }
+            else{
+                this.tickCycleTime = setTimeout(this.fetchClock, this.$store.state.default_sample_rate );
+            }
         },
         BoxClick(i) {
             this.loadIntersectionData(i)
