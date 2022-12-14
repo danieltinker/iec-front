@@ -13,7 +13,7 @@
                     </span>
                 </div>
                 <div class="grid-item">
-                    <strong v-if="object_condition_color(item.value)" class="dot" :style="'background-color:' + item[header.value]['color']"></strong>
+                    <strong v-if="object_condition_color(item.value)" class="dot" :style="'background-color:' + item.value['color']"></strong>
                     <span v-else
                         style="display:block;word-wrap: break-word;text-align: -webkit-right;font-family: almoni-medium"
                         :style="{ color: getCurrentTheme.kpi.value_color }"> {{ item.value }}
