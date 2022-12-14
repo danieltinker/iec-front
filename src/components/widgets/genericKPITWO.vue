@@ -1,7 +1,8 @@
 <!-- eslint-disable -->
 <template>
     <div class="KPI2container" dir="rtl">
-        <div class="kpi-box" v-for="(item, index) in activeData" :key="index" :style="{
+        <div class="no-data-box" v-if="activeData.length==0"><p>אין פריטים זמינים להצגה</p></div>
+        <div v-else class="kpi-box" v-for="(item, index) in activeData" :key="index" :style="{
             backgroundColor: props_object.isDrillDown ? getCurrentTheme.kpi.drill_background : getCurrentTheme.kpi.main_background,
             border: props_object.activeIndex == index ? getCurrentTheme.legend_border_color : ' solid black 0px'
         }" @click="$emit('BoxClick',index)">
@@ -32,6 +33,10 @@
 <script>
 export default {
     props:["activeData","props_object"],
+    created(){
+    },
+    watch:{
+    },
     computed: {
     },
     methods:{
@@ -59,7 +64,23 @@ export default {
 </script>
 
 <style scoped>
-
+.no-data-box{
+    display: flex;
+    align-items: center;
+    vertical-align: center;
+    justify-content: space-around;
+    padding-top: 10px;
+    background-color: v-bind('getCurrentTheme.kpi.drill_background');
+    margin: auto;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    text-align: center;
+    width: 304px;
+    height: auto;
+    border-radius: 4px;
+    font-size: 18px;
+    font-family: almoni-demibold;
+}
 .flex-center {
     display: flex;
     flex-direction: column;
