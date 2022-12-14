@@ -13,8 +13,7 @@
                     </span>
                 </div>
                 <div class="grid-item">
-                    <strong v-if="typeof item.value == 'string' && item.value.split('*-*')[0] == 'dot'" class="dot"
-                        :style="'background-color:' + item.value.split('*-*')[1]"></strong>
+                    <strong v-if="object_condition_color(item.value)" class="dot" :style="'background-color:' + item.value['color']"></strong>
                     <span v-else
                         style="display:block;word-wrap: break-word;text-align: -webkit-right;font-family: almoni-medium"
                         :style="{ color: getCurrentTheme.kpi.value_color }"> {{ item.value }}
@@ -50,7 +49,10 @@ export default {
             }
             let test = 100 / MyWidth + "%"
             return test + " " + test + " " + test
-        }
+        },
+        object_condition_color(item){
+            return item ? typeof item == 'object' && Object.prototype.hasOwnProperty.call(item, 'color') : false
+        },
     }
 
 }
