@@ -32,7 +32,7 @@
                             <img v-on="on" v-bind="attr" src="../../assets/playLeft.svg" />
                         </template>
 
-                        <v-carousel-item v-for="(DataArray, index) in jsonData[params.selected_category]" :key="index">
+                        <v-carousel-item v-for="(DataArray, index) in jsonData[params.selected_category]" :key="index + params.selected_category">
                             <div class="generic-clock" dir="rtl">
                                 <component @BoxClick="BoxClick"
                                  :props_object={isDrillDown:isDrillDown,activeIndex:activeIndex,params:params,jsonData:jsonData,meta_data:meta_data} 
