@@ -165,16 +165,17 @@ export default {
 }
 .fav-span {
   font-family: almoni;
-  width: 40px;
+  width: 58px;
   align-self: center;
-  height: 40px;
+  height: 38px;
   font-size: 12px;
-  display: -webkit-box;
+  display: inline;
   -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  /* word-wrap: break-word; */
   text-overflow: ellipsis;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  word-wrap: break-word;/* Important for long words! */
     transition: height 0.2s cubic-bezier(0.4, 0, 0.6, 1);
 }
 .fav-btn {
