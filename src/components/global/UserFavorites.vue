@@ -169,8 +169,12 @@ export default {
   align-self: center;
   height: 40px;
   font-size: 12px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  /* word-wrap: break-word; */
   text-overflow: ellipsis;
-    overflow: hidden; 
     transition: height 0.2s cubic-bezier(0.4, 0, 0.6, 1);
 }
 .fav-btn {
