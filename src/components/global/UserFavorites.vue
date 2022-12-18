@@ -176,10 +176,21 @@ export default {
 .fav-btn {
   display: flex;
   flex-direction: column;
+  margin-left:20px;;
+  text-align: center;
+
+
+}
+
+@media only screen and (max-width: 600px) {
+  .fav-btn {
+  display: flex;
+  flex-direction: column;
   margin-left:v-bind('myMargin');
   text-align: center;
 
 
+}
 }
 .container {
   /* background-color: rgb(244, 244, 244); */
@@ -243,7 +254,15 @@ export default {
   box-shadow: none;
   height: 58px;
   width: 58px;
+  margin-left:20px !important
+}
+@media only screen and (max-width: 600px) {
+  .storyClear {
+  box-shadow: none;
+  height: 58px;
+  width: 58px;
   margin-left:v-bind('myMargin') !important
+}
 }
 
 .favoriteLabels {
