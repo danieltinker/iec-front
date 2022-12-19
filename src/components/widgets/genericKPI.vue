@@ -1,6 +1,6 @@
 <!-- eslint-disable -->
 <template>
-    <div class="KPIcontainer">
+    <div class="KPIcontainer" style="margin-top:10px">
         <div class="kpi-box" style="padding-right:5px;padding-left:5px" v-for="(item, index) in activeData" :key="index"
             :style="{
                 backgroundColor: props_object.isDrillDown ? getCurrentTheme.kpi.drill_background : getCurrentTheme.kpi.main_background,

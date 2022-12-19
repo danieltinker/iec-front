@@ -11,7 +11,7 @@
                     </v-radio-group>
                 </div>
                 <div class="clock-carousel">
-                    <v-row style="place-content: center;">
+                    <v-row style="place-content: center;margin:0">
                     <ChartTitles :isDrillDown="isDrillDown" :params="params" :carouselActiveIndex="carouselActiveIndex" :static_drill_titles_prop="static_drill_titles_prop"></ChartTitles>
                     <span>
                         <v-icon dir="rtl"
