@@ -11,6 +11,7 @@
                     </v-radio-group>
                 </div>
                 <div class="clock-carousel">
+                    <v-row style="place-content: center;">
                     <ChartTitles :isDrillDown="isDrillDown" :params="params" :carouselActiveIndex="carouselActiveIndex" :static_drill_titles_prop="static_drill_titles_prop"></ChartTitles>
                     <span>
                         <v-icon dir="rtl"
@@ -20,6 +21,7 @@
                             v-if="isDrillDown && params.headline_config && params.headline_config.bookmark_enabled && view_ID!=134">
                             {{CheckBookmark(view_ID)? "mdi-bookmark": "mdi-bookmark-outline"}}</v-icon>
                     </span>
+                </v-row>
 
 
                     <v-carousel hide-delimiters :show-arrows="showArrows" class="carousel-flex" ref="pieCarousel"
@@ -262,7 +264,8 @@ export default {
 
 :deep() .v-input--selection-controls .v-radio>.v-label {
     color: v-bind('getCurrentTheme.drill_title_color');
-    margin-right: 6px;
+    margin-right: 4px;
+    margin-left: 8px;
 }
 
 :deep() .v-input--radio-group.v-input--radio-group--row .v-radio {
