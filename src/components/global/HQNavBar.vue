@@ -1,7 +1,7 @@
 <template>
     <div>
       <v-overlay :value="drawer" z-index="4"></v-overlay>
-      <v-app-bar :color="getCurrentTheme.hq_navbar.app_bar" app clipped-right flat dir="rtl">
+      <v-app-bar :color="getCurrentTheme.app_background" app clipped-right flat dir="rtl">
         <v-app-bar-nav-icon :color="getCurrentTheme.hq_navbar.bar_icon" style="margin-right: -10px;" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
         <v-toolbar-title :style="'margin-right: 15px; font-family: almoni; font-size: 27px; color:' +
         getCurrentTheme.hq_navbar.toolbar_title">
