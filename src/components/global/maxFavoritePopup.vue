@@ -17,7 +17,7 @@
               :color="getCurrentTheme.max_fevorite.card_color"
               >mdi-close</v-icon
             >
-            <span> שעוני מבט מהיר</span></v-card-title
+            <span :style="{color:getCurrentTheme.global_theme_color}"> שעוני מבט מהיר</span></v-card-title
           >
   
           <v-card-subtitle :style="
@@ -56,7 +56,7 @@
                 <div style="">
                   <v-btn
                     :ripple="false"
-                    color="#0F2558"
+                    :style="{color:getCurrentTheme.global_theme_color}"
                     outlined
                     fab
                     class="story"
@@ -102,7 +102,7 @@
                 <div style="">
                   <v-btn
                     :ripple="false"
-                    color="#0F2558"
+                    :style="{color:getCurrentTheme.global_theme_color}"
                     outlined
                     fab
                     class="story"
@@ -136,7 +136,8 @@
             >
             <v-btn
               class="mb-4 mt-2"
-              color="#0F2558"
+              
+              :color=getCurrentTheme.global_theme_color
               elevation="0"
               rounded
               @click="save"
@@ -199,8 +200,8 @@
         this.emptyFav = false;
       },
       getImg(img) {
-            try {
-                return require(`@/assets/FavBar/${img}.svg`);
+        try {
+                return this.getCurrentTheme.theme == "darkTheme" ? require(`@/assets/FavBar/${img}_dark.svg`) : require(`@/assets/FavBar/${img}.svg`);
             }
             catch (e) {
                 //defaultImage

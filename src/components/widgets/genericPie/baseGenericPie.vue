@@ -110,6 +110,7 @@ export default {
         box-shadow: 2px 2px 2px rgba(148, 148, 148, 0.427) !important;
     }
     .main-btn{
+      padding-right: 8px !important;
         font-family: almoni;
         margin:8px;
         justify-content: right;
@@ -125,12 +126,14 @@ export default {
   }
 
   .btn-span{
-        text-overflow: ellipsis;
-        overflow: hidden; 
-        width: 68px; 
-        white-space: nowrap;
-        font-size: 16px;
-        letter-spacing: 0;
+    text-align: -webkit-right;
+    margin-right: 4px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 68px;
+    white-space: nowrap;
+    font-size: 16px;
+    letter-spacing: 0;
     }
   .dot {
     align-self: center;

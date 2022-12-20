@@ -42,5 +42,6 @@
     }
     .successClass{
       background-color: #0F2558;
+      background-color: v-bind('getCurrentTheme.global_theme_color');
     }
   </style>

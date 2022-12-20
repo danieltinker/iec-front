@@ -86,7 +86,7 @@
     min-height: 10px;
     height: 25px !important;
     justify-content: center;
-    border-radius: 10px;
+    border-radius: 16px;
   }
   .container {
     background-color: rgb(244, 244, 244);

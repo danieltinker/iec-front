@@ -39,7 +39,7 @@ export default new Vuex.Store({
         "solid_selected_border":"solid purple 4px",
         "kpi_sec_value": "#828282",
         "generic_title_color" : "#FFFFFF",
-        "legend_border_color" : "solid white 1px",
+        "legend_border_color" : "solid white 2px",
         "kpi":{
           "kpi_value_color":"#000000",
           "kpi_sec_value": "#828282",
@@ -85,7 +85,7 @@ export default new Vuex.Store({
         "max_fevorite":{
           "card_color":"#FFFFFF",
           "card_background_color":"#282828",
-          "card_subtitle":"FFFFFF"
+          "card_subtitle":"#FFFFFF"
         },
         "cyber_status":{
           "box_color_1":"#FFFFFF",
@@ -127,7 +127,7 @@ export default new Vuex.Store({
         "global_radio":"#606060",
         "global_selected_radio":"#0F2558",
         "generic_title_color" : "#2D2D2D",
-        "legend_border_color" : "solid black 1px",
+        "legend_border_color" : "solid black 2px",
         "kpi":{
           "kpi_value_color":"#000000",
           "kpi_sec_value": "#828282",
