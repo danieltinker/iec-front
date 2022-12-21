@@ -317,6 +317,7 @@ export default {
     column-gap: 10px;
     justify-content: center;
     padding-bottom: 20px;
+    margin-right: 2% !important;
 }
 
 #chartsHeaders {

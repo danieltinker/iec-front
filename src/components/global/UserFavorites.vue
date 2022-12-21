@@ -168,7 +168,7 @@ export default {
   width: 58px;
   align-self: center;
   height: 38px;
-  font-size: 12px;
+  font-size: 13px;
   display: inline;
   -webkit-line-clamp: 2;
   text-overflow: ellipsis;

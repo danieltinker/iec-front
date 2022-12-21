@@ -132,7 +132,7 @@ export default {
     overflow: hidden;
     width: 68px;
     white-space: nowrap;
-    font-size: 16px;
+    font-size: 14px;
     letter-spacing: 0;
     }
   .dot {

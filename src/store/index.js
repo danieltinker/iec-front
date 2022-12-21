@@ -161,7 +161,7 @@ export default new Vuex.Store({
           "drill_background":"#EBEBEB"
         }, // generic Main clock components
         "baseGenericPie":{
-          "span_color":"#606060",
+          "span_color":"#010101",
           "btn_color_drill":"#FDFDFD",
           "btn_color":"#EBEBEB",
           "innerContentColor":"#000000"

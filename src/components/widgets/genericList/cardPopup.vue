@@ -10,7 +10,7 @@
         </v-card-title>
         
 
-        <v-card-text style="padding:8px;font-family: almoni-demibold;padding-left:6%;padding-right:6%;" dir="rtl">
+        <v-card-text style="padding:8px;font-family: almoni-demibold;font-size:18px;padding-left:6%;padding-right:6%;color:#010101" dir="rtl">
          {{myItem}}
         </v-card-text>
 
