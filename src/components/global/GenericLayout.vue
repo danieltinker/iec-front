@@ -355,6 +355,14 @@ export default {
     margin-left: 2px;
 }
 
+.carousel-flex :deep() .v-window__next img{
+    padding-left: 11px;
+}
+
+.carousel-flex :deep() .v-window__prev img{
+    padding-right: 11px;
+}
+
 .radio-btn {
     display: inline-block !important;
     ;
