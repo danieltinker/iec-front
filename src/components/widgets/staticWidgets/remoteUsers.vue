@@ -114,7 +114,7 @@ export default {
 }
 
 .statusBox {
-  background-color: #ff9900;
+  background-color: #234BA6;
   text-align: center;
   line-height: 50px;
   margin: auto;
