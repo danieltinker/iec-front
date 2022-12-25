@@ -81,6 +81,11 @@ export default {
         }
       }
       console.log("Render App")
+      console.log("RAN MAZAL TOV AD 120")
+      console.log("RAN MAZAL TOV AD 120")
+      console.log("RAN MAZAL TOV AD 120")
+      console.log("RAN MAZAL TOV AD 120")
+      console.log("RAN MAZAL TOV AD 120")
       this.renderApp = true
 
       this.$root.$on("addBookmarkSnackbar", (text,success) => {
