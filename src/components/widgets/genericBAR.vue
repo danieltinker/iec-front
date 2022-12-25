@@ -86,13 +86,13 @@ export default {
     font-family: almoni;
     display: -webkit-inline-box;
     -webkit-box-align: center;
-    margin-left: 10px
+    margin-left: 10px;
 }
 
 .btn-container {
     margin-left: 4%;
     margin-right: 4%;
-
+    
 }
 
 :deep() .v-btn:not(.v-btn--round).v-size--default {
@@ -108,6 +108,7 @@ export default {
     white-space: nowrap;
     font-size: 14px;
     letter-spacing: 0;
+    
 }
 
 .main-btn {
@@ -118,6 +119,8 @@ export default {
     border-radius: 6px;
     width: 102px !important;
     box-shadow: 0px 0px !important;
+    box-shadow: 2px 2px 2px rgba(148, 148, 148, 0.427) !important;
+
     /* text-align: -webkit-right;
          */
 }
