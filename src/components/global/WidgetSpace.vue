@@ -95,7 +95,7 @@ export default {
   data() {
     return {
       scrollDownOptions:{
-          top: 300,
+          top: 80,
           behavior: 'smooth'
       },
       isMaxFavorite:false,
@@ -218,7 +218,10 @@ export default {
       this.SET_FAV_LIST()
     },
     scrollWin(options) {
-    window.scrollBy(options);
+    setTimeout(()=>{
+      window.scrollBy(options);
+    },100)
+    
     }
   },
 };

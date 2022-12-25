@@ -1,7 +1,9 @@
 <template>
     <div>
+        <!-- <h1>{{ serie }}</h1> -->
       <apexchart v-if="showData" 
-      width="90%" type="line" 
+      height="350"
+      width="99%" type="line" 
       :options="option"
        :series="serie"
        style="overflow-y: hidden; margin-right: 7px;dir:ltr"></apexchart>
@@ -26,17 +28,31 @@ export default{
             const ts = Date.now()
             let ts_arr = []
             this.serie[0].data.forEach(couple =>{
+                // console.log(new Date(couple[0] * 1000))  
+                
                 ts_arr.push(couple[0])
             })
-            this.option.chart.zoom.enabled = false
-            this.option.chart.toolbar.show = false
+            // this.option.chart.zoom.enabled = false
+            // this.option.chart.toolbar.show = false
             // this.option.xaxis[0].axisBorder.show = true
             // this.option.yaxis[0].axisBorder.show = true
-            this.option.xaxis.range =  100000
-            this.option.xaxis.tickAmount = 10
-            this.option.xaxis.type = 'datetime'
+            this.option.xaxis.range =  1000000
+            this.option.xaxis.tickAmount = 5
+            this.option.xaxis.type = 'numeric'
             this.option.xaxis.categories = ts_arr
+            // this.option.dataLabels.enabled=  false
+            // this.option.xaxis.axisTicks.show= true
+            // this.option.xaxis.labels.axisTicks= {
+            //         show: false,
+            //         borderType: 'solid',
+            //         color: '#78909C',
+            //         height: 6,
+            //         offsetX: 0,
+            //         offsetY: 0
+            //     }
+     
             this.option.xaxis.labels ={formatter: (value,timestamp) =>{
+                    console.log(new Date(timestamp * 1000))
                     const dateTimeFormat = new Intl.DateTimeFormat('en', {  month: 'numeric', day: 'numeric', hour: 'numeric', minute:'numeric', hour12: false })             
                     var [{ value: month },,{ value: day },,{value: hour},,{value:minute}] = dateTimeFormat .formatToParts(new Date( timestamp  )) 
                     if(hour==24)hour=0
@@ -51,4 +67,5 @@ export default{
 }
 </script>
 
-<style></style>
+<style>
+</style>

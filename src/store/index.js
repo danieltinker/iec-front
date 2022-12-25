@@ -131,7 +131,7 @@ export default new Vuex.Store({
         "kpi":{
           "kpi_value_color":"#000000",
           "kpi_sec_value": "#828282",
-          "main_background":"#EBEBEB",
+          "main_background":"#F5F5F5",
           "drill_background":"#FFFFFF",
           "main_label":"#010101",
           "value_color":"#0F2558",

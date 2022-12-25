@@ -1,11 +1,11 @@
 <!-- eslint-disable -->
 <template>
     <div class="KPIcontainer">
-        <div class="kpi-box" style="padding-right:5px;padding-left:5px" v-for="(item, index) in activeData" :key="index"
+        <div :class="{kpiBox:true, pulse:disabled&&props_object.activeIndex == index, shadowBox:props_object.params.data_intersection}" style="padding-right:5px;padding-left:5px" v-for="(item, index) in activeData" :key="index"
             :style="{
                 backgroundColor: props_object.isDrillDown ? getCurrentTheme.kpi.drill_background : getCurrentTheme.kpi.main_background,
                 border: props_object.activeIndex == index ? getCurrentTheme.legend_border_color : ' solid black 0px'
-            }" @click="$emit('BoxClick',index)">
+            }" @click="$emit('BoxClick',index);pulse()">
             <span :style="{ color: getCurrentTheme.kpi.main_label }" style=" font-family: almoni-bold"
                 class="kpi-label">
                 {{ item.label }}
@@ -26,6 +26,19 @@
 <script>
 export default {
     props:["activeData","props_object"],
+    data(){
+        return{
+            disabled:false,
+        }
+    },
+    methods:{
+        pulse(){
+      this.disabled=true
+      setTimeout(() => {
+        this.disabled=false
+      }, 500);
+    }
+    },
     computed: {
     },
 
@@ -33,6 +46,25 @@ export default {
 </script>
 
 <style scoped>
+    .pulse{
+          animation: pulse 0.1s;
+    }
+    @keyframes pulse {
+    0% {
+      transform: scale(1);
+      box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.7);
+    }
+
+    70% {
+      transform: scale(0.95);
+      box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
+    }
+
+    100% {
+      transform: scale(1);
+      box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+    }
+  }
 .KPIcontainer {
     display: grid;
     grid-template-columns: auto auto;
@@ -42,19 +74,24 @@ export default {
     padding-bottom: 8px;
 }
 
-.kpi-box {
+.kpiBox {
     padding-top: 0px;
     text-align: center;
     align-items: center;
     width: 159px;
     height: 80px;
     border-radius: 4px;
+    /* box-shadow:3px 3px 5px rgba(146, 146, 146, 0.25) !important; */
 }
 
-.kpi-box .kpi-sec-value {
+.shadowBox{
+    box-shadow:3px 3px 5px rgba(146, 146, 146, 0.25) !important;
+}
+
+.kpiBox .kpi-sec-value {
     color: #606060
 }
-.kpi-box span {
+.kpiBox span {
     display: inline-block;
     font-size: 18px;
     font-family: almoni;

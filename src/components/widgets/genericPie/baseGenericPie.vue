@@ -11,10 +11,10 @@
         />
         <div class="btn-container">
             <v-row dir="rtl" style="place-content:right;display: inline-flex;">
-                <v-btn class="main-btn"
+                <v-btn :class="{mainBtn:true, pulse:disabled && activeIm==index}" 
                 :ripple="false"
                  v-for="(btnName,index) in buttons" :key="index"
-                  @click="$refs.dount.onClickLegend(index);"
+                  @click="$refs.dount.onClickLegend(index); pulse()"
                   :style="{backgroundColor: isDrill ? getCurrentTheme.baseGenericPie.btn_color_drill : getCurrentTheme.baseGenericPie.btn_color ,border : activeIm == index ? getCurrentTheme.legend_border_color : ' solid black 0px'}">
                     <span
                     class="dot"
@@ -56,6 +56,7 @@ export default {
   },
   data(){
         return{
+          disabled:false,
           TemplateData:undefined,
           activeIndex:undefined,
           chartTitle:"test",
@@ -82,6 +83,12 @@ export default {
   
   },
   methods:{
+    pulse(){
+      this.disabled=true
+      setTimeout(() => {
+        this.disabled=false
+      }, 500);
+    },
     emitHandler(indexClick){
       console.log("emitHnadler",indexClick)
       this.$emit('handleIntersection',indexClick)
@@ -94,6 +101,7 @@ export default {
 </script>
 
 <style>
+
    .btn-container{
     margin-left:4%;
     margin-right:4%;
@@ -109,17 +117,39 @@ export default {
         /* box-shadow:1px 1px !important; */
         box-shadow: 2px 2px 2px rgba(148, 148, 148, 0.427) !important;
     }
-    .main-btn{
+    .mainBtn{
         font-family: almoni;
         margin:8px;
         justify-content: right;
         overflow: hidden;
         border-radius: 6px;
         width: 102px !important;
+        box-shadow:2px 3px 2.5px rgba(138, 138, 138, 0.35) !important;
+        /* box-shadow:0.5px 1px 0px 0px rgba(0, 0, 0, 0.2)  !important; */
+        box-shadow: 0 0 0 0 rgba(0, 0, 0, 1);
         /* text-align: -webkit-right;
          */
-        box-shadow:0px 0px !important;
+        }
+        .pulse{
+          animation: pulse 0.3s;
+        }
+    @keyframes pulse {
+    0% {
+      transform: scale(1);
+      box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.7);
     }
+
+    70% {
+      transform: scale(0.95);
+      box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
+    }
+
+    100% {
+      transform: scale(1);
+      box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+    }
+  }
+
   .main-btn::before {
     display:none;
   }
