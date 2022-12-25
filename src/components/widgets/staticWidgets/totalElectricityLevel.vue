@@ -12,7 +12,7 @@
                         <span v-if="key == 1"
                             style="display: block; z-index: 1; position: relative; top: 224px; right: 40px; ">100</span>
                         <hr
-                            style="display: block; z-index: 1; position: relative; top: 213px; border: 1px solid #FF0100;">
+                            style="display: block; z-index: 1; position: relative; top: 213px; border: 1px solid #FF0100;background-color:#FF0100">
                     </div>
                     <div id="600orange" style="height:1px">
                         <span v-if="key == 0" :style="{ color: getCurrentTheme.cyber_status.color_1 }"
@@ -20,7 +20,7 @@
                         <span v-if="key == 1"
                             style="display: block; z-index: 1; position: relative; top: 191px; right: 40px; ">600</span>
                         <hr
-                            style="display: block; z-index: 1; position: relative; top: 177px; border: 1px solid #F87302;">
+                            style="display: block; z-index: 1; position: relative; top: 177px; border: 1px solid #F87302;background-color:#F87302">
                     </div>
                     <div id="1100yellow">
                         <span v-if="key == 0" :style="{ color: getCurrentTheme.cyber_status.color_1 }"
@@ -28,7 +28,7 @@
                         <span v-if="key == 1"
                             style="display: block; z-index: 1; position: relative; top: 153px; right: 46px; ">1,100</span>
                         <hr
-                            style="display: block; z-index: 1; position: relative; top: 140px; border: 1px solid #FFDB58;">
+                            style="display: block; z-index: 1; position: relative; top: 140px; border: 1px solid #FFDB58;background-color:#FFDB58">
                     </div>
                     <v-col style="display: block; z-index: 2; position: relative;">
                         <div style="position: relative;  text-align: center; ">
@@ -52,7 +52,8 @@
 
         <div class="loader" v-else>
             <div class="loader" v-if="!isErrorMsg">
-                <v-progress-circular indeterminate :style="{ color: getCurrentTheme.global_theme_color }">
+                <v-progress-circular :size="20"
+        :width="1" indeterminate :style="{ color: getCurrentTheme.global_theme_color }">
                 </v-progress-circular>
             </div>
             <h1 v-else style="font-family: almoni;font-size:20px"> {{ errorMSG }} </h1>

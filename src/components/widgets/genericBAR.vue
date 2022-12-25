@@ -1,11 +1,19 @@
 <!-- eslint-disable -->
 <template>
     <div class="barcontainer" dir="rtl">
+        <!-- <hr style="display: block; z-index: 1; position: relative; top: 35px; border: 1px solid #FF0100;"
+        :style="{top: (169 * (4272 / (Math.max(...activeData.map(obj => obj.value)))).toFixed(1) + 35)+ 'px'}"> -->
+        
         <v-row dir="rtl" style="margin-top:10px;margin-bottom: 20px; place-content: center">
             <oneBar v-for="(item, index) in activeData" :isSelectedIndex="props_object.activeIndex === index"
                 :isSelected="props_object.activeIndex != -1" :key="index" v-on:click.native="$emit('BoxClick',index)" :params="props_object.params"
                 :data="item.color ? item.max_value ? item : getTotal(activeData, item) : item.max_value ? getColor(item, index) : getColor(getTotal(activeData, item), index)" />
         </v-row>
+        <div style="text-align: -webkit-center;">
+        <!-- <hr style="display: block; z-index: -1; position: relative; bottom:20px; border: 1px solid #FF0100;width:80%"
+        :style="{bottom: (169 * (8544 / (Math.max(...activeData.map(obj => obj.value)))).toFixed(1) + 20)+ 'px'}"
+        > -->
+    </div>
 
         <div class="btn-container">
             <v-row dir="rtl" style="place-content:right;display: inline-flex;"
@@ -98,7 +106,7 @@ export default {
     overflow: hidden;
     width: 68px;
     white-space: nowrap;
-    font-size: 16px;
+    font-size: 14px;
     letter-spacing: 0;
 }
 

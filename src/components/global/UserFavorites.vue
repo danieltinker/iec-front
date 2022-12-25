@@ -165,21 +165,37 @@ export default {
 }
 .fav-span {
   font-family: almoni;
-  width: 40px;
+  width: 58px;
   align-self: center;
-  height: 40px;
-  font-size: 12px;
+  height: 38px;
+  font-size: 13px;
+  display: inline;
+  -webkit-line-clamp: 2;
   text-overflow: ellipsis;
-    overflow: hidden; 
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  word-wrap: break-word;/* Important for long words! */
     transition: height 0.2s cubic-bezier(0.4, 0, 0.6, 1);
 }
 .fav-btn {
+  display: flex;
+  flex-direction: column;
+  margin-left:20px;;
+  text-align: center;
+
+
+}
+
+@media only screen and (max-width: 600px) {
+  .fav-btn {
   display: flex;
   flex-direction: column;
   margin-left:v-bind('myMargin');
   text-align: center;
 
 
+}
 }
 .container {
   /* background-color: rgb(244, 244, 244); */
@@ -243,7 +259,15 @@ export default {
   box-shadow: none;
   height: 58px;
   width: 58px;
+  margin-left:20px !important
+}
+@media only screen and (max-width: 600px) {
+  .storyClear {
+  box-shadow: none;
+  height: 58px;
+  width: 58px;
   margin-left:v-bind('myMargin') !important
+}
 }
 
 .favoriteLabels {

@@ -7,21 +7,21 @@
             border: props_object.activeIndex == index ? getCurrentTheme.legend_border_color : ' solid black 0px'
         }" @click="$emit('BoxClick',index)">
 
-            <div class="grid-container" :style="{ 'grid-template-columns': getWidth(item) }">
+            <div class="grid-container" :style="{ 'grid-template-columns': getWidth(item) }" style="margin-right:5px">
                 <div class="grid-item">
-                    <span style="display:block;word-wrap: break-word;text-align: -webkit-right;font-family: almoni-bold"
+                    <span :align="props_object.params.style ? props_object.params.style.label_align : 'start'" style="display:block;word-wrap: break-word;font-family: almoni-bold"
                         :style="{ color: getCurrentTheme.kpi.main_label }">{{ item.label }}
                     </span>
                 </div>
-                <div class="grid-item">
+                <div class="grid-item" style="margin-right:2px">
                     <strong v-if="object_condition_color(item.value)" class="dot" :style="'background-color:' + item.value['color']"></strong>
-                    <span v-else
-                        style="display:block;word-wrap: break-word;text-align: -webkit-right;font-family: almoni-medium"
+                    <span v-else :align="props_object.params.style ? props_object.params.style.value_align : 'start'"
+                        style="display:block;word-wrap: break-word;font-family: almoni-medium"
                         :style="{ color: getCurrentTheme.kpi.value_color }"> {{ item.value }}
                     </span>
                 </div>
-                <div class="grid-item">
-                    <span style="display:block;word-wrap: break-word;text-align: -webkit-right;"
+                <div class="grid-item" style="margin-right:4px">
+                    <span :align="props_object.params.style ? props_object.params.style.secondary_align : 'start'" style="display:block;font-family: almoni-medium;word-wrap: break-word;"
                         :style="{ color: getCurrentTheme.kpi.kpi_sec_value }">
                         {{ item.secondary_value }} </span>
                 </div>

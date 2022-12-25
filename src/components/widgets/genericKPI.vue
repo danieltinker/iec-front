@@ -1,6 +1,6 @@
 <!-- eslint-disable -->
 <template>
-    <div class="KPIcontainer">
+    <div class="KPIcontainer" style="margin-top:10px">
         <div :class="{kpiBox:true, pulse:disabled&&props_object.activeIndex == index, shadowBox:props_object.params.data_intersection}" style="padding-right:5px;padding-left:5px" v-for="(item, index) in activeData" :key="index"
             :style="{
                 backgroundColor: props_object.isDrillDown ? getCurrentTheme.kpi.drill_background : getCurrentTheme.kpi.main_background,

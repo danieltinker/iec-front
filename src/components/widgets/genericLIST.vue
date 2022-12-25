@@ -38,7 +38,7 @@
 
                 <template v-slot:item="{item, index}">
                     <tr>
-                        <td v-for="(header, i) in headers" :key="i">
+                        <td v-for="(header, i) in headers" :key="i" :align="header.align">
                             
                             <!-- <strong @click="overScrollWidth(index,item[header.value])"
                         v-if="typeof item[header.value] == 'string' && item[header.value].split('*-*')[0] == 'dot'" :key="i"
@@ -317,6 +317,7 @@ export default {
     column-gap: 10px;
     justify-content: center;
     padding-bottom: 20px;
+    margin-right: 2% !important;
 }
 
 #chartsHeaders {
