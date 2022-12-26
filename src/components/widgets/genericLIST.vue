@@ -1,6 +1,6 @@
 <!-- eslint-disable -->
 <template>
-    <div>
+    <div style="margin-top:10px">
         <div class="LISTcontainer" dir="rtl">
             <!-- start -->
             <v-data-table ref="tttt" id="mytable" style="width:100%" :headers="headers" :items="activeData"
