@@ -52,7 +52,7 @@ export default {
                         console.log("200 - request w sid for hq LoginStore:", this.$store.state.loginStore)
                         console.log("APP AUTHENTICATE rerouting APP -> HomePage")
                         if(this.$router.currentRoute.path=="/"){
-                          console.log("already in / no need route")
+                          console.log("already in / no need reroute")
                         }
                         else{
                           this.$router.push("/");

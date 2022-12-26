@@ -215,7 +215,7 @@ import Logout_dialog from "./logout_dialog.vue";
             // update DB user theme
             await this.$myShavitApi(`user/themes/${currentTheme}`)
                 .then(response => {
-                console.log(response);
+                // console.log(response);
             })
                 .catch(error => {
                 console.log(error, "user theme update failed");
