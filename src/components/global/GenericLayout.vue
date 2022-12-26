@@ -90,6 +90,10 @@ export default {
     },
     data() {
         return {
+            scrolllDownOptions:{
+                top: 80,
+                behavior: 'smooth'
+            },
             tickCycleTime: undefined,
             activeLabelIndex: 0,
             activeIndex: -1,
@@ -201,6 +205,7 @@ export default {
         BoxClick(i) {
             this.loadIntersectionData(i)
             this.expandDrillHandler(i)
+            
         },
         loadIntersectionData(i){
             if (this.params.data_intersection) {
@@ -212,6 +217,9 @@ export default {
         expandDrillHandler(i){
             if (this.params.click_open_drill_enabled) {
                 if (!this.params.expand || i != this.selectedIndex) {
+                    if(!this.params.expand){
+                        this.scrollWin(this.scrolllDownOptions)
+                    }
                     // eslint-disable-next-line
                     this.params.expand = true
                     this.activeIndex = i
@@ -223,7 +231,10 @@ export default {
                 }
                 this.selectedIndex = i
             }
-        }
+        },
+        scrollWin(options) {
+            window.scrollBy(options);
+            }
     },
     created() {
         this.$on("myIndex", (i) => {
