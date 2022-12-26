@@ -85,7 +85,7 @@ export default {
 }
 
 .shadowBox{
-    box-shadow:3px 3px 5px rgba(146, 146, 146, 0.25) !important;
+    box-shadow:3px 3px 4.5px rgba(146, 146, 146, 0.25) !important;
 }
 
 .kpiBox .kpi-sec-value {
