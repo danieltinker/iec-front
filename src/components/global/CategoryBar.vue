@@ -26,7 +26,7 @@
       }
     },
     async created(){
-      console.log("create cat bar")
+      console.log("Creating Category Bar")
       await axios
             .get(this.$store.state.serverAdrr+"/shavit-mobile"+
               `/${this.$store.state.selected_hq_id}/categories`,

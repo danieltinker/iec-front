@@ -2,8 +2,10 @@
 <template>
     <div>
         <div v-if="doneFetching">
+
             <div class="clock-main" style="text-align: center;" v-if="params.show_clock">
-                <div class="flex-center">
+
+                <div class="radios">
                     <v-radio-group dir="rtl" v-model="params.selected_category" row id="districtRadioGroup"
                         v-if="params.data_category.length >= 2">
                         <v-radio v-for="(category) in params.data_category" :key="category" :label="category"
@@ -26,26 +28,28 @@
 
                     <v-carousel hide-delimiters :show-arrows="showArrows" class="carousel-flex" ref="pieCarousel"
                         :value="carouselIndex" v-model="carouselActiveIndex" height=auto>
-
                         <template v-slot:next="{ on, attr }">
                             <img v-on="on" v-bind="attr" src="../../assets/playRight.svg" />
                         </template>
                         <template v-slot:prev="{ on, attr }">
                             <img v-on="on" v-bind="attr" src="../../assets/playLeft.svg" />
                         </template>
-
                         <v-carousel-item v-for="(DataArray, index) in jsonData[params.selected_category]" :key="index + params.selected_category">
                             <div class="generic-clock" dir="rtl">
+
                                 <component @BoxClick="BoxClick"
                                  :props_object={isDrillDown:isDrillDown,activeIndex:activeIndex,params:params,jsonData:jsonData,meta_data:meta_data} 
                                  :is="stepComponent" 
                                  :activeData="DataArray">
                                 </component>
+
                             </div>
                         </v-carousel-item>
                     </v-carousel>
                 </div>
             </div>
+
+
             <div class="clock-drilldown" v-if="params.expand && !isDrillDown && params.drill_down_params"
                 :style="{ backgroundColor: getCurrentTheme.genericClock.drill_background }">
                 <h1 class="drilldown-title" v-if="params.drill_down_params.headline_config">
@@ -57,6 +61,8 @@
                 </component>
             </div>
         </div>
+
+
         <div class="data-status-pod" v-else>
             <div class="loader" v-if="!isErrorMsg">
                 <v-progress-circular  :size="20"
@@ -117,7 +123,8 @@ export default {
     },
     methods: {
         async fetchClock() {
-            this.doneFetching = false // SHOW LOADER
+            // console.log("Loading Clocks...") // SHOW LOADER
+            this.doneFetching = false 
             this.LoadDrillCarouselIndex()
             this.LoadQuickViewCarouselIndex()
             if(this.isDrillDown){ this.LoadDrillData() }
@@ -125,7 +132,10 @@ export default {
                 await this.fetchMainData()
                 if(this.hasMainDataRecieved && this.params.drill_down_params){ await this.fetchDrillData() }
             }
-            if(!this.hasErrorMsg()){this.doneFetching = true} // SHOW CLOCK
+            if(!this.hasErrorMsg()){
+                // console.log("Showing Clocks") // SHOW CLOCK
+                this.doneFetching = true
+            } 
             this.tick(this.params.sample_rate)
         },
         LoadDrillData(){
@@ -203,12 +213,14 @@ export default {
             }
         },
         BoxClick(i) {
+            console.log("recieved generic label click, index:",i)
             this.loadIntersectionData(i)
             this.expandDrillHandler(i)
             
         },
         loadIntersectionData(i){
             if (this.params.data_intersection) {
+                console.log("Load Data Intersection")
                 this.activeLabelIndex = i
                 this.drilldownData = this.intersectionDrillData[this.jsonData[this.params.selected_category][this.carouselActiveIndex][i].label]
                 this.params.static_drill_titles_param_copy = this.params.static_drill_titles_param[this.jsonData[this.params.selected_category][this.carouselActiveIndex][i].label]
@@ -219,6 +231,7 @@ export default {
                 if (!this.params.expand || i != this.selectedIndex) {
                     if(!this.params.expand){
                         this.scrollWin(this.scrolllDownOptions)
+                        console.log("Expanding...")
                     }
                     // eslint-disable-next-line
                     this.params.expand = true
@@ -240,6 +253,7 @@ export default {
         this.$on("myIndex", (i) => {
             this.drillCarouselIndex = i
         })
+        
         this.fetchClock()
     },
     beforeDestroy() {
@@ -283,7 +297,7 @@ export default {
     margin-right: 0px !important;
 }
 
-.flex-center {
+.radios {
     display: flex;
     flex-direction: column;
     align-items: center;

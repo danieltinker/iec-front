@@ -55,12 +55,12 @@ Vue.mixin({
     },
 
     BookMarkClick(viewID,parameters,templateType, isDrillDown,activeIndex) {
+      console.log("Bookmark Click (viewID, activeIndex)",viewID, activeIndex)
       let view_id = viewID
-      console.log("saving index!@?@!#?", activeIndex)
       //save curr widget params for bookmark
       this.$store.state.selected_view_param = Object.assign({},parameters)
       this.$store.state.selected_view_param["TEMPLATE_TYPE"] = templateType
-
+      
       if(isDrillDown){
         this.$store.state.selected_view_param["drill_down_params"]["carouselActiveIndex"] = activeIndex
         this.$store.state.selected_view_param["show_clock"] = false
@@ -78,26 +78,15 @@ Vue.mixin({
       if (this.IS_FETCHING === false) {
         this.DO_FETCH()
         if (this.CheckBookmark(view_id)) {
-          //already bookmarked remove fav
-
-          // OLDD
-          // FavoriteAxios.RemoveUserFav()
-          //   .then(() => {
-          //     //if we got new info update user favorite list
-          //     this.GetUserFav();
-          //   })
-          //   .catch((error) => {
-          //     console.log("Got error removing user fav: ", error);
-          //   });
           this.$store.state.removeBookmarkDialog = true
         } else {
           //add user fav
           FavoriteAxios.AddUserFav()
-            .then(() => {
-              //if we got new info update user favorite list
-              this.GetUserFav();
-              this.$root.$emit("addBookmarkSnackbar", "השעון נוסף בהצלחה למבט מהיר!",true);
-            })
+          .then(() => {
+            //if we got new info update user favorite list
+            this.GetUserFav();
+            this.$root.$emit("addBookmarkSnackbar", "השעון נוסף בהצלחה למבט מהיר!",true);
+          })
             .catch((error) => {
               console.log("Got error adding user fav: ", error);
               if(error.response.status == 405){

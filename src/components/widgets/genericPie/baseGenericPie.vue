@@ -90,7 +90,6 @@ export default {
       }, 500);
     },
     emitHandler(indexClick){
-      console.log("emitHnadler",indexClick)
       this.$emit('handleIntersection',indexClick)
     },
     myActiveIndex(){

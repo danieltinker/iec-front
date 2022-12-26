@@ -146,9 +146,9 @@ export default {
   },
 
   async created() {
-    console.log("create widget space")
+    console.log("Creating Widget Space...")
     this.doneFetching=false
-    console.log(this.$store.state.selected_hq_id,"widget selcet")
+    console.log("Selected HeadQuarters",this.$store.state.selected_hq_id)
     await axios
       .get(this.$store.state.serverAdrr+"/shavit-mobile/views/" + this.$store.state.selected_hq_id + "/" + this.$store.state.selected_cat_id, { params: { sid: this.$store.state.loginStore.userInfo.sid } })
       .then((response) => {
@@ -161,24 +161,6 @@ export default {
         console.log(error);
       });
 
-
-    // console.log("setInterval /views")
-    // this.fetch_interval = setInterval(async ()=>{
-    //       console.log("Refreshing Page")
-    //       this.doneFetching=false
-    //       await axios
-    //         .get(this.$store.state.serverAdrr+"/shavit-mobile/views/" + this.$store.state.selected_hq_id + "/" + this.$store.state.selected_cat_id, { params: { sid: this.$store.state.loginStore.userInfo.sid } })
-    //         .then((response) => {
-    //           this.responseData = response.data;
-    //           this.doneFetching = true;
-    //           this.errorMsg = ""
-    //         })
-    //         .catch((error) => {
-    //           this.errorMsg = "תצוגת דף לא זמינה"
-    //           console.log(error);
-    //         });
-    //     },120000)
-
     this.$on('bookmark-drill', (viewID,params,templateType,isDrillDown)=>{
             console.log("widget lets make the save",viewID,params,templateType,isDrillDown)
             this.BookMarkClick(viewID,params,templateType,isDrillDown)
@@ -189,6 +171,7 @@ export default {
     }
 
     this.GetUserFav();
+    console.log("Loading Clocks:")
   },
 
   computed:{

@@ -49,6 +49,7 @@
     props: ["isExpand"],
     methods: {
       onExpandTooltipClick() {
+        console.log("Expanding/Closing Generic Clock From 3dot9dot")
         this.$emit("switch-expand");
       },
     },

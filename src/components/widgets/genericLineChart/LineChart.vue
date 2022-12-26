@@ -52,7 +52,6 @@ export default{
             //     }
      
             this.option.xaxis.labels ={formatter: (value,timestamp) =>{
-                    console.log(new Date(timestamp * 1000))
                     const dateTimeFormat = new Intl.DateTimeFormat('en', {  month: 'numeric', day: 'numeric', hour: 'numeric', minute:'numeric', hour12: false })             
                     var [{ value: month },,{ value: day },,{value: hour},,{value:minute}] = dateTimeFormat .formatToParts(new Date( timestamp  )) 
                     if(hour==24)hour=0

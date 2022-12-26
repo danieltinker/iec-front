@@ -19,6 +19,7 @@ export default {
 
   //add to user fav
   AddUserFav() {
+    console.log("saving clock to favorites")
     let fav_state = {
       PARAMETERS: store.state.selected_view_param,
       CUSTOM_SETTINGS: store.state.custom_bookmark_data,
@@ -36,6 +37,7 @@ export default {
   },
   //remove favorite
   RemoveUserFav() {
+    console.log("Removing Clock from Favorites")
     return ShavitMobileFavReq.delete(
       `${store.state.loginStore.userInfo.user_id}/${store.state.selected_view_id}`,
       {
