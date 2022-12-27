@@ -47,11 +47,11 @@
                     <v-icon v-if="object_condition_icons(item[header.value])" class="my-2" :color="getCurrentTheme.hq_navbar.span_color_first" style="font-size: 30px; justify-content: right;">{{item[header.value]['icon']}}</v-icon>
                     
 
-                    <v-icon v-else-if="object_condition_color(item[header.value])" class="my-2" :color="item[header.value]['color']" style="font-size: 30px;    margin: 0px !important;">mdi-circle-medium</v-icon>
-                    
-                    <!-- <strong v-else-if="object_condition_color(item[header.value])"
+                    <!-- <v-icon v-else-if="object_condition_color(item[header.value])" class="my-2" :color="item[header.value]['color']" style="font-size: 30px;    margin: 0px !important;">mdi-circle-medium</v-icon>
+                     -->
+                    <strong v-else-if="object_condition_color(item[header.value])"
                     @click="overScrollWidth(header,index,item[header.value], $event)" 
-                    class="dot" :style="'background-color:' + item[header.value]['color']"></strong> -->
+                    class="dot" :style="'background-color:' + item[header.value]['color']"></strong>
 
 
                     <strong @click="overScrollWidth(header,index,item[header.value], $event)"
