@@ -40,9 +40,11 @@ export default {
     watch:{
         activeData(){
             if(this.activeData["*"]==[]){
-                    console.log("empty one ")
+                console.log(this.activeData)
+                console.log("empty one ")
             }
             else{
+                console.log(this.activeData)
                 console.log("not empty")
             }
         }
