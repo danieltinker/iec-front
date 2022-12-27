@@ -38,17 +38,15 @@
 
                 <template v-slot:item="{item, index}">
                     <tr>
-                        <!-- <td v-for="(header, i) in headers" :key="i" :align="header.align" :style="[header.value == 'user_name' ? {'color':'red'}:{'color':''}]"> -->
-                            <td v-for="(header, i) in headers" :key="i" :align="header.align"></td>
+                        <td v-for="(header, i) in headers" :key="i" :align="header.align">
+                            
                             <!-- <strong @click="overScrollWidth(index,item[header.value])"
                         v-if="typeof item[header.value] == 'string' && item[header.value].split('*-*')[0] == 'dot'" :key="i"
                         class="dot" :style="'background-color:' + item[header.value].split('*-*')[1]">
                     </strong> -->
                     <v-icon v-if="object_condition_icons(item[header.value])" class="my-2" :color="getCurrentTheme.hq_navbar.span_color_first" style="font-size: 30px; justify-content: right;">{{item[header.value]['icon']}}</v-icon>
-                    
 
-                    <!-- <v-icon v-else-if="object_condition_color(item[header.value])" class="my-2" :color="item[header.value]['color']" style="font-size: 30px;    margin: 0px !important;">mdi-circle-medium</v-icon>
-                     -->
+
                     <strong v-else-if="object_condition_color(item[header.value])"
                     @click="overScrollWidth(header,index,item[header.value], $event)" 
                     class="dot" :style="'background-color:' + item[header.value]['color']"></strong>
