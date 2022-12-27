@@ -96,8 +96,8 @@ export default {
     },
     data() {
         return {
-            scrolllDownOptions:{
-                top: 80,
+            scrollDownOptions:{
+                top: 120,
                 behavior: 'smooth'
             },
             tickCycleTime: undefined,
@@ -223,6 +223,10 @@ export default {
                 console.log("Load Data Intersection")
                 this.activeLabelIndex = i
                 this.drilldownData = this.intersectionDrillData[this.jsonData[this.params.selected_category][this.carouselActiveIndex][i].label]
+                if(this.drilldownData==[]){
+                    console.log("this is an empty drill click transfer bool to the comp.")
+                    console.log(this.drilldownData)
+                }
                 this.params.static_drill_titles_param_copy = this.params.static_drill_titles_param[this.jsonData[this.params.selected_category][this.carouselActiveIndex][i].label]
             }
         },
@@ -230,7 +234,7 @@ export default {
             if (this.params.click_open_drill_enabled) {
                 if (!this.params.expand || i != this.selectedIndex) {
                     if(!this.params.expand){
-                        this.scrollWin(this.scrolllDownOptions)
+                        this.scrollWin(this.scrollDownOptions)
                         console.log("Expanding...")
                     }
                     // eslint-disable-next-line
