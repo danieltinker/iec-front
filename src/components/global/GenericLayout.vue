@@ -34,7 +34,7 @@
                         <template v-slot:prev="{ on, attr }">
                             <img v-on="on" v-bind="attr" src="../../assets/playLeft.svg" />
                         </template>
-                        <v-carousel-item v-for="(DataArray, index) in jsonData[params.selected_category]" :key="index + params.selected_category">
+                        <v-carousel-item v-for="(DataArray, index) in jsonData[params.selected_category]" :key="index + params.selected_category" style="margin-bottom:10px">
                             <div class="generic-clock" dir="rtl">
 
                                 <component @BoxClick="BoxClick"

@@ -38,6 +38,7 @@
 
                 <template v-slot:item="{item, index}">
                     <tr>
+                        <!-- <td v-for="(header, i) in headers" :key="i" :align="header.align" :style="[header.value == 'user_name' ? {'color':'red'}:{'color':''}]"></td> -->
                         <td v-for="(header, i) in headers" :key="i" :align="header.align">
                             
                             <!-- <strong @click="overScrollWidth(index,item[header.value])"
@@ -45,11 +46,13 @@
                         class="dot" :style="'background-color:' + item[header.value].split('*-*')[1]">
                     </strong> -->
                     <v-icon v-if="object_condition_icons(item[header.value])" class="my-2" :color="getCurrentTheme.hq_navbar.span_color_first" style="font-size: 30px; justify-content: right;">{{item[header.value]['icon']}}</v-icon>
+                    
 
-
-                    <strong v-else-if="object_condition_color(item[header.value])"
+                    <v-icon v-else-if="object_condition_color(item[header.value])" class="my-2" :color="item[header.value]['color']" style="font-size: 30px;    margin: 0px !important;">mdi-circle-medium</v-icon>
+                    
+                    <!-- <strong v-else-if="object_condition_color(item[header.value])"
                     @click="overScrollWidth(header,index,item[header.value], $event)" 
-                    class="dot" :style="'background-color:' + item[header.value]['color']"></strong>
+                    class="dot" :style="'background-color:' + item[header.value]['color']"></strong> -->
 
 
                     <strong @click="overScrollWidth(header,index,item[header.value], $event)"
@@ -103,10 +106,8 @@
         </div>
 
 
-        <div v-if="props_object.params.bottom_text" dir="ltr" class="updateDate">
-            <p>{{ props_object.params.bottom_text.substring(0, 5) == '$meta' ?
-                props_object.meta_data[props_object.params.bottom_text.substring(6)] : props_object.params.bottom_text
-            }}</p>
+        <div  dir="ltr" class="updateDate" style="white-space: pre-wrap;">
+            <p>{{testdata}}</p>
         </div>
 
 
@@ -121,6 +122,7 @@ export default {
     props: ["activeData", "props_object"],
     data() {
         return {
+            testdata:"הלו הלו הלו הלו\n הלו2 הלו2 הלו2 הלו2",
             cardData: '',
             colortest: "green",
             meta_data: null,
@@ -176,7 +178,7 @@ export default {
 .updateDate {
     font-family: almoni-medium;
     font-size: 16px;
-    text-align: center;
+    text-align: right;
     color: v-bind('getCurrentTheme.list_data.font_color')
 }
 
