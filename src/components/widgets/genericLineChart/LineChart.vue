@@ -2,7 +2,7 @@
     <div>
         <!-- <h1>{{ serie }}</h1> -->
       <apexchart v-if="showData" 
-      height="350"
+      height="300"
       width="99%" type="line" 
       :options="option"
        :series="serie"

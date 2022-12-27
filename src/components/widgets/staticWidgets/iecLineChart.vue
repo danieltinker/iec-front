@@ -10,7 +10,7 @@
           style="overflow-y: hidden; margin-right: 7px;dir:ltr"
           ref="chart"
           type="line"
-          height="250px"
+          height="300px"
           width="90%"
           :options="chartOptions"
           :series="series"
