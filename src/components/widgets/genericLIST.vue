@@ -14,8 +14,8 @@
                     showFirstLastPage: false,
                     firstIcon: 'mdi-arrow-collapse-left',
                     lastIcon: 'mdi-arrow-collapse-right',
-                    prevIcon: 'mdi-chevron-right',
-                    nextIcon: 'mdi-chevron-left',
+                    prevIcon: 'mdi-arrow-right-thin',
+                    nextIcon: 'mdi-arrow-left-thin',
                     'items-per-page-text':'שורות'
                 }"
                 :group-by="props_object.params.group_by ? 'category' : null" sort-by=""

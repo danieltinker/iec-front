@@ -19,14 +19,10 @@
                 <img v-if="item.STATE.PARAMETERS.fav_icon != ''" :src="getImg(item.STATE.PARAMETERS.fav_icon)" />
             </v-btn>
             <span class="fav-span" v-if="item.STATE.PARAMETERS.headline_config.title.length < 8">{{ item.STATE.PARAMETERS.headline_config.title }}</span>
-            <v-tooltip top v-else>
-                <template v-slot:activator="{ on, attrs }">
-                    <span class="fav-span" v-bind="attrs" v-on="on">
-                        {{ item.STATE.PARAMETERS.headline_config.title }}
-                    </span>
-                </template>
+            <div top v-else>
+                
                 <span class="fav-span">{{ item.STATE.PARAMETERS.headline_config.title}}</span>
-            </v-tooltip>
+            </div>
         </div>
 
 
