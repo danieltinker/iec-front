@@ -95,7 +95,7 @@ export default {
   data() {
     return {
       scrollDownOptions:{
-          top: 80,
+          top: 120,
           behavior: 'smooth'
       },
       isMaxFavorite:false,

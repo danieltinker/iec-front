@@ -96,8 +96,8 @@ export default {
     },
     data() {
         return {
-            scrolllDownOptions:{
-                top: 100,
+            scrollDownOptions:{
+                top: 120,
                 behavior: 'smooth'
             },
             tickCycleTime: undefined,
@@ -234,7 +234,7 @@ export default {
             if (this.params.click_open_drill_enabled) {
                 if (!this.params.expand || i != this.selectedIndex) {
                     if(!this.params.expand){
-                        this.scrollWin(this.scrolllDownOptions)
+                        this.scrollWin(this.scrollDownOptions)
                         console.log("Expanding...")
                     }
                     // eslint-disable-next-line
