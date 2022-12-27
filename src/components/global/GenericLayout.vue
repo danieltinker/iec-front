@@ -97,7 +97,7 @@ export default {
     data() {
         return {
             scrolllDownOptions:{
-                top: 80,
+                top: 100,
                 behavior: 'smooth'
             },
             tickCycleTime: undefined,
