@@ -74,6 +74,11 @@ export default {
         }
     },
     computed: {
+        my_center(){
+        let width = screen.width;
+        let xn = (width-331) / 2
+        return xn + "px"
+      }
     },
 
 }
@@ -90,8 +95,8 @@ export default {
 }
 
 .btn-container {
-    margin-left: 4%;
-    margin-right: 4%;
+    margin-left:v-bind('my_center');
+    margin-right:v-bind('my_center');
     
 }
 

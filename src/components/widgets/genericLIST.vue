@@ -38,7 +38,7 @@
 
                 <template v-slot:item="{item, index}">
                     <tr>
-                        <td v-for="(header, i) in headers" :key="i" :align="header.align" :style="[isBold.includes(header.value) ? {'color':'red'}:{'color':''}]">
+                        <td v-for="(header, i) in headers" :key="i" :align="header.align" :style="[isBold.includes(header.value) ? {'color':'red'}:{'color':''},activeData[index]['isSum'] ? {'background-color':getCurrentTheme.list_data.total_color}:'']">
                             
                             <!-- <strong @click="overScrollWidth(index,item[header.value])"
                         v-if="typeof item[header.value] == 'string' && item[header.value].split('*-*')[0] == 'dot'" :key="i"
