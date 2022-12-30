@@ -187,9 +187,9 @@ export default new Vuex.Store({
           "color_1":"#282828",
           "color_2":"#121212",
           "background_color":"#F9F9F9",
-          "font_color":"#606060",
+          "font_color":"#010101",
           "border_color":"#FFFFFF",
-          "total_color":"#c7c9c9"
+          "total_color":"#e9edf6"
         },
         "remove_dialog":{
           "card_main":"#000000",
