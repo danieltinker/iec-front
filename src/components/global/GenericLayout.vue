@@ -38,7 +38,7 @@
                             <div class="generic-clock" dir="rtl">
 
                                 <component @BoxClick="BoxClick"
-                                 :props_object={isDrillDown:isDrillDown,activeIndex:activeIndex,params:params,jsonData:jsonData,meta_data:meta_data,isEmptyDrill=emptyDrillData} 
+                                 :props_object={isDrillDown:isDrillDown,activeIndex:activeIndex,params:params,jsonData:jsonData,meta_data:meta_data,isEmptyDrill:emptyDrillData} 
                                  :is="stepComponent" 
                                  :activeData="DataArray">
                                 </component>
