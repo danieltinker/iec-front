@@ -1,6 +1,6 @@
 <!-- eslint-disable -->
 <template>
-    <div dir="ltr">
+    <div dir="rtl">
         <LineChart style="text-align: -webkit-center;" :series="activeData" :options="props_object.params.options" />
     </div>
 </template>
