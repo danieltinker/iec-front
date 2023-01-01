@@ -124,9 +124,9 @@ body {
   align-items: center;
   align-self: center;
 }
-.v-progress-circular{
+/* .v-progress-circular{
   padding:40px;
-}
+} */
 
 @font-face {
   font-family: almoni-black;

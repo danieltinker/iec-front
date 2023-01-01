@@ -94,10 +94,19 @@ export default {
     margin-left: 10px;
 }
 
-.btn-container {
+.btn-container{
+    margin-left:4%;
+    margin-right:4%;
+    padding-bottom: 20px;
+   }
+   @media only screen and (max-width: 780px) {
+  .btn-container {
     margin-left:v-bind('my_center');
     margin-right:v-bind('my_center');
-    
+    padding-bottom: 20px;
+
+
+}
 }
 
 :deep() .v-btn:not(.v-btn--round).v-size--default {

@@ -107,10 +107,19 @@ export default {
 <style>
 
    .btn-container{
+    margin-left:4%;
+    margin-right:4%;
+    padding-bottom: 20px;
+   }
+   @media only screen and (max-width: 780px) {
+  .btn-container {
     margin-left:v-bind('my_center');
     margin-right:v-bind('my_center');
     padding-bottom: 20px;
-   }
+
+
+}
+}
     .btn{
         margin:10px;
         justify-content: right;

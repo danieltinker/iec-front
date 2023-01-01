@@ -65,8 +65,8 @@
 
         <div class="data-status-pod" v-else>
             <div class="loader" v-if="!isErrorMsg">
-                <v-progress-circular  :size="20"
-        :width="1" indeterminate :style="{ color: getCurrentTheme.global_theme_color }">
+                <v-progress-circular  :size="40"
+        :width="4" indeterminate :style="{ color: getCurrentTheme.global_theme_color }">
                 </v-progress-circular>
             </div>
             <h1 v-else style="font-family: almoni;font-size:20px"> {{ errorMSG }} </h1>
@@ -343,9 +343,9 @@ export default {
     align-self: center;
 }
 
-.v-progress-circular {
+/* .v-progress-circular {
     padding: 40px;
-}
+} */
 
 .clock-drilldown {
     background-color: #E5E5E5;

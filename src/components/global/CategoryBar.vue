@@ -3,7 +3,7 @@
       <div>
         <div v-for="(category, index) in categories" :key="index">
           <v-btn class="chipBtn ml-3" :color="getCurrentTheme.category_bar.btn_chip" :id="index" elevation="0"
-            @click="setCategory(index,category.CATEGORY_ID)"
+            @click="setCategory(index,category.CATEGORY_ID,category.SUB_CATEGORIES,category.LABEL)"
             :style="
                   active == index
                     ? {'color': '#FFFFFF', 'background-color' : getCurrentTheme.global_theme_color}
@@ -20,7 +20,12 @@
   import axios from "axios";
   export default {
     methods: {
-      setCategory(index, category) {
+      setCategory(index, category,SUB_CATEGORIES,LABEL) {
+        this.$store.state.clearSubCategory = undefined;
+        this.$store.state.isSubCategories = SUB_CATEGORIES;
+        this.$store.state.selected_cat_name = LABEL;
+        console.log("SUB_CATEGORIES",this.$store.state.isSubCategories);
+        console.log(LABEL);
         this.active = index;
         this.$store.state.selected_cat_id = category;
       }
@@ -33,9 +38,15 @@
               { params: { sid: this.$store.state.loginStore.userInfo.sid } }
             )
             .then(response => {
-              this.categories = response.data;
+              //this.categories = response.data;
+              this.categories = response.data['CATEGORIES'];
+              this.$store.state.sub_categories_json = response.data['SUB_CATEGORIES'];
               //SET default category
               this.$store.state.selected_cat_id = this.categories[0].CATEGORY_ID;
+              this.$store.state.selected_cat_name = this.categories[0].LABEL;
+              this.$store.state.isSubCategories = this.categories[0].SUB_CATEGORIES;
+              console.log("SUB_CATEGORIES",this.$store.state.isSubCategories);
+
               this.active = 0
             })
             .catch(error => {
@@ -52,9 +63,14 @@
               { params: { sid: this.$store.state.loginStore.userInfo.sid } }
             )
             .then(response => {
-              this.categories = response.data;
+              //this.categories = response.data;
+              this.categories = response.data['CATEGORIES'];
+              this.$store.state.sub_categories_json = response.data['SUB_CATEGORIES']
               //SET default category
               this.$store.state.selected_cat_id = this.categories[0].CATEGORY_ID;
+              this.$store.state.selected_cat_name = this.categories[0].LABEL;
+              this.$store.state.isSubCategories = this.categories[0].SUB_CATEGORIES;
+              console.log("SUB_CATEGORIES",this.$store.state.isSubCategories);
               this.active = 0
             })
             .catch(error => {

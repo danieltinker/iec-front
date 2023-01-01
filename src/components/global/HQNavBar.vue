@@ -8,7 +8,7 @@
           {{getAppTitle}}
         </v-toolbar-title>
       </v-app-bar>
-      <v-navigation-drawer :color="getCurrentTheme.hq_navbar.navigation_drawer" v-model="drawer" app right clipped hide-overlay dir="rtl">
+      <v-navigation-drawer :color="getCurrentTheme.hq_navbar.navigation_drawer" v-model="drawer" app right clipped dir="rtl">
         <v-icon class="my-2" dir @click="drawer = !drawer" :color="getCurrentTheme.hq_navbar.span_color_first" style="font-size: 30px; justify-content: right;">mdi-close</v-icon>
         
         <div
@@ -162,6 +162,12 @@ import Logout_dialog from "./logout_dialog.vue";
         setHQ(item) {
             this.$store.state.selected_hq_id = item.HQ_ID;
             this.$store.state.appTitle = item.LABEL;
+            this.$store.state.clearSubCategory = undefined;
+            window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: 'smooth'
+      });
         }
     },
     computed: {

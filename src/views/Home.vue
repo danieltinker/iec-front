@@ -8,6 +8,7 @@
         <!-- CATEGORIES BAR HORIZONTAL SCROLL -->
         <CategoryBar/>
         <!-- WIDGETS SPACE (CLOCKS) VERTICAL SCROLL  -->
+        <SubCategories v-if="$store.state.isSubCategories" style="margin-top:8px" />
         <WidgetSpace/>
         <!-- <WidgetSpace v-if="!this.$store.state.quick_view" /> -->
         <!-- {{$store.state.selected_view_param}} -->
@@ -31,6 +32,7 @@
   import RemoveBookmark from '../components/global/removeBookmark.vue';
   import BookmarkSnackbar from '../components/global/bookmarkSnackbar.vue';
   import axios from 'axios';
+import SubCategories from '@/components/global/SubCategories.vue';
   export default {
       name: "App",
       data: () => ({
@@ -39,7 +41,7 @@
         snackText:"",
         valid_sid:false
         }),
-      components: { WidgetSpace, HQNavBar, CategoryBar, UserFavorites, MaxFavoritePopup, RemoveBookmark, BookmarkSnackbar },
+      components: { WidgetSpace, HQNavBar, CategoryBar, UserFavorites, MaxFavoritePopup, RemoveBookmark, BookmarkSnackbar, SubCategories },
       async created() {
         console.log("WELCOME TO HOME PAGE")
         if(this.$store.state.loginStore.isAuthenticated){
