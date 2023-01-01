@@ -231,7 +231,8 @@ export default {
                 this.activeLabelIndex = i
                 this.drilldownData = this.intersectionDrillData[this.jsonData[this.params.selected_category][this.carouselActiveIndex][i].label]
                 console.log(this.drilldownData,"drilldown data", this.isDrillDown)
-                if(this.drilldownData==[]){
+                if(this.drilldownData["*"]==[]){
+                    this.emptyDrillData = true
                     console.log(this.drilldownData)
                     console.log("this is an empty drill click transfer bool to the comp.")
                 }
