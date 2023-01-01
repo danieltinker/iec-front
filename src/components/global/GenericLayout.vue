@@ -38,7 +38,7 @@
                             <div class="generic-clock" dir="rtl">
 
                                 <component @BoxClick="BoxClick"
-                                 :props_object={isDrillDown:isDrillDown,activeIndex:activeIndex,params:params,jsonData:jsonData,meta_data:meta_data} 
+                                 :props_object={isDrillDown:isDrillDown,activeIndex:activeIndex,params:params,jsonData:jsonData,meta_data:meta_data,isEmptyDrill=emptyDrillData} 
                                  :is="stepComponent" 
                                  :activeData="DataArray">
                                 </component>
@@ -113,7 +113,8 @@ export default {
             doneFetching: false,
             drillCarouselIndex: 0,
             intersectionDrillData: {},
-            meta_data:{}
+            meta_data:{},
+            emptyDrillData:false
         }
     },
     components: {
@@ -141,6 +142,11 @@ export default {
         LoadDrillData(){
             if(this.drillDataProp != undefined){
                 this.jsonData = this.drillDataProp
+                console.log("drill down data for real",this.isDrillDown,this.jsonData)
+                if(this.jsonData==[]){
+                    console.log("empty!!!")
+                    this.emptyDrillData = true
+                }
             }
         },
         LoadDrillCarouselIndex(){
@@ -214,6 +220,7 @@ export default {
         },
         BoxClick(i) {
             console.log("recieved generic label click, index:",i)
+            console.log(this.isDrillDown, this.jsonData,"json data")
             this.loadIntersectionData(i)
             this.expandDrillHandler(i)
             
@@ -223,9 +230,10 @@ export default {
                 console.log("Load Data Intersection")
                 this.activeLabelIndex = i
                 this.drilldownData = this.intersectionDrillData[this.jsonData[this.params.selected_category][this.carouselActiveIndex][i].label]
+                console.log(this.drilldownData,"drilldown data", this.isDrillDown)
                 if(this.drilldownData==[]){
-                    console.log("this is an empty drill click transfer bool to the comp.")
                     console.log(this.drilldownData)
+                    console.log("this is an empty drill click transfer bool to the comp.")
                 }
                 this.params.static_drill_titles_param_copy = this.params.static_drill_titles_param[this.jsonData[this.params.selected_category][this.carouselActiveIndex][i].label]
             }
