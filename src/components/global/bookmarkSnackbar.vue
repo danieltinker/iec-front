@@ -36,12 +36,32 @@
   </script>
   
   <style>
+
+.snackbar{
+  animation: bounceInUp 0.7s;
+}
+  
+@keyframes bounceInUp {
+   0% {
+      opacity: 0;
+      transform: translateY(2000px);
+   }
+   50% {
+      opacity: 1;
+      transform: translateY(-5px);
+   }
+   100% {
+      transform: translateY(0);
+   }
+} 
     .errorClass{
       background-color: #0F2558;
+      animation: bounceInRight 1s;
   ;
     }
     .successClass{
       background-color: #0F2558;
       background-color: v-bind('getCurrentTheme.global_theme_color');
+      animation: bounceInRight 1s;
     }
   </style>
