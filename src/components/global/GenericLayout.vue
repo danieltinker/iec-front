@@ -2,9 +2,8 @@
 <template>
     <div>
         <div v-if="doneFetching">
-
             <div class="clock-main" style="text-align: center;" v-if="params.show_clock">
-
+                
                 <div class="radios">
                     <v-radio-group dir="rtl" v-model="params.selected_category" row id="districtRadioGroup"
                         v-if="params.data_category.length >= 2">
@@ -17,15 +16,15 @@
                     <ChartTitles :isDrillDown="isDrillDown" :params="params" :carouselActiveIndex="carouselActiveIndex" :static_drill_titles_prop="static_drill_titles_prop"></ChartTitles>
                     <span>
                         <v-icon dir="rtl"
-                            @click="BookMarkClick(view_ID, parentsParam, params.template_type, true, carouselActiveIndex)"
+                        @click="BookMarkClick(view_ID, parentsParam, params.template_type, true, carouselActiveIndex)"
                             style="font-size: 30px"
                             :style="{color:getCurrentTheme.global_theme_color}"
                             v-if="isDrillDown && params.headline_config && params.headline_config.bookmark_enabled && view_ID!=134">
                             {{CheckBookmark(view_ID)? "mdi-bookmark": "mdi-bookmark-outline"}}</v-icon>
-                    </span>
-                </v-row>
-
-
+                        </span>
+                    </v-row>
+                    
+                <div v-if="jsonData[params.selected_category].length!=0">
                     <v-carousel hide-delimiters :show-arrows="showArrows" class="carousel-flex" ref="pieCarousel"
                         :value="carouselIndex" v-model="carouselActiveIndex" height=auto>
                         <template v-slot:next="{ on, attr }">
@@ -38,7 +37,7 @@
                             <div class="generic-clock" dir="rtl">
 
                                 <component @BoxClick="BoxClick"
-                                 :props_object={isDrillDown:isDrillDown,activeIndex:activeIndex,params:params,jsonData:jsonData,meta_data:meta_data,isEmptyDrill:emptyDrillData} 
+                                 :props_object={isDrillDown:isDrillDown,activeIndex:activeIndex,params:params,jsonData:jsonData,meta_data:meta_data} 
                                  :is="stepComponent" 
                                  :activeData="DataArray">
                                 </component>
@@ -46,6 +45,8 @@
                             </div>
                         </v-carousel-item>
                     </v-carousel>
+                </div>
+                <div v-else><NoDataMsg :templateType="params.template_type"/></div>
                 </div>
             </div>
 
@@ -78,6 +79,7 @@
 
 import ThreeDotsNineDots from '../utils/ThreeDotsNineDots.vue'
 import ChartTitles from '../utils/ChartTitles.vue'
+import NoDataMsg from '../utils/NoDataMsg.vue'
 export default {
     props: {
         isDrillDown: { type: Boolean },
@@ -113,15 +115,15 @@ export default {
             doneFetching: false,
             drillCarouselIndex: 0,
             intersectionDrillData: {},
-            meta_data:{},
-            emptyDrillData:false
+            meta_data:{}
         }
     },
     components: {
-        ThreeDotsNineDots,
-        ChartTitles,
-        GenericLayout: () => import('../global/GenericLayout.vue')
-    },
+    ThreeDotsNineDots,
+    ChartTitles,
+    GenericLayout: () => import("../global/GenericLayout.vue"),
+    NoDataMsg
+},
     methods: {
         async fetchClock() {
             // console.log("Loading Clocks...") // SHOW LOADER
@@ -142,11 +144,6 @@ export default {
         LoadDrillData(){
             if(this.drillDataProp != undefined){
                 this.jsonData = this.drillDataProp
-                console.log("drill down data for real",this.isDrillDown,this.jsonData)
-                if(this.jsonData==[]){
-                    console.log("empty!!!")
-                    this.emptyDrillData = true
-                }
             }
         },
         LoadDrillCarouselIndex(){
@@ -220,7 +217,6 @@ export default {
         },
         BoxClick(i) {
             console.log("recieved generic label click, index:",i)
-            console.log(this.isDrillDown, this.jsonData,"json data")
             this.loadIntersectionData(i)
             this.expandDrillHandler(i)
             
@@ -230,12 +226,6 @@ export default {
                 console.log("Load Data Intersection")
                 this.activeLabelIndex = i
                 this.drilldownData = this.intersectionDrillData[this.jsonData[this.params.selected_category][this.carouselActiveIndex][i].label]
-                console.log(this.drilldownData,"drilldown data", this.isDrillDown)
-                if(this.drilldownData["*"]==[]){
-                    this.emptyDrillData = true
-                    console.log(this.drilldownData)
-                    console.log("this is an empty drill click transfer bool to the comp.")
-                }
                 this.params.static_drill_titles_param_copy = this.params.static_drill_titles_param[this.jsonData[this.params.selected_category][this.carouselActiveIndex][i].label]
             }
         },

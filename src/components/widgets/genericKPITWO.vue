@@ -1,8 +1,7 @@
 <!-- eslint-disable -->
 <template>
     <div class="KPI2container" dir="rtl">
-        <div class="no-data-box" v-if="props_object.emptyDrillData"><p class="no-data-info">אין פריטים זמינים להצגה</p></div>
-        <div v-else class="kpi-box" v-for="(item, index) in activeData" :key="index" :style="{
+        <div class="kpi-box" v-for="(item, index) in activeData" :key="index" :style="{
             backgroundColor: props_object.isDrillDown ? getCurrentTheme.kpi.drill_background : getCurrentTheme.kpi.main_background,
             border: props_object.activeIndex == index ? getCurrentTheme.legend_border_color : ' solid black 0px'
         }" @click="$emit('BoxClick',index)">
@@ -35,19 +34,8 @@ export default {
     props:["activeData","props_object"],
     created(){
       
-        // console.log(this.activeData)
     },
     watch:{
-        activeData(){
-            if(this.activeData["*"]==[]){
-                console.log(this.activeData)
-                console.log("empty one ")
-            }
-            else{
-                console.log(this.activeData)
-                console.log("not empty")
-            }
-        }
     },
     computed: {
     },
