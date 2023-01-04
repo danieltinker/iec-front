@@ -162,6 +162,8 @@ export default {
     created() {
         this.headers = this.props_object.params.headers
         this.totalGet = this.props_object.params.totalGet
+        this.isIntersection = this.props_object.params.isIntersection
+        this.isBold = this.props_object.params.isBold
     }
 }
 </script>
