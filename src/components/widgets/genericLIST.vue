@@ -38,7 +38,9 @@
 
                 <template v-slot:item="{item, index}">
                     <tr>
-                        <td v-for="(header, i) in headers" :key="i" :align="header.align" :style="[isBold.includes(header.value) ? {'color':'red'}:{'color':''},activeData[index]['isSum'] ? {'background-color':getCurrentTheme.list_data.total_color}:'']">
+                        <td v-for="(header, i) in headers" :key="i" :align="header.align" 
+                        :class="{'list-total' : item['isSum']}"
+                        :style="[isBold.includes(header.value) ? {'color':'red'}:{'color':''}]">
                             
                             <!-- <strong @click="overScrollWidth(index,item[header.value])"
                         v-if="typeof item[header.value] == 'string' && item[header.value].split('*-*')[0] == 'dot'" :key="i"
@@ -170,13 +172,16 @@ export default {
         if(this.props_object.params.isBold){
             this.isBold = this.props_object.params.isBold
         }
+        
     }
 }
 </script>
 
 <style scoped>
 
-
+strong{
+    font-weight: normal;
+}
 
 :deep() .v-data-footer * {
     color: v-bind('getCurrentTheme.drill_title_color');
@@ -212,7 +217,7 @@ export default {
 }
 
 .list-total {
-    font-family: almoni-bold !important;
+    font-family: almoni-demibold !important;
     font-size: 16px !important;
     background-color: v-bind('getCurrentTheme.list_data.total_color');
     padding: 0px !important;
@@ -249,7 +254,7 @@ export default {
 .v-data-table>.v-data-table__wrapper>table>tfoot>tr>td,
 .v-data-table>.v-data-table__wrapper>table>tfoot>tr {
     font-size: 14px;
-    font-family: almoni-light;
+    font-family: almoni;
     color: v-bind('getCurrentTheme.list_data.font_color');
     padding-left: 0px;
     padding-right: 8px;
