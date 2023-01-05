@@ -162,7 +162,7 @@ import Logout_dialog from "./logout_dialog.vue";
         setHQ(item) {
             this.$store.state.selected_hq_id = item.HQ_ID;
             this.$store.state.appTitle = item.LABEL;
-            this.$store.state.clearSubCategory = undefined;
+            this.$store.state.clearSubCategory = 0;
             window.scrollTo({
         top: 0,
         left: 0,

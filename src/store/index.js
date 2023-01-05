@@ -10,7 +10,7 @@ export default new Vuex.Store({
     sub_categories_json:undefined,
     isSubCategories:false,
     selected_cat_name:undefined,
-    clearSubCategory:undefined,
+    clearSubCategory:0,
     fetching: false,
     selected_hq_id:100,
     selected_cat_id:1,

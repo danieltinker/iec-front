@@ -2,7 +2,7 @@
     <div dir="rtl" class="container" :style="{'background-color' :getCurrentTheme.category_bar.background_color}">
       <div>
         <div v-for="(category, index) in categories" :key="index">
-          <v-btn class="chipBtn ml-3" :color="getCurrentTheme.category_bar.btn_chip" :id="index" elevation="0"
+          <v-btn class="chipBtn ml-3" :ripple="false" :color="getCurrentTheme.category_bar.btn_chip" :id="index" elevation="0"
             @click="setCategory(index,category.CATEGORY_ID,category.SUB_CATEGORIES,category.LABEL)"
             :style="
                   active == index
@@ -21,7 +21,7 @@
   export default {
     methods: {
       setCategory(index, category,SUB_CATEGORIES,LABEL) {
-        this.$store.state.clearSubCategory = undefined;
+        this.$store.state.clearSubCategory = 0;
         this.$store.state.isSubCategories = SUB_CATEGORIES;
         this.$store.state.selected_cat_name = LABEL;
         console.log("SUB_CATEGORIES",this.$store.state.isSubCategories);

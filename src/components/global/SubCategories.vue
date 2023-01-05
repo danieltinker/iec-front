@@ -8,7 +8,7 @@
       {{$store.state.sub_categories_json}} -->
       <div>
         <div v-for="(category, index) in $store.state.sub_categories_json[$store.state.selected_cat_name]" :key="index">
-          <v-btn class="chipBtn ml-3" :color="getCurrentTheme.category_bar.btn_chip" :id="index" elevation="0"
+          <v-btn class="chipBtn ml-3" :ripple="false" :color="getCurrentTheme.category_bar.btn_chip" :id="index" elevation="0"
             @click="setCategory(index,category.CATEGORY_ID)"
             :style="
             $store.state.clearSubCategory == index
@@ -38,6 +38,12 @@
         defaultCategory: 0,
         categories: []
       };
+    },
+    created(){
+      this.$store.state.selected_cat_id = this.$store.state.sub_categories_json[this.$store.state.selected_cat_name][0].CATEGORY_ID
+    },
+    beforeDestroy(){
+      this.$store.state.clearSubCategory = 0;
     }
   };
   </script>
