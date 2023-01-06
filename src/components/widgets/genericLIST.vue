@@ -47,14 +47,14 @@
                         class="dot" :style="'background-color:' + item[header.value].split('*-*')[1]">
                     </strong> -->
                     <v-icon v-if="object_condition_icons(item[header.value])" class="my-2" :color="getCurrentTheme.hq_navbar.span_color_first" style="font-size: 30px; justify-content: right;">{{item[header.value]['icon']}}</v-icon>
-                    <v-icon v-else-if="object_condition_color(item[header.value])" @click="overScrollWidth(header,index,item[header.value], $event)"  class="my-2" :color="item[header.value]['color']" style="font-size: 30px;    margin: 0px !important;">mdi-circle-medium</v-icon>
+                    <v-icon v-else-if="object_condition_color(item[header.value])" @click="overScrollWidth(header,index,item[header.value], $event,item)"  class="my-2" :color="item[header.value]['color']" style="font-size: 30px;    margin: 0px !important;">mdi-circle-medium</v-icon>
 
                     <!-- <strong v-else-if="object_condition_color(item[header.value])"
                     @click="overScrollWidth(header,index,item[header.value], $event)" 
                     class="dot" :style="'background-color:' + item[header.value]['color']"></strong> -->
 
 
-                    <strong @click="overScrollWidth(header,index,item[header.value], $event)"
+                    <strong @click="overScrollWidth(header,index,item[header.value], $event,item)"
                         v-else-if="typeof item[header.value] == 'string'" :key="i + header">
                         {{ item[header.value] }}</strong>
                     <strong v-else :key="header + i">{{ item[header.value] }}</strong>
@@ -83,7 +83,7 @@
                             <span v-if="i == 0 && !totalGet.includes(item.value)">סה"כ</span>
                             <div v-else>
                                 <span v-if="totalGet.includes(item.value)"
-                                    @click="overScrollWidth(item,i,sumField(item.value).toFixed(1), $event)"> {{
+                                    @click="overScrollWidth(item,i,sumField(item.value).toFixed(1), $event,item)"> {{
                                             sumField(item.value).toFixed(1)
                                     }} </span>
                                 <span v-else> </span>
@@ -136,10 +136,10 @@ export default {
         CardPopup,
     },
     methods: {
-        overScrollWidth(header,index,item, e) {
+        overScrollWidth(header,index,item, e,full_item) {
             console.log("index : ",index," | item : ",item," | object : ",header," | e : ",e);
             if(this.isIntersection.includes(header.value)){
-                this.$emit('BoxClick',index)
+                this.$emit('BoxClick',this.activeData.indexOf(full_item))
             }
             else{
                 if (e.path[1].offsetWidth < e.path[1].scrollWidth) {
