@@ -18,6 +18,7 @@
     "vue-apexcharts": "^1.6.2",
     "vue-chartjs": "^3.5.1",
     "vue-echarts": "^6.2.3",
+    "vue-gauge": "^1.0.3",
     "vue-router": "^3.5.1",
     "vuetify": "^2.6.0",
     "vuex": "^3.6.2"
