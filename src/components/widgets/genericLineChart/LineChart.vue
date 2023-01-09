@@ -71,8 +71,12 @@ export default{
             //         offsetX: 0,
             //         offsetY: 0
             //     }
+            // this.option.xaxis.range = 82800000
+            this.option.xaxis.min = new Date().getTime(),
+            this.option.xaxis.type = "datetime",
      
-            this.option.xaxis.labels ={formatter: (value,timestamp) =>{
+            this.option.xaxis.labels ={
+              formatter: (value,timestamp) =>{
                     const dateTimeFormat = new Intl.DateTimeFormat('en', {  month: 'numeric', day: 'numeric', hour: 'numeric', minute:'numeric', hour12: false })             
                     var [{ value: month },,{ value: day },,{value: hour},,{value:minute}] = dateTimeFormat .formatToParts(new Date( timestamp  )) 
                     if(hour==24)hour=0
