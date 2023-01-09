@@ -6,6 +6,7 @@
       width="99%" type="line" 
       :options="option"
        :series="serie"
+       ref="genericChart"
        style="overflow-y: hidden; margin-right: 7px;dir:ltr"></apexchart>
     </div>
 </template>
@@ -23,7 +24,27 @@ export default{
             option:this.options,
             serie: this.series
          }
-    },
+    }, watch: {
+    getCurrentTheme() {
+      //console.log(this.$refs.chart.options.yaxis[0].labels.style.colors,"heheehhe");
+
+      console.log(this.$refs.chart, "heheehhe");
+      if(this.option.yaxis[0]){
+        this.option.yaxis[0].labels.style.colors = this.getCurrentTheme.cyber_status.box_color_1;
+      }
+      if(this.option.yaxis[1]){
+        this.option.yaxis[1].labels.style.colors = this.getCurrentTheme.cyber_status.box_color_1;
+      }
+      if(this.option.yaxis[2]){
+        this.option.yaxis[2].labels.style.colors = this.getCurrentTheme.cyber_status.box_color_1;
+      }
+      
+      console.log(this.option.yaxis[0].labels.style.colors);
+      this.option.xaxis.labels.style.colors = this.getCurrentTheme.cyber_status.box_color_1;
+      this.$refs.genericChart.updateOptions(
+      this.option);
+    }
+  },
     created(){
             const ts = Date.now()
             let ts_arr = []
@@ -57,8 +78,10 @@ export default{
                     if(hour==24)hour=0
                     return `${hour}:${minute} ${day}/${month}`; 
                     //return new Date(timestamp) // The formatter function overrides format property
-                    }
-                }
+                    },
+                "style":{
+                    "colors":"#808080"
+                }}
         // this.option.xaxis.categories = ts_arr
         // this.option.xaxis.axisBorder.color = "black"
         this.showData = true
@@ -66,5 +89,14 @@ export default{
 }
 </script>
 
-<style>
+<style scoped>
+
+:deep() .apexcharts-legend-series{
+    direction:rtl;
+}
+:deep()  .apexcharts-legend-text {
+  margin-right: 5px !important;
+  place-content: end !important;
+  color: v-bind('getCurrentTheme.cyber_status.box_color_1') !important;
+}
 </style>
