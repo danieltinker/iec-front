@@ -1,5 +1,6 @@
 <template>
   <div dir="ltr">
+    <div v-if="this.activeData[0].needleValue && this.activeData[0].arcColors">
     <!-- style="pointer-events: none;" -->
     <vue-gauge :options="activeData[0]" />
     <!--button @click="value++">Add</button-->
@@ -7,6 +8,8 @@
     top: 80%;
     left: 50%;
     transform: translate(-50%, -50%);" :style="{color : getCurrentTheme.cyber_status.box_color_1}">50</h1>
+  </div>
+  <div else> אין מידע</div>
   </div>
 </template>
 
