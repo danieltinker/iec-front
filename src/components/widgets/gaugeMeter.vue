@@ -25,19 +25,22 @@ export default {
     //   rangeLabel: [0,1000],
     //   arcLabels:[400, 500]
     // }]
-    this.activeData[0].chartWidth = window.innerWidth / 1.2,
-    this.activeData[0].needleColor = 'black',
-    this.activeData[0].rangeLabelFontSize = 18
-    this.activeData[0].needleValue = this.precentage(this.activeData[0].needleValue,this.activeData[0].rangeLabel[1])
-    //this.activeData[0].arcLabels = this.activeData[0].arcLabels.map(this.precentage)
-    this.activeData[0].arcDelimiters = this.activeData[0].arcLabels.map(this.precentage)
+    if(this.activeData[0].needleValue){
+      this.activeData[0].chartWidth = window.innerWidth / 1.2,
+      this.activeData[0].needleColor = 'black',
+      this.activeData[0].rangeLabelFontSize = 18
+      this.activeData[0].needleValue = this.precentage(this.activeData[0].needleValue,this.activeData[0].rangeLabel[1])
+      //this.activeData[0].arcLabels = this.activeData[0].arcLabels.map(this.precentage)
+      this.activeData[0].arcDelimiters = this.activeData[0].arcLabels.map(this.precentage)
 
-    //this.activeData[0].arcDelimiters = [30,40]
-    this.activeData[0].rangeLabel = this.activeData[0].rangeLabel.map(String);
-    // this.myOptions.needleValue = this.activeData[0].needleValue
-    // this.myOptions.arcDelimiters = this.activeData[0].arcDelimiters
-    // this.myOptions.arcColors = this.activeData[0].arcColors
-    // this.myOptions.rangeLabel = this.activeData[0].rangeLabel
+      //this.activeData[0].arcDelimiters = [30,40]
+      this.activeData[0].rangeLabel = this.activeData[0].rangeLabel.map(String);
+      // this.myOptions.needleValue = this.activeData[0].needleValue
+      // this.myOptions.arcDelimiters = this.activeData[0].arcDelimiters
+      // this.myOptions.arcColors = this.activeData[0].arcColors
+      // this.myOptions.rangeLabel = this.activeData[0].rangeLabel
+
+    }
 
   },
   methods:{

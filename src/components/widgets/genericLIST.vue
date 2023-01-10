@@ -40,9 +40,7 @@
                     <tr>
                         <td v-for="(header, i) in headers" :key="i" :align="header.align" 
                         :class="{'list-total' : item['isSum']}"
-                        :style="[isBold.includes(header.value) ? {'color':'red'}:{'color':''}]">
-                            
-                            <!-- <strong @click="overScrollWidth(index,item[header.value])"
+                        :style="[isBold.includes(header.value) ? {'font-weight':'bold'}:{'font-weight':'normal'},item[header.value] == '' || item[header.value] == null ? {'text-align': '-webkit-center'}:{'text-align':''}]">                            <!-- <strong @click="overScrollWidth(index,item[header.value])"
                         v-if="typeof item[header.value] == 'string' && item[header.value].split('*-*')[0] == 'dot'" :key="i"
                         class="dot" :style="'background-color:' + item[header.value].split('*-*')[1]">
                     </strong> -->
@@ -52,12 +50,17 @@
                     <!-- <strong v-else-if="object_condition_color(item[header.value])"
                     @click="overScrollWidth(header,index,item[header.value], $event)" 
                     class="dot" :style="'background-color:' + item[header.value]['color']"></strong> -->
+                    <span
+                        v-else-if="item[header.value] == '' || item[header.value] == null" :key="i + header">
+                        - </span>
 
-
-                    <strong @click="overScrollWidth(header,index,item[header.value], $event,item)"
+                    <span @click="overScrollWidth(header,index,item[header.value], $event,item)"
                         v-else-if="typeof item[header.value] == 'string'" :key="i + header">
-                        {{ item[header.value] }}</strong>
-                    <strong v-else :key="header + i">{{ item[header.value] }}</strong>
+                        {{ item[header.value] }}</span>
+                    
+                    
+
+                    <span v-else :key="header + i">{{ item[header.value] }}</span>
                                  
                                   
                             
@@ -172,16 +175,15 @@ export default {
         if(this.props_object.params.isBold){
             this.isBold = this.props_object.params.isBold
         }
-        
     }
 }
 </script>
 
 <style scoped>
 
-strong{
+/* strong{
     font-weight: normal;
-}
+} */
 
 :deep() .v-data-footer * {
     color: v-bind('getCurrentTheme.drill_title_color');
