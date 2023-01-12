@@ -40,7 +40,7 @@
                     <tr>
                         <td v-for="(header, i) in headers" :key="i" :align="header.align" 
                         :class="{'list-total' : item['isSum']}"
-                        :style="[isBold.includes(header.value) ? {'font-weight':'bold'}:{'font-weight':'normal'},item[header.value] == '' || item[header.value] == null ? {'text-align': '-webkit-center'}:{'text-align':''}]">                            <!-- <strong @click="overScrollWidth(index,item[header.value])"
+                        :style="[isBold.includes(header.value) ? {'font-weight':'bold'}:{'font-weight':'normal'}]">                            <!-- <strong @click="overScrollWidth(index,item[header.value])"
                         v-if="typeof item[header.value] == 'string' && item[header.value].split('*-*')[0] == 'dot'" :key="i"
                         class="dot" :style="'background-color:' + item[header.value].split('*-*')[1]">
                     </strong> -->
