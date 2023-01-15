@@ -16,7 +16,8 @@
                 class="ml-4 story"
                 @click="openQuickView(item)"
                 >
-                <img v-if="item.STATE.PARAMETERS.fav_icon != ''" :src="getImg(item.STATE.PARAMETERS.fav_icon)" />
+                <img v-if="item.STATE.PARAMETERS.fav_icon != '' && item.STATE.PARAMETERS.show_clock" :src="getImg(item.STATE.PARAMETERS.fav_icon)" />
+                <img v-if="item.STATE.PARAMETERS.fav_icon != '' && !item.STATE.PARAMETERS.show_clock" :src="getImg(item.STATE.PARAMETERS.drill_down_params.fav_icon)" />
             </v-btn>
             <span class="fav-span" v-if="item.STATE.PARAMETERS.headline_config.title.length < 8">{{ item.STATE.PARAMETERS.headline_config.title }}</span>
             <div top v-else>
