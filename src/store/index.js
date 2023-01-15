@@ -51,6 +51,7 @@ export default new Vuex.Store({
           "drill_background":"#424242",
           "main_label":"#ffffff",
           "value_color":"#15A0EB",
+          "main_no_data_background":"#121212",
         },
         "hq_navbar":{
           "span_color_first":"#FFFFFF",
@@ -139,6 +140,7 @@ export default new Vuex.Store({
           "drill_background":"#FFFFFF",
           "main_label":"#010101",
           "value_color":"#0F2558",
+          "main_no_data_background":"#f5f5f5",
         },
         "hq_navbar":{
           "span_color_first":"#000000",

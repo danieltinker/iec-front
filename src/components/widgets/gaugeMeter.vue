@@ -9,15 +9,16 @@
     left: 50%;
     transform: translate(-50%, -50%);" :style="{ color: getCurrentTheme.cyber_status.box_color_1 }">{{myOptions.needleLabel}}</h1>
     </div>
-    <div v-else> אין מידע</div>
+    <NoDataMsg :isDrill="props_object.isDrill" v-else/>
   </div>
 </template>
 
 <script>
 import VueGauge from "vue-gauge";
+import NoDataMsg from "../utils/NoDataMsg.vue";
 export default {
   props: ["activeData", "props_object"],
-  components: { VueGauge },
+  components: { VueGauge, NoDataMsg },
   created() {
     // this.activeData = [{
     //   needleValue:1111240,
