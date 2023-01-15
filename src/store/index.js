@@ -6,6 +6,11 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    popupDialog:{
+      showPopupDialog:false,
+      params_popup_Dialog:undefined,
+      selected_label:undefined
+    },
     removeBookmarkDialog:false,
     sub_categories_json:undefined,
     isSubCategories:false,

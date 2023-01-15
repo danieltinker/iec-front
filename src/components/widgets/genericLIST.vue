@@ -44,7 +44,7 @@
                         v-if="typeof item[header.value] == 'string' && item[header.value].split('*-*')[0] == 'dot'" :key="i"
                         class="dot" :style="'background-color:' + item[header.value].split('*-*')[1]">
                     </strong> -->
-                    <v-icon v-if="object_condition_icons(item[header.value])" class="my-2" :color="getCurrentTheme.hq_navbar.span_color_first" style="font-size: 30px; justify-content: right;">{{item[header.value]['icon']}}</v-icon>
+                    <v-icon v-if="object_condition_icons(item[header.value])" @click="overScrollWidth(header,index,item[header.value], $event,item)" class="my-2" :color="getCurrentTheme.hq_navbar.span_color_first" style="font-size: 30px; justify-content: right;">{{item[header.value]['icon']}}</v-icon>
                     <v-icon v-else-if="object_condition_color(item[header.value])" @click="overScrollWidth(header,index,item[header.value], $event,item)"  class="my-2" :color="item[header.value]['color']" style="font-size: 30px;    margin: 0px !important;">mdi-circle-medium</v-icon>
 
                     <!-- <strong v-else-if="object_condition_color(item[header.value])"
@@ -131,7 +131,7 @@ export default {
             meta_data: null,
             headers: undefined,
             totalGet: undefined,
-            isIntersection:[],
+            isIntersection:['status'],
             isBold:[]
         }
     },
@@ -142,7 +142,18 @@ export default {
         overScrollWidth(header,index,item, e,full_item) {
             console.log("index : ",index," | item : ",item," | object : ",header," | e : ",e);
             if(this.isIntersection.includes(header.value)){
-                this.$emit('BoxClick',this.activeData.indexOf(full_item))
+                if(this.object_condition_icons(item)){
+                    if(item.icon == 'mdi-arrow-left'){
+                        this.$emit('BoxClick',this.activeData.indexOf(full_item),true,"label1")
+                        console.log("Dsdsd");
+                        // this.$store.state.popupDialog.showPopupDialog = true
+                        // this.$store.state.popupDialog.params_popup_Dialog = this.props_object.params.popup_data
+                        // this.$store.state.popupDialog.selected_label = "kk"
+                    }
+
+                } else {
+                    this.$emit('BoxClick',this.activeData.indexOf(full_item))
+                }
             }
             else{
                 if (e.path[1].offsetWidth < e.path[1].scrollWidth) {
@@ -175,6 +186,78 @@ export default {
         if(this.props_object.params.isBold){
             this.isBold = this.props_object.params.isBold
         }
+        this.activeData = [
+      {
+        "log_id": 1127,
+        "log_time": "12/10/2022 | 15:02:58",
+        "subject": "חזל\"ש",
+        "user_code": "veronika",
+        "user_name": "ורוניקה",
+        "severity": {
+          "desc": "בינונית",
+          "color": "#FFCA28"
+        },
+        "status": {
+          "icon": "mdi-arrow-left"
+        }
+      },
+      {
+        "log_id": 1126,
+        "log_time": "12/10/2022 | 15:02:54",
+        "subject": "טקסט טקסט טקסט טקסט טקסט טקסט טקסט טקסט טקסט טקסט טקסט",
+        "user_code": "veronika",
+        "user_name": "ורוניקה",
+        "severity": {
+          "desc": "חמורה",
+          "color": "#D4402E"
+        },
+        "status": {
+          "color": "#D4402E"
+        }
+      },
+      {
+        "log_id": 1105,
+        "log_time": "11/10/2022 | 16:16:48",
+        "subject": "למה לעזאזל",
+        "user_code": "veronika",
+        "user_name": "ורוניקה",
+        "severity": {
+          "desc": "חמורה",
+          "color": "#D4402E"
+        },
+        "status": {
+          "color": "#D4402E"
+        }
+      },
+      {
+        "log_id": 1104,
+        "log_time": "11/10/2022 | 16:16:43",
+        "subject": "אל תגידו לי מה לעשות",
+        "user_code": "veronika",
+        "user_name": "ורוניקה",
+        "severity": {
+          "desc": "נמוכה",
+          "color": "#01978A"
+        },
+        "status": {
+          "color": "#01978A"
+        }
+      },
+      {
+        "log_id": 1103,
+        "log_time": "11/10/2022 | 16:16:37",
+        "subject": "סתם משהו",
+        "user_code": "veronika",
+        "user_name": "ורוניקה",
+        "severity": {
+          "desc": "בינונית",
+          "color": "#FFCA28"
+        },
+        "status": {
+          "color": "#FFCA28"
+        }
+      }
+    ]
     }
 }
 </script>

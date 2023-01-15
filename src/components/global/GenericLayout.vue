@@ -90,6 +90,7 @@ export default {
         static_drill_titles_prop: { type: Object },
         drillCarouselIndexProp: { type: Number },
         template_type:{ type: String },
+        isPopupData:{ type: String, required: true },
     },
     watch: {
         drillDataProp() {
@@ -215,10 +216,19 @@ export default {
                 this.tickCycleTime = setTimeout(this.fetchClock, this.$store.state.default_sample_rate );
             }
         },
-        BoxClick(i) {
+        BoxClick(i, popup=false,selected_label=undefined) {
+            if(popup){
+                console.log(i,"popp");
+                console.log(selected_label,"selected");
+                this.$store.state.popupDialog.showPopupDialog = true
+                this.$store.state.popupDialog.params_popup_Dialog = this.params.popup_data
+                this.$store.state.popupDialog.selected_label = selected_label
+
+            } else {
             console.log("recieved generic label click, index:",i)
             this.loadIntersectionData(i)
             this.expandDrillHandler(i)
+            }
             
         },
         loadIntersectionData(i){
@@ -253,11 +263,18 @@ export default {
             }
     },
     created() {
-        this.$on("myIndex", (i) => {
-            this.drillCarouselIndex = i
+        if(this.isPopupData){
+            console.log(this.isPopupData,"hereePOPUP");
+            this.jsonData = {"*":this.isPopupData['data']}
+            this.doneFetching = true
+        }else{
+            console.log(this.isPopupData,"NOTTTTT POPOPUP");
+            this.$on("myIndex", (i) => {
+                this.drillCarouselIndex = i
         })
         
         this.fetchClock()
+    }
     },
     beforeDestroy() {
         this.$parent.$emit("myIndex", this.carouselActiveIndex)

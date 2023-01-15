@@ -1,6 +1,7 @@
 <template >
       <!-- APP PAGE -->
       <div  v-if="valid_sid">
+        <PopupDialog class="top-component" v-if="$store.state.popupDialog.showPopupDialog"/>
         <!-- navigation bar + Theme Selector toggle + Log out BTN -->
         <HQNavBar/> 
         <!-- FAVORITES HORIZONTAL "instagram" SCROLL -->
@@ -9,7 +10,7 @@
         <CategoryBar/>
         <!-- WIDGETS SPACE (CLOCKS) VERTICAL SCROLL  -->
         <SubCategories v-if="$store.state.isSubCategories" style="margin-top:8px" />
-        <WidgetSpace/>
+        <WidgetSpace v-show="!$store.state.popupDialog.showPopupDialog" class="other-component" />
         <!-- <WidgetSpace v-if="!this.$store.state.quick_view" /> -->
         <!-- {{$store.state.selected_view_param}} -->
         <MaxFavoritePopup v-if="$store.state.max_favorite_popup"/>
@@ -33,6 +34,7 @@
   import BookmarkSnackbar from '../components/global/bookmarkSnackbar.vue';
   import axios from 'axios';
 import SubCategories from '@/components/global/SubCategories.vue';
+import PopupDialog from '@/components/global/popupDialog.vue';
   export default {
       name: "App",
       data: () => ({
@@ -41,7 +43,7 @@ import SubCategories from '@/components/global/SubCategories.vue';
         snackText:"",
         valid_sid:false
         }),
-      components: { WidgetSpace, HQNavBar, CategoryBar, UserFavorites, MaxFavoritePopup, RemoveBookmark, BookmarkSnackbar, SubCategories },
+      components: { WidgetSpace, HQNavBar, CategoryBar, UserFavorites, MaxFavoritePopup, RemoveBookmark, BookmarkSnackbar, SubCategories, PopupDialog },
       async created() {
         console.log("WELCOME TO HOME PAGE")
         if(this.$store.state.loginStore.isAuthenticated){
@@ -84,6 +86,7 @@ import SubCategories from '@/components/global/SubCategories.vue';
   </script>
   
   <style>
+ 
   html, body {
     overflow-x: hidden;
   }
