@@ -94,7 +94,11 @@ export default {
     watch: {
         drillDataProp() {
             this.jsonData = this.drillDataProp
-        }
+        },
+        'params.selected_category'(newVal){
+          console.log("Dsadas",newVal);
+          this.carouselActiveIndex = 0
+    }
     },
     data() {
         return {
