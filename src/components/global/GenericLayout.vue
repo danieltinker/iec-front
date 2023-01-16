@@ -2,6 +2,7 @@
 <template>
     <div>
         <div v-if="doneFetching">
+            {{ jsonData }}
             <div class="clock-main" style="text-align: center;" v-if="params.show_clock">
                 
                 <div class="radios">
@@ -265,7 +266,9 @@ export default {
     created() {
         if(this.isPopupData){
             console.log(this.isPopupData,"hereePOPUP");
-            this.jsonData = {"*":this.isPopupData['data']}
+            // this.jsonData = {"*":[this.isPopupData['data']]}
+            this.jsonData = this.isPopupData
+            // console.log("dsdsds",this.isPopupData.length);
             this.doneFetching = true
         }else{
             console.log(this.isPopupData,"NOTTTTT POPOPUP");

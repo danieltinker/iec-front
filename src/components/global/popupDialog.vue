@@ -15,10 +15,14 @@
                 <span> מידע </span></v-col>
             <v-col cols="4" style="padding-top:0;padding:bottom:0;"></v-col>
         </v-row>
+        <!-- <div v-for="(obj,index) in objects_data_intersection" :key="obj.title">
+          {{ index }}
+        {{ items[$store.state.popupDialog.selected_label]['data_'+index] }}
+      </div> -->
 
-        <div v-for="obj in objects_data_intersection" :key="obj.title">
-            <GenericLayout :template_type="obj.TEMPLATE_TYPE" :params="obj.PARAMETERS" :isDrillDown="false"
-                :view_ID="4444" :ref="'component' + obj.title" :isPopupData="Object.assign(items[$store.state.popupDialog.selected_label])">
+        <div v-for="(obj,index) in objects_data_intersection" :key="obj.title">
+            <GenericLayout v-if="items[$store.state.popupDialog.selected_label]['data_'+index]" :template_type="obj.TEMPLATE_TYPE" :params="obj.PARAMETERS" :isDrillDown="false"
+                :view_ID="4444" :ref="'component' + obj.title" :isPopupData="{'*':[Object.assign(items[$store.state.popupDialog.selected_label]['data_'+index])]}">
             </GenericLayout>
         </div>
     </div>
@@ -50,13 +54,84 @@ export default {
             .then(response => {
                 this.items = {
                     "label1": {
-                        "data": [
+                        "data_0": [
+      {
+        "log_id": 1127,
+        "log_time": "12/10/2022 | 15:02:58",
+        "subject": "dsadsadsad",
+        "user_code": "rannnnnnnnnnnnnnnnnnnnnnn",
+        "user_name": "rannnnnnnnnnnnnnnnnnnnnnn",
+        "severity": {
+          "desc": "בינונית",
+          "color": "#FFCA28"
+        },
+        "status": {
+          "color": "#FFCA28"
+        }
+      },
+      {
+        "log_id": 1126,
+        "log_time": "12/10/2022 | 15:02:54",
+        "subject": "dsadsadטקסט",
+        "user_code": "veronika",
+        "user_name": "rannnnnnnnnnnnnnnnnnnnnnn",
+        "severity": {
+          "desc": "חמורה",
+          "color": "#D4402E"
+        },
+        "status": {
+          "color": "#D4402E"
+        }
+      },
+      {
+        "log_id": 1105,
+        "log_time": "11/10/2022 | 16:16:48",
+        "subject": "למה לעזאזל",
+        "user_code": "veronika",
+        "user_name": "rannnnnnnnnnnnnnnnnnnnnnn",
+        "severity": {
+          "desc": "חמורה",
+          "color": "#D4402E"
+        },
+        "status": {
+          "color": "#D4402E"
+        }
+      },
+      {
+        "log_id": 1104,
+        "log_time": "11/10/2022 | 16:16:43",
+        "subject": "אל תגידו לי מה לעשות",
+        "user_code": "veronika",
+        "user_name": "rannnnnnnnnnnnnnnnnnnnnnn",
+        "severity": {
+          "desc": "נמוכה",
+          "color": "#01978A"
+        },
+        "status": {
+          "color": "#01978A"
+        }
+      },
+      {
+        "log_id": 1103,
+        "log_time": "11/10/2022 | 16:16:37",
+        "subject": "rannnnnnnnnnnnnnnnnnnnnnn משהו",
+        "user_code": "veronika",
+        "user_name": "rannnnnnnnnnnnnnnnnnnnnnn",
+        "severity": {
+          "desc": "בינונית",
+          "color": "#FFCA28"
+        },
+        "status": {
+          "color": "#FFCA28"
+        }
+      }
+    ],"data_1": [
       {
         "log_id": 1127,
         "log_time": "12/10/2022 | 15:02:58",
         "subject": "חזל\"ש",
-        "user_code": "rannnnnnnnnnnnnnnnnnnnnnn",
-        "user_name": "rannnnnnnnnnnnnnnnnnnnnnn",
+        "user_code": "rannnnnnnnnnnnnnnnnnnnnnn2222222",
+        "user_name": "rannnnnnnnnnnnnnnnnnnnnnn2222222222",
         "severity": {
           "desc": "בינונית",
           "color": "#FFCA28"
@@ -121,7 +196,7 @@ export default {
           "color": "#FFCA28"
         }
       }
-    ]
+    ],
                     },
                     "label2": {
                         "data": {}
