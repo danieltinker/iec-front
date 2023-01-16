@@ -46,7 +46,7 @@
                         </v-carousel-item>
                     </v-carousel>
                 </div>
-                <div v-else><NoDataMsg :isDrill="props_object.isDrill" :templateType="params.template_type"/></div>
+                <div v-else><NoDataMsg :isDrill="isDrillDown" :templateType="params.template_type"/></div>
                 </div>
             </div>
 

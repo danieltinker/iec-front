@@ -85,7 +85,8 @@ export default {
 }
 
 .shadowBox{
-    box-shadow:3px 3px 4.5px rgba(146, 146, 146, 0.25) !important;
+    /* box-shadow:3px 3px 4.5px rgba(20, 194, 40, 0.25) !important */
+    box-shadow : v-bind('getCurrentTheme.kpi.boxx_shadow'); 
 }
 
 .kpiBox .kpi-sec-value {

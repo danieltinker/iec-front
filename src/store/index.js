@@ -43,6 +43,7 @@ export default new Vuex.Store({
         "solid_selected_border":"solid purple 4px",
         "kpi_sec_value": "#828282",
         "generic_title_color" : "#FFFFFF",
+        "barr_boxx_shadow":"2px 3px 2.5px #00000040",
         "legend_border_color" : "solid white 2px",
         "kpi":{
           "kpi_value_color":"#000000",
@@ -52,6 +53,7 @@ export default new Vuex.Store({
           "main_label":"#ffffff",
           "value_color":"#15A0EB",
           "main_no_data_background":"#121212",
+          "boxx_shadow":"3px 3px 4.5px #00000040"
         },
         "hq_navbar":{
           "span_color_first":"#FFFFFF",
@@ -81,7 +83,8 @@ export default new Vuex.Store({
           "span_color":"#FFFFFF",
           "btn_color_drill":"#424242",
           "btn_color":"#424242",
-          "innerContentColor":"#FFFFFF"
+          "innerContentColor":"#FFFFFF",
+          "boxx_shadow":"2px 3px 2.5px #00000040"
         },
         "one_bar":{
           "background_bar":"#3B3B3B",
@@ -132,6 +135,8 @@ export default new Vuex.Store({
         "global_radio":"#606060",
         "global_selected_radio":"#0F2558",
         "generic_title_color" : "#2D2D2D",
+        "barr_boxx_shadow":"2px 3px 2.5px rgba(148, 148, 148, 0.427)",
+
         "legend_border_color" : "solid black 2px",
         "kpi":{
           "kpi_value_color":"#000000",
@@ -141,6 +146,7 @@ export default new Vuex.Store({
           "main_label":"#010101",
           "value_color":"#0F2558",
           "main_no_data_background":"#f5f5f5",
+          "boxx_shadow":"3px 3px 4.5px rgba(146, 146, 146, 0.25)"
         },
         "hq_navbar":{
           "span_color_first":"#000000",
@@ -170,7 +176,8 @@ export default new Vuex.Store({
           "span_color":"#010101",
           "btn_color_drill":"#FDFDFD",
           "btn_color":"#EBEBEB",
-          "innerContentColor":"#000000"
+          "innerContentColor":"#000000",
+          "boxx_shadow":"2px 3px 2.5px rgba(138, 138, 138, 0.35)"
         },
         "one_bar":{
           "background_bar":"#F4F4F4",

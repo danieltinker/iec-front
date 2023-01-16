@@ -133,7 +133,8 @@ export default {
     border-radius: 6px;
     width: 102px !important;
     box-shadow: 0px 0px !important;
-    box-shadow: 2px 2px 2px rgba(148, 148, 148, 0.427) !important;
+    /* box-shadow: 2px 2px 2px rgba(148, 148, 148, 0.427) !important; */
+    box-shadow : v-bind('getCurrentTheme.barr_boxx_shadow') !important;
 
     /* text-align: -webkit-right;
          */

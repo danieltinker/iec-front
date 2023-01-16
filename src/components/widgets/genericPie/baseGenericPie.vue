@@ -138,9 +138,11 @@ export default {
         overflow: hidden;
         border-radius: 6px;
         width: 102px !important;
-        box-shadow:2px 3px 2.5px rgba(138, 138, 138, 0.35) !important;
+        /* box-shadow:2px 3px 2.5px rgba(138, 138, 138, 0.35) !important; */
+        box-shadow : v-bind('getCurrentTheme.baseGenericPie.boxx_shadow');
+        
         /* box-shadow:0.5px 1px 0px 0px rgba(0, 0, 0, 0.2)  !important; */
-        box-shadow: 0 0 0 0 rgba(0, 0, 0, 1);
+        /* box-shadow: 0 0 0 0 rgba(0, 0, 0, 1); */
         /* text-align: -webkit-right;
          */
         }
@@ -150,21 +152,21 @@ export default {
     @keyframes pulse {
     0% {
       transform: scale(1);
-      box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.7);
+      box-shadow : v-bind('getCurrentTheme.baseGenericPie.boxx_shadow');
     }
 
     70% {
       transform: scale(0.95);
-      box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
+      box-shadow : v-bind('getCurrentTheme.baseGenericPie.boxx_shadow');
     }
 
     100% {
       transform: scale(1);
-      box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+      box-shadow : v-bind('getCurrentTheme.baseGenericPie.boxx_shadow');
     }
   }
 
-  .main-btn::before {
+  .mainBtn::before {
     display:none;
   }
 
