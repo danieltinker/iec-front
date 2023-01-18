@@ -1,6 +1,8 @@
 <template>
     <div>
-        <div class="no-data-box" v-if="true"><p class="no-data-info">אין פריטים זמינים להצגה</p></div>
+        <div v-if="message" class="no-data-box"><p class="no-data-info">{{ message }}</p></div>
+        <div v-else class="no-data-box"><p class="no-data-info">אין פריטים זמינים להצגה</p></div>
+        <!-- <div class="no-data-box"><p class="no-data-info">אין פריטים זמינים להצגה</p></div> -->
     </div>
 </template>
 
@@ -8,7 +10,8 @@
 export default {
     props: {
         templateType: { type: String },
-        isDrill:{type:Boolean}
+        isDrill:{type:Boolean},
+        message:{type:String}
         }
 }
 </script>
