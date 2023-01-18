@@ -1,6 +1,7 @@
 <template>
   <div :style="'background-color:' + getCurrentTheme.cyber_status.color_1">
     <div v-if="isData">
+      <div v-if="cyberStatusData.length !== 0">
       <div style="position: relative">
         <div>
           <customCyberStatus :dataCyber="this.cyberStatusData[0]" :subTitle="false" />
@@ -30,6 +31,14 @@
           </v-carousel>
         </div>
       </div>
+    </div>
+    <div v-else>
+      <div class="" style="margin-top:18px;margin-bottom:18px;height:110px">
+                <div class="cyber-status-highlight2">
+                    <p class="noItems">אין נתוני מצב כוננות סייבר</p>
+                </div>
+            </div>
+    </div>
     </div>
 
     <div class="loader" v-else>
@@ -114,6 +123,38 @@ export default {
 </script>
   
 <style scoped>
+
+.flex1 {
+    flex: 1;
+}
+
+
+.cyber-status-highlight-container2 {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    justify-items: center;
+    height: 6.615vh;
+    /* margin: 0 3.7vw 0 -3.7vw; */
+    
+}
+
+.cyber-status-highlight2 {
+  text-align: center;
+  line-height: 50px;
+  margin: auto;
+  margin-top: 8px;
+  width: 180px;
+  height: 48px;
+  font-family: almoni;
+  background-color: #1dc102;
+    
+}
+
+.noItems {
+    color: #ffffff;
+    font-size: 2.5vh;
+}
 h1 {
   color: #0F2558;
   font-family: almoni-medium;
