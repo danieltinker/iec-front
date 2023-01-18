@@ -56,11 +56,11 @@
 
                     <span @click="overScrollWidth(header,index,item[header.value], $event,item)"
                         v-else-if="typeof item[header.value] == 'string'" :key="i + header">
-                        {{ item[header.value] }}</span>
+                        {{ numToLocaleString(item[header.value]) }}</span>
                     
                     
 
-                    <span v-else :key="header + i">{{ item[header.value] }}</span>
+                    <span v-else :key="header + i">{{ numToLocaleString(item[header.value]) }}</span>
                                  
                                   
                             
@@ -87,7 +87,7 @@
                             <div v-else>
                                 <span v-if="totalGet.includes(item.value)"
                                     @click="overScrollWidth(item,i,sumField(item.value).toFixed(1), $event,item)"> {{
-                                            sumField(item.value).toFixed(1)
+                                        numToLocaleString(toINT(sumField(item.value).toFixed(1)))
                                     }} </span>
                                 <span v-else> </span>
                             </div>

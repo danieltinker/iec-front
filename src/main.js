@@ -26,6 +26,14 @@ Vue.mixin({
       let result = parseInt(value)
       return isNaN(result) ? 0 : result
     },
+    numToLocaleString(value){
+      if (typeof value === "number") {
+        return value.toLocaleString("en-US");
+      } else {
+        return value
+      }
+
+    },
 
     ...mapActions(["SET_FAV_LIST","DO_FETCH","END_FETCH"]),
     //Get user favorites

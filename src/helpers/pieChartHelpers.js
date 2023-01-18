@@ -80,6 +80,13 @@ export const pluginInnerContentHelper = (thisChart,myTheme) => {
     thisChart.addPlugin({
         id:"my-plugin",
         afterDraw: function (chart) {
+            const numToLocaleString = (value) =>{
+      if (typeof value === "number") {
+        return value.toLocaleString("en-US");
+      } else {
+        return value
+      }
+    }
             const precentage = (num)=> {return (num / (data.datasets[0].data.reduce((a, b) => a + b,0) / 100)).toFixed(0) + "%";}
             var data = chart.tooltip._data
             var items = Object.values(Object.values(data.datasets)[0]._meta)[0].data
@@ -106,7 +113,7 @@ export const pluginInnerContentHelper = (thisChart,myTheme) => {
             ctx.fillText(text, chart.width / 2, chart.height / 2 - number,200);
             ctx.fillStyle = myTheme
             ctx.font = "26px" + " almoni-medium"
-            ctx.fillText(text2, chart.width / 2, chart.height / 2 + heightNum,200);
+            ctx.fillText(numToLocaleString(text2), chart.width / 2, chart.height / 2 + heightNum,200);
             if(data.datasets[0].isPrecentage){ctx.fillText(text24, chart.width / 2, chart.height / 2 + number,200);}
             ctx.save();
           }

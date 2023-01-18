@@ -8,16 +8,16 @@
             }" @click="$emit('BoxClick',index);pulse()">
             <span :style="{ color: getCurrentTheme.kpi.main_label }" style=" font-family: almoni-bold"
                 class="kpi-label">
-                {{ item.label }}
+                {{ numToLocaleString(item.label) }}
             </span>
             <br>
             <span class="kpi-value" style=" font-family: almoni-medium"
                 :style="{ color: getCurrentTheme.kpi.value_color }">
-                {{ item.value }}
+                {{ numToLocaleString(item.value) }}
             </span>
             <br>
             <span :style="{ color: getCurrentTheme.kpi.kpi_sec_value }">
-                {{ item.secondary_value }}
+                {{ numToLocaleString(item.secondary_value) }}
             </span>
         </div>
     </div>

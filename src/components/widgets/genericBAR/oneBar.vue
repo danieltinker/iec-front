@@ -1,7 +1,7 @@
 <template>
   <div style="margin-left:10px">
     <label v-if="params.displayUpper" :style="'color : '+getCurrentTheme.one_bar.label_color" style="font-family: almoni;font-size:16px">
-        {{upperLabel}}
+        {{numToLocaleString(upperLabel)}}
     </label>
     <div
       :style="
@@ -26,7 +26,7 @@
         &emsp;
       </div>
     </div>
-    <label v-if="params.displayLower" :style="'color : '+getCurrentTheme.one_bar.label_color" style="font-family: almoni;font-size:16px">{{lowerLabel}}</label>
+    <label v-if="params.displayLower" :style="'color : '+getCurrentTheme.one_bar.label_color" style="font-family: almoni;font-size:16px">{{numToLocaleString(lowerLabel)}}</label>
   </div>
 
 </template>
