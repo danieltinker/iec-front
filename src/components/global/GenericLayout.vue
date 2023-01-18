@@ -70,7 +70,13 @@
         :width="4" indeterminate :style="{ color: getCurrentTheme.global_theme_color }">
                 </v-progress-circular>
             </div>
-            <h1 v-else style="font-family: almoni;font-size:20px"> {{ errorMSG }} </h1>
+            <div v-else>
+                <v-row style="place-content: center;margin:0;margin-bottom:10px">
+            <ChartTitles :isDrillDown="isDrillDown" :params="params" :carouselActiveIndex="carouselActiveIndex" :static_drill_titles_prop="static_drill_titles_prop"></ChartTitles>
+        </v-row>
+            
+            <h1 style="font-family: almoni;font-size:20px"> {{ errorMSG }} </h1>
+        </div>
         </div>
     </div>
 </template>
@@ -338,12 +344,12 @@ export default {
 }
 
 .data-status-pod {
-    height: 100px;
+    height: 100%;
     width: 100%;
     display: flex;
     justify-content: center;
-    align-items: center;
     align-self: center;
+    padding-bottom: 20px;
 }
 
 /* .v-progress-circular {
