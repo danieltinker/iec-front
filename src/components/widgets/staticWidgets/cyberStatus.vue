@@ -34,9 +34,7 @@
     </div>
     <div v-else>
       <div class="" style="margin-top:18px;margin-bottom:18px;height:110px">
-                <div class="cyber-status-highlight2">
-                    <p class="noItems">אין נתוני מצב כוננות סייבר</p>
-                </div>
+                <NoDataMsg :isDrill="false" :templateType="'cyberStatus'"/>
             </div>
     </div>
     </div>
@@ -54,6 +52,7 @@
   
   
 <script>
+import NoDataMsg from "@/components/utils/NoDataMsg.vue";
 import customCyberStatus from "../cyberStatus/customCyberStatus.vue";
 export default {
   props: {
@@ -101,7 +100,8 @@ export default {
   },
   components: {
     customCyberStatus,
-  },
+    NoDataMsg
+},
   data() {
     return {
       myTimeout:undefined,

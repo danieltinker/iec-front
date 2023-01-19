@@ -23,11 +23,11 @@ export default {
     align-items: center;
     vertical-align: center;
     justify-content: space-around;
-    padding-top: 10px;
+    padding-top: 12px;
     background-color: v-bind('isDrill ? getCurrentTheme.kpi.drill_background : getCurrentTheme.kpi.main_no_data_background');
     margin: auto;
-    margin-top: 20px;
-    margin-bottom: 10px;
+    /* margin-top: 20px;
+    margin-bottom: 10px; */
     text-align: center;
     width: 220px;
     height: auto;
