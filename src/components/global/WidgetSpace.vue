@@ -48,7 +48,8 @@
         </template>
       </div>      
     </div>
-    <h1 class="error-msg" v-else>  {{errorMsg}} </h1>
+    <!-- <h1 class="error-msg" v-else>  {{errorMsg}} </h1> -->
+    <ErrorPage v-else :error_text="errorMsg"/>
     </div>  
 </template>
 
@@ -69,6 +70,7 @@ import axios from "axios";
 import { mapGetters } from "vuex";
 import MaxFavoritePopup from "./maxFavoritePopup.vue";
 import GenericLayout from "./GenericLayout.vue";
+import ErrorPage from "../utils/errorPage.vue";
 export default {
   components: {
     ThreeDotsNineDots,
@@ -84,7 +86,8 @@ export default {
     totalElectricityLevel,
     iecLineChart,
     genericBoxKpi,
-    GenericLayout
+    GenericLayout,
+    ErrorPage
 },
   props: {
     quickViewPopup: {
