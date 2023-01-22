@@ -61,6 +61,7 @@ export default {
 
     created() {
         this.chartOptions = Object.assign({}, require('./garphConfig.json'))
+        this.props_object.params.graphConfig ? this.updateKey() : false
         this.chartOptions.xaxis.labels.formatter = function (value, timestamp) {
             const dateTimeFormat = new Intl.DateTimeFormat('en', { month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric', hour12: false })
             var [{ value: month }, , { value: day }, , { value: hour }, , { value: minute }] = dateTimeFormat.formatToParts(new Date(timestamp))
@@ -71,7 +72,7 @@ export default {
 
 
         //update config if get
-        this.props_object.params.graphConfig ? this.updateKey() : false
+        // this.props_object.params.graphConfig ? this.updateKey() : false
         console.log(this.activeData);
 
 
