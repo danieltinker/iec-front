@@ -36,13 +36,22 @@ export default {
     // Component Parameters
     props: ["activeData", "props_object"],
     watch: {
-        activeData(){
-            console.log("dsadas");
+        doneFetching(){
+            for (let i in this.chartOptions.yaxis) {
+                if(!this.isStaticStyleColor){
+                    this.chartOptions.yaxis[i].labels.style.colors = this.getCurrentTheme.cyber_status.box_color_1;
+                    this.chartOptions.yaxis[i].title ? this.chartOptions.yaxis[i].title.style.color = this.getCurrentTheme.cyber_status.box_color_1 : false
+                }
+            }
+            this.chartOptions.xaxis.labels.style.colors = this.getCurrentTheme.cyber_status.box_color_1;
+            this.$refs.chart.updateOptions(
+                this.chartOptions);
         },
         getCurrentTheme() {
             for (let i in this.chartOptions.yaxis) {
                 if(!this.isStaticStyleColor){
                     this.chartOptions.yaxis[i].labels.style.colors = this.getCurrentTheme.cyber_status.box_color_1;
+                    this.chartOptions.yaxis[i].title ? this.chartOptions.yaxis[i].title.style.color = this.getCurrentTheme.cyber_status.box_color_1 : false
                 }
             }
             this.chartOptions.xaxis.labels.style.colors = this.getCurrentTheme.cyber_status.box_color_1;
@@ -87,6 +96,7 @@ export default {
             this.chartOptions.yaxis[i].labels.style.colors ? false : this.chartOptions.yaxis[i].labels.style.colors = this.getCurrentTheme.cyber_status.box_color_1
             this.chartOptions.yaxis[i].labels.style.fontFamily = "almoni"
             this.chartOptions.yaxis[i].labels.style.fontSize = "12px"
+            this.chartOptions.yaxis[i].title ? this.chartOptions.yaxis[i].title.style.color = this.getCurrentTheme.cyber_status.box_color_1 : false
         }
         this.chartOptions.xaxis.labels.style.colors = this.getCurrentTheme.cyber_status.box_color_1;
         this.doneFetching = true
