@@ -45,6 +45,8 @@
                             </div>
                         </v-carousel-item>
                     </v-carousel>
+                    <MetaText v-if="false" style="padding-bottom:10px"/>
+                    <MetaLegend v-if="false" style="padding-bottom:10px"/>
                 </div>
                 <div v-else><NoDataMsg :isDrill="isDrillDown" :templateType="params.template_type"/></div>
                 </div>
@@ -86,6 +88,8 @@
 import ThreeDotsNineDots from '../utils/ThreeDotsNineDots.vue'
 import ChartTitles from '../utils/ChartTitles.vue'
 import NoDataMsg from '../utils/NoDataMsg.vue'
+import MetaText from '../utils/metaText.vue'
+import MetaLegend from '../utils/metaLegend.vue'
 export default {
     props: {
         isDrillDown: { type: Boolean },
@@ -132,7 +136,9 @@ export default {
     ThreeDotsNineDots,
     ChartTitles,
     GenericLayout: () => import("../global/GenericLayout.vue"),
-    NoDataMsg
+    NoDataMsg,
+    MetaText,
+    MetaLegend
 },
     methods: {
         async fetchClock() {
@@ -358,7 +364,7 @@ export default {
 
 .clock-drilldown {
     background-color: #E5E5E5;
-    padding-bottom: 20px;
+    padding-bottom: 0px !important;
 }
 
 .drilldown-title {

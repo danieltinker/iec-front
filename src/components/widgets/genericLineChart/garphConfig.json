@@ -1,0 +1,102 @@
+{
+    "colors": ["#8CC63F", "#009245"],
+    "plotOptions": {
+        "bar": {
+            "columnWidth": "30%"
+        }
+    },
+    "chart": {
+        "height": "250px",
+        "width": "100%",
+        "type": "line",
+        "toolbar": {
+            "show": false,
+            "tools": {
+                "download": false,
+                "selection": false,
+                "reset": false
+            }
+        },
+
+        "stacked": false,
+        "events": {
+        }
+    },
+    "dataLabels": {
+        "enabled": false
+    },
+    "stroke": {
+        "curve": "smooth",
+        "width": [3, 3]
+    },
+    "xaxis": {
+        "range": 14511464,
+        "categories": [ ],
+        "type": "datetime",
+        "labels": {
+            "rotate": 86,
+            "offsetY": 0,
+
+            "style": {
+                "colors": "#ffffff"
+            }
+        },
+        "tooltip": {
+            "enabled": false
+          }
+
+        
+    },
+    "yaxis":[
+    {
+        "seriesName": "A",
+        "axisTicks": {
+            "show": true
+        },
+        "axisBorder": {
+            "show": true
+        },
+        "labels": {
+            "align": "center",
+            "style": {
+
+                
+            }
+        },
+
+        "tooltip": {
+            "enabled": false
+        }
+    }],
+    "tooltip": {
+        "show": false,
+        "fontFamily": "almoni",
+        "shared": true,
+        "fixed": {
+            
+            "enabled": true,
+            "position": "topLeft",
+            "offsetY": 165,
+            "offsetX": 140,
+            "fontFamily": "almoni"
+        }
+    },
+    "grid": {
+        "borderColor": "#979797"
+    },
+    "legend": {
+        "itemMargin": {
+            "horizontal": 30,
+            "vertical": 10
+        },
+        "show": false,
+        "showForSingleSeries": true,
+        "onItemClick": {
+            "toggleDataSeries": true
+        },
+
+        "horizontalAlign": "left",
+        "offsetX": 40,
+        "fontFamily": "almoni"
+    }
+}

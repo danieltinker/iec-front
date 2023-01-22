@@ -34,7 +34,7 @@
     </div>
     <div v-else>
       <div class="" style="margin-top:18px;margin-bottom:18px;height:110px">
-                <NoDataMsg :isDrill="false" :templateType="'cyberStatus'"/>
+                <NoDataMsg :isDrill="false" :templateType="'cyberStatus'" message="אין נתוני מצב כוננות סייבר"/>
             </div>
     </div>
     </div>
