@@ -12,16 +12,16 @@
                         :style="{ color: getCurrentTheme.kpi.main_label }">{{ numToLocaleString(item.label) }}
                     </span>
                 </div>
-                <div class="grid-item" style="margin-right:2px">
+                <div class="grid-item" style="margin-right:2px;padding-left:6px">
                     <strong v-if="object_condition_color(item.value)" class="dot" :style="'background-color:' + item.value['color']"></strong>
                     <span v-else :align="props_object.params.style ? props_object.params.style.value_align : 'start'"
                         style="display:block;word-wrap: break-word;font-family: almoni-medium"
                         :style="{ color: getCurrentTheme.kpi.value_color }"> {{ numToLocaleString(item.value) }}
                     </span>
                 </div>
-                <div class="grid-item" style="margin-right:4px">
+                <div class="grid-item" style="margin-right:4px;padding-left:8px">
                     <span :align="props_object.params.style ? props_object.params.style.secondary_align : 'start'" style="display:block;font-family: almoni-medium;word-wrap: break-word;"
-                        :style="{ color: getCurrentTheme.kpi.kpi_sec_value }">
+                        :style="{ color: getCurrentTheme.kpi.main_label }">
                         {{ numToLocaleString(item.secondary_value) }} </span>
                 </div>
             </div>

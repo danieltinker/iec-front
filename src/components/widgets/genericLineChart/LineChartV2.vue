@@ -36,25 +36,27 @@ export default {
     // Component Parameters
     props: ["activeData", "props_object"],
     watch: {
-        doneFetching(){
+        doneFetching() {
             for (let i in this.chartOptions.yaxis) {
-                if(!this.isStaticStyleColor){
+                if (!this.isStaticStyleColor) {
                     this.chartOptions.yaxis[i].labels.style.colors = this.getCurrentTheme.cyber_status.box_color_1;
                     this.chartOptions.yaxis[i].title ? this.chartOptions.yaxis[i].title.style.color = this.getCurrentTheme.cyber_status.box_color_1 : false
                 }
             }
             this.chartOptions.xaxis.labels.style.colors = this.getCurrentTheme.cyber_status.box_color_1;
+            this.chartOptions.xaxis.title ? this.chartOptions.xaxis.title.style.color = this.getCurrentTheme.cyber_status.box_color_1 : false
             this.$refs.chart.updateOptions(
                 this.chartOptions);
         },
         getCurrentTheme() {
             for (let i in this.chartOptions.yaxis) {
-                if(!this.isStaticStyleColor){
+                if (!this.isStaticStyleColor) {
                     this.chartOptions.yaxis[i].labels.style.colors = this.getCurrentTheme.cyber_status.box_color_1;
                     this.chartOptions.yaxis[i].title ? this.chartOptions.yaxis[i].title.style.color = this.getCurrentTheme.cyber_status.box_color_1 : false
                 }
             }
             this.chartOptions.xaxis.labels.style.colors = this.getCurrentTheme.cyber_status.box_color_1;
+            this.chartOptions.xaxis.title ? this.chartOptions.xaxis.title.style.color = this.getCurrentTheme.cyber_status.box_color_1 : false
             this.$refs.chart.updateOptions(
                 this.chartOptions);
         }
@@ -64,7 +66,8 @@ export default {
             isStaticStyleColor: false,
             doneFetching: false,
             series: [],
-            chartOptions: undefined
+            chartOptions: undefined,
+            maxMin: undefined
         };
     },
 
@@ -86,6 +89,12 @@ export default {
 
 
         for (let i in this.activeData) {
+            if (this.props_object.params.maxMin) {
+                this.maxMin = {
+                    max: Math.max.apply(null, this.activeData[i]['data'].map(function (elem) { return elem[1]; })) + this.props_object.params.maxMin
+                    , min: Math.min.apply(null, this.activeData[i]['data'].map(function (elem) { return elem[1]; })) - this.props_object.params.maxMin
+                }
+            }
             this.series.push({
                 name: this.activeData[i]['name'],
                 type: 'line',
@@ -93,13 +102,27 @@ export default {
             })
         }
         for (let i in this.chartOptions.yaxis) {
+            if (this.props_object.params.maxMin) {
+                this.chartOptions.yaxis[i]["max"] = this.maxMin.max,
+                    this.chartOptions.yaxis[i]["min"] = this.maxMin.min
+            }
             this.chartOptions.yaxis[i].labels.style.colors ? false : this.chartOptions.yaxis[i].labels.style.colors = this.getCurrentTheme.cyber_status.box_color_1
             this.chartOptions.yaxis[i].labels.style.fontFamily = "almoni"
             this.chartOptions.yaxis[i].labels.style.fontSize = "12px"
             this.chartOptions.yaxis[i].title ? this.chartOptions.yaxis[i].title.style.color = this.getCurrentTheme.cyber_status.box_color_1 : false
         }
         this.chartOptions.xaxis.labels.style.colors = this.getCurrentTheme.cyber_status.box_color_1;
+        this.chartOptions.xaxis.title ? this.chartOptions.xaxis.title.style.color = this.getCurrentTheme.cyber_status.box_color_1 : false
         this.doneFetching = true
+
+        // this.chartOptions.xaxis.labels = {
+        // formatter: function (val) {
+        //     var date = new Date(val);
+        //     var hours = date.getUTCHours();
+        //     if (hours === 16 || hours === 20 || hours === 0 || hours === 4 || hours === 8 || hours === 12) {
+        //         return val;
+        //     }
+        // }}
     },
 
     methods: {
@@ -108,13 +131,13 @@ export default {
         },
         updateKey() {
             for (let [key, value] of Object.entries(this.props_object.params.graphConfig)) {
-                this.chartOptions = {...this.chartOptions,...{[key]:value}}
+                this.chartOptions = { ...this.chartOptions, ...{ [key]: value } }
                 // if (Object.prototype.hasOwnProperty.call(obj, key)) {
                 //     key == "yaxis" ? this.isStaticStyleColor = true : false
                 //     obj[key] = obj2[key]
                 // }
             }
-            console.log("dsdsds",this.chartOptions);
+            console.log("dsdsds", this.chartOptions);
         }
     }
 };
@@ -152,7 +175,7 @@ export default {
 }
 
 
-:deep() .apexcharts-tooltip{
+:deep() .apexcharts-tooltip {
     direction: rtl;
     background-color: white !important;
     background-color: v-bind('getCurrentTheme.app_background') !important;
@@ -160,20 +183,22 @@ export default {
     font-family: almoni;
 }
 
-:deep() .apexcharts-tooltip-marker{
+:deep() .apexcharts-tooltip-marker {
     margin-right: 0px;
     margin-left: 10px;
     direction: ltr;
 }
-:deep() .apexcharts-tooltip-title{
+
+:deep() .apexcharts-tooltip-title {
     direction: rtl;
     background-color: v-bind('getCurrentTheme.app_background') !important;
     color: v-bind('getCurrentTheme.drill_title_color') !important;
     font-family: almoni;
 }
-:deep() .apexcharts-xaxis-texts-g{
+
+:deep() .apexcharts-xaxis-texts-g {
     direction: rtl;
-} 
+}
 
 /* :deep() .apexcharts-zoomin-icon,
 :deep() .apexcharts-zoomout-icon,
