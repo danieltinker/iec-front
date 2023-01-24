@@ -21,6 +21,8 @@
   export default {
     methods: {
       setCategory(index, category,SUB_CATEGORIES,LABEL) {
+        this.$store.state.isSubCategories = false
+        console.log("SUB_CATEGORIES",this.$store.state.isSubCategories);
         this.$store.state.clearSubCategory = 0;
         this.$store.state.isSubCategories = SUB_CATEGORIES;
         this.$store.state.selected_cat_name = LABEL;

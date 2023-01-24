@@ -38,6 +38,14 @@
         defaultCategory: 0,
         categories: []
       };
+    },watch:{
+      "$store.state.selected_cat_id": {
+      // fetch the widgets views from the DB
+      async handler() {
+        console.log("Dsadsad");
+        this.$store.state.selected_cat_id = this.$store.state.sub_categories_json[this.$store.state.selected_cat_name][0].CATEGORY_ID
+      }}
+
     },
     created(){
       this.$store.state.selected_cat_id = this.$store.state.sub_categories_json[this.$store.state.selected_cat_name][0].CATEGORY_ID
