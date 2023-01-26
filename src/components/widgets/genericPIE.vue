@@ -7,7 +7,7 @@
             @handleIntersection="pieClick" />
     </div>
     <div v-else>
-        <NoDataMsg :isDrill="props_object.isDrill" :message="props_object.params.no_data"/>
+        <NoDataMsg :isDrill="props_object.isDrillDown" :message="props_object.params.no_data"/>
     </div>
 </template>
 

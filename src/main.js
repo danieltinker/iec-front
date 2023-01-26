@@ -76,6 +76,9 @@ Vue.mixin({
       else{
         this.$store.state.selected_view_param["carouselActiveIndex"] = activeIndex
         this.$store.state.selected_view_param["show_clock"] = true
+        if(this.$store.state.selected_view_param["drill_down_params"]){
+          this.$store.state.selected_view_param["expand"] = true
+        }
 
         if(this.$store.state.selected_view_param["data_intersection"]==true){
           this.$store.state.selected_view_param["expand"] = false
