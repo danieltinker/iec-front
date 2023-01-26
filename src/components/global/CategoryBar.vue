@@ -21,7 +21,8 @@
   export default {
     methods: {
       setCategory(index, category,SUB_CATEGORIES,LABEL) {
-        this.$store.state.isSubCategories = false
+        if(this.active != index){
+          this.$store.state.isSubCategories = false
         console.log("SUB_CATEGORIES",this.$store.state.isSubCategories);
         this.$store.state.clearSubCategory = 0;
         this.$store.state.isSubCategories = SUB_CATEGORIES;
@@ -29,7 +30,10 @@
         console.log("SUB_CATEGORIES",this.$store.state.isSubCategories);
         console.log(LABEL);
         this.active = index;
-        this.$store.state.selected_cat_id = category;
+        if(!this.$store.state.isSubCategories){
+          this.$store.state.selected_cat_id = category;
+        }
+        }
       }
     },
     async created(){

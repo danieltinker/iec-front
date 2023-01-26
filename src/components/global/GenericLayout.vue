@@ -2,8 +2,8 @@
 <template>
     <div>
         <div v-if="doneFetching">
-            <div class="clock-main" style="text-align: center;" v-if="params.show_clock">
-                
+            <div class="clock-main" style="text-align: center;" v-if="params.show_clock">   
+
                 <div class="radios">
                     <v-radio-group dir="rtl" v-model="params.selected_category" row id="districtRadioGroup"
                         v-if="params.data_category.length >= 2">
@@ -142,6 +142,7 @@ export default {
 },
     methods: {
         async fetchClock() {
+            console.log("fetch");
             // console.log("Loading Clocks...") // SHOW LOADER
             this.doneFetching = false 
             this.LoadDrillCarouselIndex()
@@ -155,7 +156,7 @@ export default {
                 // console.log("Showing Clocks") // SHOW CLOCK
                 this.doneFetching = true
             } 
-            this.tick(this.params.sample_rate)
+            //this.tick(this.params.sample_rate)
         },
         LoadDrillData(){
             if(this.drillDataProp != undefined){
@@ -223,14 +224,16 @@ export default {
             }
             return true
         },
-        tick(time){
-            if(time){
-                this.tickCycleTime = setTimeout(this.fetchClock, time );
-            }
-            else{
-                this.tickCycleTime = setTimeout(this.fetchClock, this.$store.state.default_sample_rate );
-            }
-        },
+        // tick(time){
+        //     if(time){
+        //         this.tickCycleTime = setTimeout(this.fetchClock, time );
+        //         console.log("pasa",this.params);
+        //     }
+        //     else{
+        //         this.tickCycleTime = setTimeout(this.fetchClock, this.$store.state.default_sample_rate );
+        //         console.log("setttime",this.tickCycleTime);
+        //     }
+        // },
         BoxClick(i) {
             console.log("recieved generic label click, index:",i)
             this.loadIntersectionData(i)
@@ -272,12 +275,30 @@ export default {
         this.$on("myIndex", (i) => {
             this.drillCarouselIndex = i
         })
-        
         this.fetchClock()
+
+        if (this.params.sample_rate) {
+            this.tickCycleTime = setInterval(() => {
+                this.fetchClock()
+            }, this.params.sample_rate)
+        }
+        else {
+            this.tickCycleTime = setInterval(() => {
+                this.fetchClock()
+            }, this.$store.state.default_sample_rate)
+        }
+
+        // this.tickCycleTime = setInterval(() => {
+        //     this.fetchClock()
+        // }, 500000)
+        
+        
     },
     beforeDestroy() {
         this.$parent.$emit("myIndex", this.carouselActiveIndex)
+        if(this.tickCycleTime){
         clearTimeout(this.tickCycleTime)
+        }
     },
     computed: {
         stepComponent() {

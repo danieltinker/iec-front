@@ -39,7 +39,7 @@
         categories: []
       };
     },watch:{
-      "$store.state.selected_cat_id": {
+      "$store.state.selected_cat_name": {
       // fetch the widgets views from the DB
       async handler() {
         console.log("Dsadsad");
