@@ -1,6 +1,7 @@
 <template >
   <v-app :style="{'background-color':getCurrentTheme.app_background,'color':getCurrentTheme.app_color}">
     <!-- APP PAGE -->
+    <!-- hey -->
     <v-main class="app" v-if="renderApp">
       <router-view/>
     </v-main>
