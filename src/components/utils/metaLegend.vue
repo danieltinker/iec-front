@@ -3,7 +3,7 @@
         
 
         <v-row dir="rtl" style="place-content:center;display: inline-flex;">
-                <div v-for="(item, index) in test" :key="index" class="labels">
+                <div v-for="(item, index) in meta_labels" :key="index" class="labels">
                     <span class="dot" style="margin-left:4px"
                         :style="{ backgroundColor: item.color}"></span>
                     <span :style="'color:' + getCurrentTheme.baseGenericPie.span_color" style="margin-left:4px">

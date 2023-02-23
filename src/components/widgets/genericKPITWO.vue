@@ -1,12 +1,24 @@
 <!-- eslint-disable -->
 <template>
-    <div class="KPI2container" dir="rtl">
-        <div class="kpi-box" v-for="(item, index) in activeData" :key="index" :style="{
+    <div class="" dir="rtl" style="margin-top:15px">
+        <div class="KPI2container">
+
+        <v-card :hover="false" :ripple="false" style="padding:0;box-shadow: none;marin:0px;margin-bottom: 6px;margin-left:18px;margin-right:18px" min-width=200 class="main-crad" v-for="(item, index) in activeData" :key="index" :style="{
             backgroundColor: props_object.isDrillDown ? getCurrentTheme.kpi.drill_background : getCurrentTheme.kpi.main_background,
             border: props_object.activeIndex == index ? getCurrentTheme.legend_border_color : ' solid black 0px'
-        }" @click="$emit('BoxClick',index)">
+        }" @click="$emit('BoxClick',index);pulse()">
+    <v-card-text style="padding:0px">
+      <div class="text-block" :style="{ gridTemplateColumns: computedColumns(item) }">
+        <span v-if="item.label" style="margin-right:4px" :align="props_object.params.style ? props_object.params.style.label_align : 'start'" :style="{ color: getCurrentTheme.kpi.main_label }">{{ numToLocaleString(item.label) }}</span>
+        <strong v-if="object_condition_color(item.value)" class="dot" :style="'background-color:' + item.value['color']"></strong>
+        <span v-else :align="props_object.params.style ? props_object.params.style.value_align : 'start'" :style="{ color: getCurrentTheme.kpi.value_color }">{{ numToLocaleString(item.value) }}</span>
+        <span v-if="item.secondary_value" :align="props_object.params.style ? props_object.params.style.secondary_align : 'start'" :style="{ color: getCurrentTheme.kpi.main_label }">{{ numToLocaleString(item.secondary_value) }}</span>
+      </div>
+      
+    </v-card-text>
+  </v-card>
 
-            <div class="grid-container" :style="{ 'grid-template-columns': getWidth(item) }" style="margin-right:5px">
+            <!-- <div class="grid-container" :style="{ 'grid-template-columns': getWidth(item) }" style="margin-right:5px">
                 <div class="grid-item">
                     <span :align="props_object.params.style ? props_object.params.style.label_align : 'start'" style="display:block;word-wrap: break-word;font-family: almoni-bold"
                         :style="{ color: getCurrentTheme.kpi.main_label }">{{ numToLocaleString(item.label) }}
@@ -24,7 +36,7 @@
                         :style="{ color: getCurrentTheme.kpi.main_label }">
                         {{ numToLocaleString(item.secondary_value) }} </span>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 </template>
@@ -40,6 +52,16 @@ export default {
     computed: {
     },
     methods:{
+        computedColumns(item) {
+            console.log("itemmmmmmmmmmmmmmmmmmmm",item);
+            const numColumns = [item.label, item.value, item.secondary_value].filter(prop => !!prop).length;
+            return `repeat(${numColumns}, 1fr)`;
+    },pulse(){
+      this.disabled=true
+      setTimeout(() => {
+        this.disabled=false
+      }, 500);
+    },
         getWidth(item) {
             let MyWidth = 0
             let obj_arr = Object.keys(item)
@@ -64,54 +86,54 @@ export default {
 </script>
 
 <style scoped>
-.no-data-box{
-    display: flex;
-    align-items: center;
-    vertical-align: center;
-    justify-content: space-around;
-    padding-top: 10px;
-    background-color: v-bind('getCurrentTheme.kpi.drill_background');
-    margin: auto;
-    margin-top: 20px;
-    margin-bottom: 10px;
-    text-align: center;
-    width: 220px;
-    height: auto;
+.v-card--link:before {
+  background: none;
+}
+/* .main-card {
     border-radius: 2px;
     font-size: 18px;
     font-family: almoni-demibold;
+    margin-left:5px;
+    margin-right:5px;
+} */
+
+.pulse{
+          animation: pulse 0.1s;
+    }
+    @keyframes pulse {
+    0% {
+      transform: scale(1);
+      box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.7);
+    }
+
+    70% {
+      transform: scale(0.95);
+      box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
+    }
+
+    100% {
+      transform: scale(1);
+      box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+    }
+  }
+.text-block {
+  display: grid;
+  /* grid-template-columns: auto; */
+  gap: 10px;
+  padding: 5px;
+  font-size: 16px;
+    font-family: almoni-medium;
 }
 
-.no-data-info{
-    width: 200px;
-    height: 10px;
-    font-size: 14px;
-}
-.flex-center {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
 
 .KPI2container {
-    display: inline-block;
-    justify-content: center;
+  justify-content: center;
+  align-items: center;
     padding-bottom: 20px;
+    margin: 0 auto;
 }
 
-.kpi-box {
-    display: flex;
-    justify-content: space-around;
-    padding-top: 4px;
-    margin-top: 5px;
-    text-align: center;
-    /* align-items: center; */
-    width: 304px;
-    height: auto;
-    border-radius: 4px;
-    font-size: 18px;
-    font-family: almoni-demibold;
-}
+
 
 .kpi-label {
     padding-top: 0px;
@@ -135,13 +157,6 @@ export default {
 .kpi-box .kpi-sec-value {
     color: #606060
 }
-.grid-container {
-    width: 306px;
-    display: grid;
-    /* grid-template-columns: 30% 30% 30%; */
-    padding-right: 4px;
-    padding-left: 4px;
 
-}
 
 </style>

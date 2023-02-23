@@ -2,12 +2,12 @@
   <div dir="ltr">
     <div v-if="myOptions">
       <!-- style="pointer-events: none;" -->
-      <vue-gauge :options="myOptions" />
+      <vue-gauge :refid="'reff'+props_object.view_ID" :options="myOptions" />
       <!--button @click="value++">Add</button-->
       <h1 style="position: absolute;
     top: 80%;
     left: 50%;
-    transform: translate(-50%, -50%);" :style="{ color: getCurrentTheme.cyber_status.box_color_1 }">{{myOptions.needleLabel}}</h1>
+    transform: translate(-50%, -50%);" :style="{ color: getCurrentTheme.cyber_status.box_color_1 }">{{numToLocaleString(myOptions.needleLabel)}}</h1>
     </div>
     <NoDataMsg :isDrill="props_object.isDrill" v-else/>
   </div>
@@ -41,7 +41,8 @@ export default {
           arcDelimiters: this.activeData[0].arcLabels.map(this.precentage),
           arcColors: this.activeData[0].arcColors,
           arcLabels : this.activeData[0].arcLabels,
-          rangeLabel: this.activeData[0].rangeLabel.map(String)
+          rangeLabel: this.activeData[0].rangeLabel.map(x =>{return this.numToLocaleString(x)}),
+          arcOverEffect:false
         }
       }
       else {
@@ -84,6 +85,8 @@ test {
   color: blue
 }
 
+
+
 :deep() path {
   d: 88 !important
 }
@@ -111,6 +114,14 @@ test {
 :deep() text:nth-last-child(1) {
   font-size: 20px;
   transform: translateY(28px);
+}
+
+:deep() text:nth-last-child(2) {
+  display: v-bind('props_object.params.hideNumbers ? "none" : "block" ');
+}
+
+:deep() text:nth-last-child(3) {
+  display: v-bind('props_object.params.hideNumbers ? "none" : "block" ');
 }
 
 :deep() svg path:nth-last-child(5) {

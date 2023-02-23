@@ -73,7 +73,7 @@ export default {
     methods: {
         async fetchData() {
             this.doneFetching = false
-            await this.$myApi("queryList/iec/reserve_total,total_peak_reserve")
+            await this.$myApi("data?dsname=noga_total_electricitylevel")
                 .then((response) => {
                     if (response) {
                         var prodData = [];

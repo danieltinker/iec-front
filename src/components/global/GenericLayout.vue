@@ -1,8 +1,17 @@
 <!-- eslint-disable -->
 <template>
     <div>
+        <AdminPanel v-if="$store.state.loginStore.userInfo.user_id == 'ueie4'" ref="test" :view_ID="view_ID" :params="params"/>
+        <v-btn v-if="$store.state.loginStore.userInfo.user_id == 'ueie4'" color="primary" @click="$refs.test.dialogVisible = true">OPEN Dialog</v-btn>
         <div v-if="doneFetching">
-            <div class="clock-main" style="text-align: center;" v-if="params.show_clock">   
+
+            <div class="clock-main" style="text-align: center;" v-if="params.show_clock">  
+                
+                <h1 style="text-align: center;margin-top:4px" :style="'color:' + getCurrentTheme.headline.title_color"
+                        class="headline-title grid-item" v-if="staticData && params.headline_config">
+                        {{ params.headline_config.title }}
+                    </h1>
+                    
 
                 <div class="radios">
                     <v-radio-group dir="rtl" v-model="params.selected_category" row id="districtRadioGroup"
@@ -23,6 +32,7 @@
                             {{CheckBookmark(view_ID)? "mdi-bookmark": "mdi-bookmark-outline"}}</v-icon>
                         </span>
                     </v-row>
+                    <MetaText v-if="params.upper_text" :text="params.upper_text" style="padding-bottom:0px"/>
                     
                 <div v-if="jsonData[params.selected_category].length!=0">
                     <v-carousel hide-delimiters :show-arrows="showArrows" class="carousel-flex" ref="pieCarousel"
@@ -37,7 +47,7 @@
                             <div class="generic-clock" dir="rtl">
 
                                 <component @BoxClick="BoxClick"
-                                 :props_object={isDrillDown:isDrillDown,activeIndex:activeIndex,params:params,jsonData:jsonData,meta_data:meta_data} 
+                                 :props_object={isDrillDown:isDrillDown,activeIndex:activeIndex,params:params,jsonData:jsonData,meta_data:meta_data,view_ID:view_ID} 
                                  :is="stepComponent" 
                                  :activeData="DataArray">
                                 </component>
@@ -45,8 +55,8 @@
                             </div>
                         </v-carousel-item>
                     </v-carousel>
-                    <MetaText v-if="false" style="padding-bottom:10px"/>
-                    <MetaLegend v-if="false" style="padding-bottom:10px"/>
+                    <MetaText v-if="params.buttom_text" :text="params.buttom_text" style="padding-bottom:10px"/>
+                    <MetaLegend v-if="params.upper_legends" :meta_labels="params.upper_legends" style="padding-bottom:10px"/>
                 </div>
                 <div v-else><NoDataMsg :isDrill="isDrillDown" :templateType="params.template_type"/></div>
                 </div>
@@ -57,10 +67,10 @@
                 :style="{ backgroundColor: getCurrentTheme.genericClock.drill_background }">
                 <h1 class="drilldown-title" v-if="params.drill_down_params.headline_config">
                     {{ params.drill_down_params.headline_config.title }}</h1>
-                <component :is="'GenericLayout'" :params=params.drill_down_params
+                <component :is="'GenericLayout'" :params="params.drill_down_params"
                     :isDrillDown="true" :view_ID="view_ID" :drillDataProp="drilldownData" :parentsParam="params"
                     :static_drill_titles_prop="params.static_drill_titles_param_copy"
-                    :drillCarouselIndexProp="drillCarouselIndex">
+                    :drillCarouselIndexProp="drillCarouselIndex" :popup_drill_do_intersection_prop="popup_drill_do_intersection">
                 </component>
             </div>
         </div>
@@ -90,6 +100,7 @@ import ChartTitles from '../utils/ChartTitles.vue'
 import NoDataMsg from '../utils/NoDataMsg.vue'
 import MetaText from '../utils/metaText.vue'
 import MetaLegend from '../utils/metaLegend.vue'
+import AdminPanel from '../utils/adminPanel.vue'
 export default {
     props: {
         isDrillDown: { type: Boolean },
@@ -100,6 +111,8 @@ export default {
         static_drill_titles_prop: { type: Object },
         drillCarouselIndexProp: { type: Number },
         template_type:{ type: String },
+        staticData:{ type: Object, required: false },
+        popup_drill_do_intersection_prop:{type: Object, required: false}
     },
     watch: {
         drillDataProp() {
@@ -129,7 +142,11 @@ export default {
             doneFetching: false,
             drillCarouselIndex: 0,
             intersectionDrillData: {},
-            meta_data:{}
+            meta_drill_data:{},
+            meta_data:{},
+
+            popup_intersection : {},
+            popup_drill_do_intersection : {},
         }
     },
     components: {
@@ -138,11 +155,11 @@ export default {
     GenericLayout: () => import("../global/GenericLayout.vue"),
     NoDataMsg,
     MetaText,
-    MetaLegend
+    MetaLegend,
+    AdminPanel
 },
     methods: {
         async fetchClock() {
-            console.log("fetch");
             // console.log("Loading Clocks...") // SHOW LOADER
             this.doneFetching = false 
             this.LoadDrillCarouselIndex()
@@ -177,18 +194,25 @@ export default {
             await this.$myApi(this.params.data_url)
                     .then(response => {
                         this.jsonData = response.data
+                        
+                        
                         this.errorMSG = ""
                         this.hasMainDataRecieved = true
+
+                        this.updateMetaData(this.jsonData)
                         
-                        if (Object.prototype.hasOwnProperty.call(response.data, 'meta')) {
-                            this.meta_data = response.data["meta"]
-                            delete response.data["meta"];
-                        }
+                        // if (Object.prototype.hasOwnProperty.call(response.data, 'meta')) {
+                        //     this.meta_data = response.data["meta"]
+                        //     delete response.data["meta"];
+                        // }
                     })
                     .catch(error => {
                         console.log(error, "Main Clock Data GET request FAIL, PLEASE Check BackEnd & Db")
                         this.errorMSG = "אין מידע"
                         this.hasMainDataRecieved = false
+                        if(error.response.status == 405){
+                                window.location.href = this.$store.state.serverAdrr + "/adfs_mobile";
+                            }
                     });
         },
         async fetchDrillData(){
@@ -196,6 +220,7 @@ export default {
                     await this.$myApi(this.params.drill_down_params.data_url)
                         .then(response => {
                             this.drilldownData = Object.assign(response.data)
+                            this.updateMetaData(this.drilldownData,true)
                             if (this.params.data_intersection) {
                                 this.intersectionDrillData = Object.assign(response.data)
                                 this.reloadDrillDataOnTick()
@@ -208,6 +233,9 @@ export default {
 
                         })
                         .catch(error => {
+                            if(error.response.status == 405){
+                                window.location.href = this.$store.state.serverAdrr + "/adfs_mobile";
+                            }
                             console.log(error, "drill DATA FETCH ERROR");
                             this.errorMSG = "אין מידע"
                         });
@@ -235,9 +263,26 @@ export default {
         //     }
         // },
         BoxClick(i) {
+            if(this.params.isPopupData){
+                // this.activeIndex = i
+                console.log(this.jsonData[this.params.selected_category][this.carouselActiveIndex][i].label);
+                this.$store.state.popupData.popup_url = this.jsonData[this.params.selected_category][this.carouselActiveIndex][i].popup_url
+                this.$store.state.popupData.popup_title = this.jsonData[this.params.selected_category][this.carouselActiveIndex][i].popup_title
+                this.$store.state.popupData.popup_sub_title = this.jsonData[this.params.selected_category][this.carouselActiveIndex][i].popup_sub_title
+                this.$store.state.popupData.showPopupData = true
+                this.$store.state.popupData.params_popup_data = this.params.popup_data
+                console.log("params_popup_data",this.params.popup_data);
+                
+                this.$store.state.popupData.popup_data = this.isDrillDown ? this.popup_drill_do_intersection_prop : this.popup_intersection
+                console.log("hahahagaagfga");
+                this.$store.state.popupData.selected_label = this.jsonData[this.params.selected_category][this.carouselActiveIndex][i].label
+                console.log("hahahagaagfga");
+            } else {
+                console.log("ininininin");
             console.log("recieved generic label click, index:",i)
             this.loadIntersectionData(i)
             this.expandDrillHandler(i)
+            }
             
         },
         loadIntersectionData(i){
@@ -267,30 +312,77 @@ export default {
                 this.selectedIndex = i
             }
         },
+        updateMetaData(data,isDrillMeta=false,isStaticDa=false){
+            console.log("isDrillMeta",isDrillMeta);
+            if (Object.prototype.hasOwnProperty.call(data, 'popup_intersection')) {
+                           if(isDrillMeta){
+                            this.popup_drill_do_intersection = Object.assign({},data["popup_intersection"])
+                            delete data["popup_intersection"];
+                           } else {
+                            this.popup_intersection = Object.assign({},data["popup_intersection"])
+                            delete data["popup_intersection"];
+                           }
+                        }
+            if (Object.prototype.hasOwnProperty.call(data, 'meta') && isDrillMeta) {
+                console.log("drilllllllllllllllllllllllllllllllllllllll");
+                            console.log(isDrillMeta,"drill_meta");
+                            console.log(isStaticDa);
+                            console.log("drill_meta",data["meta"]);
+                            
+                            for (let [key, value] of Object.entries(data["meta"])) {
+                                    console.log(data["meta"],"metaaaaaaaaaaa");
+                                    // eslint-disable-next-line
+                                    this.params.drill_down_params[key] = value
+                                    //delete data["meta"];
+                            } }
+
+
+            if (Object.prototype.hasOwnProperty.call(data, 'meta') && !isDrillMeta) {
+                console.log("main_Data",isDrillMeta);
+                console.log("main_Data",data["meta"]);
+
+
+
+                            for (let [key, value] of Object.entries(data["meta"])) {
+                                    console.log(data["meta"]);
+                                    // eslint-disable-next-line
+                                    this.params[key] = value
+                                    //delete data["meta"];
+                            }
+                        }
+                        
+
+        },
         scrollWin(options) {
             window.scrollBy(options);
             }
     },
     created() {
-        this.$on("myIndex", (i) => {
+        if(this.staticData){
+            this.updateMetaData(this.staticData,false,true)
+            this.jsonData = this.staticData
+            // console.log("dsdsds",this.isPopupData.length);
+            this.doneFetching = true
+
+        } else {
+            this.$on("myIndex", (i) => {
             this.drillCarouselIndex = i
-        })
-        this.fetchClock()
+            })
+            this.fetchClock()
 
-        if (this.params.sample_rate) {
-            this.tickCycleTime = setInterval(() => {
-                this.fetchClock()
-            }, this.params.sample_rate)
-        }
-        else {
-            this.tickCycleTime = setInterval(() => {
-                this.fetchClock()
-            }, this.$store.state.default_sample_rate)
-        }
+            if (this.params.sample_rate) {
+                this.tickCycleTime = setInterval(() => {
+                    this.fetchClock()
+                }, this.params.sample_rate)
+            }
+            else {
+                this.tickCycleTime = setInterval(() => {
+                    this.fetchClock()
+                }, this.$store.state.default_sample_rate)
+            }
 
-        // this.tickCycleTime = setInterval(() => {
-        //     this.fetchClock()
-        // }, 500000)
+        }
+        
         
         
     },
@@ -326,7 +418,9 @@ export default {
 :deep() .v-input--selection-controls__input .v-icon {
     color: v-bind('getCurrentTheme.global_radio');
 }
-
+.clock-main{
+    min-height: v-bind('params.comp_min_height ? params.comp_min_height : ""');
+}
 :deep() .v-input--selection-controls .v-radio>.v-label {
     color: v-bind('getCurrentTheme.drill_title_color');
     margin-right: 4px;
@@ -337,6 +431,14 @@ export default {
     margin-right: 0px !important;
 }
 
+
+
+
+.headline-title {
+  color: #0F2558;
+  font-family: almoni-medium;
+  font-size: 22px;
+}
 .radios {
     display: flex;
     flex-direction: column;

@@ -1,0 +1,153 @@
+{"LABEL1":[
+	{   
+        "template_params":"list_1",
+		"data":[
+            {
+                "log_id": 1127,
+                "log_time": "12/10/2022 | 15:02:58",
+                "subject": "dsadsadsad",
+                "user_code": "rannnnnnnnnnnnnnnnnnnnnnn",
+                "user_name": "rannnnnnnnnnnnnnnnnnnnnnn",
+                "severity": {
+                    "desc": "בינונית",
+                    "color": "#FFCA28"
+                },
+                "status": {
+                    "color": "#FFCA28"
+                }
+            },
+            {
+                "log_id": 1126,
+                "log_time": "12/10/2022 | 15:02:54",
+                "subject": "dsadsadטקסט",
+                "user_code": "veronika",
+                "user_name": "rannnnnnnnnnnnnnnnnnnnnnn",
+                "severity": {
+                    "desc": "חמורה",
+                    "color": "#D4402E"
+                },
+                "status": {
+                    "color": "#D4402E"
+                }
+            },
+            {
+                "log_id": 1105,
+                "log_time": "11/10/2022 | 16:16:48",
+                "subject": "למה לעזאזל",
+                "user_code": "veronika",
+                "user_name": "rannnnnnnnnnnnnnnnnnnnnnn",
+                "severity": {
+                    "desc": "חמורה",
+                    "color": "#D4402E"
+                },
+                "status": {
+                    "color": "#D4402E"
+                }
+            },
+            {
+                "log_id": 1104,
+                "log_time": "11/10/2022 | 16:16:43",
+                "subject": "אל תגידו לי מה לעשות",
+                "user_code": "veronika",
+                "user_name": "rannnnnnnnnnnnnnnnnnnnnnn",
+                "severity": {
+                    "desc": "נמוכה",
+                    "color": "#01978A"
+                },
+                "status": {
+                    "color": "#01978A"
+                }
+            },
+            {
+                "log_id": 1103,
+                "log_time": "11/10/2022 | 16:16:37",
+                "subject": "rannnnnnnnnnnnnnnnnnnnnnn משהו",
+                "user_code": "veronika",
+                "user_name": "rannnnnnnnnnnnnnnnnnnnnnn",
+                "severity": {
+                    "desc": "בינונית",
+                    "color": "#FFCA28"
+                },
+                "status": {
+                    "color": "#FFCA28"
+                }
+            }
+        ]
+	},
+	{
+        "template_params":"list_2",
+		"data":[
+            {
+                "log_id": 1127,
+                "log_time": "12/10/2022 | 15:02:58",
+                "subject": "חזל\"ש",
+                "user_code": "rannnnnnnnnnnnnnnnnnnnnnn2222222",
+                "user_name": "rannnnnnnnnnnnnnnnnnnnnnn2222222222",
+                "severity": {
+                    "desc": "בינונית",
+                    "color": "#FFCA28"
+                },
+                "status": {
+                    "color": "#FFCA28"
+                }
+            },
+            {
+                "log_id": 1126,
+                "log_time": "12/10/2022 | 15:02:54",
+                "subject": "טקסט טקסט טקסט טקסט טקסט טקסט טקסט טקסט טקסט טקסט טקסט",
+                "user_code": "veronika",
+                "user_name": "rannnnnnnnnnnnnnnnnnnnnnn",
+                "severity": {
+                    "desc": "חמורה",
+                    "color": "#D4402E"
+                },
+                "status": {
+                    "color": "#D4402E"
+                }
+            },
+            {
+                "log_id": 1105,
+                "log_time": "11/10/2022 | 16:16:48",
+                "subject": "למה לעזאזל",
+                "user_code": "veronika",
+                "user_name": "rannnnnnnnnnnnnnnnnnnnnnn",
+                "severity": {
+                    "desc": "חמורה",
+                    "color": "#D4402E"
+                },
+                "status": {
+                    "color": "#D4402E"
+                }
+            },
+            {
+                "log_id": 1104,
+                "log_time": "11/10/2022 | 16:16:43",
+                "subject": "אל תגידו לי מה לעשות",
+                "user_code": "veronika",
+                "user_name": "rannnnnnnnnnnnnnnnnnnnnnn",
+                "severity": {
+                    "desc": "נמוכה",
+                    "color": "#01978A"
+                },
+                "status": {
+                    "color": "#01978A"
+                }
+            },
+            {
+                "log_id": 1103,
+                "log_time": "11/10/2022 | 16:16:37",
+                "subject": "rannnnnnnnnnnnnnnnnnnnnnn משהו",
+                "user_code": "veronika",
+                "user_name": "rannnnnnnnnnnnnnnnnnnnnnn",
+                "severity": {
+                    "desc": "בינונית",
+                    "color": "#FFCA28"
+                },
+                "status": {
+                    "color": "#FFCA28"
+                }
+            }
+        ]
+	}
+]
+}

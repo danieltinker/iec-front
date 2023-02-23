@@ -91,8 +91,16 @@ export default {
         for (let i in this.activeData) {
             if (this.props_object.params.maxMin) {
                 this.maxMin = {
-                    max: Math.max.apply(null, this.activeData[i]['data'].map(function (elem) { return elem[1]; })) + this.props_object.params.maxMin
-                    , min: Math.min.apply(null, this.activeData[i]['data'].map(function (elem) { return elem[1]; })) - this.props_object.params.maxMin
+                    max: Math.max.apply(null, this.activeData[i]['data'].map(function (elem) {
+  return elem[1];
+}).filter(function (elem) {
+  return elem !== null;
+})) + this.props_object.params.maxMin
+                    , min: Math.min.apply(null, this.activeData[i]['data'].map(function (elem) {
+  return elem[1];
+}).filter(function (elem) {
+  return elem !== null;
+})) - this.props_object.params.maxMin
                 }
             }
             this.series.push({

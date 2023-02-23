@@ -8,6 +8,16 @@ export default new Vuex.Store({
   state: {
     removeBookmarkDialog:false,
     sub_categories_json:undefined,
+    popupData:{
+      showPopupData:false,
+      popup_data:undefined,
+      params_popup_data:undefined,
+      selected_label:undefined,
+      popup_title:undefined,
+      
+      popup_sub_title:undefined,
+      popup_url:undefined
+    },
     isSubCategories:false,
     selected_cat_name:undefined,
     clearSubCategory:0,
@@ -23,7 +33,7 @@ export default new Vuex.Store({
     serverAdrr: process.env.NODE_ENV === 'development' ? "http://20.102.120.232:8080" : "",
     isAzureEnv: process.env.NODE_ENV === 'development' ? true : false,
     quick_view: false,
-    default_sample_rate:120000,
+    default_sample_rate:1120000,
     user_favorites: [],
     is_logout_dialog:false,
     // isAuthenticated: window.localStorage.getItem("sessionid") ? true : false,
@@ -109,7 +119,8 @@ export default new Vuex.Store({
           "background_color":"#424242",
           "font_color":"#ffffff",
           "border_color":"#282828",
-          "total_color":"#1f1e1e"
+          "total_color":"#1f1e1e",
+          "border_bottom":"1px solid #424242"
         },
         "remove_dialog":{
           "card_main":"#FFFFFF",
@@ -202,7 +213,8 @@ export default new Vuex.Store({
           "background_color":"#F9F9F9",
           "font_color":"#010101",
           "border_color":"#FFFFFF",
-          "total_color":"#e9edf6"
+          "total_color":"#e9edf6",
+          "border_bottom":"1px solid #f9f9f9"
         },
         "remove_dialog":{
           "card_main":"#000000",

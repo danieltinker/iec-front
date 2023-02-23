@@ -6,13 +6,13 @@
                 backgroundColor: props_object.isDrillDown ? getCurrentTheme.kpi.drill_background : getCurrentTheme.kpi.main_background,
                 border: props_object.activeIndex == index ? getCurrentTheme.legend_border_color : ' solid black 0px'
             }" @click="$emit('BoxClick',index);pulse()">
-            <span :style="{ color: getCurrentTheme.kpi.main_label }" style=" font-family: almoni-bold"
+            <span :style="{ color: getCurrentTheme.kpi.main_label}" style=" font-family: almoni-bold"
                 class="kpi-label">
                 {{ numToLocaleString(item.label) }}
             </span>
             <br>
             <span class="kpi-value" style=" font-family: almoni-medium"
-                :style="{ color: getCurrentTheme.kpi.value_color }">
+                :style="{ color: getCurrentTheme.kpi.value_color,direction : isPrecntege(item.value) ? 'ltr' : 'rtl' }">
                 {{ numToLocaleString(item.value) }}
             </span>
             <br>
@@ -31,7 +31,17 @@ export default {
             disabled:false,
         }
     },
+    created(){
+        console.log("isPrecntege",this.isPrecntege('-100%'));
+    },
     methods:{
+        isPrecntege(item){
+            if(typeof item == 'string'){
+                item = item.replace('-','')
+            }
+            return /^\d+(\.\d+)?%$/.test(item);
+
+        },
         pulse(){
       this.disabled=true
       setTimeout(() => {

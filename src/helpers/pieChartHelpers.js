@@ -32,10 +32,10 @@ export function baseTemplate(myJson,innerText,innerNum,precentage,isNumber){
 }
 
 export const getSelectedRadius = (chartElements) =>{
-    const innerRadiusArr =[]
+    // const innerRadiusArr =[]
     const outerRadiusArr= []
     chartElements.forEach((element) => { 
-        innerRadiusArr.push(element._model.innerRadius)
+        // innerRadiusArr.push(element._model.innerRadius)
         outerRadiusArr.push(element._model.outerRadius)
     });
     return Math.max(...outerRadiusArr) ===Math.min(...outerRadiusArr) ? -1 : outerRadiusArr.indexOf(Math.max(...outerRadiusArr))
@@ -44,16 +44,16 @@ export const handleChartRadius = (chartElements,indexClick,indexOpen)=>{
 
     if(indexOpen === -1){
         chartElements[indexClick]._model.outerRadius += 5;
-        chartElements[indexClick]._model.innerRadius -= 5;
+        // chartElements[indexClick]._model.innerRadius -= 5;
     } else{
         if(indexOpen===indexClick){
             chartElements[indexClick]._model.outerRadius -= 5;
-            chartElements[indexClick]._model.innerRadius += 5;
+            // chartElements[indexClick]._model.innerRadius += 5;
         }else{
             chartElements[indexClick]._model.outerRadius += 5;
-            chartElements[indexClick]._model.innerRadius -= 5;
+            // chartElements[indexClick]._model.innerRadius -= 5;
             chartElements[indexOpen]._model.outerRadius -= 5;
-            chartElements[indexOpen]._model.innerRadius += 5;
+            // chartElements[indexOpen]._model.innerRadius += 5;
         }
     }
 }

@@ -1,5 +1,5 @@
 <template>
-    <div dir="rtl" class="container" :style="'background-color: ' + getCurrentTheme.category_bar.background_color">
+    <div dir="rtl" ref="content" class="container" :style="'background-color: ' + getCurrentTheme.category_bar.background_color">
       <!-- {{$store.state.selected_cat_name}} sdadas
       <br>
       {{typeof $store.state.sub_categories_json}}
@@ -44,7 +44,9 @@
       async handler() {
         console.log("Dsadsad");
         this.$store.state.selected_cat_id = this.$store.state.sub_categories_json[this.$store.state.selected_cat_name][0].CATEGORY_ID
-      }}
+        this.$refs.content.scrollLeft = this.$refs.content.scrollWidth;
+      }
+      }
 
     },
     created(){

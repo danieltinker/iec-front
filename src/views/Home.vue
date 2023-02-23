@@ -7,9 +7,10 @@
         <UserFavorites/>
         <!-- CATEGORIES BAR HORIZONTAL SCROLL -->
         <CategoryBar/>
+        <PopupData class="top-component" v-if="$store.state.popupData.showPopupData" />
         <!-- WIDGETS SPACE (CLOCKS) VERTICAL SCROLL  -->
         <SubCategories v-if="$store.state.isSubCategories" style="margin-top:8px" />
-        <WidgetSpace/>
+        <WidgetSpace class="other-component" />
         <!-- <WidgetSpace v-if="!this.$store.state.quick_view" /> -->
         <!-- {{$store.state.selected_view_param}} -->
         <MaxFavoritePopup v-if="$store.state.max_favorite_popup"/>
@@ -33,6 +34,7 @@
   import BookmarkSnackbar from '../components/global/bookmarkSnackbar.vue';
   import axios from 'axios';
 import SubCategories from '@/components/global/SubCategories.vue';
+import PopupData from '@/components/global/popupData.vue';
   export default {
       name: "App",
       data: () => ({
@@ -41,7 +43,7 @@ import SubCategories from '@/components/global/SubCategories.vue';
         snackText:"",
         valid_sid:false
         }),
-      components: { WidgetSpace, HQNavBar, CategoryBar, UserFavorites, MaxFavoritePopup, RemoveBookmark, BookmarkSnackbar, SubCategories },
+      components: { WidgetSpace, HQNavBar, CategoryBar, UserFavorites, MaxFavoritePopup, RemoveBookmark, BookmarkSnackbar, SubCategories, PopupData },
       async created() {
         console.log("WELCOME TO HOME PAGE")
         if(this.$store.state.loginStore.isAuthenticated){

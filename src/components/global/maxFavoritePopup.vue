@@ -106,7 +106,7 @@
                     outlined
                     fab
                     class="story"
-                    ><img v-if="item.fav_icon ? item.fav_icon : item.STATE.PARAMETERS.fav_icon != ''" :src="getImg(item.fav_icon ? item.fav_icon : item.STATE.PARAMETERS.fav_icon)" />
+                    ><img v-if="item.fav_icon ? item.fav_icon : item.STATE.PARAMETERS.fav_icon != ''" :src="getImg(item.fav_icon ? item.show_clock ? item.fav_icon : item.drill_down_params.fav_icon : item.STATE.PARAMETERS.show_clock ? item.STATE.PARAMETERS.fav_icon : item.STATE.PARAMETERS.drill_down_params.fav_icon)" />
                     <v-btn
                       color="green"
                       @click="addFav(index)"

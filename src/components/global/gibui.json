@@ -1,0 +1,117 @@
+{
+	"show_clock": true,
+	"headline_config": {
+	"three_dots_enabled": false,
+	"bookmark_enabled": true,
+	"title": " טטסטט"
+	},
+	"click_open_drill_enabled": false,
+	"data_category": ["*"],
+	"selected_category": "*",
+	"chart_titles": {"*":[""]},
+	"data_url": "log/logsByType/update_fault",
+	"expand":false,
+	"data_intersection":false,
+	"fav_icon": "list",
+	"group_by":false,
+	"isPopupData":true,
+	"totalGet":[],
+	"headers" : [ 
+	            {
+                    "text": "סטטוס",
+                    "align": "start",
+                    "sortable": false,
+                    "value": "status"
+                },
+                {
+                    "text": "תוכן",
+                    "align": "start",
+                    "sortable": false,
+                    "value": "subject"
+                },
+                { "text": "שם משתמש", "value": "user_name", "sortable": false,"align": "center"},
+                { "text": "תאריך עדכון", "value": "log_time", "sortable": false,"align": "center"}
+               
+                ],
+    "popup_data":[
+    {
+    "TEMPLATE_TYPE":"genericLIST",
+    "PARAMETERS":{
+	"show_clock": true,
+	"headline_config": {
+	"three_dots_enabled": false,
+	"bookmark_enabled": true,
+	"title": " טטסטט"
+	},
+	"click_open_drill_enabled": false,
+	"data_category": ["*"],
+	"selected_category": "*",
+	"chart_titles": {"*":[""]},
+	"data_url": "log/logsByType/update_fault",
+	"expand":false,
+	"data_intersection":false,
+	"fav_icon": "bar",
+	"group_by":false,
+	"totalGet":[],
+	"headers" : [ 
+	            {
+                    "text": "סטטוס",
+                    "align": "start",
+                    "sortable": false,
+                    "value": "status"
+                },
+                {
+                    "text": "תוכן",
+                    "align": "start",
+                    "sortable": false,
+                    "value": "subject"
+                },
+                { "text": "שם משתמש", "value": "user_name", "sortable": false,"align": "center"},
+                { "text": "תאריך עדכון", "value": "log_time", "sortable": false,"align": "center"}
+               
+                ],
+	"drill_down_params": false
+	}
+},
+{
+    "TEMPLATE_TYPE":"genericLIST",
+    "PARAMETERS":{
+	"show_clock": true,
+	"headline_config": {
+	"three_dots_enabled": false,
+	"bookmark_enabled": true,
+	"title": " טטסטט"
+	},
+	"click_open_drill_enabled": false,
+	"data_category": ["*"],
+	"selected_category": "*",
+	"chart_titles": {"*":[""]},
+	"data_url": "log/logsByType/update_fault",
+	"expand":false,
+	"data_intersection":false,
+	"fav_icon": "bar",
+	"group_by":false,
+	"totalGet":[],
+	"headers" : [ 
+	            {
+                    "text": "סטטוס",
+                    "align": "start",
+                    "sortable": false,
+                    "value": "status"
+                },
+                {
+                    "text": "תוכן",
+                    "align": "start",
+                    "sortable": false,
+                    "value": "subject"
+                },
+                { "text": "שם משתמש", "value": "user_name", "sortable": false,"align": "center"},
+                { "text": "תאריך עדכון", "value": "log_time", "sortable": false,"align": "center"}
+               
+                ],
+	"drill_down_params": false
+	}
+}
+],
+	"drill_down_params": false
+}

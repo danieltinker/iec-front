@@ -2,13 +2,14 @@
 <template>
     <div style="margin-top:10px">
         <div class="LISTcontainer" dir="rtl">
+           
             <!-- start -->
             <v-data-table ref="tttt" id="mytable" style="width:100%" :headers="headers" :items="activeData"
                 mobile-breakpoint="0" :show-expand="false" calculate-widths 
-                :items-per-page="5"
-                :hide-default-footer="activeData.length > 5 ? false : true"
+                :items-per-page="props_object.params.group_by ? 1000000000 : 5"
+                :hide-default-footer="props_object.params.group_by ? true : activeData.length > 5 ? false : true"
                 disable-filtering 
-                :disable-pagination="activeData.length > 5 ? false : true"
+                :disable-pagination="props_object.params.group_by ? true : activeData.length > 5 ? false : true"
                 :footer-props="{
                     showFooterBorder: false,
                     showFirstLastPage: false,
@@ -21,30 +22,49 @@
                 :group-by="props_object.params.group_by ? 'category' : null" sort-by=""
                 :header-props="{ showHeaderBorder: false }"
                 :show-rows-border="false" class="elevation-1" dir="rtl">
-                <template v-slot:group.header="{ items }">
-                    <td :colspan="headers.length" class="list-total" style="height:30px">
+                <template v-slot:group.header="{ items,group, headers, toggle, isOpen }">
+                    <td :colspan="headers.length" class="list-total" style="height:30px" :style="{'background-color' : getCurrentTheme.list_data.total_color}">
+                        
                         <strong>{{ items[0].category.charAt(1) == '-' ?
                                 items[0].category.split('-')[1] : items[0].category
                         }}</strong>
                         <!-- <hr>
                                           <strong>{{ items[0].category }}</strong> -->
+                                          <v-btn @click="toggle" v-if="!props_object.params.expend_category" style="position: absolute;left: 10px;" small icon :ref="group" :data-open="isOpen">
+                    <v-icon v-if="isOpen" :color="getCurrentTheme.hq_navbar.span_color_first">mdi-chevron-up</v-icon>
+                    <v-icon v-else :color="getCurrentTheme.hq_navbar.span_color_first">mdi-chevron-down</v-icon>
+                </v-btn>
                     </td>
 
                 </template>
+
+                <template v-slot:expanded-item="{ headers, item }">
+            <td :colspan="headers.length">
+                <div class="row">
+                    <div class="col-auto">
+                        <v-img :src="item.picture.thumbnail" avatar class="mx-4"></v-img>
+                    </div>
+                    <div class="col">
+                        <h6>Details</h6>
+                        ... {{ items[0].category }}
+                    </div>
+                </div>
+            </td>
+        </template>
 
                 <template v-slot:[`footer.page-text`]="items" dir="rtl"> 
   {{ items.pageStart }} - {{ items.pageStop }} &nbsp;מ&nbsp;-&nbsp; {{ items.itemsLength }}
 </template>
 
                 <template v-slot:item="{item, index}">
-                    <tr>
+                    <tr :style="{border: props_object.activeIndex == index ? getCurrentTheme.legend_border_color : ' solid black 0px'}">
                         <td v-for="(header, i) in headers" :key="i" :align="header.align" 
                         :class="{'list-total' : item['isSum']}"
                         :style="[isBold.includes(header.value) ? {'font-weight':'bold'}:{'font-weight':'normal'}]">                            <!-- <strong @click="overScrollWidth(index,item[header.value])"
                         v-if="typeof item[header.value] == 'string' && item[header.value].split('*-*')[0] == 'dot'" :key="i"
                         class="dot" :style="'background-color:' + item[header.value].split('*-*')[1]">
                     </strong> -->
-                    <v-icon v-if="object_condition_icons(item[header.value])" class="my-2" :color="getCurrentTheme.hq_navbar.span_color_first" style="font-size: 30px; justify-content: right;">{{item[header.value]['icon']}}</v-icon>
+                    <v-icon v-if="object_condition_icons(item[header.value])" @click="overScrollWidth(header,index,item[header.value], $event,item)" class="my-2" :color="getCurrentTheme.hq_navbar.span_color_first" style="font-size: 30px; justify-content: right;">{{item[header.value]['icon']}}</v-icon>
                     <v-icon v-else-if="object_condition_color(item[header.value])" @click="overScrollWidth(header,index,item[header.value], $event,item)"  class="my-2" :color="item[header.value]['color']" style="font-size: 30px;    margin: 0px !important;">mdi-circle-medium</v-icon>
 
                     <!-- <strong v-else-if="object_condition_color(item[header.value])"
@@ -67,6 +87,7 @@
                             
                             </td>
                     </tr>
+                    <div style="height:4px"></div>
                 </template>
 
 
@@ -138,22 +159,61 @@ export default {
     components: {
         CardPopup,
     },
+    mounted(){
+        if(!this.props_object.params.expend_category){this.closeAll()}
+        
+
+    },
     methods: {
+        toggleAll () {
+        Object.keys(this.$refs).forEach(k => {
+            //console.log(this.$refs[k])
+            this.$refs[k].$el.click()
+        })
+    },
+    closeAll () {
+        Object.keys(this.$refs).forEach(k => {
+            console.log(this.$refs[k])
+            if (this.$refs[k] && this.$refs[k].$attrs['data-open']) {
+                this.$refs[k].$el.click()
+            }
+        })
+    },
+    openAll () {
+        Object.keys(this.$refs).forEach(k => {
+            if (this.$refs[k] && !this.$refs[k].$attrs['data-open']) {
+                this.$refs[k].$el.click()
+            }
+        })
+    }
+  ,
         overScrollWidth(header,index,item, e,full_item) {
-            console.log("index : ",index," | item : ",item," | object : ",header," | e : ",e);
+            // console.log("hereee");
+            // console.log("index : ",index," | item : ",item," | object : ",header," | e : ",e);
+            // console.log("itemdeeeeeeeee",e.target.offsetParent.scrollWidth);
             if(this.isIntersection.includes(header.value)){
+                console.log("hehehehe");
                 this.$emit('BoxClick',this.activeData.indexOf(full_item))
             }
             else{
-                if (e.path[1].offsetWidth < e.path[1].scrollWidth) {
-                this.$refs.cardPop.dialog = true
-                this.cardData = item
+                if (e.target.offsetParent.offsetWidth < e.target.offsetParent.scrollWidth) {
+                    this.$refs.cardPop.dialog = true
+                    this.cardData = item
             }
             }
         },
         sumField(key) {
             // sum data in give key (property)
-            return this.props_object.jsonData[this.props_object.params.selected_category][0].reduce((a, b) => a + (b[key] || 0), 0);
+            return this.props_object.jsonData[this.props_object.params.selected_category][0].reduce((a, b) => a + ((b['isSum'] === undefined) ? (b[key] || 0) : 0), 0);
+        },
+        getSumclear(cull){
+            let sum = 0;
+            for (let i = 0; i < this.activeData.length; i++) {
+                if (typeof this.activeData[i][cull] === 'number' && !isNaN(this.activeData[i][cull])) {
+                sum += this.activeData[i][cull];
+            }
+            }
+            return sum
         },
         object_condition_color(item){
             return item ? typeof item == 'object' && Object.prototype.hasOwnProperty.call(item, 'color') : false
@@ -175,6 +235,7 @@ export default {
         if(this.props_object.params.isBold){
             this.isBold = this.props_object.params.isBold
         }
+        // this.activeData = [{"log_time":"12/10/2022 | 15:31:38","subject":10,"user_code":"veronika","user_name":"ורוניקה","severity":88,"label":"aaaa","category":"dasda","dsads":""},{"log_time":"12/10/2022 | 15:02:38","subject":88,"user_code":"veronika","user_name":"ורוניקה","severity":88,"category":"bbbb"}]
     }
 }
 </script>
@@ -184,9 +245,19 @@ export default {
 /* strong{
     font-weight: normal;
 } */
-
+:deep() .theme--light.v-icon:focus::after {
+    display: none;
+}
 :deep() .v-data-footer * {
     color: v-bind('getCurrentTheme.drill_title_color');
+}
+
+
+
+
+
+:deep() table {
+  border-collapse: collapse;
 }
 
 .updateDate {
@@ -221,8 +292,9 @@ export default {
 .list-total {
     font-family: almoni-demibold !important;
     font-size: 16px !important;
-    background-color: v-bind('getCurrentTheme.list_data.total_color');
+    background-color: v-bind('getCurrentTheme.list_data.total_color') !important;
     padding: 0px !important;
+    border-bottom: v-bind('getCurrentTheme.list_data.border_bottom') !important;
 
 }
 
@@ -260,12 +332,13 @@ export default {
     color: v-bind('getCurrentTheme.list_data.font_color');
     padding-left: 0px;
     padding-right: 8px;
+    background-color: v-bind('getCurrentTheme.list_data.background_color');
 
 }
 
 :deep() .theme--light.v-data-table>.v-data-table__wrapper>table>tbody>tr:not(:last-child)>td:not(.v-data-table__mobile-row),
 .theme--light.v-data-table>.v-data-table__wrapper>table>tbody>tr:not(:last-child)>th:not(.v-data-table__mobile-row) {
-    border-bottom: 4px solid v-bind('getCurrentTheme.list_data.border_color');
+    border-bottom: none 4px solid v-bind('getCurrentTheme.list_data.border_color');
 }
 
 /* #mytable tbody td {
@@ -283,7 +356,7 @@ export default {
 
 #mytable {
     /* pointer-events: none; */
-    background-color: v-bind('getCurrentTheme.list_data.background_color');
+    background-color: v-bind('getCurrentTheme.headline.background');
 }
 
 

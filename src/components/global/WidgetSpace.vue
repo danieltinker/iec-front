@@ -122,6 +122,9 @@ export default {
               this.errorMsg = ""
             })
             .catch((error) => {
+              if(error.response.status == 405){
+                                window.location.href = this.$store.state.serverAdrr + "/adfs_mobile";
+                            }
               this.errorMsg = "תצוגת דף לא זמינה"
               console.log(error);
             });
@@ -141,6 +144,9 @@ export default {
               this.errorMsg = ""
             })
             .catch((error) => {
+              if(error.response.status == 405){
+                                window.location.href = this.$store.state.serverAdrr + "/adfs_mobile";
+                            }
               this.errorMsg = "תצוגת דף לא זמינה"
               console.log(error);
             });
@@ -160,6 +166,9 @@ export default {
         this.errorMsg = ""
       })
       .catch((error) => {
+        if(error.response.status == 405){
+                                window.location.href = this.$store.state.serverAdrr + "/adfs_mobile";
+                            }
         this.errorMsg = "תצוגת דף לא זמינה"
         console.log(error);
       });

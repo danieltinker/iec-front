@@ -1,6 +1,6 @@
 <!-- eslint-disable -->
 <template>
-  <div dir="rtl">
+  <div dir="rtl" v-if="activeData.length !== 0">
 
     <div v-for="(btnName, index) in activeData" :key="index">
 
@@ -28,9 +28,14 @@
     </div>
 
   </div>
+  <div v-else>
+        <NoDataMsg :isDrill="props_object.isDrillDown" :message="props_object.params.no_data"/>
+    </div>
 </template>
 
 <script>
+import NoDataMsg from '../utils/NoDataMsg.vue';
+
 export default {
   props:["activeData","props_object"],
   watch: {
@@ -49,7 +54,8 @@ export default {
     };
   },
   components: {
-  },
+    NoDataMsg
+},
   methods: {
     getColor(obj, index) {
       obj.color = this.defaultColors[index]

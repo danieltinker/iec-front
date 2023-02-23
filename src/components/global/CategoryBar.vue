@@ -57,6 +57,9 @@
             })
             .catch(error => {
               console.log(error);
+              if(error.response.status == 405){
+                                window.location.href = this.$store.state.serverAdrr + "/adfs_mobile";
+                            }
             });
     }
     ,
@@ -81,6 +84,9 @@
             })
             .catch(error => {
               console.log(error);
+              if(error.response.status == 405){
+                                window.location.href = this.$store.state.serverAdrr + "/adfs_mobile";
+                            }
             });
         }
       }

@@ -66,7 +66,7 @@ export default {
                           this.$router.push("/mobile_login");
                         }
                         else{
-                          window.location.href = "https://shavit-t.net.iec.co.il/adfs_mobile";
+                          window.location.href = this.$store.state.serverAdrr + "/adfs_mobile";
                         }
                     });
 
@@ -74,7 +74,7 @@ export default {
       else{
         console.log("No local storage go fetch rerouting APP --> ADFS_MOBILE/login page")
         if(!this.$store.state.isAzureEnv){
-          window.location.href = "https://shavit-t.net.iec.co.il/adfs_mobile";
+          window.location.href = this.$store.state.serverAdrr + "/adfs_mobile";
         }
         else{
           this.$router.push("/mobile_login");

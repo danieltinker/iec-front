@@ -1,6 +1,6 @@
 <template>
     <div style="text-align: right;" class="meta-container">
-        <div v-for="(item,index) in test" :key="index">
+        <div v-for="(item,index) in text" :key="index">
             <div v-if="item.title.length !== 0" class="main-title">{{ item.title }}</div>
             <div v-if="item.text.length !== 0" class="main-subtitle">{{ item.text }}</div>
         </div>
@@ -13,7 +13,7 @@
 <script>
 export default {
     props: {
-        text: { type: Object, required: false },
+        text: { type: Array, required: false },
     },
     data() { 
         return {
